@@ -55,8 +55,8 @@ Output: 36
 
 Ограничения:
 
-1 <= commands.length <= 104
+1 <= commands.length <= 10^4
 commands[i] равны -2, -1 или целому числу в диапазоне [1, 9].
-0 <= obstacles.length <= 104
--3 * 104 <= xi, yi <= 3 * 104
+0 <= obstacles.length <= 10^4
+-3 * 10^4 <= xi, yi <= 3 * 10^4
 Ответ гарантированно будет меньше 2^31.

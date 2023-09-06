@@ -28,4 +28,4 @@ Output: []
 
 Ограничения:
 
-0 <= tomatoSlices, cheeseSlices <= 107
+0 <= tomatoSlices, cheeseSlices <= 10^7

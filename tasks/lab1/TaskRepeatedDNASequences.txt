@@ -19,5 +19,5 @@ Output: ["AAAAAAAAAA"]
 
 Ограничение:
 
-1 <= s.length <= 105
+1 <= s.length <= 10^5
 s[i] символы 'A', 'C', 'G', or 'T'.
