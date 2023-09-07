@@ -57,6 +57,7 @@ out/
 .idea_modules/
 *.ipr
 *.iws
+*.iml
 
 ##############################
 ## OS X
