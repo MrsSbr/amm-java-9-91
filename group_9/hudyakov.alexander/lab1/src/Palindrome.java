@@ -29,5 +29,6 @@ public class Palindrome {
         } catch (InputMismatchException exception) {
             System.out.println("Incorrect input");
         }
+
     }
 }
