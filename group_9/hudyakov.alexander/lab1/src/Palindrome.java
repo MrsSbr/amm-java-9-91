@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Palindrome {
 
-    private static  int reverse(int number){
+    private static int reverse(int number) {
         int copy = number;
         int reversed = 0;
 
@@ -15,7 +15,7 @@ public class Palindrome {
         return reversed;
     }
 
-    private static  boolean isPalindrome(int number){
+    private static boolean isPalindrome(int number) {
         return number == reverse(number);
     }
 
