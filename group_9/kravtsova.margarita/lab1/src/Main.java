@@ -36,23 +36,22 @@ public class Main {
             return countTypes;
         }
     }
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         int n;
-        int [] candiesTypes;
+        int[] candiesTypes;
         System.out.println("Введите число n: ");
         Scanner in = new Scanner(System.in);
         boolean error = false;
         do {
-            if(error)
+            if (error)
                 System.out.println("Введено неверное значение!\nПовторите ввод:");
             n = in.nextInt();
             error = true;
-        } while(n < 2 || n > 10000 || n % 2 != 0);
+        } while (n < 2 || n > 10000 || n % 2 != 0);
         candiesTypes = fillArray(n);
-        int acceptableCount = n/2;
+        int acceptableCount = n / 2;
         int countTypes = countTypesCandy(candiesTypes);
-        System.out.println(String.format("Максимальное количество типов конфет: %d\n", maxCountTypes(acceptableCount,countTypes)));
+        System.out.println(String.format("Максимальное количество типов конфет: %d\n", maxCountTypes(acceptableCount, countTypes)));
 
     }
 }
