@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.HashSet;
 public class Main {
@@ -7,34 +8,31 @@ public class Main {
         int [] newArray = new int[n];
         System.out.println("Введите номера конфет: ");
         int i = 0;
-        while(i < n) {
+        while (i < n) {
          try {
                newArray[i] = stream.nextInt();
-               if(Math.abs(newArray[i]) <= 100000)
-               i++;
+               if (Math.abs(newArray[i]) <= 100000) {
+                   i++;
+               }
            }
-        catch (Exception ex){
+        catch (InputMismatchException ex){
             System.out.println("Было введено неверное значение!\nПовторите ввод:\n");
            }
         }
         return newArray;
     }
     private static int countTypesCandy(int[]candyType){
-        int countDifferentTypesCandies;
         HashSet <Integer> variantsCandies = new HashSet<Integer>();
-        for(int i=0;i<candyType.length;i++) {
+        for (int i = 0; i < candyType.length; i++) {
             variantsCandies.add(candyType[i]);
         }
         return variantsCandies.size();
     }
-
-    public static int maxCountTypes(int acceptableCount,int countTypes ) {
-        if (acceptableCount >= countTypes) {
-            return acceptableCount;
-
-        }else {
+    public static int maxCountCandies(int acceptableCount, int countTypes){
+        if (acceptableCount > countTypes) {
             return countTypes;
         }
+        return acceptableCount;
     }
     public static void main(String[] args) {
         int n;
@@ -43,15 +41,15 @@ public class Main {
         Scanner in = new Scanner(System.in);
         boolean error = false;
         do {
-            if (error)
+            if (error) {
                 System.out.println("Введено неверное значение!\nПовторите ввод:");
+            }
             n = in.nextInt();
             error = true;
         } while (n < 2 || n > 10000 || n % 2 != 0);
         candiesTypes = fillArray(n);
         int acceptableCount = n / 2;
         int countTypes = countTypesCandy(candiesTypes);
-        System.out.println(String.format("Максимальное количество типов конфет: %d\n", maxCountTypes(acceptableCount, countTypes)));
-
+        System.out.println(String.format("Максимальное количество типов конфет: %d\n", maxCountCandies(acceptableCount, countTypes)));
     }
 }
