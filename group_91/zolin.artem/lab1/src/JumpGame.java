@@ -23,8 +23,10 @@ public class JumpGame {
 
     private static int[] readArrayFromConsole() {
         var scanner = new Scanner(System.in);
-        var numbers = scanner.nextLine().split("\\s+");
-        return Arrays.stream(numbers).mapToInt(Integer::parseInt).toArray();
+        return Arrays.stream(scanner.nextLine()
+                        .split("\\s+"))
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
 
     public static void main(String[] args) {
