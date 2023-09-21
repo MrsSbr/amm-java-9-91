@@ -1,39 +1,37 @@
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.HashSet;
+import java.util.*;
+
 public class Main {
-    private static int [] fillArray(int n)
-    {
+    private static int[] fillArray(int n) {
         Scanner stream = new Scanner(System.in);
-        int [] newArray = new int[n];
+        int[] newArray = new int[n];
         System.out.println("Введите номера конфет: ");
         int i = 0;
         while (i < n) {
-         try {
-               newArray[i] = stream.nextInt();
-               if (Math.abs(newArray[i]) <= 100000) {
-                   i++;
-               }
-           }
-        catch (InputMismatchException ex){
-            System.out.println("Было введено неверное значение!\nПовторите ввод:\n");
-           }
+            try {
+                newArray[i] = stream.nextInt();
+                if (Math.abs(newArray[i]) <= 100000) {
+                    i++;
+                }
+            } catch (InputMismatchException ex) {
+                System.out.println("Было введено неверное значение!\nПовторите ввод:\n");
+                ex.printStackTrace();
+            }
         }
         return newArray;
     }
-    private static int countTypesCandy(int[]candyType){
-        HashSet <Integer> variantsCandies = new HashSet<Integer>();
-        for (int i = 0; i < candyType.length; i++) {
-            variantsCandies.add(candyType[i]);
+
+    private static int countTypesCandy(int[] candyType) {
+        Set<Integer> variantsCandies = new HashSet<>();
+        for (int j : candyType) {
+            variantsCandies.add(j);
         }
         return variantsCandies.size();
     }
-    public static int maxCountCandies(int acceptableCount, int countTypes){
-        if (acceptableCount > countTypes) {
-            return countTypes;
-        }
-        return acceptableCount;
+
+    public static int maxCountCandies(int acceptableCount, int countTypes) {
+        return Math.min(acceptableCount, countTypes);
     }
+
     public static void main(String[] args) {
         int n;
         int[] candiesTypes;
@@ -50,6 +48,6 @@ public class Main {
         candiesTypes = fillArray(n);
         int acceptableCount = n / 2;
         int countTypes = countTypesCandy(candiesTypes);
-        System.out.println(String.format("Максимальное количество типов конфет: %d\n", maxCountCandies(acceptableCount, countTypes)));
+        System.out.printf("Максимальное количество типов конфет: %d\n%n", maxCountCandies(acceptableCount, countTypes));
     }
 }
