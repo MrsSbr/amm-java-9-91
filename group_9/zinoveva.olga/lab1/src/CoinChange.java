@@ -76,8 +76,8 @@ public class CoinChange {
         //Размер массива
         int size = 0;
         System.out.println("Ожидается ввод количества вариантов номиналов монет");
-        while (size == 0) {
-            System.out.println("Количество вариантов не может быть 0");
+        while (size < 1 || size > 12) {
+            System.out.println("Количество вариантов не может быть меньше 1 и больше 12");
             size = getPositiveNum();
         }
 
@@ -86,9 +86,12 @@ public class CoinChange {
         getArrayCoins(coins, size);
 
         //Общая сумма монет
-        int amount;
+        int amount = -1;
         System.out.println("Ожидается ввод общей суммы");
-        amount = getPositiveNum();
+        while (amount < 0 || amount > 10000) {
+            System.out.println("Сумма не может быть меньше 0 и больше 10000");
+            amount = getPositiveNum();
+        }
 
         int res = minCountCoins(coins, size, amount);
         //Красивый вывод
