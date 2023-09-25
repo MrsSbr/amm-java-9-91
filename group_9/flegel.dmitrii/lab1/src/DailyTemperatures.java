@@ -1,5 +1,3 @@
-package lab1.src;
-
 import java.util.Stack;
 import java.util.Scanner;
 
