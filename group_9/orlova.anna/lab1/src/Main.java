@@ -23,6 +23,6 @@ public class Main {
         Scanner in = new Scanner(System.in);
         System.out.print("Input: n = ");
         int n = in.nextInt();
-        System.out.println("Output: " + LastRemainingNumber.task(n));
+        System.out.println("Output: " + LastRemainingNumber.taskEliminationGame(n));
     }
 }
