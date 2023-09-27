@@ -1,4 +1,6 @@
-public abstract class Bee implements IWorker {
+package hive;
+
+public abstract class Bee implements Worker {
 
     private int age;
 
@@ -34,15 +36,11 @@ public abstract class Bee implements IWorker {
 
     @Override
     public int hashCode() {
-        return age * 100 + (int) (size * 10000);
+        return super.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Bee bee) {
-            return age == bee.age && size == bee.size;
-        }
-        return false;
+        return super.equals(obj);
     }
-
 }
