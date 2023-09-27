@@ -2,44 +2,33 @@ import java.util.Scanner;
 
 public class BulbSwitcher {
 
-    public static void switchBulbs(boolean[] bulbs) {
-        for (int i = 0; i < bulbs.length; ++i) {
-            for (int j = i; j < bulbs.length; j += i + 1) {
-                bulbs[j] = !bulbs[j];
-            }
-        }
-    }
-
-    public static int countLitBulbs(boolean[] bulbs) {
-        int totalLitBulbs = 0;
-
-        for (int i = 0; i < bulbs.length; ++i) {
-            if (bulbs[i]) {
-                ++totalLitBulbs;
-            }
-        }
-
-        return totalLitBulbs;
-    }
-
-    public static void main(String[] args) {
-        int bulbCount = 0;
-        boolean[] bulbs = null;
-        int litBulbsCount = 0;
+    public static int readBulbsCount() {
         Scanner reader = new Scanner(System.in);
 
         System.out.print("Введите количество лампочек -> ");
-        bulbCount = reader.nextInt();
+        while (!reader.hasNextInt()) {
+            System.out.print("Вввод не распознан. Пвоторите ввод -> ");
+            reader.nextLine();
+        }
 
-        if (bulbCount == 0) {
-            System.out.println("Количество включенных лампочек: 0");
+        return reader.nextInt();
+    }
+
+    public static int countLitBulbs(int bulbsCount) {
+        return (int) Math.floor(Math.sqrt(bulbsCount));
+    }
+
+    public static void main(String[] args) {
+        int bulbsCount;
+        int litBulbsCount;
+
+        bulbsCount = readBulbsCount();
+        if (bulbsCount < 0) {
+            System.out.println("Введенное значение не может быть количеством лампочек.");
             return;
         }
 
-        bulbs = new boolean[bulbCount];
-
-        switchBulbs(bulbs);
-        litBulbsCount = countLitBulbs(bulbs);
+        litBulbsCount = countLitBulbs(bulbsCount);
         System.out.println("Количество включенных лампочек: " + litBulbsCount);
     }
 }
