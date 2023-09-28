@@ -1,10 +1,11 @@
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 
 public class LastRemainingNumber {
     public static int taskEliminationGame(int n) {
 
-        LinkedList<Integer> numbers = new LinkedList<>();
+        List<Integer> numbers = new LinkedList<>();
         for (int i = 0; i < n; ++i) {
             numbers.add(i + 1);
         }
