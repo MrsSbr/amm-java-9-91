@@ -29,7 +29,8 @@ public class MountainArrayTaskSolver {
         int size = array.length;
         int counter = 0;
         if (size > 3) {
-            int left = 0, right = 0;
+            int left = 0;
+            int right;
             while (left < size - 1) {
                 right = left + 1;
                 if (array[left] < array[left + 1]) {
