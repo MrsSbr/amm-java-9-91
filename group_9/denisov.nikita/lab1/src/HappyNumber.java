@@ -1,5 +1,6 @@
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class HappyNumber {
     public static void main(String[] args) {
@@ -21,17 +22,14 @@ public class HappyNumber {
             choice = scanner.next().charAt(0);
 
             switch (choice) {
-                case '1': {
+                case '1' -> {
                     task(scanner);
-                    break;
                 }
-                case '0': {
+                case '0' -> {
                     scanner.close();
-
                     System.out.print("Работа программы завершена.");
-                    break;
                 }
-                default: {
+                default -> {
                     System.out.println("Ошибка ввода. Попробуйте снова.");
                 }
             }
@@ -52,7 +50,7 @@ public class HappyNumber {
     }
 
     public static boolean isHappy(int number) {
-        HashSet<Integer> numbers = new HashSet<>();
+        Set<Integer> numbers = new HashSet<>();
 
         // Число не является счастливым, если в процессе работы алгоритма появляется бесконечный цикл.
         // 2 -> 4 -> 16 -> 37 -> 58 -> 89 -> 145 -> 42 -> 20 -> 4 -> 16...
