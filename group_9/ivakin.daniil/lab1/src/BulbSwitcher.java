@@ -7,7 +7,7 @@ public class BulbSwitcher {
 
         System.out.print("Введите количество лампочек -> ");
         while (!reader.hasNextInt()) {
-            System.out.print("Вввод не распознан. Пвоторите ввод -> ");
+            System.out.print("Ввод не распознан. Пвоторите ввод -> ");
             reader.nextLine();
         }
 
