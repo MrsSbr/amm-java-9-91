@@ -3,7 +3,6 @@ package hive;
 public class Drone extends Bee , implements Worker{
 
     private int larvaeCared;
-
     public void setLarvaeCared(int larvaeCared) {
         this.larvaeCared = larvaeCared;
     }
