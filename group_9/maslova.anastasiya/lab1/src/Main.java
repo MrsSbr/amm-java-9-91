@@ -10,7 +10,7 @@ public class Main {
      * This method calculates the minimum number of boats required to carry people.
      *
      * @param people - array of weights of the people
-     * @param limit - weight limit of the boat
+     * @param limit  - weight limit of the boat
      * @return minimum number of boats required
      * @throws IllegalArgumentException if input is invalid
      */
@@ -28,19 +28,19 @@ public class Main {
             }
         }
 
-    Arrays.sort(people);
+        Arrays.sort(people);
 
-    int boatCount = 0;
-    int leftIndex = 0;
-    int rightIndex = people.length - 1;
+        int boatCount = 0;
+        int leftIndex = 0;
+        int rightIndex = people.length - 1;
 
         while (leftIndex <= rightIndex) {
-        if (people[leftIndex] + people[rightIndex] <= limit) {
-            leftIndex = leftIndex + 1;
+            if (people[leftIndex] + people[rightIndex] <= limit) {
+                leftIndex = leftIndex + 1;
+            }
+            rightIndex = rightIndex - 1;
+            boatCount = boatCount + 1;
         }
-        rightIndex = rightIndex - 1;
-        boatCount = boatCount + 1;
-    }
 
         return boatCount;
     }
@@ -49,7 +49,7 @@ public class Main {
      * This method runs a test with given inputs and expected result.
      *
      * @param people - array of weights of the people
-     * @param limit - weight limit of the boat
+     * @param limit  - weight limit of the boat
      */
     public static void runTest(int[] people, int limit) {
         try {
@@ -65,8 +65,8 @@ public class Main {
         runTest(new int[]{1, 2}, 3);
         runTest(new int[]{3, 2, 2, 1}, 3);
         runTest(new int[]{3, 5, 3, 4}, 5);
-        runTest(new int[]{2, 2, 2 ,2}, 2);
-        runTest(new int[]{2, 2, 2 ,2}, 1);
+        runTest(new int[]{2, 2, 2, 2}, 2);
+        runTest(new int[]{2, 2, 2, 2}, 1);
         runTest(new int[]{}, 3);
         runTest(new int[]{5, 6, 3, 50}, 3);
     }
