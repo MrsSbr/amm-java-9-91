@@ -11,7 +11,7 @@ public class Main {
 
         int[] arr = new int[scan.nextInt()];
 
-        Set set = new HashSet();
+        Set<Integer> set = new HashSet<>();
 
         for (int i = 0; i < arr.length; i++) {
 
