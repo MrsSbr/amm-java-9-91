@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class PeakIndexInMountainArray {
+
     public static void FillArray(int[] array, Scanner scanner){
         // заполнение массива
         System.out.print("Введите элементы массива -> ");
