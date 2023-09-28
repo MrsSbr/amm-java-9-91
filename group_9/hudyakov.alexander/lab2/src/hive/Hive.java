@@ -11,12 +11,12 @@ public class Hive {
         return queen;
     }
 
-    private Queen queen = null;
+    private Queen queen;
 
 
     public Hive() {
         workers = new HashSet<>();
-        hasQueen = false;
+        queen = null;
     }
 
     public double getTotalHoney() {
