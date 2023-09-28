@@ -1,6 +1,6 @@
 package hive;
 
-public class Drone extends Bee {
+public class Drone extends Bee , implements Worker{
 
     private int larvaeCared;
 
@@ -20,6 +20,24 @@ public class Drone extends Bee {
     public Drone(int age, double size, int larvaeCared) {
         super(age, size);
         this.larvaeCared = larvaeCared;
+    }
+
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+
+        Drone drone = (Drone) object;
+
+        if (larvaeCared != drone.larvaeCared) return false;
+
+        return true;
+    }
+
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + larvaeCared;
+        return result;
     }
 
     @Override

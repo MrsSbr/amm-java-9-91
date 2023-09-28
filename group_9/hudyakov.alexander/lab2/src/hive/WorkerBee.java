@@ -1,6 +1,6 @@
 package hive;
 
-public class WorkerBee extends Bee {
+public class WorkerBee extends Bee, implements Worker {
 
     private double honeyProduced;
 
@@ -25,6 +25,26 @@ public class WorkerBee extends Bee {
     @Override
     public String getWorkDescription() {
         return "Producing honey";
+    }
+
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+
+        WorkerBee workerBee = (WorkerBee) object;
+
+        if (java.lang.Double.compare(honeyProduced, workerBee.honeyProduced) != 0) return false;
+
+        return true;
+    }
+
+    public int hashCode() {
+        int result = super.hashCode();
+        long temp;
+        temp = java.lang.Double.doubleToLongBits(honeyProduced);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 
     @Override

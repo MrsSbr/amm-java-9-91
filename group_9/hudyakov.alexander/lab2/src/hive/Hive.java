@@ -3,23 +3,24 @@ package hive;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Hive implements Worker {
+public class Hive {
 
-    private final Set<Bee> bees;
+    private final Set<Worker> workers;
 
-    private boolean hasQueen;
-
-    public boolean isHasQueen() {
-        return hasQueen;
+    public Queen getQueen() {
+        return queen;
     }
 
+    private Queen queen = null;
+
+
     public Hive() {
-        bees = new HashSet<>();
+        workers = new HashSet<>();
         hasQueen = false;
     }
 
     public double getTotalHoney() {
-        return bees
+        return workers
                 .stream()
                 .filter(b -> b instanceof WorkerBee)
                 .map(b -> (WorkerBee) b)
@@ -28,29 +29,29 @@ public class Hive implements Worker {
     }
 
     public void addBee(Bee bee) {
-        if (bee instanceof Queen queen) {
-            if (isHasQueen()) {
+        if (bee instanceof Queen q) {
+            if (!queen.equals(null)) {
                 throw new ExtraQueenException("There can't be more than one queen in a hive", queen);
             }
-            hasQueen = true;
+            queen = q;
         }
-        bees.add(bee);
+        else {
+            workers.add(bee);
+        }
     }
 
     public void watchBees() {
-        for (Bee bee : bees) {
+        for (Bee bee : workers) {
             System.out.printf("%s is %s\n", bee.toString(), bee.getWorkDescription());
         }
     }
 
     @Override
-    public String getWorkDescription() {
-        return "Bees are busy in the hive";
-    }
-
-    @Override
-    public void work() {
-        bees.forEach(Bee::work);
+    public void cycle() {
+        workers.forEach(Bee::work);
+        if(!queen.equals(null)){
+            queen.layEgg();
+        }
     }
 
 }

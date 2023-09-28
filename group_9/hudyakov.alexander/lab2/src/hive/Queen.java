@@ -27,9 +27,22 @@ public class Queen extends Bee {
         return String.format("%s, eggsLaid = %d", super.toString(), eggsLaid);
     }
 
-    @Override
-    public String getWorkDescription() {
-        return "Laying eggs";
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+
+        Queen queen = (Queen) object;
+
+        if (eggsLaid != queen.eggsLaid) return false;
+
+        return true;
+    }
+
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + eggsLaid;
+        return result;
     }
 
     @Override
@@ -37,8 +50,7 @@ public class Queen extends Bee {
         return "Queen";
     }
 
-    @Override
-    public void work() {
-        eggsLaid += 1;
+    public void layEgg(){
+        eggsLaid++;
     }
 }

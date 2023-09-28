@@ -14,11 +14,11 @@ public class HiveTest {
 
         hive.watchBees();
 
-        String honeyMessage = String.format("Honey before work: %f", hive.getTotalHoney());
+        String honeyMessage = String.format("Honey before cycle: %f", hive.getTotalHoney());
         System.out.println(honeyMessage);
 
-        hive.work();
-        honeyMessage = String.format("Honey after work: %f", hive.getTotalHoney());
+        hive.cycle();
+        honeyMessage = String.format("Honey after cycle: %f", hive.getTotalHoney());
         System.out.println(honeyMessage);
 
         try {
@@ -28,7 +28,7 @@ public class HiveTest {
         }
 
         hive.addBee(new WorkerBee(4, 3));
-        hive.work();
+        hive.cycle();
         honeyMessage = String.format("Honey after work of two bees: %f", hive.getTotalHoney());
         System.out.println(honeyMessage);
     }
