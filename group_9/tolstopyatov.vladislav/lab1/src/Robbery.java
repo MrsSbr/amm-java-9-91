@@ -7,7 +7,7 @@ public class Robbery {
     private static final int MAX_LENGTH = 100;
     private static final int MIN_LENGTH = 1;
 
-    private static int[] InitArray() {
+    private static int[] initArray() {
         System.out.print("Enter the number of houses: ");
         var scanner = new Scanner(System.in);
         var numberOfHouses = scanner.nextInt();
@@ -18,28 +18,27 @@ public class Robbery {
         return new int[numberOfHouses];
     }
 
-    private static void FillArray(int[]array) {
+    private static void fillArray(int[]array) {
         System.out.println("Fill array:");
         var scanner = new Scanner(System.in);
 
         for (int i = 0; i < array.length; i++) {
             var sumAtHome = scanner.nextInt();
 
-            if(sumAtHome < MIN_VALUE || sumAtHome > MAX_VALUE) {
+            if (sumAtHome < MIN_VALUE || sumAtHome > MAX_VALUE) {
                 array[i] = MIN_VALUE;
-            }
-            else {
+            } else {
                 array[i] = sumAtHome;
             }
         }
     }
 
-    private static int MaxSum(int[]array) {
-        if(array.length == 1) {
+    private static int maxSum(int[]array) {
+        if (array.length == 1) {
             return array[0];
         }
 
-        if(array.length == 2) {
+        if (array.length == 2) {
             return Math.max(array[0], array[1]);
         }
 
@@ -51,11 +50,11 @@ public class Robbery {
             sumIgnoringLastHouse += array[i];
         }
 
-        for(int i = 1; i < array.length; i += 2) {
+        for (int i = 1; i < array.length; i += 2) {
             sumStartingFromSecondHouse += array[i];
         }
 
-        for(int i = array.length-1; i > 0; i -= 2) {
+        for (int i = array.length-1; i > 0; i -= 2) {
             sumIgnoringFirstHouse += array[i];
         }
 
@@ -65,16 +64,16 @@ public class Robbery {
 
 
     public static void main(String[] args) {
-        var array = InitArray();
+        var array = initArray();
 
-        if(array == null) {
+        if (array == null) {
             System.out.println("Uncorrect input");
             return;
         }
 
-        FillArray(array);
+        fillArray(array);
 
-        int maxSumRobbery = MaxSum(array);
+        int maxSumRobbery = maxSum(array);
         System.out.println("Максимальное количество награбленных денег: "  + maxSumRobbery);
     }
 }
