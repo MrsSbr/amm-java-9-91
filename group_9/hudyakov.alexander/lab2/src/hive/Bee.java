@@ -1,54 +1,59 @@
 package hive;
 
-import idgen.IdGenerator;
+import java.util.UUID;
 
 public abstract class Bee {
     private int age;
     private double size;
-    public int getId() {
-        return id;
-    }
-    private final int id;
+    private final UUID id;
     public Bee(int age, double size) {
         this.age = age;
         this.size = size;
-        id = IdGenerator.getNextId();
+        id  = UUID.randomUUID();
+    }
+    public UUID getId() {
+        return id;
     }
     public int getAge() {
         return age;
     }
-    public void setAge(int age) {
-        this.age = age;
-    }
     public double getSize() {
         return size;
+    }
+    public void setAge(int age) {
+        this.age = age;
     }
     public void setSize(double size) {
         this.size = size;
     }
     public abstract String getStatus();
     @Override
-    public String toString() {
-        return String.format("%s: age = %d, size = %f", getStatus(), age, size);
-    }
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        if (!super.equals(object)) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        Bee bee = (Bee) object;
+        Bee bee = (Bee) o;
 
         if (age != bee.age) return false;
-        if (java.lang.Double.compare(size, bee.size) != 0) return false;
-        return id == bee.id;
+        if (Double.compare(size, bee.size) != 0) return false;
+        return id.equals(bee.id);
     }
+    @Override
     public int hashCode() {
-        int result = super.hashCode();
+        int result;
         long temp;
-        result = 31 * result + age;
-        temp = java.lang.Double.doubleToLongBits(size);
+        result = age;
+        temp = Double.doubleToLongBits(size);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + id;
+        result = 31 * result + id.hashCode();
         return result;
+    }
+    @Override
+    public String toString() {
+        return "Bee{" +
+                "age=" + age +
+                ", size=" + size +
+                ", id=" + id +
+                '}';
     }
 }

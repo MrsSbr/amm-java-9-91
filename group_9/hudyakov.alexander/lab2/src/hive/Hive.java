@@ -5,13 +5,13 @@ import java.util.Set;
 
 public class Hive {
     private final Set<Worker> workers;
-    public Queen getQueen() {
-        return queen;
-    }
     private Queen queen;
     public Hive() {
         workers = new HashSet<>();
         queen = null;
+    }
+    public Queen getQueen() {
+        return queen;
     }
     public double getTotalHoney() {
         return workers

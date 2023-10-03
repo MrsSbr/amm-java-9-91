@@ -2,12 +2,6 @@ package hive;
 
 public class Queen extends Bee {
     private int eggsLaid;
-    public void setEggsLaid(int eggsLaid) {
-        this.eggsLaid = eggsLaid;
-    }
-    public int getEggsLaid() {
-        return eggsLaid;
-    }
     public Queen(int age, double size) {
         super(age, size);
         this.eggsLaid = 0;
@@ -16,9 +10,18 @@ public class Queen extends Bee {
         super(age, size);
         this.eggsLaid = eggsLaid;
     }
+    public int getEggsLaid() {
+        return eggsLaid;
+    }
+    public void setEggsLaid(int eggsLaid) {
+        this.eggsLaid = eggsLaid;
+    }
     @Override
-    public String toString() {
-        return String.format("%s, eggsLaid = %d", super.toString(), eggsLaid);
+    public String getStatus() {
+        return "Queen";
+    }
+    public void layEgg() {
+        eggsLaid++;
     }
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -35,10 +38,9 @@ public class Queen extends Bee {
         return result;
     }
     @Override
-    public String getStatus() {
-        return "Queen";
-    }
-    public void layEgg() {
-        eggsLaid++;
+    public String toString() {
+        return "Queen{" +
+                "eggsLaid=" + eggsLaid +
+                "} " + super.toString();
     }
 }
