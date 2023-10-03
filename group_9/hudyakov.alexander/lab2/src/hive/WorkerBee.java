@@ -28,6 +28,7 @@ public class WorkerBee extends Bee implements Worker {
     public String getWorkDescription() {
         return "Producing honey";
     }
+    @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
@@ -37,6 +38,7 @@ public class WorkerBee extends Bee implements Worker {
 
         return Double.compare(honeyProduced, workerBee.honeyProduced) == 0;
     }
+    @Override
     public int hashCode() {
         int result = super.hashCode();
         long temp;

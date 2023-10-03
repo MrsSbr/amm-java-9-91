@@ -28,6 +28,7 @@ public class Drone extends Bee implements Worker {
     public String getStatus() {
         return "Drone";
     }
+    @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
@@ -37,6 +38,7 @@ public class Drone extends Bee implements Worker {
 
         return larvaeCared == drone.larvaeCared;
     }
+    @Override
     public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + larvaeCared;

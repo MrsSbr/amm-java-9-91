@@ -23,6 +23,7 @@ public class Queen extends Bee {
     public void layEgg() {
         eggsLaid++;
     }
+    @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
@@ -32,6 +33,7 @@ public class Queen extends Bee {
 
         return eggsLaid == queen.eggsLaid;
     }
+    @Override
     public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + eggsLaid;
