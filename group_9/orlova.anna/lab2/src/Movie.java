@@ -1,26 +1,26 @@
 import java.util.Objects;
-class Movie extends MediaProduction implements Media {
-    private String director;
-    private final int duration;
-    public Movie(String title, int year, String director, int duration) {
-        super(title, year);
+public class Movie extends MediaProduction implements Overview {
+    private final String director;
+    private final String genre;
+    private final String description;
+    public Movie(String title, int year, String director, int duration,
+                 String genre, String description) {
+        super(title, year, duration);
         this.director = director;
-        this.duration = duration;
+        this.genre = genre;
+        this.description = description;
     }
     @Override
     public String play() {
         return "Currently playing movie: " + getTitle();
     }
-    @Override
-    public int getDuration() {
-        return duration;
+
+    public String getGenre() {
+        return genre;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() +
-                "\nDirector: " + director +
-                "\nDuration: " + duration + " minutes";
+    public String getDescription() {
+        return description;
     }
 
     @Override
@@ -29,12 +29,21 @@ class Movie extends MediaProduction implements Media {
         if (obj == null || getClass() != obj.getClass()) return false;
         if (!super.equals(obj)) return false;
         Movie movie = (Movie) obj;
-        return duration == movie.duration &&
-                director.equals(movie.director);
+        return director.equals(movie.director) && genre.equals(movie.genre)
+                && description.equals(movie.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), director, duration);
+        return Objects.hash(super.hashCode(), director, genre, description);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "\nGenre: " + genre +
+                "\nDirector: " + director +
+                "\nDuration: " + getDuration() + " minutes" +
+                "\nDescription: " + description;
     }
 }

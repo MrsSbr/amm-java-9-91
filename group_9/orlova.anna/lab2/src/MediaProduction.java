@@ -2,9 +2,12 @@ import java.util.Objects;
 abstract class MediaProduction {
     private final String title;
     private final int year;
-    public MediaProduction(String title, int year) {
+    private final int duration;
+
+    public MediaProduction(String title, int year, int duration) {
         this.title = title;
         this.year = year;
+        this.duration = duration;
     }
     public String getTitle() {
         return title;
@@ -12,24 +15,25 @@ abstract class MediaProduction {
     public int getYear() {
         return year;
     }
-    public abstract int getDuration();
-
-    @Override
-    public String toString() {
-        return "\"" + title + "\" (" + year + ")";
+    public int getDuration() {
+        return duration;
     }
+    public abstract String play();
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         MediaProduction that = (MediaProduction) obj;
-        return year == that.year &&
-                title.equals(that.title);
+        return year == that.year && title.equals(that.title) && duration == that.duration;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, year);
+        return Objects.hash(title, year, duration);
+    }
+    @Override
+    public String toString() {
+        return "\"" + title + "\" (" + year + ")";
     }
 }
