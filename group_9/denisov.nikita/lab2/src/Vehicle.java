@@ -37,4 +37,9 @@ public abstract class Vehicle implements VehicleInterface {
         return Objects.equals(brand, vehicle.brand) &&
                 Objects.equals(model, vehicle.model);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brand, model);
+    }
 }
