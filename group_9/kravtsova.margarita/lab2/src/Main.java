@@ -6,19 +6,34 @@ public class Main {
         InfectiousDisease infDis = new InfectiousDisease("ОРВИ",
                 new ArrayList<String>(Arrays.asList(symp.split(","))),
                 5,"СуперВирус",1);
-        symp = "плохое настроение,снижение деятельности";
+        symp = "плохое настроение,снижение деятельности,апатия";
         MentalDisease mentDis = new MentalDisease("Депрессия",
-                new ArrayList<String>(Arrays.asList(symp.split(","))),5,
-                true,false);
-        symp = "Снижение резкости зрения";
+                new ArrayList<String>(Arrays.asList(symp.split(","))),
+                40, true,false);
+        symp = "Снижение резкости зрения,боль в глазах";
         OrganDisease orgDis = new OrganDisease("Миопия",
                 new ArrayList<String>(Arrays.asList(symp.split(","))),
                 0,"Глаза",false);
         infDis.onsetDisease();
-        infDis.methodsTreatment();
-        mentDis.valuePercentageMorbidity();
+        try {
+            infDis.methodsTreatment();
+        } catch (MortalityException ex) {
+            System.out.println(ex.getMessage());
+        }
+        System.out.println();
         mentDis.courseDisease();
+        try {
+            mentDis.methodsTreatment();
+        } catch (MortalityException ex) {
+            System.out.println(ex.getMessage());
+        }
+        mentDis.valuePercentageMorbidity();
+        System.out.println();
         orgDis.onsetDisease();
-        orgDis.methodsTreatment();
+        try {
+            orgDis.methodsTreatment();
+        } catch (MortalityException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }
