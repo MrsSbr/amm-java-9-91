@@ -16,7 +16,10 @@ public class Intervals {
         return result;
     }
 
-    public static String mergeIntervals(int[] intervals) {
+    public static String mergeIntervals(int[] intervals) throws Exception {
+        if (intervals.length % 2 == 1)
+            throw new Exception("There are not an even number of intervals");
+
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("[");
 
@@ -68,8 +71,12 @@ public class Intervals {
     // 1, 2, 5, 6, 5, 10, 11, 15, 14, 20, 21, 22
     // 1, 3, 2, 6, 8, 10, 15, 18
     public static void main(String[] args) {
-        var intervals = enterIntervals();
-        System.out.println("Merged intervals:");
-        System.out.println(mergeIntervals(intervals));
+        try {
+            var intervals = enterIntervals();
+            System.out.println("Merged intervals:");
+            System.out.println(mergeIntervals(intervals));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
