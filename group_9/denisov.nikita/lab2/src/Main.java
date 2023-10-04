@@ -32,7 +32,7 @@ public class Main {
                     scanner.close();
                     System.out.print("Работа программы завершена.");
                 }
-                default ->  {
+                default -> {
                     System.out.println("Ошибка ввода. Попробуйте снова.");
                     scanner.nextLine();
                 }

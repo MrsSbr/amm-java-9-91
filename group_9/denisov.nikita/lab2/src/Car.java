@@ -1,5 +1,5 @@
 public class Car extends Vehicle implements VehicleInterface {
-    private  double speed;
+    private final double speed;
     private double currentSpeed;
 
     Car(String brand, String model, double speed) {
