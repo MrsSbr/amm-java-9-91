@@ -17,7 +17,7 @@ public class WalkingRobotSimulation {
             obstacleSet.add(obstacle[0] + "," + obstacle[1]);
         }
 
-        // Массив смещений для каждого направления
+        // Массив смещений для каждого направления (север, восток, юг и запад соответственно)
         int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
         for (int command : commands) {
