@@ -23,6 +23,7 @@ public class PeakIndexInMountainArray {
         }
         return 1;
     }
+
     public static int mountainPeak() {
         int peak = -1;
 
