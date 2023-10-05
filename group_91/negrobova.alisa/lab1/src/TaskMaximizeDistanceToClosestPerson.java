@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
+
 public class TaskMaximizeDistanceToClosestPerson {
     public static int getPlaceNumber() {
         int res = -1;
@@ -13,13 +14,15 @@ public class TaskMaximizeDistanceToClosestPerson {
                 }
             } catch (InputMismatchException exception) {
                 System.out.println("Введено некорректное значение");
+                exception.printStackTrace();
             }
         }
         return res;
     }
 
-    public static void getIsPlaceFree(int[] array, int size) {
+    public static int[] getIsPlaceFree(int size) {
         boolean arrayCorrectFull = false;
+        int[] array = new int[size];
 
         while (!arrayCorrectFull) {
             System.out.print("Введите рассадку людей (" + size + " мест через пробел): ");
@@ -37,11 +40,13 @@ public class TaskMaximizeDistanceToClosestPerson {
                     }
                 } catch (NumberFormatException exception) {
                     System.out.println("Ошибка. Cписок некорректен");
+                    exception.printStackTrace();
                     i = size;
                     arrayCorrectFull = false;
                 }
             }
         }
+        return array;
     }
 
     public static int getMaxDistance(int[] array, int size) {
@@ -59,18 +64,18 @@ public class TaskMaximizeDistanceToClosestPerson {
                 } else {
                     maxDistance = Math.max(maxDistance, (distance + 1) / 2);
                 }
-                distance=0;
+                distance = 0;
             }
         }
         maxDistance = Math.max(maxDistance, distance);
         return maxDistance;
     }
+
     public static void main(String[] args) {
         System.out.println("Количество мест в ряду");
         int size = getPlaceNumber();
         System.out.println("Введите 0, если место свободно, иначе введите 1");
-        int[] places = new int[size];
-        getIsPlaceFree(places, size);
+        int[] places = getIsPlaceFree(size);
         int maxDistance = getMaxDistance(places, size);
         if (maxDistance == 0) {
             System.out.println("Свободных мест нет");
