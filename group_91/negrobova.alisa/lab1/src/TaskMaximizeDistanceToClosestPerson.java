@@ -1,14 +1,14 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
 public class TaskMaximizeDistanceToClosestPerson {
-    public static int getPlaceNumber(){
+    public static int getPlaceNumber() {
         int res = -1;
         while (res < 2) {
             System.out.print("Введите число больше 1: ");
             try {
                 Scanner in = new Scanner(System.in);
                 res = in.nextInt();
-                if (res < 2){
+                if (res < 2) {
                     System.out.println("Введено значение меньше 2");
                 }
             } catch (InputMismatchException exception) {
@@ -44,23 +44,21 @@ public class TaskMaximizeDistanceToClosestPerson {
         }
     }
 
-    public static int getMaxDistance(int[] array, int size){
-
+    public static int getMaxDistance(int[] array, int size) {
         boolean isFirstPerson = true;
         int distance = 0;
         int maxDistance = 0;
 
         for (int i = 0; i < size; i++) {
-            if (array[i] == 0)
+            if (array[i] == 0) {
                 distance++;
-            else
-            {
+            } else {
                 if (isFirstPerson) {
                     maxDistance = distance;
                     isFirstPerson = false;
+                } else {
+                    maxDistance = Math.max(maxDistance, (distance + 1) / 2);
                 }
-                else
-                    maxDistance = Math.max(maxDistance,(distance + 1) / 2);
                 distance=0;
             }
         }
@@ -74,9 +72,10 @@ public class TaskMaximizeDistanceToClosestPerson {
         int[] places = new int[size];
         getIsPlaceFree(places, size);
         int maxDistance = getMaxDistance(places, size);
-        if (maxDistance == 0)
+        if (maxDistance == 0) {
             System.out.println("Свободных мест нет");
-        else
+        } else {
             System.out.println("Максимальное расcтояние: " + maxDistance);
+        }
     }
 }
