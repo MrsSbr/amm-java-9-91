@@ -6,7 +6,7 @@ public class PeakIndexInMountainArray {
         // заполнение массива
         int[] array = new int[arrayLength];
         System.out.print("Введите элементы массива -> ");
-        for (int i = 0; i < array.length; ++i){
+        for (int i = 0; i < array.length; ++i) {
             if (scanner.hasNextInt()) {
                 array[i] = scanner.nextInt();
             } else {
