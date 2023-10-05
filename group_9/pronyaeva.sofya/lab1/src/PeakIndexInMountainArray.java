@@ -2,14 +2,20 @@ import java.util.Scanner;
 
 public class PeakIndexInMountainArray {
 
-    public static void FillArray(int[] array, Scanner scanner){
+    public static boolean FillArray(int[] array, Scanner scanner){
         // заполнение массива
         System.out.print("Введите элементы массива -> ");
         for (int i = 0; i < array.length; ++i){
-            array[i] = scanner.nextInt();
+            if (scanner.hasNextInt()) {
+                array[i] = scanner.nextInt();
+            }
+            else {
+                return false;
+            }
         }
 
         System.out.println();
+        return true;
     }
     public static int MountainPeak(){
 
@@ -18,13 +24,23 @@ public class PeakIndexInMountainArray {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Введите размер массива -> ");
-        int arrayLength = scanner.nextInt();
+
+        int arrayLength;
+        if (scanner.hasNextInt()) {
+            arrayLength = scanner.nextInt();
+        }
+        else {
+            return -3;
+        }
         if (arrayLength < 3 || arrayLength > 100000){
             return -3;
         }
 
         int[] array = new int[arrayLength];
-        FillArray(array, scanner);
+
+        if (!FillArray(array, scanner)){
+            return -2;
+        }
 
         if (array[0] < 0 || array[0] > 1000000){
             return -2;
