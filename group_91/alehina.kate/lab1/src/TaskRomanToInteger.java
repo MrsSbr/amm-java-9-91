@@ -37,10 +37,10 @@ public class TaskRomanToInteger {
     public static void main(String[] args) {
         System.out.println("Введите римское число: ");
         Scanner in = new Scanner(System.in);
-        String romanNumber=in.nextLine();
+        String romanNumber = in.nextLine();
 
         if (isRoman(romanNumber)) {
-            int arabianNumber=romanToInteger(romanNumber);
+            int arabianNumber = romanToInteger(romanNumber);
             System.out.println("Арабская число: " + arabianNumber);
         } else {
             System.out.println("Ошибка! Введено некорректное число!");
