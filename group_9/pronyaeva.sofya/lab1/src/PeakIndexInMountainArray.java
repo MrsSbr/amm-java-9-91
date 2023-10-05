@@ -24,13 +24,11 @@ public class PeakIndexInMountainArray {
         return 1;
     }
     public static int mountainPeak() {
-
         int peak = -1;
 
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Введите размер массива -> ");
-
         int arrayLength;
         if (scanner.hasNextInt()) {
             arrayLength = scanner.nextInt();
@@ -62,7 +60,6 @@ public class PeakIndexInMountainArray {
     public static void main(String[] args) {
 
         int mountainPeak = mountainPeak();
-
         if (mountainPeak == -3) {
             System.out.println("Неподходящий размер!");
         } else if (mountainPeak == -2) {
