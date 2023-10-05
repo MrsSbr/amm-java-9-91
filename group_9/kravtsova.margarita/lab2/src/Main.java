@@ -1,9 +1,8 @@
-import disease.InfectiousDisease;
-import disease.MentalDisease;
-import disease.MortalityException;
-import disease.OrganDisease;
+import disease.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,6 +18,11 @@ public class Main {
         OrganDisease orgDis = new OrganDisease("Миопия",
                 Arrays.asList(symp.split(",")),
                 0,"Глаза",false);
+        symp = "Кашель,боль в горле,боль в животе,температура,головная боль";
+        Disease newDis = new InfectiousDisease("Неизвестная болезнь",
+                Arrays.asList(symp.split(",")),
+                70,"СуперПуперВирус",1);
+        List<Disease> diseases = List.of(infDis, mentDis, orgDis, newDis);
         infDis.onsetDisease();
         try {
             infDis.methodsTreatment();
@@ -40,11 +44,11 @@ public class Main {
         } catch (MortalityException ex) {
             System.out.println(ex.getMessage());
         }
+        for(Disease dis : diseases) {
+        if ((dis instanceof InfectiousDisease) && (dis.getPercentageMorbidity() > 50)) {
+            System.out.println("\nВирус " +((InfectiousDisease) dis).getNameInfection()
+                    + " очень опасен! " + "Необходимо носить маску в общественных местах!");
+        }
+        }
     }
 }
-/*
-List
-пакеты
-intanceof
-add remove симптомы
- */

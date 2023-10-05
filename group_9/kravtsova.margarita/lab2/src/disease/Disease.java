@@ -44,10 +44,6 @@ public abstract class Disease implements ActionsDuringIllness{
     public void valuePercentageMorbidity () {                                //величина процента заболеваемости
         System.out.println("Процент заболеваемости болезни " + name +
                 " равен " + Integer.toString(percentageMorbidity) + "%");
-        if ((this instanceof InfectiousDisease) && (percentageMorbidity > 50)) {
-            System.out.println("Наблюдается большая заболеваемость данным вирусом! " +
-                    "Необходимо носить маску в общественных местах!");
-        }
     }
     @Override
     public boolean equals(Object object) {
