@@ -1,11 +1,12 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
+package disease;
+
+import java.util.List;
+
 public abstract class Disease implements ActionsDuringIllness{
     private String name;
-    private ArrayList <String> symptoms;
+    private final List<String> symptoms;
     private int percentageMorbidity;                                         //процент заболеваемости
-    public Disease(String name, ArrayList <String> symptoms,
+    public Disease(String name, List <String> symptoms,
                    int percentMorbidity) {
         this.name = name;
         this.symptoms = symptoms;
@@ -14,7 +15,7 @@ public abstract class Disease implements ActionsDuringIllness{
     public String getName() {
         return name;
     }
-    public ArrayList <String> getSymptoms() {
+    public List <String> getSymptoms() {
         return symptoms;
     }
     public int getPercentageMorbidity() {
@@ -23,8 +24,11 @@ public abstract class Disease implements ActionsDuringIllness{
     public void setName(String name) {
         this.name = name;
     }
-    public void setSymptoms(ArrayList<String> symptoms) {
-        this.symptoms = symptoms;
+    public void addSymptoms(List<String> symptoms) {
+        this.symptoms.addAll(symptoms);
+    }
+    public void removeSymptoms(List<String> symptoms) {
+        this.symptoms.removeAll(symptoms);
     }
     public void setPercentageMorbidity(int percentageMorbidity) {
         this.percentageMorbidity = percentageMorbidity;
@@ -40,6 +44,10 @@ public abstract class Disease implements ActionsDuringIllness{
     public void valuePercentageMorbidity () {                                //величина процента заболеваемости
         System.out.println("Процент заболеваемости болезни " + name +
                 " равен " + Integer.toString(percentageMorbidity) + "%");
+        if ((this instanceof InfectiousDisease) && (percentageMorbidity > 50)) {
+            System.out.println("Наблюдается большая заболеваемость данным вирусом! " +
+                    "Необходимо носить маску в общественных местах!");
+        }
     }
     @Override
     public boolean equals(Object object) {
@@ -59,7 +67,7 @@ public abstract class Disease implements ActionsDuringIllness{
     }
     @Override
     public String toString() {
-        return "Disease{" +
+        return "disease.Disease{" +
                 "name='" + name + '\'' +
                 ", symptoms=" + symptoms +
                 ", percentageMorbidity=" + percentageMorbidity + '}';

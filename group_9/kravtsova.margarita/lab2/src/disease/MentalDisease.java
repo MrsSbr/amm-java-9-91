@@ -1,10 +1,11 @@
-import java.util.ArrayList;
-import java.util.Objects;
+package disease;
+
+import java.util.List;
 
 public class MentalDisease extends Disease{
     private boolean possibilityTreatment;                                          //возможность лечения
     private boolean strangeBehavior;                                               //странное поведение
-    public MentalDisease(String name, ArrayList <String> symptoms,
+    public MentalDisease(String name, List<String> symptoms,
                          int percentMorbidity, boolean possibilityTreatment,
                          boolean strangeBehavior) {
         super(name, symptoms, percentMorbidity);
@@ -64,7 +65,7 @@ public class MentalDisease extends Disease{
     }
     @Override
     public String toString() {
-        return "MentalDisease{" +
+        return "disease.MentalDisease{" +
                 "possibilityTreatment=" + possibilityTreatment +
                 ", strangeBehavior=" + strangeBehavior +
                 "} " + super.toString();

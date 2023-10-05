@@ -1,10 +1,11 @@
-import java.util.ArrayList;
-import java.util.Objects;
+package disease;
+
+import java.util.List;
 
 public class OrganDisease extends Disease{
     private String organ;
     private boolean chronic;
-    public OrganDisease(String name, ArrayList<String> symptoms,
+    public OrganDisease(String name, List<String> symptoms,
                         int percentMorbidity, String organ, boolean chronic) {
         super(name, symptoms, percentMorbidity);
         this.organ = organ;
@@ -55,7 +56,7 @@ public class OrganDisease extends Disease{
     }
     @Override
     public String toString() {
-        return "OrganDisease{" +
+        return "disease.OrganDisease{" +
                 "organ='" + organ + '\'' +
                 ", chronic=" + chronic +
                 "} " + super.toString();

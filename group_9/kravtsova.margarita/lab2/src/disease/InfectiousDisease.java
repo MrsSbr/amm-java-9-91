@@ -1,10 +1,11 @@
-import java.util.ArrayList;
-import java.util.Objects;
+package disease;
+
+import java.util.List;
 
 public class InfectiousDisease extends Disease {
     private String nameInfection;
     private int mortality;                                                      //смертность в процентах
-    public InfectiousDisease(String name, ArrayList <String> symptoms,
+    public InfectiousDisease(String name, List<String> symptoms,
                              int percentMorbidity, String nameInfection, int mortality) {
         super(name, symptoms, percentMorbidity);
         this.nameInfection = nameInfection;
@@ -53,7 +54,7 @@ public class InfectiousDisease extends Disease {
     }
     @Override
     public String toString() {
-        return "InfectiousDisease{" +
+        return "disease.InfectiousDisease{" +
                 "nameInfection='" + nameInfection + '\'' +
                 ", mortality=" + mortality +
                 "} " + super.toString();
