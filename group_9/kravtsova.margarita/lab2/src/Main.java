@@ -1,6 +1,9 @@
-import disease.*;
+import disease.InfectiousDisease;
+import disease.MentalDisease;
+import disease.MortalityException;
+import disease.OrganDisease;
+import disease.Disease;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,36 +22,22 @@ public class Main {
                 Arrays.asList(symp.split(",")),
                 0,"Глаза",false);
         symp = "Кашель,боль в горле,боль в животе,температура,головная боль";
-        Disease newDis = new InfectiousDisease("Неизвестная болезнь",
+        Disease newDis = new InfectiousDisease("СуперПупер болезнь",
                 Arrays.asList(symp.split(",")),
-                70,"СуперПуперВирус",1);
+                70,"СуперПуперВирус",30);
         List<Disease> diseases = List.of(infDis, mentDis, orgDis, newDis);
-        infDis.onsetDisease();
-        try {
-            infDis.methodsTreatment();
-        } catch (MortalityException ex) {
-            System.out.println(ex.getMessage());
-        }
-        System.out.println();
-        mentDis.courseDisease();
-        try {
-            mentDis.methodsTreatment();
-        } catch (MortalityException ex) {
-            System.out.println(ex.getMessage());
-        }
-        mentDis.valuePercentageMorbidity();
-        System.out.println();
-        orgDis.onsetDisease();
-        try {
-            orgDis.methodsTreatment();
-        } catch (MortalityException ex) {
-            System.out.println(ex.getMessage());
-        }
         for(Disease dis : diseases) {
-        if ((dis instanceof InfectiousDisease) && (dis.getPercentageMorbidity() > 50)) {
-            System.out.println("\nВирус " +((InfectiousDisease) dis).getNameInfection()
-                    + " очень опасен! " + "Необходимо носить маску в общественных местах!");
-        }
+            try {
+                dis.onsetDisease();
+                dis.methodsTreatment();
+            } catch (MortalityException ex) {
+                System.out.println(ex.getMessage());
+            }
+            System.out.println();
+            if ((dis instanceof InfectiousDisease infectDis) && (infectDis.getPercentageMorbidity() > 50)) {
+                System.out.println("\nВирус " + infectDis.getNameInfection()
+                        + " очень опасен! " + "Необходимо носить маску в общественных местах!");
+            }
         }
     }
 }
