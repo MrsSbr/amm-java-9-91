@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MilitarySatellite extends Satellite implements Spacecraft {
+
     String country;
+
     public MilitarySatellite(String name, Orbit orbit, String country) {
         super(name, orbit, Type.MILITARY);
         this.country = country;

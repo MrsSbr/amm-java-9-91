@@ -7,7 +7,9 @@ import src.satellite.enums.Type;
 import java.util.Objects;
 
 public class NavigationSatellite extends Satellite implements Spacecraft {
+
     String country;
+
     public NavigationSatellite(String name, Orbit orbit, String country) {
         super(name, orbit, Type.NAVIGATION);
         this.country = country;
