@@ -48,8 +48,8 @@ public class MilitarySatellite extends Satellite implements Spacecraft {
                     " неактивен.";
         }
 
-        for (int i = 0; i < satelliteArrayList.size(); i++) {
-            satelliteArrayList.get(i).setStatus(Status.OFF);
+        for (Satellite satellite : satelliteArrayList) {
+            satellite.setStatus(Status.OFF);
         }
 
         return getName() +
