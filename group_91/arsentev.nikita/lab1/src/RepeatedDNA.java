@@ -8,8 +8,8 @@ import java.util.InputMismatchException;
 
 public class RepeatedDNA {
     private final static String CHARS = "ACGT";
-    private final static int LENGTH = 10;
     private final static int EXCEPTION_SIZE = 100000;
+    private final static int LENGTH = 10;
 
     private static List<String> findRepeatedDNASequences(String s) {
         Map<String, Integer> mapStrings = new HashMap<>();
