@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class LargestNumber {
     public static String largestNumber(int[] nums) {
@@ -23,11 +24,42 @@ public class LargestNumber {
         return result.toString();
     }
 
-    public static void main(String[] args) {
-        int[] nums1 = {10, 2};
-        System.out.println(largestNumber(nums1)); // Вывод: "210"
+    public static void menu() {
+        Scanner scanner = new Scanner(System.in);
+        char choice;
 
-        int[] nums2 = {0, 3, 0, 30, 34, 0, 5, 9, 0};
-        System.out.println(largestNumber(nums2)); // Вывод: "9534330"
+        do {
+            System.out.print("""
+                    ГЛАВНОЕ МЕНЮ
+
+                    [1]. Построить самое большое число
+                    [0]. Завершить работу
+
+                    Выберите действие:\s""");
+            choice = scanner.next().charAt(0);
+
+            switch (choice) {
+                case '1' -> {
+                    System.out.print("Введите количество чисел в массиве: ");
+                    int arraySize = scanner.nextInt();
+                    int[] array = new int[arraySize];
+
+                    for (int i = 0; i < array.length; i++) {
+                        System.out.print("Введите число " + (i + 1) + ": ");
+                        array[i] = scanner.nextInt();
+                    }
+                    System.out.println(largestNumber(array));
+                }
+                case '0' -> {
+                    scanner.close();
+                    System.out.print("Работа программы завершена.");
+                }
+                default -> System.out.println("Ошибка ввода. Попробуйте снова.");
+            }
+        } while (choice != '0');
+    }
+    public static void main(String[] args)
+    {
+        menu();
     }
 }
