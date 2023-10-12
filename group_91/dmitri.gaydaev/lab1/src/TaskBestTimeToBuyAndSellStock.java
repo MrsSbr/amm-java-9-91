@@ -34,7 +34,7 @@
 //
 
 
-public class Main {
+public class TaskBestTimeToBuyAndSellStock {
     public static void main(String[] args) {
         int[] prices = {7, 2, 5, 1, 6, 2, 7, 9};
         int maxProfit = maxProfit(prices);

@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Main {
+public class TaskContainsDuplicates {
     public static void main(String[] args) {
 
         System.out.println("Input size of array:");

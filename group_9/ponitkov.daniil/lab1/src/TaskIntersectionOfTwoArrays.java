@@ -1,7 +1,7 @@
 import java.util.HashSet;
 import java.util.Set;
 
-public class Main {
+public class TaskIntersectionOfTwoArrays {
     public static Integer[] intersection(Integer[] nums1, Integer[] nums2) {
         Set<Integer> set1 = new HashSet<>();
         Set<Integer> set2 = new HashSet<>();

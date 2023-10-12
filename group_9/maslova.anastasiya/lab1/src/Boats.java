@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class Main {
+public class Boats {
 
     private static final int MIN_PEOPLE = 1;
     private static final int MAX_PEOPLE = 50000;

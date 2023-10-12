@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Main {
+public class DistributeCandies {
     private static int[] fillArray(int n) {
         Scanner stream = new Scanner(System.in);
         int[] newArray = new int[n];
