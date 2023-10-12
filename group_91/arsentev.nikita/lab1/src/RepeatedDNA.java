@@ -40,7 +40,7 @@ public class RepeatedDNA {
         System.out.println("How to fill string\n0 - Console, other - Random");
         Scanner in = new Scanner(System.in);
         final int number = in.nextInt();//upd: change name of variable
-        String s = "";
+        String s;
         if (number == 0) {
             System.out.println("Print string:");
             in.nextLine();
