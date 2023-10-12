@@ -59,7 +59,6 @@ public class Main
         int[][] array = {{2, 9, 4, 2}, {7, 5, 3, 7}, {6, 1, 8, 6}};
 
         System.out.println("Массив:");
-
         for (int i = 0; i < array.length; i++)
         {
             for (int j = 0; j < array[0].length; j++)
