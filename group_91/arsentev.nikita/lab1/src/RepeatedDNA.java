@@ -46,13 +46,13 @@ public class RepeatedDNA {
             in.nextLine();
             s = in.nextLine();
             if (s.isEmpty() || s.length() > EXCEPTION_SIZE || !s.matches("[" + CHARS + "]+")) {
-                throw new InputMismatchException();
+                throw new InputMismatchException("Incorrect input");
             }
         } else {
             System.out.println("Enter length of string -> ");
             final int size = in.nextInt();
             if (size < 1 || size > EXCEPTION_SIZE) {
-                throw new InputMismatchException();
+                throw new InputMismatchException("Incorrect input");
             }
             s = fillString(size);
         }
@@ -70,7 +70,7 @@ public class RepeatedDNA {
                 System.out.println("There are no repeated substrings");
             }
         } catch (InputMismatchException exception) {
-            System.out.println(exception.getMessage());//upd: add output exception
+            exception.printStackTrace();
         }
     }
 }
