@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class MeteorologicalSatellite extends Satellite implements Spacecraft {
 
-    String country;
+    private String country;
 
     public MeteorologicalSatellite(String name, Orbit orbit, String country) {
         super(name, orbit, Type.METEOROLOGICAL);
