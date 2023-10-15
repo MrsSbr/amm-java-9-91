@@ -1,4 +1,4 @@
-package CatBreed;
+package catBreed;
 
 import java.util.Objects;
 
@@ -34,6 +34,6 @@ public abstract class WildCatBreed extends CatBreed {
     public String toString() {
         return "WildCatBreed{" +
                 "aggroLvl=" + aggroLvl +
-                '}' + super.toString();
+                "} " + super.toString();
     }
 }

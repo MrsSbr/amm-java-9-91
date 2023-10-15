@@ -1,4 +1,4 @@
-package CatBreed;
+package catBreed;
 
 import java.util.Objects;
 
@@ -40,6 +40,6 @@ public abstract class DomesticCatBreed extends CatBreed {
     public String toString() {
         return "DomesticCatBreed{" +
                 "name='" + name + '\'' +
-                '}' + super.toString();
+                "} " + super.toString();
     }
 }

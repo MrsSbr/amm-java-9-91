@@ -1,8 +1,8 @@
-package CatBreed;
+package catBreed;
 
-public class Siamese extends DomesticCatBreed {
-    public Siamese(String color, int age, String name) {
-        super(color, age, name);
+public class Sphinx extends DomesticCatBreed {
+    public Sphinx(int age, String name) {
+        super("Colorless", age, name);
     }
 
     @Override
@@ -22,11 +22,11 @@ public class Siamese extends DomesticCatBreed {
 
     @Override
     public void eat() {
-        System.out.println(getName() +  "filters bowl, choosing only meat");
+        System.out.println(getName() +  " filters bowl, choosing only meat");
     }
 
     @Override
     public String toString() {
-        return "Siamese{}" + super.toString();
+        return "Siamese{} " + super.toString();
     }
 }

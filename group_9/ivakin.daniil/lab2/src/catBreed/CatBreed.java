@@ -1,9 +1,9 @@
-package CatBreed;
+package catBreed;
 
 import java.util.Objects;
 
 public abstract class CatBreed implements AnimalAction {
-    private String color;
+    private final String color;
     private int age;
 
     public CatBreed(String color, int age) {

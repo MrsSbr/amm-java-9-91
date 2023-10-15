@@ -1,4 +1,4 @@
-package CatBreed;
+package catBreed;
 
 public class Tiger extends WildCatBreed {
 
@@ -36,6 +36,6 @@ public class Tiger extends WildCatBreed {
 
     @Override
     public String toString() {
-        return "Tiger{}" + super.toString();
+        return "Tiger{} " + super.toString();
     }
 }
