@@ -1,15 +1,25 @@
+import Vehicle.Car;
+import Vehicle.Motorbike;
+import Vehicle.Vehicle;
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        menu();
+
+        Vehicle[] vehicles = new Vehicle[]{
+                new Car("Audi", "A1", 100),
+                new Car("Toyota", "Corolla", 120),
+                new Motorbike("Kawasaki", "Ninja 300", 10),
+                new Motorbike("Honda", "CBR1000RR", 20),
+                new Car("Mercedes", "C-Class", 140),
+                new Motorbike("BMW", "F850 GS", 15),
+        };
+
+        menu(vehicles);
     }
 
-    public static void menu() {
-        Vehicle[] vehicles = {
-                new Car("Audi", "A1", 100),
-                new Motorbike("BMW", "F850 GS"),
-        };
+    public static void menu(Vehicle[] vehicles) {
         Scanner scanner = new Scanner(System.in);
         int choice = -1;
 
@@ -17,8 +27,7 @@ public class Main {
             System.out.print("""
                     ГЛАВНОЕ МЕНЮ
 
-                    [1]. Работа с автомобилем
-                    [2]. Работа с мотоциклом
+                    [1]. Работа с транспортным средством
                     [0]. Завершить работу
                     Введите действие:\s""");
 
@@ -27,7 +36,7 @@ public class Main {
             }
 
             switch (choice) {
-                case 1, 2 -> print(vehicles[choice - 1]);
+                case 1 -> print(vehicles);
                 case 0 -> {
                     scanner.close();
                     System.out.print("Работа программы завершена.");
@@ -40,12 +49,20 @@ public class Main {
         } while (choice != 0);
     }
 
-    public static void print(VehicleInterface vehicle) {
-        System.out.println();
+    public static void print(Vehicle[] vehicles) {
+        for (Vehicle it : vehicles) {
+            System.out.println();
 
-        vehicle.start();
-        vehicle.stop();
+            if (it instanceof Car car) {
+                car.start();
+                car.stop();
+            } else if (it instanceof Motorbike motorbike) {
+                System.out.println(motorbike.getFuelCapacity());
 
-        System.out.println();
+                motorbike.start();
+                motorbike.stop();
+            }
+            System.out.println();
+        }
     }
 }
