@@ -1,4 +1,7 @@
-import src.satellite.*;
+import src.satellite.Satellite;
+import src.satellite.MeteorologicalSatellite;
+import src.satellite.NavigationSatellite;
+import src.satellite.MilitarySatellite;
 import src.satellite.enums.Orbit;
 
 import java.util.ArrayList;
