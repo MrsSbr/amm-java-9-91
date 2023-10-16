@@ -5,9 +5,10 @@ import src.satellite.enums.Status;
 import src.satellite.enums.Type;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class MilitarySatellite extends Satellite implements Spacecraft {
+public class MilitarySatellite extends Satellite implements Spacecraft, MilitarySpacecraft {
 
     private String country;
 
@@ -39,17 +40,38 @@ public class MilitarySatellite extends Satellite implements Spacecraft {
                     " неактивен.";
         }
         return getName() +
-                ", отправил сигнал.";
+                " отправил сигнал.";
     }
 
-    public String emp(ArrayList<Satellite> satelliteArrayList) {
+    @Override
+    public List<Satellite> targeting(List<Satellite> satelliteList, StringBuilder stringBuilder) {
+        List<Satellite> targetList = new ArrayList<>();
+
+        stringBuilder.append(getName());
+        stringBuilder.append(" навелся на цели: ");
+
+        for (Satellite satellite : satelliteList) {
+            if (satellite instanceof MilitarySatellite) {
+                stringBuilder.append(satellite.getName());
+                stringBuilder.append(", ");
+
+                targetList.add(satellite);
+            }
+        }
+
+        return targetList;
+    }
+
+    public String emp(List<Satellite> satelliteList) {
         if (getStatus() == Status.OFF) {
             return getName() +
                     " неактивен.";
         }
 
-        for (Satellite satellite : satelliteArrayList) {
-            satellite.setStatus(Status.OFF);
+        for (Satellite satellite : satelliteList) {
+            if (satellite instanceof MilitarySatellite) {
+                satellite.setStatus(Status.OFF);
+            }
         }
 
         return getName() +

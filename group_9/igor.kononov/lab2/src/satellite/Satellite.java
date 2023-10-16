@@ -56,6 +56,9 @@ public abstract class Satellite implements Spacecraft {
 
     @Override
     public String toString() {
-        return "Спутник: " + name + ", орбита: " + orbit + ", тип: " + type + ", статус: " + status;
+        return "Спутник: " + name +
+                ", орбита: " + orbit +
+                ", тип: " + type +
+                ", статус: " + status;
     }
 }
