@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class ElectricCar extends Automobile implements Vehicle {
     private double maximumSpeed;
+
     public ElectricCar(String brand, String model, double maximumSpeed) {
         super(brand, model);
         this.maximumSpeed = maximumSpeed;
