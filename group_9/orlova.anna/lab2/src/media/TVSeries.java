@@ -1,12 +1,13 @@
+package media;
 import java.util.Objects;
 
 public class TVSeries extends MediaProduction implements Overview {
     private String creator;
     private int numSeasons;
-    private final String genre;
+    private final Genre genre;
     private final String description;
     public TVSeries(String title, int year, int duration, String creator,
-                    int numSeasons, String genre, String description) {
+                    int numSeasons, Genre genre, String description) {
         super(title, year, duration * 6 * numSeasons);
         this.creator = creator;
         this.numSeasons = numSeasons;
@@ -18,7 +19,7 @@ public class TVSeries extends MediaProduction implements Overview {
         return "Currently playing TV series: " + getTitle();
     }
 
-    public String getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 

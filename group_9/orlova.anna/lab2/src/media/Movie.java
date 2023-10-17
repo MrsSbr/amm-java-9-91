@@ -1,10 +1,11 @@
+package media;
 import java.util.Objects;
 public class Movie extends MediaProduction implements Overview {
     private final String director;
-    private final String genre;
+    private final Genre genre;
     private final String description;
     public Movie(String title, int year, String director, int duration,
-                 String genre, String description) {
+                 Genre genre, String description) {
         super(title, year, duration);
         this.director = director;
         this.genre = genre;
@@ -15,7 +16,7 @@ public class Movie extends MediaProduction implements Overview {
         return "Currently playing movie: " + getTitle();
     }
 
-    public String getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 

@@ -1,4 +1,5 @@
+package media;
 public interface Overview {
-    String getGenre();
+    Genre getGenre();
     String getDescription();
 }

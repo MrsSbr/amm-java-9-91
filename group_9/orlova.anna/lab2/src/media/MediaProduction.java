@@ -1,5 +1,6 @@
+package media;
 import java.util.Objects;
-abstract class MediaProduction {
+public abstract class MediaProduction {
     private final String title;
     private final int year;
     private final int duration;
