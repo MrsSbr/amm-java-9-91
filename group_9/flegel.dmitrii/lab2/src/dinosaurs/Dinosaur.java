@@ -1,3 +1,5 @@
+package dinosaurs;
+
 import java.util.Objects;
 
 public abstract class Dinosaur {

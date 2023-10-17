@@ -1,3 +1,5 @@
+package dinosaurs;
+
 import java.util.Objects;
 
 public class Triceratops extends Dinosaur implements HerbivorousDinosaur {

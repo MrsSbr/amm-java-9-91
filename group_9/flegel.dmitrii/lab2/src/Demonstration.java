@@ -1,3 +1,5 @@
+import dinosaurs.*;
+
 public class Demonstration {
 
     public static void main(String[] args) {
@@ -8,16 +10,15 @@ public class Demonstration {
                 new Triceratops("Джон", 6, 3)
         };
 
-        for(HerbivorousDinosaur dinosaur : prey) {
+        for (HerbivorousDinosaur dinosaur : prey) {
             dinosaur.graze();
         }
 
         predator.hunt((Dinosaur)prey[1]);
 
-        if(prey[0].equals(prey[2])) {
+        if (prey[0].equals(prey[2])) {
             System.out.println(prey[0].toString() + " и " + prey[2].toString() + " равны.");
-        }
-        else {
+        } else {
             System.out.println(prey[0].toString() + " и " + prey[2].toString() + " не равны.");
         }
 

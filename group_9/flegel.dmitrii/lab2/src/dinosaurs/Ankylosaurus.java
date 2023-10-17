@@ -1,3 +1,5 @@
+package dinosaurs;
+
 import java.util.Objects;
 
 public class Ankylosaurus extends Dinosaur implements HerbivorousDinosaur {
