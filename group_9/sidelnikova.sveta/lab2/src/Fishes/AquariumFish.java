@@ -1,9 +1,24 @@
+package Fishes;
+
 import java.util.Objects;
+import java.util.Random;
 
 public abstract class AquariumFish implements AquaticAnimal {
-    String color;
-    String name;
-    String age;
+
+    final Random random = new Random();
+
+    private final String color;
+
+    private final String name;
+
+    private final String age;
+
+    public AquariumFish() {
+        color = "";
+        name = "";
+        age = "";
+    }
+
     public AquariumFish(String name, String age, String color) {
         this.name = name;
         this.age = age;
@@ -23,6 +38,7 @@ public abstract class AquariumFish implements AquaticAnimal {
     }
 
     public abstract String getFishType();
+
     public abstract String getFoodType();
 
     @Override
@@ -53,7 +69,7 @@ public abstract class AquariumFish implements AquaticAnimal {
             return false;
         AquariumFish other = (AquariumFish) object;
         return Objects.equals(color, other.color) && Objects.equals(name, other.name) &&
-                Objects.equals(age, other.age) ;
+                Objects.equals(age, other.age);
     }
 
     @Override
@@ -69,6 +85,6 @@ public abstract class AquariumFish implements AquaticAnimal {
         return "Type: " + getFishType() + "\n" +
                 "Color: " + color + "\n" +
                 "Name: " + name + "\n" +
-                "Age: " + age + "\n" ;
+                "Age: " + age + "\n";
     }
 }
