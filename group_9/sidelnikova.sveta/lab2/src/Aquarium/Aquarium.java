@@ -35,8 +35,9 @@ public class Aquarium {
 
     public AquariumFish findFishByType(String type) {
         for (var fish : fishes) {
-            if (type.equals(fish.getFishType()))
+            if (type.equals(fish.getFishType())) {
                 return fish;
+            }
         }
         return null;
     }

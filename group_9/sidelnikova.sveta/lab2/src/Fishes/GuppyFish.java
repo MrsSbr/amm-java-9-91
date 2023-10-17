@@ -39,12 +39,15 @@ public class GuppyFish extends AquariumFish {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object)
+        if (this == object) {
             return true;
-        if (object == null || object.getClass() != getClass())
+        }
+        if (object == null || object.getClass() != getClass()) {
             return false;
-        if (!super.equals(object))
+        }
+        if (!super.equals(object)) {
             return false;
+        }
         GuppyFish other = (GuppyFish) object;
         return numberOfFriesPerSpawn == other.numberOfFriesPerSpawn;
     }

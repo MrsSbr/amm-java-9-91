@@ -63,10 +63,12 @@ public abstract class AquariumFish implements AquaticAnimal {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object)
+        if (this == object) {
             return true;
-        if (object == null || object.getClass() != getClass())
+        }
+        if (object == null || object.getClass() != getClass()) {
             return false;
+        }
         AquariumFish other = (AquariumFish) object;
         return Objects.equals(color, other.color) && Objects.equals(name, other.name) &&
                 Objects.equals(age, other.age);

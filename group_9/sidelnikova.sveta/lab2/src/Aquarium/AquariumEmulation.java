@@ -72,14 +72,17 @@ public class AquariumEmulation {
         if (isFishCompatible(fish)) {
             aquarium.plantFish(fish);
             System.out.println(fish.getName() + " has planted");
-        } else System.out.println(fish.getName() + " hasn't planted");
+        } else {
+            System.out.println(fish.getName() + " hasn't planted");
+        }
     }
 
     public void getSpecialInformationAboutTypesOfFishInAquarium() {
         for (var fish : fishTypesInAquarium) {
             AquariumFish aquariumFish = aquarium.findFishByType(fish);
-            if (fish != null)
+            if (fish != null) {
                 aquariumFish.specialBehavior();
+            }
         }
     }
 }
