@@ -1,67 +1,32 @@
-import Vehicle.Car;
-import Vehicle.Motorbike;
-import Vehicle.Vehicle;
-
-import java.util.Scanner;
+import Automobile.Automobile;
+import Automobile.GasolineCar;
+import Automobile.ElectricCar;
 
 public class Main {
     public static void main(String[] args) {
-
-        Vehicle[] vehicles = new Vehicle[]{
-                new Car("Audi", "A1", 100),
-                new Car("Toyota", "Corolla", 120),
-                new Motorbike("Kawasaki", "Ninja 300", 10),
-                new Motorbike("Honda", "CBR1000RR", 20),
-                new Car("Mercedes", "C-Class", 140),
-                new Motorbike("BMW", "F850 GS", 15),
+        Automobile[] automobiles = new Automobile[] {
+                new GasolineCar("Toyota", "Camry", 2.5),
+                new ElectricCar("Tesla", "Model S", 155),
+                new GasolineCar("Honda", "Civic", 1.5),
+                new ElectricCar("Nissan", "Leaf", 90)
         };
 
-        menu(vehicles);
-    }
-
-    public static void menu(Vehicle[] vehicles) {
-        Scanner scanner = new Scanner(System.in);
-        int choice = -1;
-
-        do {
-            System.out.print("""
-                    ГЛАВНОЕ МЕНЮ
-
-                    [1]. Работа с транспортным средством
-                    [0]. Завершить работу
-                    Введите действие:\s""");
-
-            if (scanner.hasNextInt()) {
-                choice = scanner.nextInt();
-            }
-
-            switch (choice) {
-                case 1 -> print(vehicles);
-                case 0 -> {
-                    scanner.close();
-                    System.out.print("Работа программы завершена.");
+        for (Automobile it: automobiles) {
+            if (it instanceof GasolineCar gasolineCar) {
+                if (gasolineCar.getEnginePower() <= 1.1) {
+                    System.out.println("Малолитражная модель");
+                } else {
+                    System.out.println("Многолитражная модель");
                 }
-                default -> {
-                    System.out.println("Ошибка ввода. Попробуйте снова.");
-                    scanner.nextLine();
+            } else if (it instanceof ElectricCar electricCar) {
+                if (electricCar.getMaximumSpeed() > 100) {
+                    System.out.println("Машина подходит для быстрой езды");
+                } else {
+                    System.out.println("Машина подходит для спокойной езды по городу");
                 }
             }
-        } while (choice != 0);
-    }
-
-    public static void print(Vehicle[] vehicles) {
-        for (Vehicle it : vehicles) {
-            System.out.println();
-
-            if (it instanceof Car car) {
-                car.start();
-                car.stop();
-            } else if (it instanceof Motorbike motorbike) {
-                System.out.println(motorbike.getFuelCapacity());
-
-                motorbike.start();
-                motorbike.stop();
-            }
+            it.start();
+            it.stop();
             System.out.println();
         }
     }
