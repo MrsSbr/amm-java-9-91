@@ -8,9 +8,10 @@
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
-public class Main {
-    public static boolean mayIncrease(ArrayList<Integer> nums) {
+public class StrictlyIncreasing {
+    public static boolean mayIncrease(List<Integer> nums) {
         int count = 0; // Счетчик элементов, которые можно удалить
         for (int i = 1; i < nums.size(); i++) {
             if (nums.get(i) <= nums.get(i - 1)) {
@@ -19,7 +20,7 @@ public class Main {
                     return false; // Если более одного элемента надо удалить, вернуть false
                 }
                 if (i > 1 && nums.get(i) <= nums.get(i - 2)) {
-                    nums.set(i, nums.get(i - 1)); // Удалить текущий элемент, сделав его равным предыдущему
+                    nums.remove(i); // Удалить текущий элемент
                 }
             }
         }
@@ -27,7 +28,7 @@ public class Main {
     }
 
     public static void main(final String[] args) {
-        ArrayList<Integer> nums = new ArrayList<>();
+        List<Integer> nums = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Введите числа (для завершения введите -1): ");
@@ -44,7 +45,6 @@ public class Main {
             System.out.println(nums.get(i));
         }
 
-        boolean result = mayIncrease(nums);
-        System.out.println("Массив можно сделать строго возрастающим после удаления одного элемента: " + result);
+        System.out.println("Массив можно сделать строго возрастающим после удаления одного элемента: " + mayIncrease(nums));
     }
 }
