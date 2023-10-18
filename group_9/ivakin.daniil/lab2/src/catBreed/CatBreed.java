@@ -2,7 +2,7 @@ package catBreed;
 
 import java.util.Objects;
 
-public abstract class CatBreed implements AnimalAction {
+public abstract class CatBreed extends Animal {
     private final String color;
     private int age;
 

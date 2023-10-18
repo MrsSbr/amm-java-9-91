@@ -7,7 +7,7 @@ import catBreed.Tiger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class Demonstration {
 
     public static List<CatBreed> chooseDomesticCats(List<CatBreed> cats) {
         return cats

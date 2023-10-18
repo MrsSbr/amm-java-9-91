@@ -2,7 +2,7 @@ package catBreed;
 
 import java.util.Objects;
 
-public abstract class WildCatBreed extends CatBreed {
+public abstract class WildCatBreed extends CatBreed implements Hunter {
     private int aggroLvl;
 
     public WildCatBreed(String color, int age, int aggroLvl) {
