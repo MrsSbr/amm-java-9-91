@@ -6,9 +6,9 @@ public class WalkingRobotSimulation {
 
     public static int robotSim(int[] commands, int[][] obstacles) {
 
-        // Направление робота: 0 - север, 1 - восток, 2 - юг, 3 - запад
         int direction = 0;
-        int x = 0, y = 0;
+        int curCoordX = 0;
+        int curCoordY = 0;
         int maxDistance = 0;
 
         // Создаем Set препятствий для быстрого доступа
@@ -17,6 +17,7 @@ public class WalkingRobotSimulation {
             obstacleSet.add(obstacle[0] + "," + obstacle[1]);
         }
 
+        // Направление робота: 0 - север, 1 - восток, 2 - юг, 3 - запад
         // Массив смещений для каждого направления (север, восток, юг и запад соответственно)
         int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
@@ -26,21 +27,21 @@ public class WalkingRobotSimulation {
             } else if (command == -1) { // Поворот направо
                 direction = (direction + 1) % 4;
             } else { // Движение вперед
-                int dx = directions[direction][0];
-                int dy = directions[direction][1];
+                int deltaX = directions[direction][0];
+                int deltaY = directions[direction][1];
 
                 for (int i = 0; i < command; i++) {
-                    int nextX = x + dx;
-                    int nextY = y + dy;
+                    int nextCoordX = curCoordX + deltaX;
+                    int nextCoordY = curCoordY + deltaY;
 
                     // Проверяем, не находится ли следующая позиция на препятствии
-                    if (obstacleSet.contains(nextX + "," + nextY)) {
+                    if (obstacleSet.contains(nextCoordX + "," + nextCoordY)) {
                         break;
                     }
 
-                    x = nextX;
-                    y = nextY;
-                    maxDistance = Math.max(maxDistance, x * x + y * y);
+                    curCoordX = nextCoordX;
+                    curCoordY = nextCoordY;
+                    maxDistance = Math.max(maxDistance, curCoordX * curCoordX + curCoordY * curCoordY);
                 }
             }
         }
