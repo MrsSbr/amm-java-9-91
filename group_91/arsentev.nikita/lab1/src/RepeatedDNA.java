@@ -70,7 +70,7 @@ public class RepeatedDNA {
                 System.out.println("There are no repeated substrings");
             }
         } catch (InputMismatchException exception) {
-            exception.printStackTrace();
+            System.out.println(exception.getMessage());//upd: add output exception
         }
     }
 }
