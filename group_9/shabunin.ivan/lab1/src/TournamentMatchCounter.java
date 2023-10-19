@@ -6,7 +6,6 @@
 а остальные распределяются по парам. Всего сыграно (n - 1) / 2 матчей, и (n - 1) / 2 + 1 команд проходят в следующий раунд.
 Нужно вернуть количество матчей, сыгранных в турнире, до определения победителя.+
 */
-import java.util.Scanner;
 
 public class TournamentMatchCounter {
     public static int countOfMatches(int n) {
@@ -16,8 +15,7 @@ public class TournamentMatchCounter {
             if (n % 2 == 0) {
                 result += n / 2;
                 n /= 2;
-            }
-            else {
+            } else {
                 result += (n - 1) / 2;
                 n = (n - 1) / 2 + 1;
             }
