@@ -2,7 +2,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Permutations {
+public class Permutation {
     public static void main(String[] args) {
         int len;
         Scanner in = new Scanner(System.in);
@@ -27,7 +27,7 @@ public class Permutations {
                 System.out.println("Error, need unic -10<=elem<=10");
             }
         }
-        getPermutation(array, len, len);
+        getPermutations(array, len, len);
     }
     public static void printArr(int[] a, int n)
     {
@@ -35,12 +35,12 @@ public class Permutations {
             System.out.print(a[i] + " ");
         System.out.println();
     }
-    public static void getPermutation(int[] nums, int size, int n) {
+    public static void getPermutations(int[] nums, int size, int n) {
         if (size == 1){
             printArr(nums, n);
         }
         for (int i=0;i<size;i++) {
-            getPermutation(nums, size-1, n);
+            getPermutations(nums, size-1, n);
             if (size % 2 == 1) {
                 int temp = nums[0];
                 nums[0] = nums[size - 1];
