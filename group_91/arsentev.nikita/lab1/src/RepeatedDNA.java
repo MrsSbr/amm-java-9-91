@@ -8,8 +8,8 @@ import java.util.InputMismatchException;
 
 public class RepeatedDNA {
     private final static String CHARS = "ACGT";
-    private final static int LENGTH = 10;
     private final static int EXCEPTION_SIZE = 100000;
+    private final static int LENGTH = 10;
 
     private static List<String> findRepeatedDNASequences(String s) {
         Map<String, Integer> mapStrings = new HashMap<>();
@@ -40,19 +40,19 @@ public class RepeatedDNA {
         System.out.println("How to fill string\n0 - Console, other - Random");
         Scanner in = new Scanner(System.in);
         final int number = in.nextInt();//upd: change name of variable
-        String s = "";
+        String s;
         if (number == 0) {
             System.out.println("Print string:");
             in.nextLine();
             s = in.nextLine();
             if (s.isEmpty() || s.length() > EXCEPTION_SIZE || !s.matches("[" + CHARS + "]+")) {
-                throw new InputMismatchException();
+                throw new InputMismatchException("Incorrect input");
             }
         } else {
             System.out.println("Enter length of string -> ");
             final int size = in.nextInt();
             if (size < 1 || size > EXCEPTION_SIZE) {
-                throw new InputMismatchException();
+                throw new InputMismatchException("Incorrect input");
             }
             s = fillString(size);
         }
