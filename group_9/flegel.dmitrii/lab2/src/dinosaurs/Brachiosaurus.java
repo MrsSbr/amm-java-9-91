@@ -29,8 +29,7 @@ public class Brachiosaurus extends Dinosaur implements HerbivorousDinosaur {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Brachiosaurus)) return false;
-        Brachiosaurus other = (Brachiosaurus) o;
+        if (!(o instanceof Brachiosaurus other)) return false;
         return super.equals(o) && neckLength == other.neckLength;
     }
 
@@ -43,5 +42,5 @@ public class Brachiosaurus extends Dinosaur implements HerbivorousDinosaur {
     public String toString() {
         return super.toString() + " Вид: Брахиозавр. Длина шеи: " + getNeckLength() + " м.";
     }
-    
+
 }

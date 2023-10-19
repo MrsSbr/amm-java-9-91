@@ -23,17 +23,16 @@ public class Tyrannosaurus extends Dinosaur {
     public boolean hunt(Dinosaur dinosaur) {
         System.out.println("Тираннозавр " + getName() + " охотится.");
         if (dinosaur instanceof HerbivorousDinosaur herbivorousDinosaur) {
-           System.out.println("Он замечает жертву: " + dinosaur.toString());
-           if(dinosaur instanceof Brachiosaurus brachiosaurus) {
-               System.out.println(dinosaur.getName() + " не может защититься. " +
-                       "Тиранозавр " + this.getName() + " его съедает.");
-               ++numberOfVictims;
-               return true;
-           }
-           else {
-               System.out.println(dinosaur.getName() + " смог защититься от атаки.");
-               return false;
-           }
+            System.out.println("Он замечает жертву: " + dinosaur.toString());
+            if (dinosaur instanceof Brachiosaurus brachiosaurus) {
+                System.out.println(dinosaur.getName() + " не может защититься. " +
+                        "Тиранозавр " + this.getName() + " его съедает.");
+                ++numberOfVictims;
+                return true;
+            } else {
+                System.out.println(dinosaur.getName() + " смог защититься от атаки.");
+                return false;
+            }
         }
 
         return false;

@@ -29,8 +29,7 @@ public class Ankylosaurus extends Dinosaur implements HerbivorousDinosaur {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Ankylosaurus)) return false;
-        Ankylosaurus other = (Ankylosaurus) o;
+        if (!(o instanceof Ankylosaurus other)) return false;
         return super.equals(o) && armorThickness == other.armorThickness;
     }
 

@@ -29,8 +29,7 @@ public class Triceratops extends Dinosaur implements HerbivorousDinosaur {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Triceratops)) return false;
-        Triceratops other = (Triceratops) o;
+        if (!(o instanceof Triceratops other)) return false;
         return super.equals(o) && numberOfHorns == other.numberOfHorns;
     }
 
@@ -43,5 +42,5 @@ public class Triceratops extends Dinosaur implements HerbivorousDinosaur {
     public String toString() {
         return super.toString() + " Вид: Трицератопс. Количество рогов: " + getNumberOfHorns();
     }
-    
+
 }
