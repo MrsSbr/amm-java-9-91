@@ -32,10 +32,9 @@ public abstract class MilitaryTechnics implements MilitaryActions {
     }
 
     public void setGetReadyToFire(boolean getReadyToFire) {
-        if (getReadyToFire)
-            return;
-        else
+        if (!getReadyToFire) {
             this.getReadyToFire = false;
+        }
     }
 
     public void repair() {

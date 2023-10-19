@@ -41,7 +41,7 @@ public class Demonstration {
 
         for (var technics : list) {
             if (technics instanceof Tank tank && tank.getDegreeOfBreakdown() < 10) {
-                System.out.println(tank.toString() + " has good condition!");
+                System.out.println(tank + " has good condition!");
             }
         }
     }
