@@ -3,6 +3,9 @@ import java.util.Set;
 import java.util.Arrays;
 
 public class WalkingRobotSimulation {
+    // Направление робота: 0 - север, 1 - восток, 2 - юг, 3 - запад
+    // Массив смещений для каждого направления (север, восток, юг и запад соответственно)
+    public static final int[][] DIRECTIONS = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
     public static int robotSim(int[] commands, int[][] obstacles) {
 
@@ -17,18 +20,14 @@ public class WalkingRobotSimulation {
             obstacleSet.add(obstacle[0] + "," + obstacle[1]);
         }
 
-        // Направление робота: 0 - север, 1 - восток, 2 - юг, 3 - запад
-        // Массив смещений для каждого направления (север, восток, юг и запад соответственно)
-        int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-
         for (int command : commands) {
             if (command == -2) { // Поворот налево
                 direction = (direction + 3) % 4;
             } else if (command == -1) { // Поворот направо
                 direction = (direction + 1) % 4;
             } else { // Движение вперед
-                int deltaX = directions[direction][0];
-                int deltaY = directions[direction][1];
+                int deltaX = DIRECTIONS[direction][0];
+                int deltaY = DIRECTIONS[direction][1];
 
                 for (int i = 0; i < command; i++) {
                     int nextCoordX = curCoordX + deltaX;
