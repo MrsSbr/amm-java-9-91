@@ -1,17 +1,17 @@
 public class MagicSquares {
     public static boolean isMagicSquare(int[][] arr, int row, int col) {
-        int[] is_uniq = new int[9];
+        int[] isUniq = new int[9];
 
         for (int i = row; i < row + 3; i++) {
             for (int j = col; j < col + 3; j++) {
                 if (arr[i][j] < 1 || arr[i][j] > 9)
                     return false;
-                is_uniq[arr[i][j] - 1]++;
+                isUniq[arr[i][j] - 1]++;
             }
         }
 
         for (int i = 0; i < 9; i++) {
-            if (is_uniq[i] > 1)
+            if (isUniq[i] > 1)
                 return false;
         }
 
