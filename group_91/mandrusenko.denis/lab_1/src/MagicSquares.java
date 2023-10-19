@@ -4,36 +4,38 @@ public class MagicSquares {
 
         for (int i = row; i < row + 3; i++) {
             for (int j = col; j < col + 3; j++) {
-                if (arr[i][j] < 1 || arr[i][j] > 9)
+                if (arr[i][j] < 1 || arr[i][j] > 9) {
                     return false;
+                }
                 isUniq[arr[i][j] - 1]++;
             }
         }
 
         for (int i = 0; i < 9; i++) {
-            if (isUniq[i] > 1)
+            if (isUniq[i] > 1) {
                 return false;
+            }
         }
 
         int sum = arr[row][col] + arr[row + 1][col] + arr[row + 2][col];
 
         for (int i = row; i < row + 3; i++) {
-            if (arr[i][col] + arr[i][col + 1] + arr[i][col + 2] != sum)
+            if (arr[i][col] + arr[i][col + 1] + arr[i][col + 2] != sum) {
                 return false;
+            }
         }
 
         for (int j = col; j < col + 3; j++) {
-            if (arr[row][j] + arr[row + 1][j] + arr[row + 2][j] != sum)
+            if (arr[row][j] + arr[row + 1][j] + arr[row + 2][j] != sum) {
                 return false;
+            }
         }
 
-        if (arr[row][col] + arr[row + 1][col + 1] + arr[row + 2][col + 2] != sum)
+        if (arr[row][col] + arr[row + 1][col + 1] + arr[row + 2][col + 2] != sum) {
             return false;
+        }
 
-        if (arr[row][col + 2] + arr[row + 1][col + 1] + arr[row + 2][col] != sum)
-            return false;
-
-        return true;
+        return arr[row][col + 2] + arr[row + 1][col + 1] + arr[row + 2][col] == sum;
     }
 
     public static int numMagicSquares(int[][] arr) {
@@ -53,8 +55,9 @@ public class MagicSquares {
 
         System.out.println("Массив:");
         for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[0].length; j++)
+            for (int j = 0; j < array[0].length; j++) {
                 System.out.print(array[i][j] + " ");
+            }
             System.out.println();
         }
 
