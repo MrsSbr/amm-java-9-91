@@ -1,7 +1,7 @@
 package ru.alexanderhudyakov.lab3.restaurant.performance;
 
 import ru.alexanderhudyakov.lab3.restaurant.Dish;
-import ru.alexanderhudyakov.lab3.restaurant.RandomDishRepository;
+import ru.alexanderhudyakov.lab3.restaurant.repository.RandomDishRepository;
 import ru.alexanderhudyakov.lab3.restaurant.Restaurant;
 
 import java.util.Collection;
@@ -38,7 +38,7 @@ public class PerformanceTester {
         return  getMethodExecutionTime(restaurant::getMostExpensiveDishes);
     }
     public long getCreationTime(){
-        return getMethodExecutionTime(()->restaurant = new Restaurant(ORDER_COUNT, collectionSupplier, new RandomDishRepository()));
+        return getMethodExecutionTime(()->restaurant = new Restaurant(collectionSupplier, new RandomDishRepository(ORDER_COUNT)));
     }
     public ExecutionTime getExecutionTime(){
         return ExecutionTimeBuilder

@@ -4,7 +4,13 @@ import ru.alexanderhudyakov.lab3.restaurant.Dish;
 import ru.alexanderhudyakov.lab3.restaurant.performance.PerformancePrinter;
 import ru.alexanderhudyakov.lab3.restaurant.performance.PerformanceTester;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.TreeSet;
+import java.util.Vector;
 import java.util.function.Supplier;
 
 public class CollectionsTest {
