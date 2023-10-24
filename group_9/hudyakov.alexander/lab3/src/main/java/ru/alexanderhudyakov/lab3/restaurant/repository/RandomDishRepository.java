@@ -6,9 +6,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class RandomDishRepository implements DishRepository{
-
     private static final List<Dish> DISHES;
-
     static {
         DISHES = List.of(
                 new Dish("Суши", Arrays.asList("Рис", "Рыба", "Васаби"), 300),
@@ -33,9 +31,7 @@ public class RandomDishRepository implements DishRepository{
                 new Dish("Куримо", Arrays.asList("Рис", "Цветные добавки", "Начинка"), 230)
         );
     }
-
     private final int count;
-
     public RandomDishRepository(int count) {
         this.count = count;
     }

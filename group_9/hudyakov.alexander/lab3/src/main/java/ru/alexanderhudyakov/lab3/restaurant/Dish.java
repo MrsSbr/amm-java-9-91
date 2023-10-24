@@ -31,5 +31,4 @@ public class Dish {
     public void setIngredients(List<String> ingredients) {
         this.ingredients = ingredients;
     }
-
 }

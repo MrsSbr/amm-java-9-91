@@ -13,12 +13,10 @@ public class PerformanceTester {
     private final Supplier<Collection<Dish>> collectionSupplier;
     private final String collectionName;
     private Restaurant restaurant;
-
     public PerformanceTester(Supplier<Collection<Dish>> collectionSupplier, String collectionName){
         this.collectionSupplier = collectionSupplier;
         this.collectionName = collectionName;
     }
-
     public Restaurant getRestaurant() {
         return restaurant;
     }

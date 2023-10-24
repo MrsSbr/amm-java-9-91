@@ -5,7 +5,6 @@ public class ExecutionTime {
     private long uniqueDishes;
     private long totalIncome;
     private long mostExpensiveDishes;
-
     public ExecutionTime(long creation, long uniqueDishes, long totalIncome, long mostExpensiveDishes) {
         this.creation = creation;
         this.uniqueDishes = uniqueDishes;
@@ -28,15 +27,12 @@ public class ExecutionTime {
     public void setCreation(long creation) {
         this.creation = creation;
     }
-
     public void setUniqueDishes(long uniqueDishes) {
         this.uniqueDishes = uniqueDishes;
     }
-
     public void setTotalIncome(long totalIncome) {
         this.totalIncome = totalIncome;
     }
-
     public void setMostExpensiveDishes(long mostExpensiveDishes) {
         this.mostExpensiveDishes = mostExpensiveDishes;
     }

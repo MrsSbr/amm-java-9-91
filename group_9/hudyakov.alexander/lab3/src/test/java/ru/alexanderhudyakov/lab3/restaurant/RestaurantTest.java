@@ -1,8 +1,5 @@
 package ru.alexanderhudyakov.lab3.restaurant;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.alexanderhudyakov.lab3.restaurant.repository.DishRepository;
@@ -21,17 +18,14 @@ import java.util.Vector;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-class RestaurantTest {
+import static org.junit.jupiter.api.Assertions.*;
 
+class RestaurantTest {
     private final static List<Supplier<Collection<Dish>>> COLLECTIONS;
     private final static DishRepository REPOSITORY;
-
     private static final Set<String> UNIQUE;
-
     private static final Set<String> MOST_EXPENSIVE;
-
     private static final int TOTAL_PRICE;
-
     static {
         REPOSITORY = new InMemoryDishRepository(List.of(
                 new Dish("Суши", Arrays.asList("Рис", "Рыба", "Васаби"), 300),
@@ -41,7 +35,6 @@ class RestaurantTest {
                 new Dish("Удон", Arrays.asList("Лапша удон", "Бульон", "Нори"), 400),
                 new Dish("Удон", Arrays.asList("Лапша удон", "Бульон", "Нори"), 400)
         ));
-
         UNIQUE = Set.of(
                 "Суши", "Рамен", "Темпура", "Такояки", "Удон"
         );
@@ -49,7 +42,6 @@ class RestaurantTest {
                 "Рамен", "Темпура"
         );
         TOTAL_PRICE = 300 + 500 + 500 + 350 + 400 + 400;
-
         COLLECTIONS = List.of(
                 ArrayList::new,
                 LinkedList::new,
@@ -72,27 +64,25 @@ class RestaurantTest {
                 .map(x -> new Restaurant(x, REPOSITORY))
                 .map(Restaurant::getUniqueDishes)
                 .map(x -> x.stream().map(Dish::getName).collect(Collectors.toList()))
-                .forEach(x -> assertTrue(x.containsAll(UNIQUE) && UNIQUE.containsAll(x)));
+                .forEach(x -> assertTrue(UNIQUE.containsAll(x) && x.size() == UNIQUE.size()));
     }
-
     @Test
     @DisplayName("Count total income")
     void getTotalIncome() {
         COLLECTIONS
                 .stream()
-                .map(x->new Restaurant(x,REPOSITORY))
+                .map(x -> new Restaurant(x, REPOSITORY))
                 .map(Restaurant::getTotalIncome)
-                .forEach(x->assertEquals(TOTAL_PRICE, x));
+                .forEach(x -> assertEquals(TOTAL_PRICE, x));
     }
-
     @Test
     @DisplayName("Find most expensive dishes")
     void getMostExpensiveDishes() {
         COLLECTIONS
                 .stream()
-                .map(x->new Restaurant(x,REPOSITORY))
+                .map(x -> new Restaurant(x, REPOSITORY))
                 .map(Restaurant::getMostExpensiveDishes)
                 .map(x -> x.stream().map(Dish::getName).collect(Collectors.toList()))
-                .forEach(x -> assertTrue(x.containsAll(MOST_EXPENSIVE) && MOST_EXPENSIVE.containsAll(x)));
+                .forEach(x -> assertTrue(MOST_EXPENSIVE.containsAll(x) && x.size() == UNIQUE.size()));
     }
 }

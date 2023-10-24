@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class InMemoryDishRepository  implements  DishRepository{
-
     private final List<Dish> dishes;
-
     public InMemoryDishRepository(Collection<Dish> dishes){
         this.dishes= List.copyOf(dishes);
     }
