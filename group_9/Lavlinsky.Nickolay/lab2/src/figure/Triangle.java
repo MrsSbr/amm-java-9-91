@@ -1,33 +1,32 @@
 package figure;
 
-import java.awt.geom.Point2D;
 import java.util.Objects;
 
 // Класс Triangle представляет геометрическую фигуру треугольник
 // и наследуется от абстрактного класса Figure.
 public class Triangle extends Figure {
-    private Point2D secondPoint;
-    private Point2D thirdPoint;
+    private Point secondPoint;
+    private Point thirdPoint;
 
     // Конструктор треугольника принимает три точки: pivot, secondPoint и thirdPoint
-    public Triangle(Point2D pivot, Point2D secondPoint, Point2D thirdPoint) {
+    public Triangle(Point pivot, Point secondPoint, Point thirdPoint) {
         super(pivot);
         this.secondPoint = secondPoint;
         this.thirdPoint = thirdPoint;
     }
 
     // Геттер для получения второй точки треугольника
-    public Point2D getSecondPoint() {
+    public Point getSecondPoint() {
         return secondPoint;
     }
 
     // Геттер для получения третьей точки треугольника
-    public Point2D getThirdPoint() {
+    public Point getThirdPoint() {
         return thirdPoint;
     }
 
     // Сеттер для установки новой третьей точки треугольника
-    public void setThirdPoint(Point2D thirdPoint) {
+    public void setThirdPoint(Point thirdPoint) {
         this.thirdPoint = thirdPoint;
     }
 

@@ -1,6 +1,5 @@
 package figure;
 
-import java.awt.geom.Point2D;
 import java.util.Random;
 
 public class Main {
@@ -9,10 +8,10 @@ public class Main {
     private static Random random = new Random();
 
     // Метод для генерации случайной точки.
-    private static Point2D generateRandomPoint() {
+    private static Point generateRandomPoint() {
         double x = random.nextDouble() * 10;
         double y = random.nextDouble() * 10;
-        return new Point2D.Double(x, y);
+        return new Point(x, y);
     }
 
     public static void main(String[] args) {

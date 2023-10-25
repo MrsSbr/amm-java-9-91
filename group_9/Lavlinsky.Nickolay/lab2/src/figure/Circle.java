@@ -1,13 +1,12 @@
 package figure;
 
-import java.awt.geom.Point2D;
 
 // Класс Circle представляет геометрическую фигуру круг и наследуется от абстрактного класса Figure.
 public class Circle extends Figure {
     private int radius;
 
     // Конструктор круга принимает центральную точку (pivot) и радиус.
-    public Circle(Point2D pivot, int radius) {
+    public Circle(Point pivot, int radius) {
         super(pivot);
         this.radius = radius;
     }

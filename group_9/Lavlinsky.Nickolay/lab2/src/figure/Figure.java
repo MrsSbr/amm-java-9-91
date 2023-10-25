@@ -1,25 +1,24 @@
 package figure;
 
-import java.awt.geom.Point2D;
 import java.util.Objects;
 
 // Абстрактный класс Figure представляет фигуру и реализует функциональность измеряемых объектов.
 public abstract class Figure implements Measureable {
 
-    private Point2D pivot;  // Точка начала фигуры
+    private Point pivot;  // Точка начала фигуры
 
     // Конструктор принимает точку начала в качестве параметра и инициализирует ее.
-    public Figure(Point2D pivot) {
+    public Figure(Point pivot) {
         this.pivot = pivot;
     }
 
     // Метод для получения текущей точки начала фигуры.
-    public Point2D getPivot() {
+    public Point getPivot() {
         return pivot;
     }
 
     // Метод для установки новой точки начала фигуры.
-    public void setPivot(Point2D pivot) {
+    public void setPivot(Point pivot) {
         this.pivot = pivot;
     }
 
@@ -50,4 +49,5 @@ public abstract class Figure implements Measureable {
                 '}';
     }
 }
+
 

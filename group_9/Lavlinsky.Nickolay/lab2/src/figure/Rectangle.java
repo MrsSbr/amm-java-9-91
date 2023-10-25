@@ -1,26 +1,25 @@
 package figure;
 
-import java.awt.geom.Point2D;
 import java.util.Objects;
 
 // Класс Rectangle представляет геометрическую фигуру прямоугольник
 // и наследуется от абстрактного класса Figure.
 public class Rectangle extends Figure {
-    private Point2D secPoint;
+    private Point secPoint;
 
     // Конструктор прямоугольника принимает две точки: pivot и secPoint.
-    public Rectangle(Point2D pivot, Point2D secPoint) {
+    public Rectangle(Point pivot, Point secPoint) {
         super(pivot);
         this.secPoint = secPoint;
     }
 
     // Геттер для получения второй точки прямоугольника.
-    public Point2D getSecPoint() {
+    public Point getSecPoint() {
         return secPoint;
     }
 
     // Сеттер для установки новой второй точки прямоугольника.
-    public void setSecPoint(Point2D secPoint) {
+    public void setSecPoint(Point secPoint) {
         this.secPoint = secPoint;
     }
 
