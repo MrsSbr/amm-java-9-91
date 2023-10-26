@@ -51,7 +51,7 @@ public class WalkingRobotSimulation {
 
     public static void main(String[] args) {
 
-        int[] commands = {4,-1,4,-2,4};
+        int[] commands = {4, -1, 4, -2, 4};
         int[][] obstacles = {{2, 4}};
         int maxDistance = robotSim(commands, obstacles);
 
