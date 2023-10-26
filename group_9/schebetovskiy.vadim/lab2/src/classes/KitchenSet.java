@@ -4,10 +4,10 @@ import enums.FurnitureMaterial;
 import enums.SizeType;
 import enums.Color;
 
-public class KitchenSet extends KitchenFurniture{
+public class KitchenSet extends KitchenFurniture {
 
     public KitchenSet(FurnitureMaterial furnitureMaterial, SizeType sizeType, Color color,
-               double price, boolean isDeliveryOrdered){
+                      double price, boolean isDeliveryOrdered) {
         super(furnitureMaterial, sizeType, color, price, isDeliveryOrdered);
     }
 

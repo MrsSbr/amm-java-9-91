@@ -7,9 +7,11 @@ import enums.Color;
 import java.util.Objects;
 
 public abstract class Furniture extends Product {
+
     private final FurnitureMaterial furnitureMaterial;
     private final SizeType sizeType;
-    Furniture(FurnitureMaterial furnitureMaterial, SizeType sizeType, Color color, double price){
+
+    Furniture(FurnitureMaterial furnitureMaterial, SizeType sizeType, Color color, double price) {
         super(color, price);
         this.furnitureMaterial = furnitureMaterial;
         this.sizeType = sizeType;

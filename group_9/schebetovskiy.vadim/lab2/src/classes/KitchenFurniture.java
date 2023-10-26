@@ -6,16 +6,18 @@ import enums.Color;
 
 import java.util.Objects;
 
-public abstract class KitchenFurniture extends Furniture implements  DeliverableByOrder{
+public abstract class KitchenFurniture extends Furniture implements DeliverableByOrder {
 
-    private boolean isDeliveryOrdered;
+    private final boolean isDeliveryOrdered;
+
     public KitchenFurniture(FurnitureMaterial furnitureMaterial, SizeType sizeType,
-                     Color color, double price, boolean isDeliveryOrdered){
+                            Color color, double price, boolean isDeliveryOrdered) {
         super(furnitureMaterial, sizeType, color, price);
         this.isDeliveryOrdered = isDeliveryOrdered;
         if (isDeliveryOrdered)
             super.setPrice(price + DeliverableByOrder.PRICE);
     }
+
 
     public boolean getIsDeliveryOrdered() {
         return isDeliveryOrdered;

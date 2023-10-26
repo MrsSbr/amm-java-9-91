@@ -1,12 +1,17 @@
 package classes;
+
 import enums.SizeType;
 import enums.TablewareMaterial;
 import enums.Color;
+
 import java.util.Objects;
+
 public abstract class Tableware extends Product {
+
     private final TablewareMaterial tablewareMaterial;
     private final SizeType sizeType;
-    public Tableware(TablewareMaterial tablewareMaterial, SizeType sizeType, Color color, double price){
+
+    public Tableware(TablewareMaterial tablewareMaterial, SizeType sizeType, Color color, double price) {
         super(color, price);
         this.tablewareMaterial = tablewareMaterial;
         this.sizeType = sizeType;

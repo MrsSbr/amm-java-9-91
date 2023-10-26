@@ -3,6 +3,7 @@ import enums.*;
 
 public class ProductRunner {
     public static void main(String[] args) {
+
         Product mug1 = new Mug(
                 TablewareMaterial.GLASS,
                 SizeType.MEDIUM,
@@ -57,13 +58,13 @@ public class ProductRunner {
         );
 
         Product[] products = {mug1, mug2, mug3, mug4,
-                kitchenSet1,  kitchenSet2,  kitchenSet3,  kitchenSet4};
+                kitchenSet1, kitchenSet2, kitchenSet3, kitchenSet4};
 
         printInfAboutProducts(products);
     }
 
-    static void printInfAboutProducts(Product[] products){
-        for (Product product : products){
+    static void printInfAboutProducts(Product... products) {
+        for (var product : products) {
             product.inspect();
             product.buy();
             product.deliver();

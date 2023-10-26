@@ -4,8 +4,9 @@ import enums.SizeType;
 import enums.TablewareMaterial;
 import enums.Color;
 
-public class Mug extends Tableware{
-    public Mug(TablewareMaterial tablewareMaterial, SizeType sizeType, Color color, double price){
+public class Mug extends Tableware {
+
+    public Mug(TablewareMaterial tablewareMaterial, SizeType sizeType, Color color, double price) {
         super(tablewareMaterial, sizeType, color, price);
     }
 
