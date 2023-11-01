@@ -15,8 +15,8 @@ public class WorkerAnt extends Ant {
      * @throws IllegalArgumentException if the name is null or empty.
      */
     public WorkerAnt(String name) {
-        super(name);
-        this.tasksCompleted = 0;
+        super(name); //Вызываем конструктор родительского класса для установки имени муравья
+        this.tasksCompleted = 0;//кол-во выполненных задач
     }
 
     /**
