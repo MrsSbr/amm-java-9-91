@@ -1,6 +1,6 @@
 package Plants;
 
-public class Flower extends Plant implements Waterable{
+public class Flower extends Plant implements Waterable {
     private String color;
 
     public Flower(String name, int waterLevel, String color) {

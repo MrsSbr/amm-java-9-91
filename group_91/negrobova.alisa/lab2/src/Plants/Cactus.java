@@ -1,6 +1,6 @@
 package Plants;
 
-public class Cactus extends Plant implements Waterable{
+public class Cactus extends Plant implements Waterable {
     private int spikesCount;
 
     public Cactus(String name, int waterLevel, int spikesCount) {
