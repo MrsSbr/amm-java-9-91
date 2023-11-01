@@ -1,9 +1,10 @@
 package animals;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Random;
 
-public abstract class ZooAnimal implements Animal {
+public abstract class ZooAnimal implements Alive {
     protected Food[] food;
     protected int averageLifeExpectancy;
 
@@ -11,8 +12,9 @@ public abstract class ZooAnimal implements Animal {
     protected int age;
 
     public enum Sex {
-        Male, Female;
+        MALE, FEMALE
     }
+
     protected Sex sex;
 
     public ZooAnimal(String name, int age, Sex sex) {
@@ -25,17 +27,17 @@ public abstract class ZooAnimal implements Animal {
     public void eat() {
         Random rand = new Random(food.length);
         String f = (food.length > 0) ? food[rand.nextInt(food.length)].toString().toLowerCase() : "";
-        System.out.println(this.toString() + " is eating " + f + '.');
+        System.out.println(this + " is eating " + f + '.');
     }
 
     @Override
     public void move() {
-        System.out.println(this.toString() + " is moving.");
+        System.out.println(this + " is moving.");
     }
 
     @Override
     public void sleep() {
-        System.out.println(this.toString() + " is sleeping.");
+        System.out.println(this + " is sleeping.");
     }
 
     @Override
@@ -47,16 +49,20 @@ public abstract class ZooAnimal implements Animal {
             return false;
         }
         ZooAnimal zooAnimal = (ZooAnimal) obj;
-        return (age == zooAnimal.age) && (sex == zooAnimal.sex) && Objects.equals(name, zooAnimal.name);
+        return (averageLifeExpectancy == zooAnimal.averageLifeExpectancy)
+                && (age == zooAnimal.age) && (Arrays.equals(food, zooAnimal.food))
+                && (Objects.equals(name, zooAnimal.name)) && (sex == zooAnimal.sex);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, age, sex);
+        int result = Objects.hash(averageLifeExpectancy, name, age, sex);
+        result = 31 * result + Arrays.hashCode(food);
+        return result;
     }
 
     @Override
     public String toString() {
-        return getClass().getName() + " " + name;
+        return "Animal " + name;
     }
 }

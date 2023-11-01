@@ -8,7 +8,7 @@ public abstract class Bird extends ZooAnimal {
 
     protected int wingspan;
 
-    public Bird(String name, int age, ZooAnimal.Sex sex, int wingspan) {
+    public Bird(String name, int age, Sex sex, int wingspan) {
         super(name, age, sex);
         this.wingspan = wingspan;
     }
@@ -16,7 +16,7 @@ public abstract class Bird extends ZooAnimal {
     @Override
     public void move() {
         String movement = (isCapableOfFlight) ? " is flying." : " is walking.";
-        System.out.println(this.toString() + movement);
+        System.out.println(this + movement);
     }
 
     @Override
@@ -28,12 +28,18 @@ public abstract class Bird extends ZooAnimal {
             return false;
         }
         Bird bird = (Bird) obj;
-        return (age == bird.age) && (sex == bird.sex)
-                && Objects.equals(name, bird.name) && (wingspan == bird.wingspan);
+        return (age == bird.age) && (sex == bird.sex) && Objects.equals(name, bird.name)
+                && (isCapableOfFlight == bird.isCapableOfFlight) && (averageWingspan == bird.averageWingspan)
+                && (wingspan == bird.wingspan);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, age, sex, wingspan);
+        return Objects.hash(name, age, sex, isCapableOfFlight, averageWingspan, wingspan);
+    }
+
+    @Override
+    public String toString() {
+        return "Bird " + name;
     }
 }

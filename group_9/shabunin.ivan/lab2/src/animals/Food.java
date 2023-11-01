@@ -1,16 +1,16 @@
 package animals;
 
 public enum Food {
-    Meat,
-    Fish,
-    Bamboo,
-    Insects,
-    Worms,
-    Fruits,
-    Berries,
-    Flowers,
-    Leaves,
-    Mice,
-    Corn,
-    Wheat;
+    MEAT,
+    FISH,
+    BAMBOO,
+    INSECTS,
+    WORMS,
+    FRUITS,
+    BERRIES,
+    FLOWERS,
+    LEAVES,
+    MICE,
+    CORN,
+    WHEAT
 }

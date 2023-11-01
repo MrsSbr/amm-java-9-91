@@ -6,6 +6,8 @@ import animals.Panda;
 import animals.Peacock;
 import animals.Tiger;
 
+import java.awt.*;
+
 public final class Zoo {
     private Zoo(){
     }
@@ -33,18 +35,18 @@ public final class Zoo {
     }
 
     private static ZooAnimal[] getZooAnimals() {
-        Chameleon chameleon = new Chameleon("Gogi", 5, ZooAnimal.Sex.Male, 40);
-        Eagle eagle = new Eagle("Napoleon", 15, ZooAnimal.Sex.Male, 220);
-        Iguana iguana = new Iguana("Inessa", 5, ZooAnimal.Sex.Female, 120);
-        Panda panda = new Panda("Luna", 12, ZooAnimal.Sex.Female, 150, 120);
-        Peacock peacock = new Peacock("Athanasius", 2, ZooAnimal.Sex.Male, 160);
-        Tiger tiger = new Tiger("Shere Chan", 10, ZooAnimal.Sex.Male, 150, 250);
+        Chameleon chameleon = new Chameleon("Gogi", 5, ZooAnimal.Sex.MALE, 40, Chameleon.ChameleonColor.GREEN);
+        Eagle eagle = new Eagle(Eagle.EagleType.GOLDEN, "Napoleon", 15, ZooAnimal.Sex.MALE, 220);
+        Iguana iguana = new Iguana("Inessa", 5, ZooAnimal.Sex.FEMALE, 120, true);
+        Panda panda = new Panda("Luna", 12, ZooAnimal.Sex.FEMALE, 150, 120, Panda.PandaCharacter.FUNNY);
+        Peacock peacock = new Peacock("Athanasius", 2, ZooAnimal.Sex.MALE, 160, true);
+        Tiger tiger = new Tiger(Tiger.TigerSubspecies.SIBERIAN, "Shere Chan", 10, ZooAnimal.Sex.MALE, 150, 250);
 
         return new ZooAnimal[] {chameleon, eagle, iguana, panda, peacock, tiger};
     }
 
     private static void animalsFeeding(ZooAnimal[] animals) {
-        System.out.println("Кормежка животных:");
+        System.out.println("Кормление животных:");
         for (ZooAnimal animal : animals) {
             animal.eat();
         }
@@ -58,7 +60,7 @@ public final class Zoo {
     }
 
     private static void animalsFreeTime(ZooAnimal[] animals) {
-        System.out.println("Свободное время:");
+        System.out.println("Свободное время животных:");
         for (ZooAnimal animal : animals) {
             if (animal instanceof Chameleon) {
                 ((Chameleon) animal).changeColor();
@@ -77,7 +79,7 @@ public final class Zoo {
     }
 
     private static void animalsSleep(ZooAnimal[] animals) {
-        System.out.println("Сон:");
+        System.out.println("Сон животных:");
         for (ZooAnimal animal : animals) {
             animal.sleep();
         }

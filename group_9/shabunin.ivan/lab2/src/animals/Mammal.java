@@ -10,7 +10,7 @@ public abstract class Mammal extends ZooAnimal {
     protected int length;
     protected int weight;
 
-    public Mammal(String name, int age, ZooAnimal.Sex sex, int length, int weight) {
+    public Mammal(String name, int age, Sex sex, int length, int weight) {
         super(name, age, sex);
         this.length = length;
         this.weight = weight;
@@ -18,10 +18,24 @@ public abstract class Mammal extends ZooAnimal {
 
     @Override
     public void move() {
-        String[] movements = new String[]{" is walking.", " is running."};
+        String[] movements = new String[] {" is walking.", " is running."};
         Random rand = new Random();
-        System.out.println(this.toString() + movements[rand.nextInt(movements.length)]);
+        System.out.println(this + movements[rand.nextInt(movements.length)]);
     }
+
+    /*@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Mammal mammal = (Mammal) o;
+        return length == mammal.length && weight == mammal.weight;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), length, weight);
+    }*/
 
     @Override
     public boolean equals(Object obj) {
@@ -33,11 +47,17 @@ public abstract class Mammal extends ZooAnimal {
         }
         Mammal mammal = (Mammal) obj;
         return (age == mammal.age) && (sex == mammal.sex) && Objects.equals(name, mammal.name)
+                && (averageLength == mammal.averageLength) && (averageWeight == mammal.averageWeight)
                 && (length == mammal.length) && (weight == mammal.weight);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, age, sex, length, weight);
+        return Objects.hash(name, age, sex, averageLength, averageWeight, length, weight);
+    }
+
+    @Override
+    public String toString() {
+        return "Mammal " + name;
     }
 }
