@@ -1,7 +1,5 @@
 package figure;
 
-import java.awt.geom.Point2D;
-
 public class Point {
     private double x;
     private double y;
@@ -32,13 +30,12 @@ public class Point {
         double py = pt.getY() - this.getY();
         return Math.sqrt(px * px + py * py);
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Point point = (Point) o;
-
         if (Double.compare(x, point.x) != 0) return false;
         return Double.compare(y, point.y) == 0;
     }
@@ -56,9 +53,6 @@ public class Point {
 
     @Override
     public String toString() {
-        return "Point{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return "Point{" + "x=" + x + ", y=" + y + '}';
     }
 }
