@@ -59,4 +59,5 @@ public abstract class Automobile implements Vehicle {
     public void classCar() {
        System.out.println("Автомобилб типа: ");
     }
+
 }
