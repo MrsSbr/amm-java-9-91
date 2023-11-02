@@ -1,10 +1,6 @@
 import java.util.Objects;
 
-public class TemperatureSensor implements Sensor {
-
-    final private int id;
-    final private String name;
-    private boolean active;
+public class TemperatureSensor extends SensorSettings implements Sensor {
     final private int minTemperature;
     final private int maxTemperature;
     private int currentTemperature;
@@ -18,9 +14,7 @@ public class TemperatureSensor implements Sensor {
     }
 
     public TemperatureSensor(int id, String name, boolean active, int minTemp, int maxTemp, int curTemp) {
-        this.id = id;
-        this.name = name;
-        this.active = active;
+        super(id, name, active);
         this.minTemperature = minTemp;
         this.maxTemperature = maxTemp;
         this.currentTemperature = curTemp;
@@ -45,8 +39,12 @@ public class TemperatureSensor implements Sensor {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TemperatureSensor that)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof TemperatureSensor that)) {
+            return false;
+        }
         return id == that.id;
     }
 

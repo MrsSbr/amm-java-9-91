@@ -1,5 +1,8 @@
 public class Lamp extends Device {
     private boolean nightMode;
+    public boolean getNightMode() {
+        return nightMode;
+    }
 
     public void setNightMode(boolean nightMode) {
         this.nightMode = nightMode;

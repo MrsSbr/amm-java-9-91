@@ -1,9 +1,6 @@
 import java.util.Objects;
 
-public class MotionSensor implements Sensor {
-    final private int id;
-    final private String name;
-    private boolean active;
+public class MotionSensor extends SensorSettings implements Sensor {
     private boolean personMovement;
 
     public boolean getPersonMovement() {
@@ -15,9 +12,7 @@ public class MotionSensor implements Sensor {
     }
 
     public MotionSensor(int id, String name, boolean active, boolean personMovement) {
-        this.id = id;
-        this.name = name;
-        this.active = active;
+        super(id, name, active);
         this.personMovement = personMovement;
     }
 
@@ -37,8 +32,12 @@ public class MotionSensor implements Sensor {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof MotionSensor that)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof MotionSensor that)) {
+            return false;
+        }
         return id == that.id;
     }
 

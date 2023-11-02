@@ -1,21 +1,24 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
         TemperatureSensor temperatureSensor;
-        ArrayList<MotionSensor> motionSensors;
-        ArrayList<Device> devices;
+        List<MotionSensor> motionSensors = new ArrayList<>(5);
+        List<Device> devices = new ArrayList<>(7);
         
         Controller() {
             temperatureSensor = new TemperatureSensor(1, "tempSensor", true,
                     1, 50, 25);
-            motionSensors = new ArrayList<>(5);
             initMotionSensors();
-            devices = new ArrayList<>(7);
             devices.add(new AirConditioner(7, false, true,
                     "SONY", 2015, 20));
             initLamps();
             devices.add(new Door(13, false, true, "SONY", 2020,
                     "23rhiu2r02"));
+        }
+
+        public Device getDevice(int index) {
+            return devices.get(index);
         }
         
         public void printSensorsAndDevices() {
@@ -78,6 +81,20 @@ public class Controller {
             }
             for (Device device : devices) {
                 device.deleteFromSystem();
+            }
+        }
+
+        public void getExtraInformationAboutRandomDevice(Device device) {
+            System.out.println();
+            if (device instanceof  AirConditioner) {
+                System.out.println("Температура = " + ((AirConditioner) device).getOperatingTemperature());
+            }
+            if (device instanceof Door) {
+                System.out.println("Пароль = " + ((Door) device).getPassword());
+            }
+            if (device instanceof Lamp) {
+                String message = ((Lamp) device).getNightMode() ? "Ночной режим" : "Дневной режим";
+                System.out.println(message);
             }
         }
 
