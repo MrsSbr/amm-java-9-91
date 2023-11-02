@@ -1,17 +1,22 @@
 package orchestra;
 
 public class PercussionInstrument extends MusicalInstrument {
-    String type; // самозвучащие, пластинчатые или перепончатые
-    public PercussionInstrument(String name, String type, boolean isTune) {
+    public enum TypePercussionInstrument {
+        SMOOTHSOUNDING,
+        PLASTIC,
+        WEBBED
+    }
+    TypePercussionInstrument type; // самозвучащие, пластинчатые или перепончатые
+    public PercussionInstrument(String name, TypePercussionInstrument type, boolean isTune) {
         super(name, isTune);
         this.type = type;
     }
 
-    public String getType() {
+    public TypePercussionInstrument getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TypePercussionInstrument type) {
         this.type = type;
     }
 
@@ -37,9 +42,15 @@ public class PercussionInstrument extends MusicalInstrument {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        if (!super.equals(obj)) return false;
+        if (this == obj){
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()){
+            return false;
+        }
+        if (!super.equals(obj)){
+            return false;
+        }
         PercussionInstrument other = (PercussionInstrument) obj;
         return type.equals(other.type);
     }

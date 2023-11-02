@@ -36,8 +36,12 @@ public abstract class MusicalInstrument implements Instrument {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()){
+            return false;
+        }
         MusicalInstrument other = (MusicalInstrument) obj;
         return name.equals(other.name);
     }

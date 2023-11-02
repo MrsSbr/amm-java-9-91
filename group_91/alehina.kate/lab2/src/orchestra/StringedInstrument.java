@@ -38,9 +38,15 @@ public class StringedInstrument extends MusicalInstrument {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        if (!super.equals(obj)) return false;
+        if (this == obj){
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()){
+            return false;
+        }
+        if (!super.equals(obj)){
+            return false;
+        }
         StringedInstrument other = (StringedInstrument) obj;
         return stringCount == other.stringCount;
     }
