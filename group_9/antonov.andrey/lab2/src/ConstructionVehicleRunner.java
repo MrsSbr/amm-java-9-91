@@ -1,8 +1,13 @@
 import classes.ConstructionVehicle;
 import classes.Crane;
 import classes.Truck;
-import collectors.ClassClassifierConstructionVehicle;
-import enums.*;
+import collectors.CollectorByClassName;
+import enums.BodyType;
+import enums.CraneBrand;
+import enums.CraneStrokeType;
+import enums.FuelType;
+import enums.TruckBrand;
+import enums.TypeCraneConstruction;
 
 import java.util.List;
 import java.util.Map;
@@ -62,7 +67,7 @@ public class ConstructionVehicleRunner {
                 crane1, crane2, crane3, crane4);
         Collector<ConstructionVehicle,
                 Map<String, List<ConstructionVehicle>>,
-                Map<String, List<ConstructionVehicle>>> collector = new ClassClassifierConstructionVehicle();
+                Map<String, List<ConstructionVehicle>>> collector = new CollectorByClassName();
         Map<String, List<ConstructionVehicle>> result = vehicles.stream()
                 .collect(collector);
         printMap(result);
