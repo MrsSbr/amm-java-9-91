@@ -27,7 +27,7 @@ public class ContainerAnalysis {
             survey.studentsCountWithBadReviews();
             System.out.println("Время работы контейнера " +  namesColletions.get(indexCollection) + " в методе " +
                     namesMethods.get(2) + " составило " + (System.nanoTime() - time) + " наносекунд");
-            indexCollection++;
+            indexCollection ++;
             System.out.println();
         }
     }
