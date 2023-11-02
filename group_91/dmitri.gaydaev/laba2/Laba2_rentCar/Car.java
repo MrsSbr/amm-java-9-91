@@ -44,4 +44,5 @@ public class Car extends Automobile implements Vehicle {
         super.classCar();
         System.out.println("легковой");
     }
+
 }
