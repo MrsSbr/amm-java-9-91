@@ -16,16 +16,17 @@ public class Cupcake extends Pastry {
         sprinkling = newSprinkling;
     }
 
-    @Override
-    public String toString() {
-        return "Name: " + name + "\n" + "Weight: " + weight + "g" + "\n"
-                + "Price: " + price + "\n" + "Sprinkling: " + sprinkling + "\n";
-    }
-
     public void baking() {
         System.out.println("The cupcake is being prepared, please wait...");
         System.out.println("We make sprinkling...");
         condition = true;
         System.out.println("The cupcake is ready!");
     }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + "\n" + "Weight: " + weight + "g" + "\n"
+                + "Price: " + price + "\n" + "Sprinkling: " + sprinkling + "\n";
+    }
+    
 }

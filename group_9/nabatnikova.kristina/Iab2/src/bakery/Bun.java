@@ -26,13 +26,6 @@ public class Bun extends Pastry {
         sprinkling = newSprinkling;
     }
 
-    @Override
-    public String toString() {
-        return "Name: " + name + "\n" + "Weight: " + weight + "g" + "\n"
-                + "Price: " + price + "\n" + "Filling: " + filling + "\n"
-                + "Sprinkling: " + sprinkling + "\n";
-    }
-
     public void baking() {
         System.out.println("Add the filling...");
         System.out.println("The bun is being prepared, please wait...");
@@ -45,4 +38,12 @@ public class Bun extends Pastry {
     public void sale() {
         System.out.println("I'm so sorry! The cash register broke down. We can't sell you a bun.");
     }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + "\n" + "Weight: " + weight + "g" + "\n"
+                + "Price: " + price + "\n" + "Filling: " + filling + "\n"
+                + "Sprinkling: " + sprinkling + "\n";
+    }
+
 }

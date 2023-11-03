@@ -1,7 +1,4 @@
-import bakery.Bun;
-import bakery.Cupcake;
-import bakery.Pastry;
-import bakery.Pie;
+import bakery.*;
 
 public class Confectionery {
     public static void main(String[] args) {
@@ -10,18 +7,29 @@ public class Confectionery {
         Cupcake cupcake = new Cupcake("Chocolate cupcake", 65, 79, "chocolate glaze");
         Cupcake cupcake2 = new Cupcake("Chocolate cupcake", 65, 79, "chocolate glaze");
         Cupcake cupcake3 = new Cupcake("Orange cupcake", 65, 79, "powdered sugar");
-        Pastry[] pastry = {pie, bun, cupcake};
 
-        for (Pastry pas : pastry) {
-            System.out.println(pas.toString());
+        if (pie instanceof Pastry & bun instanceof Pastry & cupcake instanceof Pastry) {
+            Pastry[] pastry = {pie, bun, cupcake};
+            for (Pastry pas : pastry) {
+                System.out.println(pas.toString());
+            }
         }
+       
+        if (cupcake instanceof BakeryProducts) {
+            System.out.println("cupcake = cupcake:");
+            System.out.println(cupcake.equals(cupcake));
 
-        System.out.println("cupcake = cupcake:");
-        System.out.println(cupcake.equals(cupcake));
-        System.out.println("cupcake = cupcake2:");
-        System.out.println(cupcake.equals(cupcake2));
-        System.out.println("cupcake = cupcake3:");
-        System.out.println(cupcake.equals(cupcake3) + "\n");
+            if (cupcake2 instanceof BakeryProducts) {
+                System.out.println("cupcake = cupcake2:");
+                System.out.println(cupcake.equals(cupcake2));
+            }
+
+            if (cupcake3 instanceof BakeryProducts) {
+                System.out.println("cupcake = cupcake3:");
+                System.out.println(cupcake.equals(cupcake3));
+                System.out.println();
+            }
+        }
 
         System.out.println("Client 1: Hello! I want a apple pie.");
         System.out.println("Seller: Hello!");

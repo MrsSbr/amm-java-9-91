@@ -29,6 +29,16 @@ public abstract class Pastry implements BakeryProducts {
         return price;
     }
 
+    public abstract void baking();
+
+    public void sale() {
+        if (!condition) {
+            System.out.println("There is no " + name + " ready at the moment, but we will cook it now.");
+            baking();
+        }
+        System.out.println("That'll be " + price + " rubles. Enjoy your meal!");
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj != null && obj.getClass() == this.getClass()) {
@@ -43,16 +53,6 @@ public abstract class Pastry implements BakeryProducts {
     @Override
     public int hashCode() {
         return Objects.hash(name, weight, price);
-    }
-
-    public abstract void baking();
-
-    public void sale() {
-        if (!condition) {
-            System.out.println("There is no " + name + " ready at the moment, but we will cook it now.");
-            baking();
-        }
-        System.out.println("That'll be " + price + " rubles. Enjoy your meal!");
     }
 
 }
