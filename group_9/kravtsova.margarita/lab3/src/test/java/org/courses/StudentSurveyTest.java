@@ -1,6 +1,13 @@
 package org.courses;
 
-import java.util.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,12 +53,15 @@ class StudentSurveyTest {
                     CoursesTaught.DIFFERENTIAL_EQUATIONS,false,
                     CoursesTaught.PROBABILITY_THEORY,false,
                     CoursesTaught.FUNCTIONAL_ANALYSIS,false),55555555)));
+    private final CertainStudentsStorage emptyStudentsStorage = new CertainStudentsStorage (new ArrayList<Student>());
+    private final CertainStudentsStorage studentsStorageEmptyFeedback = new CertainStudentsStorage (List.of(
+            new Student("Марта","Васильева","Сергеевна",Map.of(),11111111)));
 private final List<Supplier<Collection<Student>>> listSuppliers = List.of(
         LinkedList::new,
         ArrayList::new,
         HashSet::new
 );
-    @org.junit.jupiter.api.Test
+    @Test
     void utilityLevelSubject() {
         for(Supplier<Collection<Student>> supplier : listSuppliers) {
             StudentSurvey survey = new StudentSurvey(supplier, studentsStorage);
@@ -59,18 +69,63 @@ private final List<Supplier<Collection<Student>>> listSuppliers = List.of(
             assertEquals(1,survey.utilityLevelSubject(CoursesTaught.ALGEBRA));
         }
     }
-    @org.junit.jupiter.api.Test
+    @Test
     void bestSubjects() {
         for(Supplier<Collection<Student>> supplier : listSuppliers) {
             StudentSurvey survey = new StudentSurvey(supplier, studentsStorage);
-            assertEquals(Set.of(CoursesTaught.COMPUTER_SCIENCE),survey.bestSubjects());
+            assertEquals(List.of(CoursesTaught.COMPUTER_SCIENCE),survey.bestSubjects());
         }
     }
-    @org.junit.jupiter.api.Test
+    @Test
     void studentsCountWithBadReviews() {
         for(Supplier<Collection<Student>> supplier : listSuppliers) {
             StudentSurvey survey = new StudentSurvey(supplier, studentsStorage);
             assertEquals(1,survey.studentsCountWithBadReviews());
         }
     }
+    @Test
+    void utilityLevelSubjectEmptyCollection() {
+        for (Supplier<Collection<Student>> supplier : listSuppliers) {
+            StudentSurvey survey = new StudentSurvey(supplier, emptyStudentsStorage);
+            assertEquals(0, survey.utilityLevelSubject(CoursesTaught.NUMERICAL_METHODS));
+            assertEquals(0, survey.utilityLevelSubject(CoursesTaught.ALGEBRA));
+        }
+    }
+    @Test
+    void bestSubjectsEmptyCollection() {
+        for (Supplier<Collection<Student>> supplier : listSuppliers) {
+            StudentSurvey survey = new StudentSurvey(supplier, emptyStudentsStorage);
+            assertEquals(List.of(), survey.bestSubjects());
+        }
+    }
+    @Test
+    void studentsCountWithBadReviewsEmptyCollection() {
+        for (Supplier<Collection<Student>> supplier : listSuppliers) {
+            StudentSurvey survey = new StudentSurvey(supplier, emptyStudentsStorage);
+            assertEquals(0, survey.studentsCountWithBadReviews());
+        }
+    }
+    @Test
+    void utilityLevelSubjectEmptyFeedback() {
+        for(Supplier<Collection<Student>> supplier : listSuppliers) {
+            StudentSurvey survey = new StudentSurvey(supplier, studentsStorageEmptyFeedback);
+            assertEquals(0,survey.utilityLevelSubject(CoursesTaught.NUMERICAL_METHODS));
+            assertEquals(0,survey.utilityLevelSubject(CoursesTaught.ALGEBRA));
+        }
+    }
+    @Test
+    void bestSubjectsEmptyFeedback() {
+        for (Supplier<Collection<Student>> supplier : listSuppliers) {
+            StudentSurvey survey = new StudentSurvey(supplier, studentsStorageEmptyFeedback);
+            assertEquals(List.of(), survey.bestSubjects());
+        }
+    }
+    @Test
+    void studentsCountWithBadReviewsEmptyFeedback() {
+        for (Supplier<Collection<Student>> supplier : listSuppliers) {
+            StudentSurvey survey = new StudentSurvey(supplier, studentsStorageEmptyFeedback);
+            assertEquals(studentsStorageEmptyFeedback.getCertainStudents().size(), survey.studentsCountWithBadReviews());
+        }
+    }
+
 }
