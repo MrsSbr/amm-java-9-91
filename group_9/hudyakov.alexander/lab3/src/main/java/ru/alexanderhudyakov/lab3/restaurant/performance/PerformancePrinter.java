@@ -19,7 +19,7 @@ public class PerformancePrinter {
         this.out = out;
     }
     public void print(){
-        ExecutionTime time = performanceTester.getAverageExecutionTime(100);
+        ExecutionTime time = performanceTester.getAverageExecutionTime(20);
         out.println(performanceTester.getCollectionName());
         out.printf("Время создания:\t%d\n", time.getCreation());
         out.printf("Поиск уникальных:\t%d\n", time.getUniqueDishes());
