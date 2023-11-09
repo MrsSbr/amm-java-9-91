@@ -5,8 +5,9 @@ import java.util.function.Supplier;
 
 public class StudentSurvey {
     private final Collection<Student> students;
-    public StudentSurvey(Supplier<Collection<Student>> supplier, StudentsStorage storage) {
-        students = storage.getStudentsStream().collect(supplier, Collection::add, Collection::addAll);
+    public StudentSurvey(Supplier<Collection<Student>> supplier, List<Student> storage) {
+        students = supplier.get();
+        students.addAll(storage);
     }
     public long utilityLevelSubject(CoursesTaught course) {                         //кол-во студентов, которые назвали предмет course полезным
            return students.stream()

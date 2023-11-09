@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.*;
 class StudentSurveyTest {
-    private final CertainStudentsStorage studentsStorage = new CertainStudentsStorage(List.of
+    private final List<Student> storage = List.of
             (new Student("Василий","Васечкин","Васильевич", Map.of(
                     CoursesTaught.MATHEMATICAL_ANALYSIS,false,
                     CoursesTaught.ALGEBRA,false,
@@ -52,10 +52,10 @@ class StudentSurveyTest {
                     CoursesTaught.NUMERICAL_METHODS,false,
                     CoursesTaught.DIFFERENTIAL_EQUATIONS,false,
                     CoursesTaught.PROBABILITY_THEORY,false,
-                    CoursesTaught.FUNCTIONAL_ANALYSIS,false),55555555)));
-    private final CertainStudentsStorage emptyStudentsStorage = new CertainStudentsStorage (new ArrayList<Student>());
-    private final CertainStudentsStorage studentsStorageEmptyFeedback = new CertainStudentsStorage (List.of(
-            new Student("Марта","Васильева","Сергеевна",Map.of(),11111111)));
+                    CoursesTaught.FUNCTIONAL_ANALYSIS,false),55555555));
+    private final List<Student> emptyStorage = List.of();
+    private final List<Student> storageEmptyFeedback = List.of(
+            new Student("Марта","Васильева","Сергеевна",Map.of(),11111111));
 private final List<Supplier<Collection<Student>>> listSuppliers = List.of(
         LinkedList::new,
         ArrayList::new,
@@ -64,7 +64,7 @@ private final List<Supplier<Collection<Student>>> listSuppliers = List.of(
     @Test
     void utilityLevelSubject() {
         for(Supplier<Collection<Student>> supplier : listSuppliers) {
-            StudentSurvey survey = new StudentSurvey(supplier, studentsStorage);
+            StudentSurvey survey = new StudentSurvey(supplier, storage);
             assertEquals(3,survey.utilityLevelSubject(CoursesTaught.NUMERICAL_METHODS));
             assertEquals(1,survey.utilityLevelSubject(CoursesTaught.ALGEBRA));
         }
@@ -72,21 +72,21 @@ private final List<Supplier<Collection<Student>>> listSuppliers = List.of(
     @Test
     void bestSubjects() {
         for(Supplier<Collection<Student>> supplier : listSuppliers) {
-            StudentSurvey survey = new StudentSurvey(supplier, studentsStorage);
+            StudentSurvey survey = new StudentSurvey(supplier, storage);
             assertEquals(List.of(CoursesTaught.COMPUTER_SCIENCE),survey.bestSubjects());
         }
     }
     @Test
     void studentsCountWithBadReviews() {
         for(Supplier<Collection<Student>> supplier : listSuppliers) {
-            StudentSurvey survey = new StudentSurvey(supplier, studentsStorage);
+            StudentSurvey survey = new StudentSurvey(supplier, storage);
             assertEquals(1,survey.studentsCountWithBadReviews());
         }
     }
     @Test
     void utilityLevelSubjectEmptyCollection() {
         for (Supplier<Collection<Student>> supplier : listSuppliers) {
-            StudentSurvey survey = new StudentSurvey(supplier, emptyStudentsStorage);
+            StudentSurvey survey = new StudentSurvey(supplier, emptyStorage);
             assertEquals(0, survey.utilityLevelSubject(CoursesTaught.NUMERICAL_METHODS));
             assertEquals(0, survey.utilityLevelSubject(CoursesTaught.ALGEBRA));
         }
@@ -94,21 +94,21 @@ private final List<Supplier<Collection<Student>>> listSuppliers = List.of(
     @Test
     void bestSubjectsEmptyCollection() {
         for (Supplier<Collection<Student>> supplier : listSuppliers) {
-            StudentSurvey survey = new StudentSurvey(supplier, emptyStudentsStorage);
+            StudentSurvey survey = new StudentSurvey(supplier, emptyStorage);
             assertEquals(List.of(), survey.bestSubjects());
         }
     }
     @Test
     void studentsCountWithBadReviewsEmptyCollection() {
         for (Supplier<Collection<Student>> supplier : listSuppliers) {
-            StudentSurvey survey = new StudentSurvey(supplier, emptyStudentsStorage);
+            StudentSurvey survey = new StudentSurvey(supplier, emptyStorage);
             assertEquals(0, survey.studentsCountWithBadReviews());
         }
     }
     @Test
     void utilityLevelSubjectEmptyFeedback() {
         for(Supplier<Collection<Student>> supplier : listSuppliers) {
-            StudentSurvey survey = new StudentSurvey(supplier, studentsStorageEmptyFeedback);
+            StudentSurvey survey = new StudentSurvey(supplier, storageEmptyFeedback);
             assertEquals(0,survey.utilityLevelSubject(CoursesTaught.NUMERICAL_METHODS));
             assertEquals(0,survey.utilityLevelSubject(CoursesTaught.ALGEBRA));
         }
@@ -116,15 +116,15 @@ private final List<Supplier<Collection<Student>>> listSuppliers = List.of(
     @Test
     void bestSubjectsEmptyFeedback() {
         for (Supplier<Collection<Student>> supplier : listSuppliers) {
-            StudentSurvey survey = new StudentSurvey(supplier, studentsStorageEmptyFeedback);
+            StudentSurvey survey = new StudentSurvey(supplier, storageEmptyFeedback);
             assertEquals(List.of(), survey.bestSubjects());
         }
     }
     @Test
     void studentsCountWithBadReviewsEmptyFeedback() {
         for (Supplier<Collection<Student>> supplier : listSuppliers) {
-            StudentSurvey survey = new StudentSurvey(supplier, studentsStorageEmptyFeedback);
-            assertEquals(studentsStorageEmptyFeedback.getCertainStudents().size(), survey.studentsCountWithBadReviews());
+            StudentSurvey survey = new StudentSurvey(supplier, storageEmptyFeedback);
+            assertEquals(storageEmptyFeedback.size(), survey.studentsCountWithBadReviews());
         }
     }
 
