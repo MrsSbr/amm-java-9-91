@@ -43,16 +43,6 @@ public class PerformanceTester {
         return getMethodExecutionTime(() -> restaurant = new Restaurant(collectionSupplier, new RandomDishRepository(ORDER_COUNT)));
     }
 
-    public ExecutionTime getExecutionTime() {
-        return ExecutionTimeBuilder
-                .anExecutionTime()
-                .withCreation(getCreationTime())
-                .withUniqueDishes(getUniqueDishesExecutionTime())
-                .withTotalIncome(getTotalIncomeExecutionTime())
-                .withMostExpensiveDishes(getMostExpensiveDishesExecutionTime())
-                .build();
-    }
-
     public ExecutionTime getAverageExecutionTime(int count) {
 
         long creation = 0;

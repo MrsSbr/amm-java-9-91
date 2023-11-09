@@ -14,8 +14,7 @@ public class Restaurant {
 
     public Restaurant(Supplier<Collection<Dish>> collectionSupplier, DishRepository dishRepository) {
         this.dishRepository = dishRepository;
-        Collection<Dish> temporalCollection = dishRepository
-                .getDishesStream()
+        Collection<Dish> temporalCollection = dishRepository.getDishesStream()
                 .collect(collectionSupplier, Collection<Dish>::add, Collection<Dish>::addAll);
         this.orders = Collections.unmodifiableCollection(temporalCollection);
 
@@ -30,15 +29,13 @@ public class Restaurant {
     }
 
     public Collection<Dish> getUniqueDishes() {
-        return orders
-                .stream()
+        return orders.stream()
                 .collect(Collectors.toMap(Dish::getName, Function.identity(), (e, r) -> e))
                 .values();
     }
 
     public int getTotalIncome() {
-        return orders
-                .stream()
+        return orders.stream()
                 .mapToInt(Dish::getPrice)
                 .sum();
     }

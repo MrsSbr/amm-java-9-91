@@ -6,11 +6,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class InMemoryDishRepository  implements  DishRepository{
+public class InMemoryDishRepository implements DishRepository {
     private final List<Dish> dishes;
-    public InMemoryDishRepository(Collection<Dish> dishes){
-        this.dishes= List.copyOf(dishes);
+
+    public InMemoryDishRepository(Collection<Dish> dishes) {
+        this.dishes = List.copyOf(dishes);
     }
+
     @Override
     public Stream<Dish> getDishesStream() {
         return dishes.stream();

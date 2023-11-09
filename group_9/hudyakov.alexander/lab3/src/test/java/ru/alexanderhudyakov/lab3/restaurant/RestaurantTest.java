@@ -19,6 +19,7 @@ class RestaurantTest {
     private static final Set<String> UNIQUE;
     private static final Set<String> MOST_EXPENSIVE;
     private static final int TOTAL_PRICE;
+
     static {
         REPOSITORY = new InMemoryDishRepository(List.of(
                 new Dish("Суши", Arrays.asList("Рис", "Рыба", "Васаби"), 300),
@@ -55,50 +56,49 @@ class RestaurantTest {
                 })
         );
     }
+
     @Test
     @DisplayName("Find unique dishes")
     void getUniqueDishes() {
-        COLLECTIONS
-                .stream()
+        COLLECTIONS.stream()
                 .map(x -> new Restaurant(x, REPOSITORY))
                 .map(Restaurant::getUniqueDishes)
                 .map(x -> x.stream().map(Dish::getName).collect(Collectors.toList()))
                 .forEach(x -> assertTrue(UNIQUE.containsAll(x) && x.size() == UNIQUE.size()));
     }
+
     @Test
     @DisplayName("Find unique dishes in empty collection")
-    void getUniqueDishesInEmptyCollection(){
-        COLLECTIONS
-                .stream()
+    void getUniqueDishesInEmptyCollection() {
+        COLLECTIONS.stream()
                 .map(x -> new Restaurant(x, EMPTY_REPOSITORY))
                 .map(Restaurant::getUniqueDishes)
                 .forEach(x -> assertTrue(x.isEmpty()));
     }
+
     @Test
     @DisplayName("Find unique dishes in non-unique collection")
     void getUniqueDishesInNonUnique() {
-        COLLECTIONS
-                .stream()
+        COLLECTIONS.stream()
                 .map(x -> new Restaurant(x, NON_UNIQUE_REPOSITORY))
                 .map(Restaurant::getUniqueDishes)
                 .map(x -> x.stream().map(Dish::getName).collect(Collectors.toList()))
-                .forEach(x -> assertTrue(x.size()==1 && x.get(0).equals("Суши")));
+                .forEach(x -> assertTrue(x.size() == 1 && x.get(0).equals("Суши")));
     }
 
     @Test
     @DisplayName("Count total income")
     void getTotalIncome() {
-        COLLECTIONS
-                .stream()
+        COLLECTIONS.stream()
                 .map(x -> new Restaurant(x, REPOSITORY))
                 .map(Restaurant::getTotalIncome)
                 .forEach(x -> assertEquals(TOTAL_PRICE, x));
     }
+
     @Test
     @DisplayName("Find total incomes in empty collection")
-    void getTotalIncomeInEmptyCollection(){
-        COLLECTIONS
-                .stream()
+    void getTotalIncomeInEmptyCollection() {
+        COLLECTIONS.stream()
                 .map(x -> new Restaurant(x, EMPTY_REPOSITORY))
                 .map(Restaurant::getTotalIncome)
                 .forEach(x -> assertEquals(0, x));
@@ -108,30 +108,29 @@ class RestaurantTest {
     @Test
     @DisplayName("Find most expensive dishes")
     void getMostExpensiveDishes() {
-        COLLECTIONS
-                .stream()
+        COLLECTIONS.stream()
                 .map(x -> new Restaurant(x, REPOSITORY))
                 .map(Restaurant::getMostExpensiveDishes)
                 .map(x -> x.stream().map(Dish::getName).collect(Collectors.toList()))
                 .forEach(x -> assertTrue(MOST_EXPENSIVE.containsAll(x) && x.size() == MOST_EXPENSIVE.size()));
     }
+
     @Test
     @DisplayName("Find most expensive dishes in empty collection")
     void getMostExpensiveDishesInEmptyCollection() {
-        COLLECTIONS
-                .stream()
+        COLLECTIONS.stream()
                 .map(x -> new Restaurant(x, EMPTY_REPOSITORY))
                 .map(Restaurant::getMostExpensiveDishes)
                 .forEach(x -> assertTrue(x.isEmpty()));
     }
+
     @Test
     @DisplayName("Find most expensive dishes in non-unique collection")
     void getMostExpensiveDishesInNonUnique() {
-        COLLECTIONS
-                .stream()
+        COLLECTIONS.stream()
                 .map(x -> new Restaurant(x, NON_UNIQUE_REPOSITORY))
                 .map(Restaurant::getMostExpensiveDishes)
                 .map(x -> x.stream().map(Dish::getName).collect(Collectors.toList()))
-                .forEach(x -> assertTrue(x.size()==1 && x.get(0).equals("Суши")));
+                .forEach(x -> assertTrue(x.size() == 1 && x.get(0).equals("Суши")));
     }
 }

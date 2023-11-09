@@ -5,20 +5,25 @@ import java.io.PrintStream;
 public class PerformancePrinter {
     private final PerformanceTester performanceTester;
     private PrintStream out;
+
     public PerformancePrinter(PerformanceTester performanceTester, PrintStream out) {
         this.performanceTester = performanceTester;
         this.out = out;
     }
+
     public PerformanceTester getPerformanceTester() {
         return performanceTester;
     }
+
     public PrintStream getOut() {
         return out;
     }
+
     public void setOut(PrintStream out) {
         this.out = out;
     }
-    public void print(){
+
+    public void print() {
         ExecutionTime time = performanceTester.getAverageExecutionTime(20);
         out.println(performanceTester.getCollectionName());
         out.printf("Время создания:\t%d\n", time.getCreation());
