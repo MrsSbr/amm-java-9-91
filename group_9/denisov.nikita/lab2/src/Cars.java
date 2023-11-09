@@ -2,7 +2,7 @@ import Automobile.Automobile;
 import Automobile.ElectricCar;
 import Automobile.GasolineCar;
 
-public class Main {
+public class Cars {
     public static void main(String[] args) {
         Automobile[] automobiles = new Automobile[]{
                 new GasolineCar("Toyota", "Camry", 2.5),
