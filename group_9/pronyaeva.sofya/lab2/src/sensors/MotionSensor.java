@@ -1,3 +1,5 @@
+package sensors;
+
 import java.util.Objects;
 
 public class MotionSensor extends SensorSettings implements Sensor {
@@ -48,7 +50,7 @@ public class MotionSensor extends SensorSettings implements Sensor {
 
     @Override
     public String toString() {
-        return "MotionSensor{" +
+        return "sensors.MotionSensor{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", active=" + active +

@@ -1,3 +1,5 @@
+package sensors;
+
 import java.util.Objects;
 
 public class TemperatureSensor extends SensorSettings implements Sensor {
@@ -55,7 +57,7 @@ public class TemperatureSensor extends SensorSettings implements Sensor {
 
     @Override
     public String toString() {
-        return "TemperatureSensor{" +
+        return "sensors.TemperatureSensor{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", active=" + active +

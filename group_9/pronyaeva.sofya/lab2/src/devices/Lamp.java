@@ -1,3 +1,5 @@
+package devices;
+
 public class Lamp extends Device {
     private boolean nightMode;
     public boolean getNightMode() {
@@ -31,7 +33,7 @@ public class Lamp extends Device {
 
     @Override
     public String toString() {
-        return "Lamp{" +
+        return "devices.Lamp{" +
                 "nightMode=" + nightMode +
                 "} " + super.toString();
     }

@@ -1,3 +1,12 @@
+package smart.home.controller;
+
+import devices.AirConditioner;
+import devices.Device;
+import devices.Door;
+import devices.Lamp;
+import sensors.MotionSensor;
+import sensors.TemperatureSensor;
+
 import java.util.ArrayList;
 import java.util.List;
 

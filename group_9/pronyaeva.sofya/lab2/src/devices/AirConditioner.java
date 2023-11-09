@@ -1,3 +1,5 @@
+package devices;
+
 public class AirConditioner extends Device {
     private int operatingTemperature;
 
@@ -34,7 +36,7 @@ public class AirConditioner extends Device {
 
     @Override
     public String toString() {
-        return "AirConditioner{" +
+        return "devices.AirConditioner{" +
                 "operatingTemperature=" + operatingTemperature +
                 "} " + super.toString();
     }

@@ -1,3 +1,5 @@
+package smart.home.controller;
+
 import java.util.Random;
 
 public class SmartHomeDevices {

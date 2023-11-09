@@ -1,3 +1,5 @@
+package devices;
+
 public class Door extends Device {
     final private String password;
     public String getPassword() {
@@ -26,7 +28,7 @@ public class Door extends Device {
 
     @Override
     public String toString() {
-        return "Door{" +
+        return "devices.Door{" +
                 "password='" + password + '\'' +
                 "} " + super.toString();
     }

@@ -1,3 +1,5 @@
+package devices;
+
 import java.util.Objects;
 
 public abstract class Device {
@@ -50,7 +52,7 @@ public abstract class Device {
 
     @Override
     public String toString() {
-        return "Device{" +
+        return "devices.Device{" +
                 "id=" + id +
                 ", condition=" + condition +
                 ", connection=" + connection +
