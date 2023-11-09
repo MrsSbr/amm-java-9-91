@@ -19,6 +19,7 @@ public class Cars {
             } else if (it instanceof ElectricCar electricCar) {
                 printAnswer = (electricCar.getMaximumSpeed() > 100) ? "Машина подходит для быстрой езды" : "Машина подходит для спокойной езды по городу";
             }
+            System.out.println(printAnswer);
             it.start();
             it.stop();
             System.out.println();
