@@ -8,25 +8,18 @@ public class Confectionery {
         Cupcake cupcake2 = new Cupcake("Chocolate cupcake", 65, 79, "chocolate glaze");
         Cupcake cupcake3 = new Cupcake("Orange cupcake", 65, 79, "powdered sugar");
 
-        if (pie instanceof Pastry & bun instanceof Pastry & cupcake instanceof Pastry) {
-            Pastry[] pastry = {pie, bun, cupcake};
-            for (Pastry pas : pastry) {
-                System.out.println(pas.toString());
-            }
-        }
-       
-        if (cupcake instanceof BakeryProducts) {
-            System.out.println("cupcake = cupcake:");
-            System.out.println(cupcake.equals(cupcake));
+        Pastry[] pastry = {pie, bun, cupcake};
+        for (Pastry pas : pastry) {
+            System.out.println(pas.toString());
+            if (pas instanceof Cupcake) {
+                System.out.println("pas = cupcake:");
+                System.out.println(pas.equals(cupcake));
 
-            if (cupcake2 instanceof BakeryProducts) {
-                System.out.println("cupcake = cupcake2:");
-                System.out.println(cupcake.equals(cupcake2));
-            }
+                System.out.println("pas = cupcake2:");
+                System.out.println(pas.equals(cupcake2));
 
-            if (cupcake3 instanceof BakeryProducts) {
-                System.out.println("cupcake = cupcake3:");
-                System.out.println(cupcake.equals(cupcake3));
+                System.out.println("pas = cupcake3:");
+                System.out.println(pas.equals(cupcake3));
                 System.out.println();
             }
         }
