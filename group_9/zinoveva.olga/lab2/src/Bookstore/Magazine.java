@@ -2,16 +2,19 @@ package Bookstore;
 
 import java.util.Objects;
 
-public class Magazine extends ForReading{
+public class Magazine extends ForReading {
     private int number;
+
     public Magazine(String title, String description, double price, String author, int countPage, int number, int count) {
-        super(title, description, price, author, countPage,count);
+        super(title, description, price, author, countPage, count);
         this.number = number;
     }
-    public int getNumber(){
+
+    public int getNumber() {
         return number;
     }
-    public void setNumber(int newNumber){
+
+    public void setNumber(int newNumber) {
         number = newNumber;
     }
 
@@ -26,17 +29,20 @@ public class Magazine extends ForReading{
                 System.out.println("Такие журналы уже есть в наличии");
         }
     }
+
     @Override
     public void buy() {
-        if(!this.getIsBuy())
+        if (!this.getIsBuy())
             System.out.println("Вы купили журнал ");
         super.buy();
     }
+
     @Override
     public void manyBuy(int count) {
         System.out.print("Вы пытаетесь купить журналы в количестве: " + count);
         super.manyBuy(count);
     }
+
     @Override
     public String toString() {
         return "Magazine{" +

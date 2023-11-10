@@ -2,26 +2,32 @@ package Bookstore;
 
 import java.util.Objects;
 
-public abstract class ForReading extends Product{
+public abstract class ForReading extends Product {
     private String author;
     private int countPage;
-    public ForReading(String title, String description, double price, String author, int countPage, int count){
+
+    public ForReading(String title, String description, double price, String author, int countPage, int count) {
         super(title, description, price, count);
         this.author = author;
         this.countPage = countPage;
     }
-    public String getAuthor(){
+
+    public String getAuthor() {
         return author;
     }
-    public void setAuthor(String newAuthor){
+
+    public void setAuthor(String newAuthor) {
         author = newAuthor;
     }
-    public int getCountPage(){
+
+    public int getCountPage() {
         return countPage;
     }
-    public void setCountPage(int newCountPage){
+
+    public void setCountPage(int newCountPage) {
         countPage = newCountPage;
     }
+
     @Override
     public String toString() {
         return "ForReading{" +
@@ -29,6 +35,7 @@ public abstract class ForReading extends Product{
                 ", countPage=" + countPage + '\'' +
                 "} " + super.toString();
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -37,6 +44,7 @@ public abstract class ForReading extends Product{
         ForReading that = (ForReading) o;
         return countPage == that.countPage && Objects.equals(author, that.author);
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), author, countPage);
