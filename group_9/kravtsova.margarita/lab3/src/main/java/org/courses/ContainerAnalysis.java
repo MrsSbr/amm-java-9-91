@@ -21,9 +21,7 @@ public class ContainerAnalysis {
         int indexCollection = 0;
         final int countTest = 10;
         for (Supplier<Collection<Student>> supplier : suppliersCollections) {
-            StudentSurvey survey = new StudentSurvey(supplier, Stream.generate(StudentFactory::generateStudent)
-                                                                     .limit(550)
-                                                                     .collect(Collectors.toList()));
+            StudentSurvey survey = new StudentSurvey(supplier, getGeneratedListStudents(550));
             List<Long> timeMethods = new ArrayList<>(List.of(0L, 0L, 0L));
             for(int i = 0; i < countTest; ++i) {
                 long time = System.nanoTime();
@@ -45,5 +43,10 @@ public class ContainerAnalysis {
             System.out.println();
             indexCollection++;
         }
+    }
+    public static List<Student> getGeneratedListStudents(int countStudents) {
+        return Stream.generate(StudentFactory::generateStudent)
+                     .limit(countStudents)
+                     .collect(Collectors.toList());
     }
 }
