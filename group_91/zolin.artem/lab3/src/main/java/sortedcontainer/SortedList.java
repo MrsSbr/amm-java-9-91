@@ -11,20 +11,20 @@ import java.util.function.Supplier;
 
 public class SortedList<T> implements SortedCollection<T> {
 
-    public static <T> SortedList<T> sortedArrayList(Comparator<T> comparator) {
-        return new SortedList<>(ArrayList::new, comparator);
-    }
-
-    public static <T> SortedList<T> sortedLinkedList(Comparator<T> comparator) {
-        return new SortedList<>(LinkedList::new, comparator);
-    }
-
     private final List<T> data;
     private final Comparator<T> comparator;
 
     public SortedList(Supplier<List<T>> listSupplier, Comparator<T> comparator) {
         data = listSupplier.get();
         this.comparator = comparator;
+    }
+
+    public static <T> SortedList<T> sortedArrayList(Comparator<T> comparator) {
+        return new SortedList<>(ArrayList::new, comparator);
+    }
+
+    public static <T> SortedList<T> sortedLinkedList(Comparator<T> comparator) {
+        return new SortedList<>(LinkedList::new, comparator);
     }
 
     public void add(T item) {

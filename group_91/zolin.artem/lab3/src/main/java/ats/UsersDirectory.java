@@ -1,7 +1,6 @@
 package ats;
 
 import sortedcontainer.SortedCollection;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
