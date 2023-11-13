@@ -47,18 +47,6 @@ public abstract class Product implements Bought {
         count = newCount;
     }
 
-    protected boolean isBuy() {
-        return count == 0;
-    }
-
-    public void updatingAvailableProduct(int count) {
-        if (count < 0) {
-            count = 0;
-        }
-        this.count += count;
-        System.out.println("Количество товара: " + this.count);
-    }
-
     @Override
     public void buy() {
         if (!isBuy()) {
@@ -77,6 +65,18 @@ public abstract class Product implements Bought {
         } else {
             System.out.println("Невозможно купить, так как такого количества нет в наличии");
         }
+    }
+
+    protected boolean isBuy() {
+        return count == 0;
+    }
+
+    public void updatingAvailableProduct(int count) {
+        if (count < 0) {
+            count = 0;
+        }
+        this.count += count;
+        System.out.println("Количество товара: " + this.count);
     }
 
     @Override
