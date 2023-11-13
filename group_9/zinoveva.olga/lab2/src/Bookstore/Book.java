@@ -12,15 +12,17 @@ public class Book extends ForReading {
                 System.out.println("Книги с названием '" + getTitle() + "' теперь в наличии");
                 setIsBuy(false);
                 setCount(count);
-            } else
+            } else {
                 System.out.println("Такие книги есть в наличии, добавление не требуется");
+            }
         }
     }
 
     @Override
     public void buy() {
-        if (!this.getIsBuy())
+        if (!this.getIsBuy()) {
             System.out.println("Вы купили книгу");
+        }
         super.buy();
     }
 
