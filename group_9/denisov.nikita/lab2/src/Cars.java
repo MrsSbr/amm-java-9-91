@@ -11,7 +11,7 @@ public class Cars {
                 new ElectricCar("Nissan", "Leaf", 90)
         };
 
-        String printAnswer;
+        String printAnswer = null;
 
         for (Automobile it : automobiles) {
             if (it instanceof GasolineCar gasolineCar) {
