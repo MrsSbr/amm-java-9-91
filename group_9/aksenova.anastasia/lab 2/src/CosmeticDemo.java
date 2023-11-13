@@ -26,7 +26,7 @@ public class CosmeticDemo {
         System.out.println(mascara1);
         System.out.println(mascara2);
 
-        System.out.println("Помада и тушь равны? " + lipstick1.deepEquals(mascara1));
+        System.out.println("Помада и тушь равны? " + lipstick1.equals(mascara1));
 
         Lipstick redLipstick = new Lipstick("Красная помада", 10.99, "Красный");
         Mascara voluminousMascara = new Mascara("Объемная тушь", 9.99, false);
