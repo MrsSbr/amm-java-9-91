@@ -1,4 +1,4 @@
-package Bookstore;
+package bookstore;
 
 import java.util.Objects;
 
@@ -30,23 +30,22 @@ public class Bookmark extends Product {
 
     @Override
     public void buy() {
-        if (!this.getIsBuy()) {
+        if (!isBuy()) {
             System.out.println("Вы купили закладку ");
         }
         super.buy();
     }
 
     @Override
-    public void manyBuy(int count) {
+    public void buy(int count) {
         System.out.println("Вы пытаетесь купить закладки с названием '" + getTitle() + "' в количестве: " + count);
-        super.manyBuy(count);
+        super.buy(count);
     }
 
     @Override
     public void updatingAvailableProduct(int count) {
         if (count > 0) {
             setCount(getCount() + count);
-            setIsBuy(false);
             System.out.print("Закладка с названием '" + getTitle() + "' добавлены. ");
             System.out.println("Теперь их количество составляет: " + getCount());
         }

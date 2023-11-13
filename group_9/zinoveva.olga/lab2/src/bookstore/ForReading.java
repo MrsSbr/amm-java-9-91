@@ -1,4 +1,4 @@
-package Bookstore;
+package bookstore;
 
 import java.util.Objects;
 

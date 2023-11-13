@@ -1,4 +1,4 @@
-package Bookstore;
+package bookstore;
 
 import java.util.Objects;
 
@@ -6,18 +6,13 @@ public abstract class Product implements Bought {
     private String title;
     private String description;
     private double price;
-    private boolean isBuy = false;
     private int count;
 
     public Product(String title, String description, double price, int count) {
         this.title = title;
         this.description = description;
         this.price = price;
-        if (count == 0) {
-            isBuy = true;
-        } else {
-            this.count = count;
-        }
+        this.count = count;
     }
 
     public String getTitle() {
@@ -44,14 +39,6 @@ public abstract class Product implements Bought {
         price = newPrice;
     }
 
-    public boolean getIsBuy() {
-        return isBuy;
-    }
-
-    public void setIsBuy(boolean isBuy) {
-        this.isBuy = isBuy;
-    }
-
     public int getCount() {
         return count;
     }
@@ -60,22 +47,22 @@ public abstract class Product implements Bought {
         count = newCount;
     }
 
+    protected boolean isBuy() {
+        return count == 0;
+    }
+
     public void updatingAvailableProduct(int count) {
-        if (count < 0)
-            updatingAvailableProduct(0);
+        if (count < 0) {
+            count = 0;
+        }
         this.count += count;
-        if (this.count != 0)
-            isBuy = false;
         System.out.println("Количество товара: " + this.count);
     }
 
     @Override
     public void buy() {
-        if (!isBuy) {
+        if (!isBuy()) {
             count--;
-            if (count == 0) {
-                isBuy = true;
-            }
             System.out.println("Покупка на сумму: " + price);
         } else {
             System.out.println("Невозможно купить, так как нет в наличии");
@@ -83,12 +70,9 @@ public abstract class Product implements Bought {
     }
 
     @Override
-    public void manyBuy(int count) {
+    public void buy(int count) {
         if (this.count >= count) {
             this.count -= count;
-            if (count == 0) {
-                isBuy = true;
-            }
             System.out.println("Покупка успешно совершена на сумму: " + price * count);
         } else {
             System.out.println("Невозможно купить, так как такого количества нет в наличии");
@@ -101,7 +85,6 @@ public abstract class Product implements Bought {
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price + '\'' +
-                ", isBuy=" + isBuy + '\'' +
                 ", count=" + count +
                 '}';
     }

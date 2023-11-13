@@ -1,7 +1,7 @@
-import Bookstore.Book;
-import Bookstore.Bookmark;
-import Bookstore.Magazine;
-import Bookstore.Product;
+import bookstore.Book;
+import bookstore.Bookmark;
+import bookstore.Magazine;
+import bookstore.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,9 @@ public class TestBookstore {
     public static void buy(int count, Product product) {
         if (count == 1) {
             product.buy();
-            System.out.println("Товар остался в колличестве: " + product.getCount());
+            System.out.println("Товар остался в количестве: " + product.getCount());
         } else {
-            product.manyBuy(count);
+            product.buy(count);
         }
     }
 

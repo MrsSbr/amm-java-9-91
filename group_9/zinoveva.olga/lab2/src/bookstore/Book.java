@@ -1,4 +1,4 @@
-package Bookstore;
+package bookstore;
 
 public class Book extends ForReading {
     public Book(String title, String description, double price, String author, int countPage, int count) {
@@ -8,9 +8,8 @@ public class Book extends ForReading {
     @Override
     public void updatingAvailableProduct(int count) {
         if (count > 0) {
-            if (getIsBuy()) {
+            if (isBuy()) {
                 System.out.println("Книги с названием '" + getTitle() + "' теперь в наличии");
-                setIsBuy(false);
                 setCount(count);
             } else {
                 System.out.println("Такие книги есть в наличии, добавление не требуется");
@@ -20,16 +19,16 @@ public class Book extends ForReading {
 
     @Override
     public void buy() {
-        if (!this.getIsBuy()) {
+        if (!isBuy()) {
             System.out.println("Вы купили книгу");
         }
         super.buy();
     }
 
     @Override
-    public void manyBuy(int count) {
+    public void buy(int count) {
         System.out.print("Вы пытаетесь купить книги в количестве: " + count);
-        super.manyBuy(count);
+        super.buy(count);
     }
 
     @Override

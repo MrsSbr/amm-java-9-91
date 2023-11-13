@@ -1,4 +1,4 @@
-package Bookstore;
+package bookstore;
 
 import java.util.Objects;
 
@@ -21,9 +21,8 @@ public class Magazine extends ForReading {
     @Override
     public void updatingAvailableProduct(int count) {
         if (count > 0) {
-            if (getIsBuy()) {
+            if (isBuy()) {
                 System.out.println("Недостающие журналы '" + getTitle() + "' добавлены");
-                setIsBuy(false);
                 setCount(count);
             } else {
                 System.out.println("Такие журналы уже есть в наличии");
@@ -33,15 +32,15 @@ public class Magazine extends ForReading {
 
     @Override
     public void buy() {
-        if (!this.getIsBuy())
+        if (!isBuy())
             System.out.println("Вы купили журнал ");
         super.buy();
     }
 
     @Override
-    public void manyBuy(int count) {
+    public void buy(int count) {
         System.out.print("Вы пытаетесь купить журналы в количестве: " + count);
-        super.manyBuy(count);
+        super.buy(count);
     }
 
     @Override
