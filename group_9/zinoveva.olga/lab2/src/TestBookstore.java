@@ -4,7 +4,6 @@ import Bookstore.Magazine;
 import Bookstore.Product;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class TestBookstore {
@@ -48,7 +47,7 @@ public class TestBookstore {
         System.out.println(products.get(0).toString());
         System.out.println();
 
-        buy(13, products.get(3));
+        buy(13, products.get(2));
         System.out.println();
 
         updateCount(products.get(5), 10);
