@@ -11,7 +11,9 @@ public class TestBookstore {
         if (count == 1) {
             product.buy();
             System.out.println("Товар остался в колличестве: " + product.getCount());
-        } else product.manyBuy(count);
+        } else {
+            product.manyBuy(count);
+        }
     }
 
     public static void choose(Product product) {
@@ -62,13 +64,22 @@ public class TestBookstore {
         Book bookForSearch = new Book("Вельгельм Телль", "", 500, "", 20, 0);
         Bookmark bookmarkForSearch = new Bookmark("Котята", "Закладка с рисунком котят", 200, "Серый", "Котята", 20);
         Magazine magazineForSearch = new Magazine("Космос", "Что-то там про космос", 700, "", 24, 13, 25);
-        if (search(products, bookForSearch)) System.out.println("Книга найдена");
-        else System.out.println("Книга не найдена");
+        if (search(products, bookForSearch)) {
+            System.out.println("Книга найдена");
+        } else {
+            System.out.println("Книга не найдена");
+        }
 
-        if (search(products, bookmarkForSearch)) System.out.println("Закладка найдена");
-        else System.out.println("Закладка не найдена");
+        if (search(products, bookmarkForSearch)) {
+            System.out.println("Закладка найдена");
+        } else {
+            System.out.println("Закладка не найдена");
+        }
 
-        if (search(products, magazineForSearch)) System.out.println("Журнал найден");
-        else System.out.println("Журнал не найден");
+        if (search(products, magazineForSearch)) {
+            System.out.println("Журнал найден");
+        } else {
+            System.out.println("Журнал не найден");
+        }
     }
 }
