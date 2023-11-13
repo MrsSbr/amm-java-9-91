@@ -30,8 +30,9 @@ public class Bookmark extends Product {
 
     @Override
     public void buy() {
-        if (!this.getIsBuy())
+        if (!this.getIsBuy()) {
             System.out.println("Вы купили закладку ");
+        }
         super.buy();
     }
 

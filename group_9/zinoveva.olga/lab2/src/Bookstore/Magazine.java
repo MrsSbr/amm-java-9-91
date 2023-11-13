@@ -25,8 +25,9 @@ public class Magazine extends ForReading {
                 System.out.println("Недостающие журналы '" + getTitle() + "' добавлены");
                 setIsBuy(false);
                 setCount(count);
-            } else
+            } else {
                 System.out.println("Такие журналы уже есть в наличии");
+            }
         }
     }
 
