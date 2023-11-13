@@ -1,12 +1,11 @@
 package ru.alexanderhudyakov.lab3.restaurant.performance;
 
 import ru.alexanderhudyakov.lab3.restaurant.Dish;
-import ru.alexanderhudyakov.lab3.restaurant.repository.RandomDishRepository;
 import ru.alexanderhudyakov.lab3.restaurant.Restaurant;
+import ru.alexanderhudyakov.lab3.restaurant.repository.RandomDishRepository;
 
 import java.util.Collection;
 import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public class PerformanceTester {
     private final static int ORDER_COUNT = 2431;

@@ -5,7 +5,17 @@ import org.junit.jupiter.api.Test;
 import ru.alexanderhudyakov.lab3.restaurant.repository.DishRepository;
 import ru.alexanderhudyakov.lab3.restaurant.repository.InMemoryDishRepository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Vector;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -48,8 +58,7 @@ class RestaurantTest {
                 Vector::new,
                 HashSet::new,
                 LinkedHashSet::new,
-                () -> new TreeSet<>((d1, d2) ->
-                {
+                () -> new TreeSet<>((d1, d2) -> {
                     if (d1 == d2) return 0;
                     if (d1.getPrice() < d2.getPrice()) return -1;
                     return 1;
@@ -103,7 +112,6 @@ class RestaurantTest {
                 .map(Restaurant::getTotalIncome)
                 .forEach(x -> assertEquals(0, x));
     }
-
 
     @Test
     @DisplayName("Find most expensive dishes")

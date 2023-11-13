@@ -2,7 +2,9 @@ package ru.alexanderhudyakov.lab3.restaurant.repository;
 
 import ru.alexanderhudyakov.lab3.restaurant.Dish;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 
 public class RandomDishRepository implements DishRepository {

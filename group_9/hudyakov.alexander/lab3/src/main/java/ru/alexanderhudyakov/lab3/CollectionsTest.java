@@ -20,8 +20,7 @@ public class CollectionsTest {
         testCollection(Vector::new, "Vector");
         testCollection(HashSet::new, "HashSet");
         testCollection(LinkedHashSet::new, "LinkedHashSet");
-        testCollection(() -> new TreeSet<>((d1, d2) ->
-        {
+        testCollection(() -> new TreeSet<>((d1, d2) -> {
             if (d1 == d2) return 0;
             if (d1.getPrice() < d2.getPrice()) return -1;
             return 1;
