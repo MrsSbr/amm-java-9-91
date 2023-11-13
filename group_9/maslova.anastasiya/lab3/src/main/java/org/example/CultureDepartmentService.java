@@ -1,11 +1,18 @@
 package org.example;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
+
+import static org.example.StudentStatistics.addStudents;
+import static org.example.StudentStatistics.randomAddStudents;
 
 public class CultureDepartmentService {
+    private static final int CNT_OF_TEST = 50;
 
     public static void printMainMenu() {
         System.out.println("\n\n1. Проверка работы");
@@ -13,116 +20,67 @@ public class CultureDepartmentService {
         System.out.println("0. Выход");
     }
 
-    private static void printSecondMenu() {
-        System.out.println("\n1. Ввод с клавиатуры ");
-        System.out.println("2. Случайное заполнение");
-    }
-
     public static void testing() {
-        List<Student> studentList = new ArrayList<>();
-        addStudents(studentList); // заполнение студентами
+        List<Student> studentList = addStudents();// заполнение студентами
 
         StudentStatistics studentStatistics = new StudentStatistics(studentList);
 
+        printNumberOfTickets(studentStatistics);
+        printTheMostPopularShows(studentStatistics);
+        printShowsForWhichTicketsWerePurchased(studentStatistics);
+    }
+
+    private static void printNumberOfTickets(StudentStatistics stats) {
         System.out.println("Количество билетов, заказанных на каждый спектакль");
-        List<Integer> numberOfTickets = studentStatistics.numberOfTicketsBookedForEachShow();
+        List<Integer> numberOfTickets = stats.numberOfTicketsBookedForEachShow();
         IntStream.range(0, numberOfTickets.size())
                 .mapToObj(i -> "Спектакль " + ShowName.values()[i].getShowTitle() + " кол-во билетов: " + numberOfTickets.get(i))
                 .forEach(System.out::println);
+    }
 
+    private static void printTheMostPopularShows(StudentStatistics stats) {
         System.out.println("\nСамый популярный спектакль (следует учесть вариант, что может быть несколько таких спектаклей)");
-        studentStatistics.theMostPopularShow()
+        stats.theMostPopularShow()
                 .stream()
                 .map(showName -> showName.getShowTitle() + " ")
                 .forEach(System.out::print);
+    }
 
+    private static void printShowsForWhichTicketsWerePurchased(StudentStatistics stats) {
         System.out.println("\n\nСпектакль (спектакли), на который решили приобрести билеты");
-        studentStatistics.showForWhichPurchasedTickets()
+        stats.showForWhichPurchasedTickets()
                 .stream()
                 .map(showName -> showName.getShowTitle() + "; ")
                 .forEach(System.out::print);
     }
 
-    private static void addStudents(List<Student> studentList) {
-        Scanner in = new Scanner(System.in);
-        printSecondMenu();
-        int choiceIn = Input.getIntInRange(1, 2);
-        if (choiceIn == 1) {
-            System.out.println("Добавление студентов");
-            while (true) {
-                Set<ShowName> showsForStudent = new HashSet<>(); // множества, чтобы не повторялись спектакли т.к. можно купить только 1 билет
-                System.out.println("Доступые спектакли для добавления:\n" + Arrays.toString(ShowName.values()));
-                System.out.println("Введите спектакли на которые пошёл ученик (\"конец\"  для конца ввода):");
-                String str = in.nextLine();
-                while (!str.equalsIgnoreCase("конец")) {
-                    showsForStudent.add(ShowName.valueOf(str)); // добавление спектакля в множество
-                    str = in.nextLine();
-                }
-
-                studentList.add(new Student(showsForStudent));// добавляем нового студента со списком спектаклей на которые он идёт
-
-                System.out.println("Добавть ещё ученика?(да/нет)");
-                String choice = in.nextLine();
-                if (choice.equalsIgnoreCase("нет")) {
-                    break;
-                }
-            }
-        } else {
-            randomAddStudents(studentList);
-        }
-    }
-
     public static void performanceTest() {
-        compareOnArray();
-        compareOnList();
+        testAndPrintPerformance(HashSet::new, "HashSet");
+        testAndPrintPerformance(LinkedList::new, "LinkedList");
+        testAndPrintPerformance(ArrayList::new, "ArrayList");
     }
 
-    private static void compareOnArray() {
-        System.out.println("На массиве:");
-        long startTime = System.currentTimeMillis();
-
-        List<Student> studentList = new ArrayList<>();
-        execute(startTime, studentList);
+    private static void testAndPrintPerformance(Supplier<Collection<Student>> collectionSupplier, String collectionName) {
+        long averageTime = compare(collectionSupplier);
+        System.out.println("\nСреднее время выполнения для " + collectionName + ": " + averageTime + " наносекунд");
     }
 
-    private static void compareOnList() {
-        System.out.println("\nНа списке:");
-        long startTime = System.currentTimeMillis();
+    private static long compare(Supplier<Collection<Student>> collectionSupplier) {
+        long totalTime = 0;
+        Collection<Student> studentCollection = randomAddStudents(collectionSupplier);
 
-        List<Student> studentList = new LinkedList<>();
-        execute(startTime, studentList);
-    }
+        StudentStatistics studentStatistics = new StudentStatistics(studentCollection);
+        for (int i = 0; i < CNT_OF_TEST; i++) {
+            long startTime = System.currentTimeMillis();
 
-    private static void execute(long startTime, List<Student> studentList) {
-        randomAddStudents(studentList);
-        long endCreating = System.currentTimeMillis();
+            studentStatistics.numberOfTicketsBookedForEachShow();
+            studentStatistics.theMostPopularShow();
+            studentStatistics.showForWhichPurchasedTickets();
 
-        StudentStatistics studentStatistics = new StudentStatistics(studentList);
-
-        studentStatistics.numberOfTicketsBookedForEachShow();
-        studentStatistics.theMostPopularShow();
-        studentStatistics.showForWhichPurchasedTickets();
-
-        long endTime = System.currentTimeMillis();
-
-        System.out.println("Время создания в миллисекундах: " + (endCreating - startTime));
-        System.out.println("Время выполнения в миллисекундах: " + (endTime - endCreating));
-    }
-
-
-    private static void randomAddStudents(List<Student> studentList) {
-        Random rand = new Random();
-        int cntOfValues = ShowName.values().length;
-        IntStream.range(0, StudentStatistics.TOTAL_STUDENTS)
-                .mapToObj(i -> {
-                    int numOfShows = rand.nextInt(1, cntOfValues);
-                    Set<ShowName> showsForStudent = Stream
-                            .generate(() -> ShowName.values()[rand.nextInt(0, cntOfValues)])
-                            .distinct() // генерация уникальных спектаклей на котрые ученик купил билет
-                            .limit(numOfShows)
-                            .collect(Collectors.toSet());
-                    return new Student(showsForStudent);
-                })
-                .forEach(studentList::add);
+            long endTime = System.currentTimeMillis();
+            totalTime = totalTime + (endTime - startTime);
+        }
+        return totalTime / CNT_OF_TEST;
     }
 }
+

@@ -10,7 +10,7 @@ public class Input {
                 return Integer.parseInt(in.next());
             } catch (NumberFormatException exception) {
                 exception.printStackTrace();
-                System.out.println("Некорректный ввод. Повторите!");
+                System.out.println("Некорректный ввод. Повторите еще раз!");
             }
         }
     }
