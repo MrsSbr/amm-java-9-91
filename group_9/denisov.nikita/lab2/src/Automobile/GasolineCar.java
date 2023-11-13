@@ -42,7 +42,11 @@ public class GasolineCar extends Automobile implements Vehicle {
 
     @Override
     public boolean equals(Object object) {
-        if (!super.equals(object)) {
+        if (this == object) {
+            return true;
+        }
+
+        if (object == null || getClass() != object.getClass()) {
             return false;
         }
 
