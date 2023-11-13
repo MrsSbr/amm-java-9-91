@@ -12,7 +12,8 @@ public class RomanToInteger {
     }
 
     public static int romanToInteger(String s) {
-        int answer = 0, previous = 0;
+        int answer = 0;
+        int previous = 0;
 
         for (int i = s.length() - 1; i >= 0; i--) {
             int current = romanSymbolToInteger(s.charAt(i));
