@@ -1,7 +1,7 @@
 package tools;
 
-public class MillingСutters extends MetalCuttingTool {
-    public MillingСutters(double weightInKilograms, int strengthInHRC, double cuttingSpeedInMetersPerMinute) {
+public class MillingCutters extends MetalCuttingTool {
+    public MillingCutters(double weightInKilograms, int strengthInHRC, double cuttingSpeedInMetersPerMinute) {
         super(weightInKilograms, strengthInHRC, cuttingSpeedInMetersPerMinute);
     }
 

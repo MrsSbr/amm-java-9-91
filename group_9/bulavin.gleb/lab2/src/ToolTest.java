@@ -1,6 +1,6 @@
 import tools.MeasuringTool;
 import tools.MetalCuttingTool;
-import tools.MillingСutters;
+import tools.MillingCutters;
 import tools.TapeMeasure;
 import tools.Tool;
 
@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 public class ToolTest {
     public static void main(String[] args) {
         List<Tool> tools = new ArrayList<Tool>();
-        tools.add(new MillingСutters(0.5,20, 10));
+        tools.add(new MillingCutters(0.5,20, 10));
         tools.add(new TapeMeasure(0.3,0.1, 5.0));
         tools.add(new TapeMeasure(0.2,0.05, 3.0));
-        tools.add(new MillingСutters(0.6,10, 15));
+        tools.add(new MillingCutters(0.6,10, 15));
 
         System.out.println("Информация о всех металлорежущих инструментах:");
         List<Tool> metalCuttingTools = getAllMetalCuttingTool(tools);
