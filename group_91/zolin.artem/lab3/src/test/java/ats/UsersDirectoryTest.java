@@ -4,15 +4,16 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import sortedcontainer.TreeSetWrapper;
 
 import java.util.Comparator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class UsersCollectionTest {
+public class UsersDirectoryTest {
 
-    UsersCollection usersCollection = new UsersCollection();
+    UsersDirectory usersDirectory = new UsersDirectory(TreeSetWrapper::new);
 
     User[] users = {
             new User("", 4, 234),
@@ -44,35 +45,35 @@ public class UsersCollectionTest {
     @BeforeAll
     void setUsers() {
         for (var user : users) {
-            usersCollection.addUser(user);
+            usersDirectory.addUser(user);
         }
     }
 
     @Test
     @DisplayName("Количество пользователей должно правильно определяться")
     void usersCountShouldBeDeterminedCorrectly() {
-        var usersCount = usersCollection.getUsersStatistic();
+        var usersCount = usersDirectory.getUsersStatistic();
         assertThat(usersCount).containsExactlyInAnyOrder(expectedUsersCount);
     }
 
     @Test
     @DisplayName("Пользователи должны быть отсортированы")
     void usersShouldBeSorted() {
-        var users = usersCollection.getUsers().toArray(User[]::new);
+        var users = usersDirectory.getUsers().toArray(User[]::new);
         assertThat(users).isSortedAccordingTo(Comparator.comparing(User::getPhoneNumber));
     }
 
     @Test
     @DisplayName("Диапазоны свободных номеров должны правильно определяться")
     void numberRangesShouldBeDeterminedCorrectly() {
-        var numbersRanges = usersCollection.getFreeNumbersRanges();
+        var numbersRanges = usersDirectory.getFreeNumbersRanges();
         assertThat(numbersRanges).containsExactlyInAnyOrder(expectedNumbersRanges);
     }
 
     @Test
     @DisplayName("Для пустых коллекций высчитанные статистики пустые")
     void emptyCollectionsShouldProduceEmptyStatistics() {
-        var emptyCollection = new UsersCollection();
+        var emptyCollection = new UsersDirectory(TreeSetWrapper::new);
         var usersCount = emptyCollection.getUsersStatistic();
         var numbersRanges = emptyCollection.getFreeNumbersRanges();
         assertThat(usersCount).isEmpty();

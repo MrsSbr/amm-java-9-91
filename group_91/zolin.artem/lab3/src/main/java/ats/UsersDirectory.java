@@ -1,19 +1,20 @@
 package ats;
 
+import sortedcontainer.SortedCollection;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.function.Function;
 
-public class UsersCollection {
+public class UsersDirectory {
 
-    private final Set<User> collection;
+    private final SortedCollection<User> collection;
 
-    public UsersCollection() {
-        collection = new TreeSet<>(Comparator
+    public UsersDirectory(Function<Comparator<User>, SortedCollection<User>> collectionProducer) {
+        collection = collectionProducer.apply(Comparator
                 .comparing(User::atsId)
                 .thenComparing(User::id));
     }
@@ -29,7 +30,7 @@ public class UsersCollection {
     }
 
     public Collection<User> getUsers() {
-        return Collections.unmodifiableSet(collection);
+        return collection.getUnmodifiableView();
     }
 
     public void addUser(User user) {
