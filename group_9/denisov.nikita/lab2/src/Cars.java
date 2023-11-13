@@ -11,15 +11,15 @@ public class Cars {
                 new ElectricCar("Nissan", "Leaf", 90)
         };
 
-        String printAnswer = null;
+        String information = null;
 
         for (Automobile it : automobiles) {
             if (it instanceof GasolineCar gasolineCar) {
-                printAnswer = (gasolineCar.getEnginePower() <= 1.1) ? "Малолитражная модель" : "Многолитражная модель";
+                information = (gasolineCar.getEnginePower() <= 1.1) ? "Малолитражная модель" : "Многолитражная модель";
             } else if (it instanceof ElectricCar electricCar) {
-                printAnswer = (electricCar.getMaximumSpeed() > 100) ? "Машина подходит для быстрой езды" : "Машина подходит для спокойной езды по городу";
+                information = (electricCar.getMaximumSpeed() > 100) ? "Машина подходит для быстрой езды" : "Машина подходит для спокойной езды по городу";
             }
-            System.out.println(printAnswer);
+            System.out.println(information);
             it.start();
             it.stop();
             System.out.println();
