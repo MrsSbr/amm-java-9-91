@@ -13,10 +13,11 @@ public abstract class Product implements Bought {
         this.title = title;
         this.description = description;
         this.price = price;
-        if (count == 0)
+        if (count == 0) {
             isBuy = true;
-        else
+        } else {
             this.count = count;
+        }
     }
 
     public String getTitle() {
@@ -72,22 +73,26 @@ public abstract class Product implements Bought {
     public void buy() {
         if (!isBuy) {
             count--;
-            if (count == 0)
+            if (count == 0) {
                 isBuy = true;
+            }
             System.out.println("Покупка на сумму: " + price);
-        } else
+        } else {
             System.out.println("Невозможно купить, так как нет в наличии");
+        }
     }
 
     @Override
     public void manyBuy(int count) {
         if (this.count >= count) {
             this.count -= count;
-            if (count == 0)
+            if (count == 0) {
                 isBuy = true;
+            }
             System.out.println("Покупка успешно совершена на сумму: " + price * count);
-        } else
+        } else {
             System.out.println("Невозможно купить, так как такого количества нет в наличии");
+        }
     }
 
     @Override
