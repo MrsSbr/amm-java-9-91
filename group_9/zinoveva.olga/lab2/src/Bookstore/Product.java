@@ -19,37 +19,6 @@ public abstract class Product implements Bought {
             this.count = count;
     }
 
-    public void updatingAvailableProduct(int count) {
-        if (count < 0)
-            updatingAvailableProduct(0);
-        this.count += count;
-        if (this.count != 0)
-            isBuy = false;
-        System.out.println("Количество товара: " + this.count);
-    }
-
-    @Override
-    public void buy() {
-        if (!isBuy) {
-            count--;
-            if (count == 0)
-                isBuy = true;
-            System.out.println("Покупка на сумму: " + price);
-        } else
-            System.out.println("Невозможно купить, так как нет в наличии");
-    }
-
-    @Override
-    public void manyBuy(int count) {
-        if (this.count >= count) {
-            this.count -= count;
-            if (count == 0)
-                isBuy = true;
-            System.out.println("Покупка успешно совершена на сумму: " + price * count);
-        } else
-            System.out.println("Невозможно купить, так как такого количества нет в наличии");
-    }
-
     public String getTitle() {
         return title;
     }
@@ -88,6 +57,37 @@ public abstract class Product implements Bought {
 
     public void setCount(int newCount) {
         count = newCount;
+    }
+
+    public void updatingAvailableProduct(int count) {
+        if (count < 0)
+            updatingAvailableProduct(0);
+        this.count += count;
+        if (this.count != 0)
+            isBuy = false;
+        System.out.println("Количество товара: " + this.count);
+    }
+
+    @Override
+    public void buy() {
+        if (!isBuy) {
+            count--;
+            if (count == 0)
+                isBuy = true;
+            System.out.println("Покупка на сумму: " + price);
+        } else
+            System.out.println("Невозможно купить, так как нет в наличии");
+    }
+
+    @Override
+    public void manyBuy(int count) {
+        if (this.count >= count) {
+            this.count -= count;
+            if (count == 0)
+                isBuy = true;
+            System.out.println("Покупка успешно совершена на сумму: " + price * count);
+        } else
+            System.out.println("Невозможно купить, так как такого количества нет в наличии");
     }
 
     @Override
