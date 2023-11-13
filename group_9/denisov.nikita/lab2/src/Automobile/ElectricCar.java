@@ -19,6 +19,18 @@ public class ElectricCar extends Automobile implements Vehicle {
     }
 
     @Override
+    public void start() {
+        super.start();
+        System.out.println(" (электрический автомобиль)");
+    }
+
+    @Override
+    public void stop() {
+        super.stop();
+        System.out.println(" (электрический автомобиль)");
+    }
+
+    @Override
     public String toString() {
         return super.toString() + " " + "максимальная скорость " + maximumSpeed;
     }
@@ -37,17 +49,5 @@ public class ElectricCar extends Automobile implements Vehicle {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), maximumSpeed);
-    }
-
-    @Override
-    public void start() {
-        super.start();
-        System.out.println(" (электрический автомобиль)");
-    }
-
-    @Override
-    public void stop() {
-        super.stop();
-        System.out.println(" (электрический автомобиль)");
     }
 }

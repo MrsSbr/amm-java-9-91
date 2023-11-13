@@ -28,6 +28,16 @@ public abstract class Automobile implements Vehicle {
     }
 
     @Override
+    public void start() {
+        System.out.print("Автомобиль (" + this + ") начал движение.");
+    }
+
+    @Override
+    public void stop() {
+        System.out.print("Автомобиль (" + this + ") остановился.");
+    }
+
+    @Override
     public String toString() {
         return brand + " " + model;
     }
@@ -51,15 +61,5 @@ public abstract class Automobile implements Vehicle {
     @Override
     public int hashCode() {
         return Objects.hash(brand, model);
-    }
-
-    @Override
-    public void start() {
-        System.out.print("Автомобиль (" + this + ") начал движение.");
-    }
-
-    @Override
-    public void stop() {
-        System.out.print("Автомобиль (" + this + ") остановился.");
     }
 }

@@ -19,6 +19,18 @@ public class GasolineCar extends Automobile implements Vehicle {
     }
 
     @Override
+    public void start() {
+        super.start();
+        System.out.println(" (бензиновый автомобиль)");
+    }
+
+    @Override
+    public void stop() {
+        super.stop();
+        System.out.println(" (бензиновый автомобиль)");
+    }
+
+    @Override
     public String toString() {
         return super.toString() + " " + enginePower + " литров";
     }
@@ -37,17 +49,5 @@ public class GasolineCar extends Automobile implements Vehicle {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), enginePower);
-    }
-
-    @Override
-    public void start() {
-        super.start();
-        System.out.println(" (бензиновый автомобиль)");
-    }
-
-    @Override
-    public void stop() {
-        super.stop();
-        System.out.println(" (бензиновый автомобиль)");
     }
 }
