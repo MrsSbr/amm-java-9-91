@@ -13,6 +13,9 @@ public abstract class AbstractFurniture implements Furniture { // Абстрак
         return name;
     }
 
+    public void commonAssemblySteps() {
+        System.out.println("Common assembly steps for " + name);
+    }
     @Override
     public String toString() {
         return "Furniture: " + name + ", Price: $" + price;
@@ -34,9 +37,5 @@ public abstract class AbstractFurniture implements Furniture { // Абстрак
         int result = name.hashCode();
         result = 31 * result + Double.hashCode(price);
         return result;
-    }
-
-    public void commonAssemblySteps() {
-        System.out.println("Common assembly steps for " + name);
     }
 }
