@@ -2,7 +2,6 @@ package Furniture;
 
 public class Table extends AbstractFurniture { // Класс-наследник - стол
     private int numberOfLegs;
-
     public Table(String name, double price, int numberOfLegs) {
         super(name, price);
         this.numberOfLegs = numberOfLegs;
