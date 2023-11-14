@@ -3,6 +3,7 @@ package Furniture;
 public abstract class AbstractFurniture implements Furniture { // Абстрактный класс для мебели
     private String name;
     private double price;
+
     public AbstractFurniture(String name, double price) {
         this.name = name;
         this.price = price;

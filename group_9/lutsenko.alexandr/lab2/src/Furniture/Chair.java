@@ -3,6 +3,7 @@ package Furniture;
 public class Chair extends AbstractFurniture { // Класс-наследник - стул
     private String material;
     private String color;
+
     public Chair(String name, double price, String material, String color) {
         super(name, price);
         this.material = material;

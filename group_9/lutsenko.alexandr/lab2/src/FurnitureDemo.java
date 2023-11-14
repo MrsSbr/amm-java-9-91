@@ -13,7 +13,7 @@ public class FurnitureDemo {
         System.out.println("Chair Material: " + chair.getMaterial());
         System.out.println("Chair Color: " + chair.getColor());
         chair.chairSpecificMethod();
-        System.out.println("\n\n");
+        System.out.println("\n");
         System.out.println(table);
         table.assemble();
         System.out.println("Number of Legs: " + table.getNumberOfLegs());
