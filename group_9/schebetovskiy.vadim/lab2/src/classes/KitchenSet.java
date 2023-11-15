@@ -4,17 +4,17 @@ import enums.FurnitureMaterial;
 import enums.SizeType;
 import enums.Color;
 
-public class KitchenSet extends KitchenFurniture {
+public class KitchenSet extends Furniture {
 
     public KitchenSet(FurnitureMaterial furnitureMaterial, SizeType sizeType, Color color,
-                      double price, boolean isDeliveryOrdered) {
-        super(furnitureMaterial, sizeType, color, price, isDeliveryOrdered);
+                      double price, boolean deliveryOrdered) {
+        super(furnitureMaterial, sizeType, color, price, deliveryOrdered);
     }
 
     @Override
     public void deliverByCourierService() {
-        if (super.getIsDeliveryOrdered())
-            System.out.println("The courier service loaded the kitchen set and took it to the designated place.");
+        System.out.println("The courier service loaded the kitchen set and took it to the designated place." +
+                " The buyer paid " + DeliverableByOrder.PRICE + " rubles for courier delivery.");
     }
 
     @Override
@@ -33,8 +33,9 @@ public class KitchenSet extends KitchenFurniture {
 
     @Override
     public void deliver() {
-        deliverByCourierService();
-        System.out.println("The kitchen furniture is delivered! It remains only to assemble it)");
+        if (getDeliveryOrdered())
+            deliverByCourierService();
+        System.out.println("The kitchen furniture is delivered! It remains only to assemble it.");
     }
 
     @Override
