@@ -2,5 +2,6 @@ package enums;
 
 public enum TablewareMaterial {
     CERAMICS,
-    GLASS
+    GLASS,
+    PORCELAIN
 }
