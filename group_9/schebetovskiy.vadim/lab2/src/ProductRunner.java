@@ -48,7 +48,7 @@ public class ProductRunner {
                 1000
         );
         Plate plate2 = new Plate(
-                TablewareMaterial.CERAMICS,
+                TablewareMaterial.PORCELAIN,
                 SizeType.MEDIUM,
                 35,
                 Color.WHITE,

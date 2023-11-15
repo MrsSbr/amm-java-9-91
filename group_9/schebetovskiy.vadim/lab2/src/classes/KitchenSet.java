@@ -6,8 +6,7 @@ import enums.Color;
 
 public class KitchenSet extends Furniture {
 
-    public KitchenSet(FurnitureMaterial furnitureMaterial, SizeType sizeType, Color color,
-                      double price, boolean deliveryOrdered) {
+    public KitchenSet(FurnitureMaterial furnitureMaterial, SizeType sizeType, Color color, double price, boolean deliveryOrdered) {
         super(furnitureMaterial, sizeType, color, price, deliveryOrdered);
     }
 
@@ -33,7 +32,7 @@ public class KitchenSet extends Furniture {
 
     @Override
     public void deliver() {
-        if (getDeliveryOrdered())
+        if (super.isDeliveryOrdered())
             deliverByCourierService();
         System.out.println("The kitchen furniture is delivered! It remains only to assemble it.");
     }
