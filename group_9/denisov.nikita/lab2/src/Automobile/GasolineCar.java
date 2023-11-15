@@ -36,11 +36,6 @@ public class GasolineCar extends Automobile implements Vehicle {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), enginePower);
-    }
-
-    @Override
     public boolean equals(Object object) {
         if (this == object) {
             return true;
@@ -53,5 +48,10 @@ public class GasolineCar extends Automobile implements Vehicle {
         GasolineCar gasolineCar = (GasolineCar) object;
 
         return Objects.equals(enginePower, gasolineCar.enginePower);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), enginePower);
     }
 }

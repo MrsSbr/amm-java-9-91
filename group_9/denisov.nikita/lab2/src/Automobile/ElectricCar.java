@@ -36,11 +36,6 @@ public class ElectricCar extends Automobile implements Vehicle {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), maximumSpeed);
-    }
-
-    @Override
     public boolean equals(Object object) {
         if (this == object) {
             return true;
@@ -53,5 +48,10 @@ public class ElectricCar extends Automobile implements Vehicle {
         ElectricCar electricCar = (ElectricCar) object;
 
         return Objects.equals(maximumSpeed, electricCar.maximumSpeed);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), maximumSpeed);
     }
 }

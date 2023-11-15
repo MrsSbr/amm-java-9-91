@@ -43,11 +43,6 @@ public abstract class Automobile implements Vehicle {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(brand, model);
-    }
-
-    @Override
     public boolean equals(Object object) {
         if (this == object) {
             return true;
@@ -61,5 +56,10 @@ public abstract class Automobile implements Vehicle {
 
         return Objects.equals(brand, automobile.brand) &&
                 Objects.equals(model, automobile.model);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brand, model);
     }
 }
