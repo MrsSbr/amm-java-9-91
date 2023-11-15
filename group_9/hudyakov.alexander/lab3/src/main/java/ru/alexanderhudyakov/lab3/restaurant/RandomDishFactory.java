@@ -1,13 +1,10 @@
-package ru.alexanderhudyakov.lab3.restaurant.repository;
-
-import ru.alexanderhudyakov.lab3.restaurant.Dish;
+package ru.alexanderhudyakov.lab3.restaurant;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Stream;
 
-public class RandomDishRepository implements DishRepository {
+public class RandomDishFactory {
     private static final List<Dish> DISHES;
 
     static {
@@ -35,17 +32,8 @@ public class RandomDishRepository implements DishRepository {
         );
     }
 
-    private final int count;
-
-    public RandomDishRepository(int count) {
-        this.count = count;
-    }
-
-    @Override
-    public Stream<Dish> getDishesStream() {
-        return new Random().ints(0, DISHES.size())
-                .mapToObj(DISHES::get)
-                .map(dish -> new Dish(dish.getName(), dish.getIngredients(), dish.getPrice()))
-                .limit(count);
+    public Dish getDish() {
+        Random rand = new Random();
+        return DISHES.get(rand.nextInt(DISHES.size()));
     }
 }

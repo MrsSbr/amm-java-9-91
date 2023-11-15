@@ -30,7 +30,7 @@ public class CollectionsTest {
 
     private static void testCollection(Supplier<Collection<Dish>> collectionSupplier, String collectionName) {
         PerformanceTester tester = new PerformanceTester(collectionSupplier, collectionName);
-        PerformancePrinter printer = new PerformancePrinter(tester, System.out);
+        PerformancePrinter printer = new PerformancePrinter(tester);
         printer.print();
     }
 }

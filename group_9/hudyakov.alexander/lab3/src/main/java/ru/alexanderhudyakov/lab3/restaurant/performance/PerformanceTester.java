@@ -1,14 +1,15 @@
 package ru.alexanderhudyakov.lab3.restaurant.performance;
 
 import ru.alexanderhudyakov.lab3.restaurant.Dish;
+import ru.alexanderhudyakov.lab3.restaurant.RandomDishesListFactory;
 import ru.alexanderhudyakov.lab3.restaurant.Restaurant;
-import ru.alexanderhudyakov.lab3.restaurant.repository.RandomDishRepository;
 
 import java.util.Collection;
 import java.util.function.Supplier;
 
 public class PerformanceTester {
     private final static int ORDER_COUNT = 2431;
+    private final RandomDishesListFactory factory = new RandomDishesListFactory(ORDER_COUNT);
     private final Supplier<Collection<Dish>> collectionSupplier;
     private final String collectionName;
     private Restaurant restaurant;
@@ -39,7 +40,7 @@ public class PerformanceTester {
     }
 
     public long getCreationTime() {
-        return getMethodExecutionTime(() -> restaurant = new Restaurant(collectionSupplier, new RandomDishRepository(ORDER_COUNT)));
+        return getMethodExecutionTime(() -> restaurant = new Restaurant(collectionSupplier, factory.getDishesList()));
     }
 
     public ExecutionTime getAverageExecutionTime(int count) {
