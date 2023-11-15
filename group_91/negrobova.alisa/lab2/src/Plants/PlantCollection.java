@@ -16,7 +16,9 @@ public class PlantCollection {
 
     public void waterPlants() {
         for (Plant plant : plants) {
-            plant.water();
+            if (plant instanceof Waterable) {
+                ((Waterable) plant).water();
+            }
         }
     }
 

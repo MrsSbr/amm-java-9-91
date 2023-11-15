@@ -17,8 +17,6 @@ public abstract class Plant {
         this.waterLevel = waterLevel;
     }
 
-    public abstract void water();
-
     public String getName() {
         return name;
     }
@@ -26,6 +24,8 @@ public abstract class Plant {
     public int getWaterLevel() {
         return waterLevel;
     }
+
+    public abstract void water();
 
     @Override
     public boolean equals(Object obj) {

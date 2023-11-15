@@ -1,6 +1,4 @@
-import Plants.Flower;
-import Plants.Cactus;
-import Plants.PlantCollection;
+import Plants.*;
 
 public class HousePlants {
 
