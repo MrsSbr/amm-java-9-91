@@ -16,7 +16,6 @@ public abstract class Plant {
         this.name = name;
         this.waterLevel = waterLevel;
     }
-
     public String getName() {
         return name;
     }

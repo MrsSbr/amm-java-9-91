@@ -21,7 +21,6 @@ public class PlantCollection {
             }
         }
     }
-
     public void printPlants() {
         for (Plant plant : plants) {
             System.out.println(plant.toString());
