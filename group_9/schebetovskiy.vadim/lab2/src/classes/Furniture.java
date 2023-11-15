@@ -7,6 +7,7 @@ import enums.Color;
 import java.util.Objects;
 
 public abstract class Furniture extends Product {
+
     private final FurnitureMaterial furnitureMaterial;
     private final SizeType sizeType;
     private boolean deliveryOrdered;
@@ -49,7 +50,6 @@ public abstract class Furniture extends Product {
     public int hashCode() {
         return Objects.hash(furnitureMaterial, sizeType, deliveryOrdered);
     }
-
 
     @Override
     public String toString() {

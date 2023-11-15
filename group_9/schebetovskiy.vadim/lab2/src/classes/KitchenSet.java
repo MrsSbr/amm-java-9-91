@@ -41,4 +41,5 @@ public class KitchenSet extends Furniture {
     public String toString() {
         return "KitchenSet{" + super.toString() + "}";
     }
+
 }

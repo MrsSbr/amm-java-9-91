@@ -6,6 +6,7 @@ import enums.SizeType;
 import enums.TablewareMaterial;
 
 public class Plate extends Tableware {
+
     private final Integer diameter;
     private final PlateClassification plateClassification;
 

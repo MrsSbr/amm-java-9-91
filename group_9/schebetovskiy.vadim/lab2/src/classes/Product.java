@@ -3,6 +3,7 @@ package classes;
 import enums.Color;
 
 public abstract class Product {
+
     private double price;
     private final Color color;
 

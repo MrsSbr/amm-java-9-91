@@ -9,6 +9,7 @@ import enums.SizeType;
 import enums.TablewareMaterial;
 
 public class ProductRunner {
+
     public static void main(String[] args) {
 
         Mug mug1 = new Mug(
@@ -90,15 +91,18 @@ public class ProductRunner {
                 kitchenSet1, kitchenSet2, kitchenSet3, kitchenSet4};
 
         printInfAboutProducts(products);
+
     }
 
     static void printInfAboutProducts(Product... products) {
+
         for (var product : products) {
             product.inspect();
             product.buy();
             product.deliver();
             System.out.println();
         }
+
     }
 
 }

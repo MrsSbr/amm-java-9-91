@@ -7,6 +7,7 @@ import enums.Color;
 import java.util.Objects;
 
 public abstract class Tableware extends Product {
+
     private final TablewareMaterial tablewareMaterial;
     private final SizeType sizeType;
 
@@ -46,4 +47,5 @@ public abstract class Tableware extends Product {
                 ", price=" + super.getPrice() +
                 '}';
     }
+
 }

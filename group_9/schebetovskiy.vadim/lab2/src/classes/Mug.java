@@ -5,6 +5,7 @@ import enums.TablewareMaterial;
 import enums.Color;
 
 public class Mug extends Tableware {
+
     private final Integer volume;
 
     public Mug(TablewareMaterial tablewareMaterial, SizeType sizeType, Integer volume, Color color, double price) {
@@ -39,6 +40,5 @@ public class Mug extends Tableware {
     public String toString() {
         return "Mug{" + super.toString() + "}";
     }
-
 
 }
