@@ -37,11 +37,7 @@ public class ElectricCar extends Automobile implements Vehicle {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-
-        if (object == null || getClass() != object.getClass()) {
+        if (!super.equals(object)) {
             return false;
         }
 
