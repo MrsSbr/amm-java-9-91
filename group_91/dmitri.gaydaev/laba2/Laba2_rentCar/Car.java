@@ -19,6 +19,12 @@ public class Car extends Automobile implements Vehicle {
     }
 
     @Override
+    public void classCar() {
+        super.classCar();
+        System.out.println("легковой");
+    }
+
+    @Override
     public String toString() {
         return super.toString() + " " + "максимальная вместительность пассажиров " + capacityPeople;
     }
@@ -38,11 +44,4 @@ public class Car extends Automobile implements Vehicle {
     public int hashCode() {
         return Objects.hash(super.hashCode(), capacityPeople);
     }
-
-    @Override
-    public void classCar() {
-        super.classCar();
-        System.out.println("легковой");
-    }
-
 }

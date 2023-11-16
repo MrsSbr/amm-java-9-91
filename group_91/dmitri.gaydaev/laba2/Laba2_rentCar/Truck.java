@@ -19,6 +19,12 @@ public class Truck extends Automobile implements Vehicle {
     }
 
     @Override
+    public void classCar() {
+        super.classCar();
+        System.out.println("грузовой");
+    }
+
+    @Override
     public String toString() {
         return super.toString() + " " + loadCapacity + " тонн";
     }
@@ -37,12 +43,6 @@ public class Truck extends Automobile implements Vehicle {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), loadCapacity);
-    }
-
-    @Override
-    public void classCar() {
-        super.classCar();
-        System.out.println("грузовой");
     }
 
 }
