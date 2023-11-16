@@ -17,9 +17,13 @@ public class TestBookstore {
     }
 
     public static void choose(Product product) {
-        if (product instanceof Book) ((Book) product).setAuthor("Изменён");
-        else if (product instanceof Bookmark) ((Bookmark) product).setColor("Изменён");
-        else if (product instanceof Magazine) ((Magazine) product).setNumber(0);
+        if (product instanceof Book) {
+            ((Book) product).setAuthor("Изменён");
+        } else if (product instanceof Bookmark) {
+            ((Bookmark) product).setColor("Изменён");
+        } else if (product instanceof Magazine) {
+            ((Magazine) product).setNumber(0);
+        }
     }
 
     public static void updateCount(Product product, int count) {
