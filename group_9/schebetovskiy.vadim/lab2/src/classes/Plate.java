@@ -7,17 +7,17 @@ import enums.TablewareMaterial;
 
 public class Plate extends Tableware {
 
-    private final Integer diameter;
+    private final int diameter;
     private final PlateClassification plateClassification;
 
-    public Plate(TablewareMaterial tablewareMaterial, SizeType sizeType, Integer diameter,
+    public Plate(TablewareMaterial tablewareMaterial, SizeType sizeType, int diameter,
                  Color color, PlateClassification plateClassification, double price) {
         super(tablewareMaterial, sizeType, color, price);
         this.diameter = diameter;
         this.plateClassification = plateClassification;
     }
 
-    public Integer getDiameter() {
+    public int getDiameter() {
         return diameter;
     }
 

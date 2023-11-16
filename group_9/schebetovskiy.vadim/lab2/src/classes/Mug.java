@@ -6,14 +6,14 @@ import enums.Color;
 
 public class Mug extends Tableware {
 
-    private final Integer volume;
+    private final int volume;
 
-    public Mug(TablewareMaterial tablewareMaterial, SizeType sizeType, Integer volume, Color color, double price) {
+    public Mug(TablewareMaterial tablewareMaterial, SizeType sizeType, int volume, Color color, double price) {
         super(tablewareMaterial, sizeType, color, price);
         this.volume = volume;
     }
 
-    public Integer getVolume() {
+    public int getVolume() {
         return volume;
     }
 

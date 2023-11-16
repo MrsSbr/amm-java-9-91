@@ -1,7 +1,4 @@
-import classes.KitchenSet;
-import classes.Mug;
-import classes.Plate;
-import classes.Product;
+import classes.*;
 import enums.Color;
 import enums.FurnitureMaterial;
 import enums.PlateClassification;
@@ -91,7 +88,8 @@ public class ProductRunner {
                 kitchenSet1, kitchenSet2, kitchenSet3, kitchenSet4};
 
         printInfAboutProducts(products);
-
+        System.out.println("Information about products deliverable by order:");
+        printInfAboutProductsDeliverableByOrder(products);
     }
 
     static void printInfAboutProducts(Product... products) {
@@ -105,4 +103,15 @@ public class ProductRunner {
 
     }
 
+    static void printInfAboutProductsDeliverableByOrder(Product... products) {
+
+        for (var product : products) {
+            if (product instanceof DeliverableByOrder)
+            {
+                product.deliver();
+                System.out.println();
+            }
+        }
+
+    }
 }
