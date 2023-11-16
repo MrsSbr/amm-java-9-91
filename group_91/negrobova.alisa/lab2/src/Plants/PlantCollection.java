@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlantCollection {
-    private List<Plant> plants;
+    private final List<Plant> plants;
 
     public PlantCollection() {
         plants = new ArrayList<>();
