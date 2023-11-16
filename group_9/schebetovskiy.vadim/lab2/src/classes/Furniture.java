@@ -6,7 +6,7 @@ import enums.Color;
 
 import java.util.Objects;
 
-public abstract class Furniture extends Product implements DeliverableByOrder{
+public abstract class Furniture extends Product implements DeliverableByOrder {
 
     private final FurnitureMaterial furnitureMaterial;
     private final SizeType sizeType;

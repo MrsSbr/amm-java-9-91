@@ -106,8 +106,7 @@ public class ProductRunner {
     static void printInfAboutProductsDeliverableByOrder(Product... products) {
 
         for (var product : products) {
-            if (product instanceof DeliverableByOrder)
-            {
+            if (product instanceof DeliverableByOrder) {
                 product.deliver();
                 System.out.println();
             }
