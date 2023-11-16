@@ -1,72 +1,96 @@
 package tasks;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.function.Supplier;
-import java.util.Set;
-
 import drinks.DrinkType;
 import drinks.SoldDrink;
 import solddrink.utils.SoldDrinkCollectionUtils;
 
+import java.util.Collection;
+import java.util.Set;
+import java.util.function.Supplier;
+
 public class CollectionPerformanceAnalyzer {
-    private final String collectionName;
     private final Supplier<Collection<SoldDrink>> collectionSupplier;
     private Collection<SoldDrink> collection;
+    private final int TEST_COUNT = 100;
 
-    public CollectionPerformanceAnalyzer(String collectionName, Supplier<Collection<SoldDrink>> supplier) {
-        this.collectionName = collectionName;
+    public CollectionPerformanceAnalyzer(Supplier<Collection<SoldDrink>> supplier) {
         this.collectionSupplier = supplier;
         this.collection = generateCollection();
     }
+    public CollectionPerformanceAnalyzer(Supplier<Collection<SoldDrink>> supplier, Collection<SoldDrink> collection) {
+        this.collectionSupplier = supplier;
+        this.collection = collection;
+        this.collection = createCollection();
+    }
 
     public String getCollectionName() {
-        return collectionName;
+        return collection.getClass().getName();
+    }
+    public Collection<SoldDrink> getCollection() {
+        return collection;
     }
 
     private Collection<SoldDrink> generateCollection() {
-        return SoldDrinkCollectionUtils.fill(Collections.emptyList(), collectionSupplier);
+        return SoldDrinkCollectionUtils.fill(collectionSupplier, 10000);
     }
 
     private Collection<SoldDrink> createCollection() {
         return SoldDrinkCollectionUtils.wrap(collection, collectionSupplier);
     }
 
-    public long getCollectionCreatingTotalTime() {
+    public double getCollectionCreatingTotalTime() {
         //считается время без учета работы рандома.
-        long startTime = System.currentTimeMillis();
+        double totalTime = 0;
+        for (int i = 0; i < TEST_COUNT; i++) {
+            long startTime = System.currentTimeMillis();
 
-        collection = createCollection();
+            collection = createCollection();
 
-        long endTime = System.currentTimeMillis();
-        return endTime - startTime;
+            long endTime = System.currentTimeMillis();
+            totalTime += (endTime - startTime);
+        }
+        return totalTime / TEST_COUNT;
     }
 
-    public long getMorningDrinksTaskTotalTime() {
-        long startTime = System.currentTimeMillis();
 
-        Set<DrinkType> morningDrinks = SoldDrinkCollectionAnalyzer.getMorningDrinks(collection);
+    public double getMorningDrinksTaskTotalTime() {
+        double totalTime = 0;
+        for (int i = 0; i < TEST_COUNT; i++) {
+            long startTime = System.currentTimeMillis();
 
-        long endTime = System.currentTimeMillis();
-        return endTime - startTime;
+            Set<DrinkType> morningDrinks = SoldDrinkCollectionAnalyzer.getMorningDrinks(collection);
+
+            long endTime = System.currentTimeMillis();
+            totalTime += (endTime - startTime);
+        }
+        return totalTime / TEST_COUNT;
     }
 
-    public long getNotOrderedDrinksLastThreeMonthsTaskTotalTime() {
-        long startTime = System.currentTimeMillis();
+    public double getNotOrderedDrinksLastThreeMonthsTaskTotalTime() {
+        double totalTime = 0;
+        for (int i = 0; i < TEST_COUNT; i++) {
+            long startTime = System.currentTimeMillis();
 
-        Set<DrinkType> notOrderedDrinksLastThreeMonths = SoldDrinkCollectionAnalyzer.getNotOrderedDrinksLastThreeMonths(collection);
+            Set<DrinkType> notOrderedDrinksLastThreeMonths =
+                    SoldDrinkCollectionAnalyzer.getNotOrderedDrinksLastThreeMonths(collection);
 
-        long endTime = System.currentTimeMillis();
-        return endTime - startTime;
+            long endTime = System.currentTimeMillis();
+            totalTime += (endTime - startTime);
+        }
+        return totalTime / TEST_COUNT;
+
     }
 
-    public long getCappuccinoOrdersCountTaskTotalTime() {
-        long startTime = System.currentTimeMillis();
+    public double getCappuccinoOrdersCountTaskTotalTime() {
+        double totalTime = 0;
+        for (int i = 0; i < TEST_COUNT; i++) {
+            long startTime = System.currentTimeMillis();
 
-        int cappuccinoOrdersCount = SoldDrinkCollectionAnalyzer.getCappuccinoOrdersCount(collection);
+            int cappuccinoOrdersCount = SoldDrinkCollectionAnalyzer.getCappuccinoOrdersCount(collection);
 
-        long endTime = System.currentTimeMillis();
-        return endTime - startTime;
+            long endTime = System.currentTimeMillis();
+            totalTime += (endTime - startTime);
+        }
+        return totalTime / TEST_COUNT;
     }
-
 }

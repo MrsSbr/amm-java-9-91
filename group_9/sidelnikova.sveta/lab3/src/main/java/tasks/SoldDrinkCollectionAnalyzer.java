@@ -21,9 +21,7 @@ public final class SoldDrinkCollectionAnalyzer {
 
     public static Set<DrinkType> getNotOrderedDrinksLastThreeMonths(@NotNull Collection<SoldDrink> collection) {
         Set<DrinkType> orderedDrinkTypes = collection.stream()
-                .filter((soldDrink) -> {
-                    return soldDrink.saleDate().compareTo(LocalDate.now().minusMonths(3)) >= 0;
-                })
+                .filter((soldDrink) -> soldDrink.saleDate().compareTo(LocalDate.now().minusMonths(3)) >= 0)
                 .map(SoldDrink::type)
                 .collect(Collectors.toSet());
         return Arrays.stream(DrinkType.values())
