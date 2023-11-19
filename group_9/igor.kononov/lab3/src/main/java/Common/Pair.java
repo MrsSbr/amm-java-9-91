@@ -1,4 +1,4 @@
-package Factory;
+package Common;
 
 import lombok.Data;
 
@@ -6,7 +6,6 @@ import lombok.Data;
 public class Pair<L, R> {
     private L first;
     private R second;
-
 
     public Pair() { }
 

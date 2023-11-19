@@ -1,6 +1,6 @@
-package Service;
+package Service.MusicService;
 
-import Composition.Composition;
+import Service.MusicService.Composition.Composition;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -36,7 +36,7 @@ public class MusicService {
     }
 
 
-    public List<List<Composition>> getUnlistenedCompositionsInLast3Months() {
+    public List<List<Composition>> getUnlistenedCompositionsInLastThreeMonths() {
         LocalDate threeMonthsAgo = LocalDate.now().minusMonths(3);
 
         return users.stream()

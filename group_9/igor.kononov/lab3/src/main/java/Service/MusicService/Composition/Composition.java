@@ -1,4 +1,4 @@
-package Composition;
+package Service.MusicService.Composition;
 
 import lombok.Data;
 
@@ -11,7 +11,6 @@ public class Composition {
     private String name;
     private String composer;
     private LocalDate date;
-
 
     public Composition() { }
 
