@@ -10,22 +10,27 @@ import java.util.function.Supplier;
 
 public class CollectionPerformanceAnalyzer {
     private final Supplier<Collection<SoldDrink>> collectionSupplier;
+    private final SoldDrinkCollectionAnalyzerImpl soldDrinkCollectionAnalyzer;
     private Collection<SoldDrink> collection;
     private final int TEST_COUNT = 100;
 
     public CollectionPerformanceAnalyzer(Supplier<Collection<SoldDrink>> supplier) {
         this.collectionSupplier = supplier;
         this.collection = generateCollection();
+        soldDrinkCollectionAnalyzer = new SoldDrinkCollectionAnalyzerImpl();
     }
+
     public CollectionPerformanceAnalyzer(Supplier<Collection<SoldDrink>> supplier, Collection<SoldDrink> collection) {
         this.collectionSupplier = supplier;
         this.collection = collection;
         this.collection = createCollection();
+        soldDrinkCollectionAnalyzer = new SoldDrinkCollectionAnalyzerImpl();
     }
 
     public String getCollectionName() {
         return collection.getClass().getName();
     }
+
     public Collection<SoldDrink> getCollection() {
         return collection;
     }
@@ -58,7 +63,7 @@ public class CollectionPerformanceAnalyzer {
         for (int i = 0; i < TEST_COUNT; i++) {
             long startTime = System.currentTimeMillis();
 
-            Set<DrinkType> morningDrinks = SoldDrinkCollectionAnalyzer.getMorningDrinks(collection);
+            Set<DrinkType> morningDrinks = soldDrinkCollectionAnalyzer.getMorningDrinks(collection);
 
             long endTime = System.currentTimeMillis();
             totalTime += (endTime - startTime);
@@ -72,7 +77,7 @@ public class CollectionPerformanceAnalyzer {
             long startTime = System.currentTimeMillis();
 
             Set<DrinkType> notOrderedDrinksLastThreeMonths =
-                    SoldDrinkCollectionAnalyzer.getNotOrderedDrinksLastThreeMonths(collection);
+                    soldDrinkCollectionAnalyzer.getNotOrderedDrinksLastThreeMonths(collection);
 
             long endTime = System.currentTimeMillis();
             totalTime += (endTime - startTime);
@@ -86,7 +91,7 @@ public class CollectionPerformanceAnalyzer {
         for (int i = 0; i < TEST_COUNT; i++) {
             long startTime = System.currentTimeMillis();
 
-            int cappuccinoOrdersCount = SoldDrinkCollectionAnalyzer.getCappuccinoOrdersCount(collection);
+            int cappuccinoOrdersCount = soldDrinkCollectionAnalyzer.getCappuccinoOrdersCount(collection);
 
             long endTime = System.currentTimeMillis();
             totalTime += (endTime - startTime);

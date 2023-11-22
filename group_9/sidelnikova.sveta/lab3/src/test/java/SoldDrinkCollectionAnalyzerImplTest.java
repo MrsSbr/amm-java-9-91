@@ -1,20 +1,29 @@
 import drinks.DrinkType;
 import drinks.SoldDrink;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import tasks.SoldDrinkCollectionAnalyzer;
+import tasks.SoldDrinkCollectionAnalyzerImpl;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
-public class SoldDrinkCollectionAnalyzerTest {
+public class SoldDrinkCollectionAnalyzerImplTest {
+
+    private static SoldDrinkCollectionAnalyzerImpl soldDrinkCollectionAnalyzer;
+
+    @BeforeAll
+    static void setUp() {
+        soldDrinkCollectionAnalyzer = new SoldDrinkCollectionAnalyzerImpl();
+    }
+
     @Test
     public void testGetMorningDrinks() {
         List<SoldDrink> testCollection = new ArrayList<>() {{
@@ -27,7 +36,7 @@ public class SoldDrinkCollectionAnalyzerTest {
             add(new SoldDrink(DrinkType.ESPRESSO, LocalDate.of(2022, 1, 1),
                     LocalTime.of(9, 0, 0)));
         }};
-        Set<DrinkType> result = SoldDrinkCollectionAnalyzer.getMorningDrinks(testCollection);
+        Set<DrinkType> result = soldDrinkCollectionAnalyzer.getMorningDrinks(testCollection);
         Assertions.assertThat(result).isEqualTo(new HashSet<>() {{
             add(DrinkType.FRAPPE);
             add(DrinkType.ESPRESSO);
@@ -38,10 +47,10 @@ public class SoldDrinkCollectionAnalyzerTest {
     @NullAndEmptySource
     public void testGetMorningDrinksWithEmptyCollection(Collection<SoldDrink> testCollection) {
         if (testCollection == null) {
-            Assertions.assertThatThrownBy(() -> SoldDrinkCollectionAnalyzer.getMorningDrinks(testCollection))
+            Assertions.assertThatThrownBy(() -> soldDrinkCollectionAnalyzer.getMorningDrinks(testCollection))
                     .isInstanceOf(IllegalArgumentException.class);
         } else {
-            Set<DrinkType> result = SoldDrinkCollectionAnalyzer.getMorningDrinks(testCollection);
+            Set<DrinkType> result = soldDrinkCollectionAnalyzer.getMorningDrinks(testCollection);
             Assertions.assertThat(result).isEmpty();
         }
     }
@@ -58,7 +67,7 @@ public class SoldDrinkCollectionAnalyzerTest {
             add(new SoldDrink(DrinkType.ESPRESSO, LocalDate.from(LocalDate.now().minusDays(3)),
                     LocalTime.of(10, 0, 0)));
         }};
-        Set<DrinkType> result = SoldDrinkCollectionAnalyzer.getNotOrderedDrinksLastThreeMonths(testCollection);
+        Set<DrinkType> result = soldDrinkCollectionAnalyzer.getNotOrderedDrinksLastThreeMonths(testCollection);
         Assertions.assertThat(result).isEqualTo(new HashSet<>() {{
             add(DrinkType.CAPPUCCINO);
             add(DrinkType.RAF);
@@ -71,10 +80,10 @@ public class SoldDrinkCollectionAnalyzerTest {
     @NullAndEmptySource
     public void testGetNotOrderedDrinksLastThreeMonthsWithEmptyCollection(Collection<SoldDrink> testCollection) {
         if (testCollection == null) {
-            Assertions.assertThatThrownBy(() -> SoldDrinkCollectionAnalyzer.getNotOrderedDrinksLastThreeMonths(testCollection))
+            Assertions.assertThatThrownBy(() -> soldDrinkCollectionAnalyzer.getNotOrderedDrinksLastThreeMonths(testCollection))
                     .isInstanceOf(IllegalArgumentException.class);
         } else {
-            Set<DrinkType> result = SoldDrinkCollectionAnalyzer.getNotOrderedDrinksLastThreeMonths(testCollection);
+            Set<DrinkType> result = soldDrinkCollectionAnalyzer.getNotOrderedDrinksLastThreeMonths(testCollection);
             Assertions.assertThat(result).isEqualTo(new HashSet<>(Set.of(DrinkType.values())));
         }
     }
@@ -93,7 +102,7 @@ public class SoldDrinkCollectionAnalyzerTest {
             add(new SoldDrink(DrinkType.CAPPUCCINO, LocalDate.of(2022, 1, 1),
                     LocalTime.of(10, 0, 0)));
         }};
-        int result = SoldDrinkCollectionAnalyzer.getCappuccinoOrdersCount(testCollection);
+        int result = soldDrinkCollectionAnalyzer.getCappuccinoOrdersCount(testCollection);
         Assertions.assertThat(result).isEqualTo(3);
     }
 
@@ -101,10 +110,10 @@ public class SoldDrinkCollectionAnalyzerTest {
     @NullAndEmptySource
     public void testGetCappuccinoOrdersCountWithEmptyCollection(Collection<SoldDrink> testCollection) {
         if (testCollection == null) {
-            Assertions.assertThatThrownBy(() -> SoldDrinkCollectionAnalyzer.getCappuccinoOrdersCount(testCollection))
+            Assertions.assertThatThrownBy(() -> soldDrinkCollectionAnalyzer.getCappuccinoOrdersCount(testCollection))
                     .isInstanceOf(IllegalArgumentException.class);
         } else {
-            int result = SoldDrinkCollectionAnalyzer.getCappuccinoOrdersCount(testCollection);
+            int result = soldDrinkCollectionAnalyzer.getCappuccinoOrdersCount(testCollection);
             Assertions.assertThat(result).isEqualTo(0);
         }
     }
