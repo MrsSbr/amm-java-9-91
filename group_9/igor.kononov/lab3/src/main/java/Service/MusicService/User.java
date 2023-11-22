@@ -7,11 +7,17 @@ import java.util.Collection;
 
 @Data
 public class User {
+
     private String firstName;
     private String secondName;
     private Collection<Composition> listenedTracks;
 
     public User() { }
+
+    public User(String firstName, String secondName) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+    }
 
     public User(String firstName, String secondName, Collection<Composition> listenedTracks) {
         this.firstName = firstName;

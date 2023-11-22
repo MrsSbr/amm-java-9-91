@@ -60,8 +60,8 @@ public class RandomCompositionFactory {
         var composition = LIST_OF_NAMES.get(random.nextInt(LIST_OF_NAMES.size()));
 
         return new Composition(
-                (String) composition.getFirst()
-                , (String) composition.getSecond()
+                composition.getFirst()
+                , composition.getSecond()
                 , date);
     }
 }

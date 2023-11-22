@@ -3,23 +3,34 @@ package Service.MusicService;
 import Service.MusicService.Composition.Composition;
 import lombok.Data;
 
+
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+
+// по заданной композиции определите, сколько раз ее прослушали за последний месяц
+// для каждого пользователя составить подборку прослушанных композиций
+// для каждого пользователя составить подборку с композициями, которые он не слушал последние 3 месяца
+// найти самый "любимый" трек для каждого пользователя
+
 
 @Data
 public class MusicService {
 
     private Collection<User> users;
-    private Collection<Composition> allCompositions;
 
-    // по заданной композиции определите, сколько раз ее прослушали за последний месяц
-    // для каждого пользователя составить подборку прослушанных композиций
-    // для каждого пользователя составить подборку с композициями, которые он не слушал последние 3 месяца
-    // найти самый "любимый" трек для каждого пользователя
+    public MusicService(Collection<User> users) {
+        this.users = users;
+    }
 
     public long countListensInLastMonth(Composition composition) {
+
         LocalDate oneMonthAgo = LocalDate.now().minusMonths(1);
 
         return users.stream()
@@ -28,24 +39,21 @@ public class MusicService {
                 .count();
     }
 
-
     public List<Set<Composition>> getUniquePlaylists() {
         return users.stream()
                 .map(user -> new HashSet<>(user.getListenedTracks()))
                 .collect(Collectors.toList());
     }
 
-
     public List<List<Composition>> getUnlistenedCompositionsInLastThreeMonths() {
         LocalDate threeMonthsAgo = LocalDate.now().minusMonths(3);
 
         return users.stream()
-                .map(user -> allCompositions.stream()
-                        .filter(composition -> user.getListenedTracks().contains(composition) && composition.getDate().isBefore(threeMonthsAgo))
+                .map(user -> user.getListenedTracks().stream()
+                        .filter(composition -> composition.getDate().isBefore(threeMonthsAgo))
                         .collect(Collectors.toList()))
                 .collect(Collectors.toList());
     }
-
 
     public List<Composition> getMostFavoriteTracks() {
         return users.stream()
@@ -57,5 +65,4 @@ public class MusicService {
                         .orElse(null))
                 .collect(Collectors.toList());
     }
-
 }
