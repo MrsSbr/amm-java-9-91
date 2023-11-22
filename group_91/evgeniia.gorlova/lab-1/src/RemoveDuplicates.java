@@ -19,18 +19,22 @@ public class RemoveDuplicates {
     public static void main(String[] args) {
         RemoveDuplicates solution = new RemoveDuplicates();
         String[] nums1 = {"1", "1", "2"};
-        int k1 = solution.removeDuplicates(nums1);
+
+        int k1 = solution.removeDuplicates (nums1);
         System.out.print("Output: " + k1 + ", nums = [");
+
         for (int i = 0; i < nums1.length; i++) {
             System.out.print(nums1[i] + (i == nums1.length - 1 ? "" : ","));
         }
         System.out.println("]");
 
         String[] nums2 = {"0", "0", "1", "1", "1", "2", "2", "3", "3", "4"};
-        int k2 = solution.removeDuplicates(nums2);
+
+        int k2 = solution.removeDuplicates (nums2);
         System.out.print("Output: " + k2 + ", nums = [");
+
         for (int i = 0; i < nums2.length; i++) {
-            System.out.print(nums2[i] + (i == nums2.length - 1 ? "" : ","));
+            System.out.print(nums2[i] + (i == nums2.length - 1 ? "" : ",") );
         }
         System.out.println("]");
     }
