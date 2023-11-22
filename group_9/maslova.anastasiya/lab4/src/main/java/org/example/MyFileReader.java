@@ -1,5 +1,8 @@
 package org.example;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -9,7 +12,11 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class MyFileReader {
+
+    private static final Logger logger = LogManager.getLogger(MyFileReader.class);
+
     public static List<Order> readOrdersFromFile(Path path) {
+        logger.info("Начало чтения заказов из файла.");
         List<Order> orders;
 
         try (Stream<String> streamFromFiles = Files.lines(path)) {
@@ -25,8 +32,10 @@ public class MyFileReader {
                     })
                     .toList();
         } catch (IOException e) {
+            logger.error("Ошибка при чтении файла!\n" + e.getMessage());
             throw new RuntimeException(e);
         }
+        logger.info("Заказы успешно прочитаны.");
         return orders;
     }
 }

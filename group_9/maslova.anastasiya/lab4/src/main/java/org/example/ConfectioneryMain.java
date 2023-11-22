@@ -1,5 +1,8 @@
 package org.example;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import static org.example.Input.getIntInRange;
 
 /*
@@ -12,7 +15,10 @@ import static org.example.Input.getIntInRange;
  */
 
 public class ConfectioneryMain {
+    private static final Logger logger = LogManager.getLogger(ConfectioneryMain.class);
+
     public static void main(String[] args) {
+        logger.info("Начало работы программы.");
         int choice = 1;
         Confectionery confectionery = new Confectionery();
         while (choice != 0) {
@@ -25,5 +31,6 @@ public class ConfectioneryMain {
                 case 0 -> System.out.println("До свидания...");
             }
         }
+        logger.info("Конец работы программы.");
     }
 }

@@ -1,5 +1,8 @@
 package org.example;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.math.BigDecimal;
 import java.time.YearMonth;
 import java.util.Comparator;
@@ -11,6 +14,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ConfectioneryService {
+    private static final Logger logger = LogManager.getLogger(ConfectioneryService.class);
     private final List<Order> orderList;
 
     public ConfectioneryService(List<Order> orderList) {
@@ -19,7 +23,7 @@ public class ConfectioneryService {
 
     // найти месяц, в котором кондитерская получила самый низкий доход
     public YearMonth theLeastProfitableMonth() {
-
+        logger.info("Вызвана функция theLeastProfitableMonth.");
         // Создаем Map, в котором ключами будут YearMonth, а значениями - суммарная прибыль за каждый месяц
         Map<YearMonth, BigDecimal> profitForMonth = orderList.stream()
                 .collect(Collectors.groupingBy( // группируем по дате начала месяца
@@ -40,6 +44,7 @@ public class ConfectioneryService {
 
     // вывести самый тяжелый торт в каждом месяце этого года
     public Map<YearMonth, Order> theHeaviestCakeInEveryMonthOfThisYear() {
+        logger.info("Вызвана функция theHeaviestCakeInEveryMonthOfThisYear");
         // Фильтруем заказы для текущего года, оставляем только те, что были сделаны в текущем году
         return orderList.stream()
                 .filter(order -> order.getDate().getYear() == YearMonth.now().getYear())
@@ -54,6 +59,7 @@ public class ConfectioneryService {
 
     // вывести список заказов тортов по месяцам
     public Map<YearMonth, List<Order>> ordersByMonth() {
+        logger.info("Вызвана функция ordersByMonth.");
         // Группируем заказы по YearMonth, чтобы получить списки заказов по месяцам
         return orderList.stream()
                 .collect(Collectors.groupingBy(
