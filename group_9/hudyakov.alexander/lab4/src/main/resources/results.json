@@ -1,0 +1,141 @@
+[ {
+  "tournamentNumber" : 1,
+  "date" : "2003-08-13",
+  "firstFighter" : "Liu Kang",
+  "secondFighter" : "Smoke",
+  "firstWon" : false,
+  "fatalityCommitted" : true
+}, {
+  "tournamentNumber" : 1,
+  "date" : "1992-03-01",
+  "firstFighter" : "Sub-Zero",
+  "secondFighter" : "Sonya Blade",
+  "firstWon" : false,
+  "fatalityCommitted" : false
+}, {
+  "tournamentNumber" : 1,
+  "date" : "1995-11-23",
+  "firstFighter" : "Scorpion",
+  "secondFighter" : "Sub-Zero",
+  "firstWon" : true,
+  "fatalityCommitted" : true
+}, {
+  "tournamentNumber" : 2,
+  "date" : "2012-01-27",
+  "firstFighter" : "Sub-Zero",
+  "secondFighter" : "Shang Tsung",
+  "firstWon" : true,
+  "fatalityCommitted" : true
+}, {
+  "tournamentNumber" : 2,
+  "date" : "1995-11-16",
+  "firstFighter" : "Shang Tsung",
+  "secondFighter" : "Sub-Zero",
+  "firstWon" : false,
+  "fatalityCommitted" : false
+}, {
+  "tournamentNumber" : 2,
+  "date" : "2008-04-14",
+  "firstFighter" : "Sub-Zero",
+  "secondFighter" : "Johnny Cage",
+  "firstWon" : false,
+  "fatalityCommitted" : true
+}, {
+  "tournamentNumber" : 2,
+  "date" : "2012-12-15",
+  "firstFighter" : "Liu Kang",
+  "secondFighter" : "Kano",
+  "firstWon" : true,
+  "fatalityCommitted" : true
+}, {
+  "tournamentNumber" : 2,
+  "date" : "1999-01-18",
+  "firstFighter" : "Scorpion",
+  "secondFighter" : "Shang Tsung",
+  "firstWon" : false,
+  "fatalityCommitted" : true
+}, {
+  "tournamentNumber" : 3,
+  "date" : "2022-05-22",
+  "firstFighter" : "Liu Kang",
+  "secondFighter" : "Jade",
+  "firstWon" : false,
+  "fatalityCommitted" : false
+}, {
+  "tournamentNumber" : 3,
+  "date" : "2020-04-23",
+  "firstFighter" : "Raiden",
+  "secondFighter" : "Kano",
+  "firstWon" : true,
+  "fatalityCommitted" : true
+}, {
+  "tournamentNumber" : 3,
+  "date" : "2020-08-23",
+  "firstFighter" : "Liu Kang",
+  "secondFighter" : "Kabal",
+  "firstWon" : false,
+  "fatalityCommitted" : false
+}, {
+  "tournamentNumber" : 3,
+  "date" : "1990-07-15",
+  "firstFighter" : "Liu Kang",
+  "secondFighter" : "Sheeva",
+  "firstWon" : true,
+  "fatalityCommitted" : true
+}, {
+  "tournamentNumber" : 4,
+  "date" : "1992-01-22",
+  "firstFighter" : "Sonya Blade",
+  "secondFighter" : "Sheeva",
+  "firstWon" : true,
+  "fatalityCommitted" : true
+}, {
+  "tournamentNumber" : 4,
+  "date" : "2001-06-09",
+  "firstFighter" : "Johnny Cage",
+  "secondFighter" : "Sindel",
+  "firstWon" : false,
+  "fatalityCommitted" : false
+}, {
+  "tournamentNumber" : 5,
+  "date" : "1999-06-13",
+  "firstFighter" : "Kitana",
+  "secondFighter" : "Liu Kang",
+  "firstWon" : true,
+  "fatalityCommitted" : false
+}, {
+  "tournamentNumber" : 5,
+  "date" : "1994-10-28",
+  "firstFighter" : "Raiden",
+  "secondFighter" : "Noob Saibot",
+  "firstWon" : true,
+  "fatalityCommitted" : false
+}, {
+  "tournamentNumber" : 5,
+  "date" : "2020-02-01",
+  "firstFighter" : "Sindel",
+  "secondFighter" : "Jade",
+  "firstWon" : false,
+  "fatalityCommitted" : true
+}, {
+  "tournamentNumber" : 5,
+  "date" : "2022-01-26",
+  "firstFighter" : "Sonya Blade",
+  "secondFighter" : "Baraka",
+  "firstWon" : true,
+  "fatalityCommitted" : true
+}, {
+  "tournamentNumber" : 5,
+  "date" : "2011-10-10",
+  "firstFighter" : "Kabal",
+  "secondFighter" : "Scorpion",
+  "firstWon" : false,
+  "fatalityCommitted" : true
+}, {
+  "tournamentNumber" : 5,
+  "date" : "1995-05-13",
+  "firstFighter" : "Kitana",
+  "secondFighter" : "Liu Kang",
+  "firstWon" : true,
+  "fatalityCommitted" : false
+} ]

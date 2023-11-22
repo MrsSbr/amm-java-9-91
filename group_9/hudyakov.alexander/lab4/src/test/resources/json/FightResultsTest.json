@@ -1,0 +1,15 @@
+[ {
+  "tournamentNumber" : 97,
+  "date" : "2003-08-13",
+  "firstFighter" : "Liu Kang",
+  "secondFighter" : "Smoke",
+  "firstWon" : false,
+  "fatalityCommitted" : true
+}, {
+  "tournamentNumber" : 24,
+  "date" : "1992-03-01",
+  "firstFighter" : "Sub-Zero",
+  "secondFighter" : "Sonya Blade",
+  "firstWon" : false,
+  "fatalityCommitted" : false
+}]
