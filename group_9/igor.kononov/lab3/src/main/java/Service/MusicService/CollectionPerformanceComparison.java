@@ -26,7 +26,7 @@ public class  CollectionPerformanceComparison {
 
         long countListensTime = measureTime(() -> {
             Composition composition = new Composition("Believer", "Imagine Dragons");
-            long result = musicService.countListensInLastMonth(composition);
+            musicService.countListensInLastMonth(composition);
         });
 
         long uniquePlaylistsTime = measureTime(musicService::getUniquePlaylists);

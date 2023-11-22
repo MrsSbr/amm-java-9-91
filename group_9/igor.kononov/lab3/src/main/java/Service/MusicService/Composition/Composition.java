@@ -12,8 +12,6 @@ public class Composition {
     private String composer;
     private LocalDate date;
 
-    public Composition() { }
-
     public Composition(String name, String composer) {
         this.name = name;
         this.composer = composer;

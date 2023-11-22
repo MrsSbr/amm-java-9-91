@@ -12,8 +12,6 @@ public class User {
     private String secondName;
     private Collection<Composition> listenedTracks;
 
-    public User() { }
-
     public User(String firstName, String secondName) {
         this.firstName = firstName;
         this.secondName = secondName;
