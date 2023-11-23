@@ -32,10 +32,10 @@ public class Grenade extends Consumables {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!super.equals(o)) {
             return false;
         }
-        if (!super.equals(o)) {
+        if (getClass() != o.getClass()) {
             return false;
         }
         Grenade grenade = (Grenade) o;

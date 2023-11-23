@@ -32,10 +32,10 @@ public class Bullet extends Consumables {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (!super.equals(o)) {
             return false;
         }
-        if (!super.equals(o)) {
+        if (getClass() != o.getClass()) {
             return false;
         }
         Bullet bullet = (Bullet) o;
@@ -44,6 +44,6 @@ public class Bullet extends Consumables {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), caliber);
+        return Objects.hash(super.hashCode(), getCaliber());
     }
 }

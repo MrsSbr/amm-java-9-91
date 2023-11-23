@@ -4,8 +4,14 @@ public class AmmunitionTask {
         Consumables grenade1 = new Grenade("Fragmentation", 50, "Explosive");
         Consumables bullet2 = new Bullet("17mm", 200, 10);
         Consumables grenade2 = new Grenade("Fragmentation", 70, "Explosive");
+        Consumables bullet3 = new Bullet("9mm", 300, 9);
+
 
         Consumables[] ammunitionArray = {bullet1, bullet2, grenade1, grenade2};
+
+        System.out.println(bullet1.equals(bullet3));
+        System.out.println(grenade1.equals(bullet1));
+        System.out.println(grenade1.equals(grenade2));
 
         for (var amm : ammunitionArray) {
             System.out.println(amm.getClass().getName());

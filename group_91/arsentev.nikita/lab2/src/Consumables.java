@@ -29,7 +29,7 @@ public abstract class Consumables implements Ammunition {
         if (this == obj) {
             return true;
         }
-        if (obj == null || getClass() != obj.getClass()) {
+        if (!(obj instanceof Consumables)) {
             return false;
         }
         Consumables other = (Consumables) obj;
