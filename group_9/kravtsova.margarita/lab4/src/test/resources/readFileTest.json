@@ -1,0 +1,32 @@
+[
+  {
+    "datePurchase": "2023-11-17",
+    "bouquetType": "NEW_YEAR",
+    "flowers": [
+      "Роза",
+      "Гортензия",
+      "Гипсофила",
+      "Гладиолус",
+      "Мимоза",
+      "Лаванда",
+      "Астра"
+    ],
+    "price": 4208,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-11-03",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Гипсофила",
+      "Гладиолус",
+      "Лаванда",
+      "Роза",
+      "Гладиолус",
+      "Пион",
+      "Гортензия",
+      "Гипсофила"
+    ],
+    "price": 4491,
+    "receivingType": "MANUALLY"
+  }]

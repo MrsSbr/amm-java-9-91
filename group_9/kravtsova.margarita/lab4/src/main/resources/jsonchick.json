@@ -1,0 +1,1477 @@
+[
+  {
+    "datePurchase": "2023-11-17",
+    "bouquetType": "NEW_YEAR",
+    "flowers": [
+      "Роза",
+      "Гортензия",
+      "Гипсофила",
+      "Гладиолус",
+      "Мимоза",
+      "Лаванда",
+      "Астра"
+    ],
+    "price": 4208,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-11-03",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Гипсофила",
+      "Гладиолус",
+      "Лаванда",
+      "Роза",
+      "Гладиолус",
+      "Пион",
+      "Гортензия",
+      "Гипсофила"
+    ],
+    "price": 4491,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-12-18",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Лаванда",
+      "Роза",
+      "Астра",
+      "Пион"
+    ],
+    "price": 3968,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-12-08",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Гортензия",
+      "Гортензия",
+      "Астра",
+      "Гипсофила",
+      "Хризантема",
+      "Астра",
+      "Мимоза",
+      "Ирис"
+    ],
+    "price": 4347,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-04-18",
+    "bouquetType": "ROMANTIC",
+    "flowers": [
+      "Ромашка",
+      "Гладиолус",
+      "Гвоздика"
+    ],
+    "price": 2142,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-07-25",
+    "bouquetType": "ROMANTIC",
+    "flowers": [
+      "Гортензия",
+      "Тюльпан",
+      "Гладиолус",
+      "Хризантема",
+      "Лилия",
+      "Астра",
+      "Роза",
+      "Ирис",
+      "Гортензия",
+      "Гладиолус",
+      "Роза"
+    ],
+    "price": 1626,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-07-22",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Ирис",
+      "Гладиолус",
+      "Пион",
+      "Хризантема",
+      "Ромашка",
+      "Ирис",
+      "Гвоздика",
+      "Гвоздика",
+      "Гипсофила"
+    ],
+    "price": 3815,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-09-05",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Ромашка",
+      "Лаванда",
+      "Астра"
+    ],
+    "price": 1803,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-06-03",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Пион",
+      "Гортензия",
+      "Роза",
+      "Лаванда",
+      "Лилия",
+      "Ирис",
+      "Пион",
+      "Ирис"
+    ],
+    "price": 679,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-04-04",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Ирис",
+      "Гладиолус",
+      "Ромашка",
+      "Гортензия"
+    ],
+    "price": 4326,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-05-10",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Пион",
+      "Гипсофила",
+      "Мимоза"
+    ],
+    "price": 1906,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-05-12",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Тюльпан",
+      "Гладиолус",
+      "Тюльпан",
+      "Ирис",
+      "Ромашка",
+      "Мимоза",
+      "Гвоздика",
+      "Тюльпан",
+      "Гладиолус",
+      "Роза",
+      "Гортензия"
+    ],
+    "price": 2456,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-05-07",
+    "bouquetType": "NEW_YEAR",
+    "flowers": [
+      "Ирис",
+      "Хризантема",
+      "Гипсофила",
+      "Гипсофила",
+      "Ирис"
+    ],
+    "price": 3085,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-06-12",
+    "bouquetType": "NEW_YEAR",
+    "flowers": [
+      "Гортензия",
+      "Тюльпан",
+      "Ромашка",
+      "Тюльпан"
+    ],
+    "price": 1218,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-01-22",
+    "bouquetType": "ROMANTIC",
+    "flowers": [
+      "Гипсофила",
+      "Пион",
+      "Мимоза",
+      "Лаванда",
+      "Гортензия",
+      "Гвоздика",
+      "Гортензия",
+      "Астра",
+      "Пион",
+      "Ромашка",
+      "Пион"
+    ],
+    "price": 1663,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-07-09",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Тюльпан",
+      "Астра",
+      "Гладиолус",
+      "Гладиолус"
+    ],
+    "price": 1048,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-07-23",
+    "bouquetType": "NEW_YEAR",
+    "flowers": [
+      "Гвоздика",
+      "Гладиолус",
+      "Лилия",
+      "Гвоздика",
+      "Гладиолус",
+      "Хризантема",
+      "Роза",
+      "Лаванда",
+      "Роза"
+    ],
+    "price": 3960,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-10-23",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Гвоздика",
+      "Гипсофила",
+      "Ирис",
+      "Ирис",
+      "Астра",
+      "Гортензия",
+      "Роза",
+      "Гвоздика"
+    ],
+    "price": 4565,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-09-12",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Гипсофила",
+      "Лаванда",
+      "Гортензия",
+      "Гипсофила",
+      "Лилия",
+      "Гортензия",
+      "Лилия",
+      "Астра",
+      "Тюльпан"
+    ],
+    "price": 648,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-01-10",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Лилия",
+      "Гвоздика",
+      "Пион",
+      "Гортензия",
+      "Гортензия",
+      "Гортензия"
+    ],
+    "price": 4384,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-06-14",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Ромашка",
+      "Тюльпан",
+      "Гортензия",
+      "Ромашка",
+      "Мимоза",
+      "Гортензия",
+      "Пион",
+      "Астра"
+    ],
+    "price": 2910,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-12-26",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Лаванда",
+      "Гвоздика",
+      "Лилия",
+      "Хризантема",
+      "Гипсофила",
+      "Хризантема",
+      "Мимоза",
+      "Ромашка",
+      "Гипсофила",
+      "Роза",
+      "Гвоздика"
+    ],
+    "price": 4599,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-12-02",
+    "bouquetType": "ROMANTIC",
+    "flowers": [
+      "Гипсофила",
+      "Гладиолус",
+      "Мимоза",
+      "Гладиолус",
+      "Лаванда",
+      "Гипсофила",
+      "Пион",
+      "Ирис",
+      "Хризантема"
+    ],
+    "price": 1673,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-06-14",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Хризантема",
+      "Роза",
+      "Хризантема",
+      "Ирис",
+      "Астра",
+      "Мимоза",
+      "Гладиолус"
+    ],
+    "price": 1719,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-02-12",
+    "bouquetType": "ROMANTIC",
+    "flowers": [
+      "Лилия",
+      "Пион",
+      "Гипсофила",
+      "Лаванда",
+      "Ромашка",
+      "Ирис",
+      "Астра",
+      "Хризантема",
+      "Пион"
+    ],
+    "price": 3250,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-06-07",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Ирис",
+      "Тюльпан",
+      "Тюльпан",
+      "Ирис",
+      "Ирис",
+      "Гипсофила"
+    ],
+    "price": 1771,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-02-09",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Хризантема",
+      "Лилия",
+      "Гладиолус",
+      "Астра",
+      "Лилия",
+      "Тюльпан"
+    ],
+    "price": 3594,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-01-05",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Гипсофила",
+      "Гвоздика",
+      "Мимоза",
+      "Хризантема"
+    ],
+    "price": 1143,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-05-14",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Лилия",
+      "Мимоза",
+      "Пион",
+      "Тюльпан",
+      "Гортензия",
+      "Гвоздика",
+      "Ирис",
+      "Ромашка"
+    ],
+    "price": 1580,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-11-13",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Роза",
+      "Лаванда",
+      "Гвоздика",
+      "Гипсофила"
+    ],
+    "price": 2944,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-12-17",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Хризантема",
+      "Астра",
+      "Пион",
+      "Астра",
+      "Астра",
+      "Пион",
+      "Ирис",
+      "Астра",
+      "Пион"
+    ],
+    "price": 4581,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-06-05",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Лилия",
+      "Лилия",
+      "Гортензия",
+      "Гладиолус",
+      "Мимоза",
+      "Хризантема"
+    ],
+    "price": 921,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-01-01",
+    "bouquetType": "NEW_YEAR",
+    "flowers": [
+      "Лилия",
+      "Лилия",
+      "Пион",
+      "Гортензия"
+    ],
+    "price": 4496,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-06-25",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Ромашка",
+      "Ромашка",
+      "Гипсофила",
+      "Мимоза",
+      "Гладиолус",
+      "Ирис",
+      "Ромашка",
+      "Лаванда",
+      "Ирис",
+      "Хризантема",
+      "Роза"
+    ],
+    "price": 2252,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-09-06",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Ирис",
+      "Гортензия",
+      "Лилия",
+      "Ирис",
+      "Роза",
+      "Хризантема",
+      "Мимоза",
+      "Гвоздика",
+      "Гортензия"
+    ],
+    "price": 2867,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-04-05",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Лаванда",
+      "Гортензия",
+      "Гвоздика",
+      "Роза",
+      "Гортензия",
+      "Ирис",
+      "Лилия",
+      "Роза"
+    ],
+    "price": 4925,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-06-05",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Гвоздика",
+      "Астра",
+      "Роза",
+      "Роза",
+      "Гвоздика",
+      "Ирис",
+      "Астра",
+      "Астра",
+      "Гипсофила"
+    ],
+    "price": 1074,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-11-24",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Астра",
+      "Лаванда",
+      "Гладиолус",
+      "Гортензия"
+    ],
+    "price": 791,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-01-04",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Астра",
+      "Лаванда",
+      "Пион",
+      "Гладиолус",
+      "Гвоздика",
+      "Мимоза",
+      "Гвоздика"
+    ],
+    "price": 1963,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-05-21",
+    "bouquetType": "NEW_YEAR",
+    "flowers": [
+      "Лаванда",
+      "Астра",
+      "Роза",
+      "Гладиолус"
+    ],
+    "price": 3797,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-05-15",
+    "bouquetType": "NEW_YEAR",
+    "flowers": [
+      "Гортензия",
+      "Гортензия",
+      "Гортензия",
+      "Лилия",
+      "Гвоздика",
+      "Гвоздика",
+      "Ромашка"
+    ],
+    "price": 1308,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-11-19",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Гипсофила",
+      "Гортензия",
+      "Гладиолус",
+      "Лаванда",
+      "Лилия",
+      "Гладиолус",
+      "Лилия",
+      "Пион"
+    ],
+    "price": 2649,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-08-20",
+    "bouquetType": "NEW_YEAR",
+    "flowers": [
+      "Астра",
+      "Ирис",
+      "Ирис",
+      "Тюльпан",
+      "Астра",
+      "Ромашка"
+    ],
+    "price": 3822,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-08-24",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Тюльпан",
+      "Мимоза",
+      "Лилия",
+      "Тюльпан",
+      "Лилия",
+      "Пион",
+      "Гипсофила",
+      "Гортензия"
+    ],
+    "price": 1168,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-04-22",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Ирис",
+      "Тюльпан",
+      "Астра"
+    ],
+    "price": 3090,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-01-03",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Пион",
+      "Роза",
+      "Роза",
+      "Гвоздика",
+      "Лаванда",
+      "Гладиолус",
+      "Ромашка",
+      "Ирис",
+      "Хризантема",
+      "Хризантема",
+      "Ирис"
+    ],
+    "price": 4686,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-04-10",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Лилия",
+      "Гортензия",
+      "Лилия",
+      "Мимоза",
+      "Гортензия",
+      "Астра"
+    ],
+    "price": 2480,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-02-21",
+    "bouquetType": "ROMANTIC",
+    "flowers": [
+      "Гладиолус",
+      "Хризантема",
+      "Лаванда",
+      "Гипсофила",
+      "Лаванда",
+      "Хризантема",
+      "Пион",
+      "Ирис",
+      "Гвоздика",
+      "Хризантема",
+      "Ирис"
+    ],
+    "price": 663,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-06-16",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Ирис",
+      "Гладиолус",
+      "Ирис",
+      "Мимоза",
+      "Лаванда",
+      "Лилия",
+      "Лаванда",
+      "Гипсофила",
+      "Лаванда"
+    ],
+    "price": 3300,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-03-14",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Хризантема",
+      "Гортензия",
+      "Астра",
+      "Гипсофила",
+      "Гладиолус",
+      "Роза",
+      "Гвоздика",
+      "Гвоздика",
+      "Астра"
+    ],
+    "price": 1586,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-01-03",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Мимоза",
+      "Гвоздика",
+      "Роза",
+      "Астра",
+      "Роза",
+      "Ирис",
+      "Гвоздика",
+      "Астра",
+      "Гладиолус",
+      "Ромашка"
+    ],
+    "price": 2134,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-07-04",
+    "bouquetType": "NEW_YEAR",
+    "flowers": [
+      "Гладиолус",
+      "Ромашка",
+      "Ромашка",
+      "Гладиолус"
+    ],
+    "price": 1565,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-11-09",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Лилия",
+      "Гвоздика",
+      "Тюльпан"
+    ],
+    "price": 894,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-10-20",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Лаванда",
+      "Ромашка",
+      "Хризантема",
+      "Роза",
+      "Ирис",
+      "Гладиолус"
+    ],
+    "price": 4185,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-10-23",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Хризантема",
+      "Роза",
+      "Хризантема",
+      "Гипсофила",
+      "Тюльпан",
+      "Лилия"
+    ],
+    "price": 1727,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-03-25",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Лилия",
+      "Ирис",
+      "Лаванда",
+      "Лаванда",
+      "Пион",
+      "Гладиолус",
+      "Лилия",
+      "Мимоза",
+      "Роза",
+      "Гвоздика",
+      "Гортензия"
+    ],
+    "price": 1100,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-05-09",
+    "bouquetType": "ROMANTIC",
+    "flowers": [
+      "Пион",
+      "Гладиолус",
+      "Ирис"
+    ],
+    "price": 4794,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-09-02",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Лилия",
+      "Гипсофила",
+      "Пион",
+      "Гипсофила",
+      "Роза",
+      "Ромашка"
+    ],
+    "price": 3447,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-08-08",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Тюльпан",
+      "Лаванда",
+      "Гипсофила",
+      "Пион",
+      "Хризантема",
+      "Ирис",
+      "Гипсофила",
+      "Лилия"
+    ],
+    "price": 812,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-05-27",
+    "bouquetType": "ROMANTIC",
+    "flowers": [
+      "Ромашка",
+      "Гладиолус",
+      "Ирис"
+    ],
+    "price": 696,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-05-26",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Лаванда",
+      "Гладиолус",
+      "Ромашка",
+      "Гладиолус",
+      "Ирис",
+      "Гортензия",
+      "Ирис",
+      "Ромашка",
+      "Мимоза"
+    ],
+    "price": 4945,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-07-15",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Астра",
+      "Хризантема",
+      "Гипсофила",
+      "Лаванда"
+    ],
+    "price": 885,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-09-15",
+    "bouquetType": "ROMANTIC",
+    "flowers": [
+      "Пион",
+      "Гипсофила",
+      "Гвоздика",
+      "Тюльпан",
+      "Хризантема",
+      "Астра",
+      "Пион",
+      "Ромашка",
+      "Гортензия",
+      "Гортензия"
+    ],
+    "price": 1849,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-10-04",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Мимоза",
+      "Гвоздика",
+      "Лаванда",
+      "Гортензия",
+      "Пион",
+      "Гладиолус",
+      "Гвоздика",
+      "Пион",
+      "Мимоза",
+      "Мимоза"
+    ],
+    "price": 3321,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-02-08",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Хризантема",
+      "Лаванда",
+      "Гладиолус",
+      "Ромашка",
+      "Гвоздика",
+      "Гипсофила",
+      "Гвоздика",
+      "Ирис",
+      "Гортензия"
+    ],
+    "price": 1486,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-06-12",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Роза",
+      "Гипсофила",
+      "Пион"
+    ],
+    "price": 609,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-02-11",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Гипсофила",
+      "Гладиолус",
+      "Тюльпан",
+      "Гипсофила",
+      "Гвоздика",
+      "Хризантема",
+      "Лилия",
+      "Астра",
+      "Гортензия",
+      "Ирис"
+    ],
+    "price": 3006,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-02-17",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Гортензия",
+      "Роза",
+      "Ирис",
+      "Гладиолус",
+      "Ромашка"
+    ],
+    "price": 1470,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-12-25",
+    "bouquetType": "NEW_YEAR",
+    "flowers": [
+      "Гипсофила",
+      "Ромашка",
+      "Астра",
+      "Гортензия",
+      "Гортензия",
+      "Гладиолус",
+      "Гортензия",
+      "Ромашка"
+    ],
+    "price": 1867,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-05-12",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Гладиолус",
+      "Гладиолус",
+      "Гипсофила",
+      "Гладиолус",
+      "Тюльпан",
+      "Ирис"
+    ],
+    "price": 1710,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-01-18",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Мимоза",
+      "Лаванда",
+      "Гипсофила",
+      "Лаванда",
+      "Лилия",
+      "Лаванда"
+    ],
+    "price": 2068,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-10-22",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Роза",
+      "Гипсофила",
+      "Пион",
+      "Пион",
+      "Ирис",
+      "Пион",
+      "Лилия",
+      "Хризантема",
+      "Астра",
+      "Ромашка",
+      "Хризантема"
+    ],
+    "price": 1654,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-04-08",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Ромашка",
+      "Ирис",
+      "Гвоздика"
+    ],
+    "price": 2152,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-02-05",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Лилия",
+      "Гортензия",
+      "Тюльпан"
+    ],
+    "price": 3708,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-08-10",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Гладиолус",
+      "Ирис",
+      "Роза",
+      "Пион",
+      "Ромашка",
+      "Гладиолус",
+      "Ирис",
+      "Ирис",
+      "Лаванда",
+      "Роза",
+      "Гипсофила"
+    ],
+    "price": 4569,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-09-06",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Роза",
+      "Гипсофила",
+      "Гипсофила",
+      "Хризантема",
+      "Пион",
+      "Гипсофила",
+      "Гортензия",
+      "Астра",
+      "Гладиолус"
+    ],
+    "price": 618,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-07-25",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Ирис",
+      "Лилия",
+      "Гвоздика"
+    ],
+    "price": 3951,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-05-21",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Лаванда",
+      "Гортензия",
+      "Хризантема",
+      "Лилия",
+      "Гвоздика",
+      "Лилия",
+      "Лаванда",
+      "Лаванда",
+      "Мимоза"
+    ],
+    "price": 4397,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-05-23",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Гладиолус",
+      "Тюльпан",
+      "Лилия"
+    ],
+    "price": 751,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-11-24",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Гладиолус",
+      "Пион",
+      "Ромашка",
+      "Ирис"
+    ],
+    "price": 4679,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-09-27",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Астра",
+      "Мимоза",
+      "Лаванда",
+      "Мимоза"
+    ],
+    "price": 4618,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-03-10",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Хризантема",
+      "Гортензия",
+      "Роза",
+      "Гвоздика",
+      "Гипсофила",
+      "Лилия",
+      "Гипсофила",
+      "Гортензия",
+      "Мимоза",
+      "Ирис"
+    ],
+    "price": 1281,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-10-02",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Гвоздика",
+      "Лаванда",
+      "Гипсофила",
+      "Пион",
+      "Ромашка",
+      "Пион",
+      "Ромашка",
+      "Хризантема",
+      "Лилия"
+    ],
+    "price": 1230,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-09-05",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Гвоздика",
+      "Гладиолус",
+      "Ирис",
+      "Гладиолус",
+      "Астра",
+      "Гипсофила",
+      "Гладиолус",
+      "Ирис"
+    ],
+    "price": 719,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-12-27",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Гладиолус",
+      "Гвоздика",
+      "Лилия",
+      "Ромашка",
+      "Гладиолус",
+      "Гортензия",
+      "Ромашка",
+      "Роза",
+      "Мимоза",
+      "Гипсофила",
+      "Тюльпан"
+    ],
+    "price": 2077,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-01-22",
+    "bouquetType": "NEW_YEAR",
+    "flowers": [
+      "Лаванда",
+      "Хризантема",
+      "Гортензия",
+      "Гладиолус",
+      "Лилия"
+    ],
+    "price": 4687,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-11-08",
+    "bouquetType": "ROMANTIC",
+    "flowers": [
+      "Лаванда",
+      "Ромашка",
+      "Лаванда"
+    ],
+    "price": 1267,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-06-13",
+    "bouquetType": "NEW_YEAR",
+    "flowers": [
+      "Астра",
+      "Гладиолус",
+      "Тюльпан"
+    ],
+    "price": 4982,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-06-18",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Мимоза",
+      "Мимоза",
+      "Лаванда",
+      "Гортензия"
+    ],
+    "price": 4155,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-12-10",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Ромашка",
+      "Гладиолус",
+      "Гладиолус",
+      "Астра",
+      "Лилия",
+      "Гортензия"
+    ],
+    "price": 1207,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-04-21",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Тюльпан",
+      "Роза",
+      "Роза"
+    ],
+    "price": 1011,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-03-12",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Лаванда",
+      "Пион",
+      "Роза",
+      "Тюльпан",
+      "Астра",
+      "Астра",
+      "Астра",
+      "Гипсофила",
+      "Астра",
+      "Ромашка"
+    ],
+    "price": 4183,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2022-11-19",
+    "bouquetType": "NEW_YEAR",
+    "flowers": [
+      "Ирис",
+      "Мимоза",
+      "Тюльпан",
+      "Ирис",
+      "Гипсофила",
+      "Астра",
+      "Пион"
+    ],
+    "price": 3097,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-11-09",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Ирис",
+      "Гвоздика",
+      "Гладиолус",
+      "Тюльпан",
+      "Гипсофила",
+      "Лаванда",
+      "Ирис",
+      "Пион"
+    ],
+    "price": 1209,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-07-21",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Ромашка",
+      "Роза",
+      "Мимоза",
+      "Астра",
+      "Лаванда"
+    ],
+    "price": 1655,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-01-07",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Гортензия",
+      "Астра",
+      "Роза",
+      "Роза"
+    ],
+    "price": 1843,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-05-02",
+    "bouquetType": "BOX",
+    "flowers": [
+      "Ромашка",
+      "Гладиолус",
+      "Гипсофила"
+    ],
+    "price": 1928,
+    "receivingType": "DELIVERY"
+  },
+  {
+    "datePurchase": "2023-07-26",
+    "bouquetType": "BUSINESS",
+    "flowers": [
+      "Ромашка",
+      "Гортензия",
+      "Ромашка",
+      "Гвоздика",
+      "Мимоза",
+      "Гипсофила"
+    ],
+    "price": 3956,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2022-01-26",
+    "bouquetType": "JUBILEE",
+    "flowers": [
+      "Мимоза",
+      "Ромашка",
+      "Пион",
+      "Гвоздика",
+      "Роза",
+      "Гортензия",
+      "Мимоза",
+      "Тюльпан"
+    ],
+    "price": 1091,
+    "receivingType": "MANUALLY"
+  },
+  {
+    "datePurchase": "2023-04-19",
+    "bouquetType": "WEDDING",
+    "flowers": [
+      "Пион",
+      "Гладиолус",
+      "Хризантема",
+      "Тюльпан",
+      "Лаванда",
+      "Ирис"
+    ],
+    "price": 4388,
+    "receivingType": "MANUALLY"
+  }
+]
