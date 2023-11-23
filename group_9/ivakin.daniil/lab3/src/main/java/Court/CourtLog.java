@@ -14,30 +14,29 @@ public class CourtLog {
 
     public CourtLog(Supplier<Collection<Lawsuit>> collectionSupplier,
                     Collection<Lawsuit> collection) {
-        this.lawsuits = collection.stream().
-                collect(collectionSupplier, Collection::add,
-                        Collection::addAll);
+        this.lawsuits = collectionSupplier.get();
+        this.lawsuits.addAll(collection);
     }
 
     public Collection<Lawsuit> getLawsuits() {
         return lawsuits;
     }
 
-    public int getUnsuitedPeopleCount() {
+    public long getUnsuitedPeopleCount() {
         Collection<String> suitedPeople = lawsuits.stream()
                 .filter(Lawsuit::isSuited)
                 .map(Lawsuit::getDefendantName)
                 .distinct()
-                .collect(Collectors.toList());
+                .toList();
 
         Collection<String> allPeople = lawsuits.stream()
                 .flatMap(lawsuit -> Stream.of(lawsuit.getSuiterName(), lawsuit.getDefendantName()))
                 .distinct()
-                .collect(Collectors.toList());
+                .toList();
 
-        allPeople.removeAll(suitedPeople);
-
-        return allPeople.size();
+        return allPeople.stream()
+                .filter(name -> !suitedPeople.contains(name))
+                .count();
     }
 
     public Collection<String> getPeopleWithSeveralClausesInTenYears() {
@@ -82,7 +81,7 @@ public class CourtLog {
                 .stream()
                 .filter(entry -> entry.getValue() > 1)
                 .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public Collection<String> getPeopleWithSeveralSuitsInThreeYears() {
@@ -94,6 +93,6 @@ public class CourtLog {
                 .stream()
                 .filter(entry -> entry.getValue() > 1)
                 .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

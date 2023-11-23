@@ -5,16 +5,18 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LawsuitListFactory {
-    private LawsuitFactory lawsuitFactory;
-    private int count;
+    private static int count;
 
-    public LawsuitListFactory(int count) {
-        lawsuitFactory = new LawsuitFactory();
-        this.count = count;
+    static {
+        count = 6490;
     }
 
-    public List<Lawsuit> getLawsuitList() {
-        return Stream.generate(lawsuitFactory::getLawsuit)
+    public static void setCount(int count) {
+        LawsuitListFactory.count = count;
+    }
+
+    public static List<Lawsuit> getLawsuitList() {
+        return Stream.generate(LawsuitFactory::getLawsuit)
                 .limit(count)
                 .collect(Collectors.toList());
     }

@@ -8,23 +8,15 @@ import java.util.Collection;
 import java.util.function.Supplier;
 
 public class PerformanceTester {
-    private static int lawsuitCount;
     private static int testAmount;
-    private static LawsuitListFactory factory;
     private CourtLog log;
 
     static {
-        factory = new LawsuitListFactory(lawsuitCount);
-        lawsuitCount = 6490;
         testAmount = 10;
     }
 
     public static void setTestAmount(int testAmount) {
         PerformanceTester.testAmount = testAmount;
-    }
-
-    public static void setLawsuitCount(int lawsuitCount) {
-        PerformanceTester.lawsuitCount = lawsuitCount;
     }
 
     public TimeMeasurement testCollection(Supplier<Collection<Lawsuit>> supplier) {
@@ -34,7 +26,7 @@ public class PerformanceTester {
         long peopleWithSuitsInThreeYearsEXTime = 0;
 
         for (int i = 0; i < testAmount; i++) {
-            creationTime += getMethodExecutionTime(() -> log = new CourtLog(supplier, factory.getLawsuitList()));
+            creationTime += getMethodExecutionTime(() -> log = new CourtLog(supplier, LawsuitListFactory.getLawsuitList()));
             unsuitedPeopleCountExTime += getMethodExecutionTime(log::getUnsuitedPeopleCount);
             peopleWithClausesInTenYearsExTime += getMethodExecutionTime(log::getPeopleWithSeveralClausesInTenYears);
             peopleWithSuitsInThreeYearsEXTime += getMethodExecutionTime(log::getPeopleWithSeveralSuitsInThreeYears);

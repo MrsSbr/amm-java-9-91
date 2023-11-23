@@ -1,6 +1,9 @@
 import Court.CourtLog;
 import Court.Lawsuit;
-import org.junit.jupiter.api.Test;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -12,6 +15,7 @@ import java.util.LinkedList;
 import java.util.Vector;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,7 +26,7 @@ public class CourtLogTest {
     public static final List<Lawsuit> LAWSUITS;
     public static final List<String> UNSUITED_PEOPLE;
 
-    public static final int UNSUITED_PEOPLE_COUNT;
+    public static final long UNSUITED_PEOPLE_COUNT;
     public static final List<String> PEOPLE_WITH_SEVERAL_CLAUSES_IN_TEN_YEARS;
     public static final List<String> PEOPLE_WITH_SEVERAL_SUITS_IN_THREE_YEARS;
 
@@ -85,60 +89,65 @@ public class CourtLogTest {
         );
     }
 
-    @Test
-    void getUnsuitedPeopleCount() {
-        COLLECTIONS.stream()
-                .map(collection -> new CourtLog(collection, LAWSUITS))
-                .map(CourtLog::getUnsuitedPeopleCount)
-
-                .forEach(result -> assertEquals(UNSUITED_PEOPLE_COUNT, result));
+    static Stream<Arguments> getCollections() {
+        return Stream.of(
+                Arguments.of(COLLECTIONS.get(0)),
+                Arguments.of(COLLECTIONS.get(1)),
+                Arguments.of(COLLECTIONS.get(2)),
+                Arguments.of(COLLECTIONS.get(3)),
+                Arguments.of(COLLECTIONS.get(4))
+        );
     }
 
-    @Test
-    void getUnsuitedPeopleCountInEmptyCollection() {
-        COLLECTIONS.stream()
-                .map(collection -> new CourtLog(collection, EMPTY_LAWSUITS))
-                .map(CourtLog::getUnsuitedPeopleCount)
-                .forEach(result -> assertEquals(0, result));
+    @ParameterizedTest
+    @MethodSource("getCollections")
+    void getUnsuitedPeopleCount(Supplier<Collection<Lawsuit>> supplier) {
+        CourtLog log = new CourtLog(supplier, LAWSUITS);
+        long result = log.getUnsuitedPeopleCount();
+        assertEquals(UNSUITED_PEOPLE_COUNT, result);
     }
 
-    @Test
-    void getPeopleWithClausesInTenYears() {
-        COLLECTIONS.stream()
-                .map(collection -> new CourtLog(collection, LAWSUITS))
-                .map(CourtLog::getPeopleWithSeveralClausesInTenYears)
-                .map(ArrayList::new)
-                .forEach(result -> assertTrue(PEOPLE_WITH_SEVERAL_CLAUSES_IN_TEN_YEARS.size() == result.size() &&
-                        PEOPLE_WITH_SEVERAL_CLAUSES_IN_TEN_YEARS.containsAll(result) &&
-                        result.containsAll(PEOPLE_WITH_SEVERAL_CLAUSES_IN_TEN_YEARS)));
+    @ParameterizedTest
+    @MethodSource("getCollections")
+    void getUnsuitedPeopleCountInEmptyCollection(Supplier<Collection<Lawsuit>> supplier) {
+        CourtLog log = new CourtLog(supplier, EMPTY_LAWSUITS);
+        long result = log.getUnsuitedPeopleCount();
+        assertEquals(0, result);
     }
 
-    @Test
-    void getPeopleWithClausesInTenYearsInEmptyCollection() {
-        COLLECTIONS.stream()
-                .map(collection -> new CourtLog(collection, EMPTY_LAWSUITS))
-                .map(CourtLog::getPeopleWithSeveralClausesInTenYears)
-                .map(ArrayList::new)
-                .forEach(result -> assertEquals(Collections.emptyList(), result));
+    @ParameterizedTest
+    @MethodSource("getCollections")
+    void getPeopleWithClausesInTenYears(Supplier<Collection<Lawsuit>> supplier) {
+        CourtLog log = new CourtLog(supplier, LAWSUITS);
+        Collection<String> result = log.getPeopleWithSeveralClausesInTenYears();
+        assertTrue(PEOPLE_WITH_SEVERAL_CLAUSES_IN_TEN_YEARS.size() == result.size() &&
+                PEOPLE_WITH_SEVERAL_CLAUSES_IN_TEN_YEARS.containsAll(result) &&
+                result.containsAll(PEOPLE_WITH_SEVERAL_CLAUSES_IN_TEN_YEARS));
     }
 
-    @Test
-    void getPeopleWithSuitsInThreeYears() {
-        COLLECTIONS.stream()
-                .map(collection -> new CourtLog(collection, LAWSUITS))
-                .map(CourtLog::getPeopleWithSeveralSuitsInThreeYears)
-                .map(ArrayList::new)
-                .forEach(result -> assertTrue(PEOPLE_WITH_SEVERAL_SUITS_IN_THREE_YEARS.size() == result.size() &&
-                        PEOPLE_WITH_SEVERAL_SUITS_IN_THREE_YEARS.containsAll(result) &&
-                        result.containsAll(PEOPLE_WITH_SEVERAL_SUITS_IN_THREE_YEARS)));
+    @ParameterizedTest
+    @MethodSource("getCollections")
+    void getPeopleWithClausesInTenYearsInEmptyCollection(Supplier<Collection<Lawsuit>> supplier) {
+        CourtLog log = new CourtLog(supplier, EMPTY_LAWSUITS);
+        Collection<String> result = log.getPeopleWithSeveralClausesInTenYears();
+        assertEquals(Collections.emptyList(), result);
     }
 
-    @Test
-    void getPeopleWithSuitsInThreeYearsInEmptyCollection() {
-        COLLECTIONS.stream()
-                .map(collection -> new CourtLog(collection, EMPTY_LAWSUITS))
-                .map(CourtLog::getPeopleWithSeveralSuitsInThreeYears)
-                .map(ArrayList::new)
-                .forEach(result -> assertEquals(Collections.emptyList(), result));
+    @ParameterizedTest
+    @MethodSource("getCollections")
+    void getPeopleWithSuitsInThreeYears(Supplier<Collection<Lawsuit>> supplier) {
+        CourtLog log = new CourtLog(supplier, LAWSUITS);
+        Collection<String> result = log.getPeopleWithSeveralSuitsInThreeYears();
+        assertTrue(PEOPLE_WITH_SEVERAL_SUITS_IN_THREE_YEARS.size() == result.size() &&
+                PEOPLE_WITH_SEVERAL_SUITS_IN_THREE_YEARS.containsAll(result) &&
+                result.containsAll(PEOPLE_WITH_SEVERAL_SUITS_IN_THREE_YEARS));
+    }
+
+    @ParameterizedTest
+    @MethodSource("getCollections")
+    void getPeopleWithSuitsInThreeYearsInEmptyCollection(Supplier<Collection<Lawsuit>> supplier) {
+        CourtLog log = new CourtLog(supplier, EMPTY_LAWSUITS);
+        Collection<String> result = log.getPeopleWithSeveralSuitsInThreeYears();
+        assertEquals(Collections.emptyList(), result);
     }
 }

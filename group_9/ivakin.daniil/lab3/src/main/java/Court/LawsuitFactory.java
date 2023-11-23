@@ -37,7 +37,7 @@ public class LawsuitFactory {
         return LocalDate.ofEpochDay(randomDay);
     }
 
-    public Lawsuit getLawsuit() {
+    public static Lawsuit getLawsuit() {
         Random rand = new Random();
         return new Lawsuit(NAMES.get(rand.nextInt(NAMES.size())),
                 NAMES.get(rand.nextInt(NAMES.size())),
