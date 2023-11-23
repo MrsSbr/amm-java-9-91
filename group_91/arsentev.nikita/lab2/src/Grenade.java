@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Grenade extends Consumables {
     private final String type;
 
@@ -16,12 +18,32 @@ public class Grenade extends Consumables {
     }
 
     @Override
+    public String getAddInfo() {
+        return "Type: " + type;
+    }
+
+    @Override
     public String toString() {
         return super.toString() + ", Type: " + type;
     }
 
     @Override
-    public String getAddInfo() {
-        return "Type: " + type;
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        Grenade grenade = (Grenade) o;
+        return Objects.equals(getType(), grenade.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getType());
     }
 }

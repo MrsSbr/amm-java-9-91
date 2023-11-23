@@ -1,6 +1,6 @@
 public class AmmunitionTask {
     public static void task() {
-        Consumables bullet1 = new Bullet("9mm", 100, 9);
+        Consumables bullet1 = new Bullet("9mm", 300, 9);
         Consumables grenade1 = new Grenade("Fragmentation", 50, "Explosive");
         Consumables bullet2 = new Bullet("17mm", 200, 10);
         Consumables grenade2 = new Grenade("Fragmentation", 70, "Explosive");

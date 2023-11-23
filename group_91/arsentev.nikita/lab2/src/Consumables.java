@@ -17,6 +17,8 @@ public abstract class Consumables implements Ammunition {
         return quantity;
     }
 
+    public abstract String getAddInfo();
+
     @Override
     public String toString() {
         return "Name: " + name + ", Quantity: " + quantity;
@@ -38,6 +40,4 @@ public abstract class Consumables implements Ammunition {
     public int hashCode() {
         return Objects.hash(name, quantity);
     }
-
-    public abstract String getAddInfo();
 }

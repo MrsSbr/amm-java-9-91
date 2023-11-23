@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Bullet extends Consumables {
     private final int caliber;
 
@@ -16,12 +18,32 @@ public class Bullet extends Consumables {
     }
 
     @Override
+    public String getAddInfo() {
+        return "Caliber: " + caliber;
+    }
+
+    @Override
     public String toString() {
         return super.toString() + ", Caliber: " + caliber;
     }
 
     @Override
-    public String getAddInfo() {
-        return "Caliber: " + caliber;
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        Bullet bullet = (Bullet) o;
+        return getCaliber() == bullet.getCaliber();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), caliber);
     }
 }
