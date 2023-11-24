@@ -23,11 +23,16 @@ public class ContainerAnalysis {
     private static void performanceCheck(String collectionType, Collection<Part> collection) {
         ProductionInfo productionInfo = new ProductionInfo(collection);
 
-        long startTime = System.nanoTime();
-        productionInfo.getPartTypeCount(PartType.ELECTRICAL_PART);
-        productionInfo.getUniqueParts();
-        long endTime = System.nanoTime();
-        System.out.println(collectionType + ": " + (endTime - startTime) / 1e9 + "s");
+        final int countTest = 100;
+        long totalTime = 0;
+        for (int i = 0; i < countTest; ++i) {
+            long startTime = System.nanoTime();
+            productionInfo.getPartTypeCount(PartType.ELECTRICAL_PART);
+            productionInfo.getUniqueParts();
+            long endTime = System.nanoTime();
+            totalTime += endTime - startTime;
+        }
+        System.out.println(collectionType + ": " + totalTime / (countTest * 1e9)  + "s");
     }
 
     public static <T extends Collection<Part>> T createCollection(Supplier<T> factory, int size) {
