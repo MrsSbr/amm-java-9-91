@@ -6,7 +6,7 @@ import java.util.List;
 public class OrderBuilder {
     private LocalDate datePurchase;
     private BouquetType bouquetType;
-    private List<String> flowers;
+    private List<FlowersType> flowers;
     private int price;
     private ReceivingType receivingType;
     public OrderBuilder setDatePurchase(LocalDate datePurchase) {
@@ -17,7 +17,7 @@ public class OrderBuilder {
         this.bouquetType = bouquetType;
         return this;
     }
-    public OrderBuilder setFlowers(List<String> flowers) {
+    public OrderBuilder setFlowers(List<FlowersType> flowers) {
         this.flowers = flowers;
         return this;
     }

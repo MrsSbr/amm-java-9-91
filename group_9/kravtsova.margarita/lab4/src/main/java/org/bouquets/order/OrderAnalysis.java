@@ -2,23 +2,30 @@ package org.bouquets.order;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.*;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
+
 public class OrderAnalysis {
-    private Collection<Order> orders;
-    public OrderAnalysis(Collection<Order> orders) {
+    private List<Order> orders;
+    public OrderAnalysis(List<Order> orders) {
         this.orders = orders;
     }
     public Collection<Order> getOrders() {
         return orders;
     }
-    public void setOrders(Collection<Order> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
-    public List<Month> monthMostDiverseFlowers() {                                          //найти месяцы в которые заказывают букеты, состоящие из наиболее разнообразных цветов
-       Map<Month, Set<String>> monthWithFlowers = new HashMap<>();
+    public List<Month> monthMostDiverseFlowers() {                                         //найти месяцы в которые заказывают букеты, состоящие из наиболее разнообразных цветов
+       Map<Month, Set<FlowersType>> monthWithFlowers = new HashMap<>();
        for(Month month : Month.values()) {
-           monthWithFlowers.put(month, new HashSet<String>(0));
+           monthWithFlowers.put(month, new HashSet<>());
        }
        orders.forEach(order -> order.getFlowers().forEach(flower -> monthWithFlowers.get(order.getDatePurchase().getMonth())
                                                                                     .add(flower)));
@@ -31,7 +38,7 @@ public class OrderAnalysis {
                                          .map(Map.Entry::getKey)
                                          .collect(Collectors.toList());
     }
-    public Map<BouquetType,Integer> floristEarnings() {                             //найти сколько заработал флорист по каждому типу букетов за последний год
+    public Map<BouquetType,Integer> floristEarnings() {                                  //найти сколько заработал флорист по каждому типу букетов за последний год
         Map<BouquetType,Integer> earnings = new HashMap<>();
         LocalDate date = LocalDate.now().minusYears(1);
         orders.stream()
@@ -39,8 +46,8 @@ public class OrderAnalysis {
               .forEach(order -> earnings.merge(order.getBouquetType(), order.getPrice(), Integer::sum));
         return earnings;
     }
-    public Map<String, ReceivingType> receivingFlowers() {                           //для каждого цветка узнать его чаще доставляют (1) или забирают самовывозом (-1)
-        Map<String,Integer> receiving = new HashMap<>();
+    public Map<FlowersType, ReceivingType> receivingFlowers() {                           //для каждого цветка узнать его чаще доставляют (1) или забирают самовывозом (-1)
+        Map<FlowersType,Integer> receiving = new HashMap<>();
         orders.forEach(order -> order.getFlowers().forEach(flower -> receiving.merge(flower,
                                                             order.getReceivingType().equals(ReceivingType.DELIVERY) ? 1 : -1, Integer::sum)));
         return receiving.entrySet().stream()

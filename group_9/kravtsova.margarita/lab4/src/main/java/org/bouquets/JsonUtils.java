@@ -8,7 +8,6 @@ import org.bouquets.localdate.LocalDateDeserializer;
 import org.bouquets.localdate.LocalDateSerializer;
 import org.bouquets.order.Order;
 
-
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Path;
@@ -19,23 +18,24 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class JsonUtils {
-    private static final Logger logger = Logger.getLogger(JsonUtils.class.getName());
-    public static File createJsonFile(Collection<Order> orders, Path filePath) throws IOException {
-        Gson gson = new GsonBuilder()
-                        .setPrettyPrinting()
-                        .registerTypeAdapter(LocalDate.class, new LocalDateSerializer())
-                        .create();
+    private final Logger logger = Logger.getLogger(JsonUtils.class.getName());
+    public File createJsonFile(Collection<Order> orders, Path filePath) throws IOException {
+        Gson gson = new GsonBuilder().setPrettyPrinting()
+                                     .registerTypeAdapter(LocalDate.class, new LocalDateSerializer())
+                                     .create();
         String jsonString = gson.toJson(orders);
         File fileJson = filePath.toFile();
-        FileWriter writer = new FileWriter(fileJson);
-        logger.log(Level.INFO,"File writing begin");
-        writer.write(jsonString);
-        logger.log(Level.INFO,"File written");
-        writer.close();
+        try (FileWriter writer = new FileWriter(fileJson)) {
+            logger.log(Level.INFO, "File writing begin");
+            writer.write(jsonString);
+            logger.log(Level.INFO, "File written");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
         logger.log(Level.INFO,"File close");
         return fileJson;
     }
-    public static List<Order> readJsonFile(Path filePath) {
+    public List<Order> readJsonFile(Path filePath) {
         File fileJson = filePath.toFile();
         Gson gson = new GsonBuilder().setPrettyPrinting()
                                      .registerTypeAdapter(LocalDate.class, new LocalDateDeserializer())

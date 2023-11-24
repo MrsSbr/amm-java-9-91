@@ -13,10 +13,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WorkingWithBouquets {
-    public static void main(String[] args)  {
-        File fileJson = createJsonFile(Stream.generate(OrderFactory::createOrder)
+    private static final JsonUtils utils = new JsonUtils();
+    public static void main(String[] args) {
+        OrderFactory orderFactory = new OrderFactory();
+        File fileJson = createJsonFile(Stream.generate(orderFactory::createOrder)
                                              .limit(100)
-                                             .collect(Collectors.toList()),"jsonchick.json");
+                                             .collect(Collectors.toList()), "orders.json");
         List<Order> orders = readJsonFile(fileJson.getName());
         System.out.println(orders + "\n");
         OrderAnalysis orderAnalysis = new OrderAnalysis(orders);
@@ -32,7 +34,7 @@ public class WorkingWithBouquets {
                                             .getContextClassLoader()
                                             .getResource(fileName)
                                             .toURI());
-            return JsonUtils.readJsonFile(filePath);
+            return utils.readJsonFile(filePath);
         } catch (NullPointerException ex) {
             System.out.println(ex.getMessage());
         } catch (URISyntaxException ex) {
@@ -46,7 +48,7 @@ public class WorkingWithBouquets {
                                             .getContextClassLoader()
                                             .getResource(fileName)
                                             .toURI());
-            return JsonUtils.createJsonFile(orders, filePath);
+            return utils.createJsonFile(orders, filePath);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

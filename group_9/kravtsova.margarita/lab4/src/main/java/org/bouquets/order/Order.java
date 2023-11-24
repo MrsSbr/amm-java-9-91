@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Order {
-    private LocalDate datePurchase;
-    private BouquetType bouquetType;
-    private List<String> flowers;
-    private int price;
-    private ReceivingType receivingType;
-    public Order(LocalDate datePurchase, BouquetType bouquetType, List<String> flowers, int price, ReceivingType receivingType) {
+    private final LocalDate datePurchase;
+    private final BouquetType bouquetType;
+    private final List<FlowersType> flowers;
+    private final int price;
+    private final ReceivingType receivingType;
+    public Order(LocalDate datePurchase, BouquetType bouquetType, List<FlowersType> flowers, int price, ReceivingType receivingType) {
         this.datePurchase = datePurchase;
         this.bouquetType = bouquetType;
         this.flowers = flowers;
@@ -22,7 +22,7 @@ public class Order {
     public BouquetType getBouquetType() {
         return bouquetType;
     }
-    public List<String> getFlowers() {
+    public List<FlowersType> getFlowers() {
         return flowers;
     }
     public int getPrice() {
@@ -30,21 +30,6 @@ public class Order {
     }
     public ReceivingType getReceivingType() {
         return receivingType;
-    }
-    public void setDatePurchase(LocalDate datePurchase) {
-        this.datePurchase = datePurchase;
-    }
-    public void setBouquetType(BouquetType bouquetType) {
-        this.bouquetType = bouquetType;
-    }
-    public void setFlowers(List<String> flowers) {
-        this.flowers = flowers;
-    }
-    public void setPrice(int price) {
-        this.price = price;
-    }
-    public void setReceivingType(ReceivingType receivingType) {
-        this.receivingType = receivingType;
     }
     @Override
     public boolean equals(Object object) {
