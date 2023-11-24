@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,7 +21,7 @@ class FightStatisticianTest {
             new FightResult(4, LocalDate.of(1999, 1, 18), "Scorpion", "Shang Tsung", false, true),
             new FightResult(5, LocalDate.of(2022, 5, 22), "Liu Kang", "Jade", false, false)
     );
-    final static List<Month> MONTHS = List.of(Month.AUGUST, Month.JANUARY);
+    final static Set<Month> MONTHS = Set.of(Month.AUGUST, Month.JANUARY);
     final static Map<String, Integer> FIGHTERS_VICTORIES = Map.of(
             "Liu Kang", 1,
             "Smoke", 1,
@@ -36,26 +33,25 @@ class FightStatisticianTest {
             "Johnny Cage", 1
     );
 
-    final static Map<Integer, Collection<String>> TOURNAMENTS_FIGHTERS = Map.of(
-            1, List.of("Liu Kang", "Smoke", "Sub-Zero", "Sonya Blade"),
-            2, List.of("Sub-Zero", "Scorpion", "Shang Tsung"),
-            3, List.of("Sub-Zero", "Johnny Cage"),
-            4, List.of("Liu Kang", "Kano", "Scorpion", "Shang Tsung"),
-            5, List.of("Liu Kang", "Jade")
+    final static Map<Integer, Set<String>> TOURNAMENTS_FIGHTERS = Map.of(
+            1, Set.of("Liu Kang", "Smoke", "Sub-Zero", "Sonya Blade"),
+            2, Set.of("Sub-Zero", "Scorpion", "Shang Tsung"),
+            3, Set.of("Sub-Zero", "Johnny Cage"),
+            4, Set.of("Liu Kang", "Kano", "Scorpion", "Shang Tsung"),
+            5, Set.of("Liu Kang", "Jade")
     );
 
     @Test
     void getMonthsWithMostFatalitiesCountOverPastThreeYears() {
         FightStatistician statistician = new FightStatistician(RESULTS);
-        Collection<Month> months = statistician.getMonthsWithMostFatalitiesCountOverPastThreeYears();
-        assertEquals(MONTHS.size(), months.size());
-        assertTrue(MONTHS.containsAll(months));
+        Set<Month> months = statistician.getMonthsWithMostFatalitiesCountOverPastThreeYears();
+        assertEquals(MONTHS, months);
     }
 
     @Test
     void getMonthsWithMostFatalitiesCountOverPastThreeYearsInEmptyCollection() {
         FightStatistician statistician = new FightStatistician(Collections.emptyList());
-        Collection<Month> months = statistician.getMonthsWithMostFatalitiesCountOverPastThreeYears();
+        Set<Month> months = statistician.getMonthsWithMostFatalitiesCountOverPastThreeYears();
         assertTrue(months.isEmpty());
     }
 
@@ -80,20 +76,19 @@ class FightStatisticianTest {
     @Test
     void getTournamentsFighters() {
         FightStatistician statistician = new FightStatistician(RESULTS);
-        Map<Integer, Collection<String>> fighters = statistician.getTournamentsFighters();
+        Map<Integer, Set<String>> fighters = statistician.getTournamentsFighters();
         assertEquals(TOURNAMENTS_FIGHTERS.size(), fighters.size());
         TOURNAMENTS_FIGHTERS.forEach((key, expectedCollection) -> {
             assertTrue(fighters.containsKey(key));
             Collection<String> actualCollection = fighters.get(key);
-            assertEquals(expectedCollection.size(), actualCollection.size());
-            assertTrue(actualCollection.containsAll(expectedCollection));
+            assertEquals(expectedCollection, actualCollection);
         });
     }
 
     @Test
     void getTournamentsFightersInEmptyCollection() {
         FightStatistician statistician = new FightStatistician(Collections.emptyList());
-        Map<Integer, Collection<String>> fighters = statistician.getTournamentsFighters();
+        Map<Integer, Set<String>> fighters = statistician.getTournamentsFighters();
         assertTrue(fighters.isEmpty());
     }
 }

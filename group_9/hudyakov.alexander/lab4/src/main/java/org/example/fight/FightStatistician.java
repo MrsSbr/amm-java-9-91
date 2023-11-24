@@ -2,20 +2,18 @@ package org.example.fight;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FightStatistician {
-    private final Collection<FightResult> fightResults;
+    private final List<FightResult> fightResults;
 
     public FightStatistician(Collection<FightResult> fightResults) {
         this.fightResults = new ArrayList<>(fightResults);
     }
 
-    public Collection<Month> getMonthsWithMostFatalitiesCountOverPastThreeYears() {
+    public Set<Month> getMonthsWithMostFatalitiesCountOverPastThreeYears() {
         LocalDate minimumDate = LocalDate.now().minusYears(3);
 
         Map<Month, Integer> monthMap = fightResults.stream()
@@ -29,7 +27,7 @@ public class FightStatistician {
         return monthMap.entrySet().stream()
                 .filter(x -> x.getValue().equals(max))
                 .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     public Map<String, Integer> getFightersVictoryCount() {
@@ -37,17 +35,17 @@ public class FightStatistician {
                 .collect(Collectors.toMap(x -> x.firstWon() ? x.firstFighter() : x.secondFighter(), x -> 1, Integer::sum));
     }
 
-    public Map<Integer, Collection<String>> getTournamentsFighters() {
+    public Map<Integer, Set<String>> getTournamentsFighters() {
         return fightResults.stream()
                 .collect(Collectors.groupingBy(FightResult::tournamentNumber))
                 .entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey,
-                        e -> e.getValue().stream()
+                        numberFightResultPair -> numberFightResultPair.getValue().stream()
                                 .flatMap(x -> Stream.of(x.firstFighter(), x.secondFighter()))
                                 .collect(Collectors.toSet()),
-                        (e, r) -> {
-                            e.addAll(r);
-                            return e;
+                        (existingFighters, newFighters) -> {
+                            existingFighters.addAll(newFighters);
+                            return existingFighters;
                         })
                 );
     }
