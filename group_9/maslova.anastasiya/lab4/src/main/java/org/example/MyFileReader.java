@@ -15,7 +15,7 @@ public class MyFileReader {
 
     private static final Logger logger = LogManager.getLogger(MyFileReader.class);
 
-    public static List<Order> readOrdersFromFile(Path path) {
+    public List<Order> readOrdersFromFile(Path path) {
         logger.info("Начало чтения заказов из файла.");
         List<Order> orders;
 

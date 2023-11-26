@@ -11,13 +11,14 @@ public class Confectionery {
 
     private static final Logger logger = LogManager.getLogger(Confectionery.class);
     private static final Path PATH = Path.of("maslova.anastasiya/lab4/src/main/resources/orders.txt");
-
     private final ConfectioneryService confectioneryService;
+    private final List<Order> orderList;
 
     public Confectionery() {
         logger.info("Создание Confectionery.");
-        List<Order> orderList = MyFileReader.readOrdersFromFile(PATH);
-        confectioneryService = new ConfectioneryService(orderList);
+        MyFileReader myFileReader = new MyFileReader();
+        orderList = myFileReader.readOrdersFromFile(PATH);
+        confectioneryService = new ConfectioneryServiceImpl();
         logger.info("Confectionery создана.");
     }
 
@@ -30,14 +31,14 @@ public class Confectionery {
 
     public void printTheLeastProfitableMonth() {
         logger.info("Вызов printTheLeastProfitableMonth.");
-        YearMonth res = confectioneryService.theLeastProfitableMonth();
+        YearMonth res = confectioneryService.theLeastProfitableMonth(orderList);
         System.out.println("Самый неприбыльный месяц —— " + res.getMonth() + " в " + res.getYear() + " году");
     }
 
     public void printTheHeaviestCakeInEveryMonthOfThisYear() {
         logger.info("Вызов printTheHeaviestCakeInEveryMonthOfThisYear.");
         System.out.println("Самый тяжелый торт для каждого месяца в " + YearMonth.now().getYear() + " году:");
-        confectioneryService.theHeaviestCakeInEveryMonthOfThisYear()
+        confectioneryService.theHeaviestCakeInEveryMonthOfThisYear(orderList)
                 .forEach(
                         (key, value) -> System.out.println("Месяц: " + key.getMonth() + "\n" + value.toString())
                 );
@@ -46,7 +47,7 @@ public class Confectionery {
     public void printOrdersByMonth() {
         logger.info("Вызов printOrdersByMonth.");
         System.out.println("Список заказов по месяцам");
-        confectioneryService.ordersByMonth()
+        confectioneryService.ordersByMonth(orderList)
                 .forEach((key, value) -> {
                     System.out.println("Год: " + key.getYear() + " Месяц: " + key.getMonth());
                     value.forEach(order -> System.out.println(order.toString()));
