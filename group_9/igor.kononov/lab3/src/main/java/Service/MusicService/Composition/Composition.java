@@ -8,9 +8,9 @@ import java.util.Objects;
 @Data
 public class Composition {
 
-    private String name;
-    private String composer;
-    private LocalDate date;
+    private final String name;
+    private final String composer;
+    private final LocalDate date;
 
     public Composition(String name, String composer) {
         this.name = name;

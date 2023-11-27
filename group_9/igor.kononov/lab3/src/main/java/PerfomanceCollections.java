@@ -13,18 +13,16 @@ public class PerfomanceCollections {
 
         var users = new GenerateUserList(500).getListOfUsers();
 
-        InvokePerfomanceTest(new MusicService(new ArrayList<>(users)), "First test");
-
-
-        InvokePerfomanceTest(new MusicService(new LinkedList<>(users)), "LinkedList");
-        InvokePerfomanceTest(new MusicService(new Vector<>(users)), "Vector");
-        InvokePerfomanceTest(new MusicService(new HashSet<>(users)), "HashSet");
-        InvokePerfomanceTest(new MusicService(new LinkedHashSet<>(users)), "LinkedHashSet");
-        InvokePerfomanceTest(new MusicService(new ArrayList<>(users)), "ArrayList");
+        InvokePerfomanceTest(new MusicService(new ArrayList<>(users)));
+        InvokePerfomanceTest(new MusicService(new LinkedList<>(users)));
+        InvokePerfomanceTest(new MusicService(new Vector<>(users)));
+        InvokePerfomanceTest(new MusicService(new HashSet<>(users)));
+        InvokePerfomanceTest(new MusicService(new LinkedHashSet<>(users)));
+        InvokePerfomanceTest(new MusicService(new ArrayList<>(users)));
     }
 
-    private static void InvokePerfomanceTest(MusicService musicService, String name) {
-        CollectionPerformanceComparison tester = new CollectionPerformanceComparison(musicService, name);
+    private static void InvokePerfomanceTest(MusicService musicService) {
+        var tester = new CollectionPerformanceComparison(musicService);
         tester.testMethodsPerformance();
     }
 }

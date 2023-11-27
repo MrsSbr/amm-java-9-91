@@ -1,6 +1,5 @@
 package Service.MusicService.Factory;
 
-import Common.Pair;
 import Service.MusicService.Composition.Composition;
 import lombok.Data;
 
@@ -60,8 +59,8 @@ public class RandomCompositionFactory {
         var composition = LIST_OF_NAMES.get(random.nextInt(LIST_OF_NAMES.size()));
 
         return new Composition(
-                composition.getFirst()
-                , composition.getSecond()
+                composition.getCompositionName()
+                , composition.getGroupName()
                 , date);
     }
 }

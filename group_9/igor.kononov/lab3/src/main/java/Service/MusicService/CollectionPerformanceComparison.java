@@ -6,13 +6,12 @@ import java.util.Date;
 
 public class  CollectionPerformanceComparison {
 
-    private final String DELIMETER = "-".repeat(200);
+    private static final String DELIMITER = "-".repeat(200);
+    private static final int COUNT = 100;
     private final MusicService musicService;
-    private final String name;
 
-    public CollectionPerformanceComparison(MusicService musicService, String name) {
+    public CollectionPerformanceComparison(MusicService musicService) {
         this.musicService = musicService;
-        this.name = name;
     }
 
 
@@ -21,8 +20,8 @@ public class  CollectionPerformanceComparison {
         long collectionCreationTime = System.currentTimeMillis();
         System.out.println("Collection created at: " + new Date(collectionCreationTime));
 
-        System.out.println(DELIMETER);
-        System.out.println(name);
+        System.out.println(DELIMITER);
+        System.out.println(musicService.getUsers().getClass().getSimpleName());
 
         long countListensTime = measureTime(() -> {
             Composition composition = new Composition("Believer", "Imagine Dragons");
@@ -35,17 +34,29 @@ public class  CollectionPerformanceComparison {
 
         long mostFavoriteTracksTime = measureTime(musicService::getMostFavoriteTracks);
 
+        System.out.println("Time taken for countListensInLastMonth: " + countListensTime + " ms");
+        System.out.println("Time taken for getUniquePlaylists: " + uniquePlaylistsTime + " ms");
+        System.out.println("Time taken for getUnlistenedCompositionsInLastThreeMonths: " + unlistenedCompositionsTime + " ms");
+        System.out.println("Time taken for getMostFavoriteTracks: " + mostFavoriteTracksTime + " ms");
+
         System.out.println("Total time: " +
                 (countListensTime + uniquePlaylistsTime + unlistenedCompositionsTime + mostFavoriteTracksTime) + " ms");
     }
 
     private long measureTime(Runnable task) {
-        long startTime = System.currentTimeMillis();
-        task.run();
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        System.out.println("Time taken: " + elapsedTime + " ms");
-        return elapsedTime;
+
+        long workTime = 0;
+
+        for (var i = 0; i < COUNT; i++) {
+
+            long startTime = System.currentTimeMillis();
+            task.run();
+            long endTime = System.currentTimeMillis();
+            long elapsedTime = endTime - startTime;
+            workTime += elapsedTime;
+        }
+
+        return workTime;
     }
 }
 
