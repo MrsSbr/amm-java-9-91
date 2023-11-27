@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @UtilityClass
-public class GenerateRandomPowerPlantsUtil {
+public class PowerPlantUtil {
     private static final List<PowerPlant> POWER_PLANTS = List.of(
             PowerPlant.of(LocalDate.of(2010, 10, 5), TypePowerPlant.HYDRO, 25),
             PowerPlant.of(LocalDate.of(2010, 5, 1), TypePowerPlant.ATOMIC, 25),
@@ -24,7 +24,7 @@ public class GenerateRandomPowerPlantsUtil {
             PowerPlant.of(LocalDate.of(2023, 6, 11), TypePowerPlant.HYDRO, 125)
     );
 
-    public static PowerPlant getPowerPlant() {
+    public static PowerPlant getRandomPowerPlant() {
         return POWER_PLANTS.get(RandomUtil.getNext(POWER_PLANTS.size()));
     }
 }

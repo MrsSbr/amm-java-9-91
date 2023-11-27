@@ -3,8 +3,8 @@ package util;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class TimeExecutionTaskUtil {
-    public static long get(Runnable runnable) {
+public class TimeExecutionUtil {
+    public static long getExecutionTime(Runnable runnable) {
         var start = System.nanoTime();
         runnable.run();
         var end = System.nanoTime();
