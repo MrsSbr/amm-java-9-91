@@ -11,42 +11,54 @@ import java.util.function.Supplier;
 public class ContainerAnalysis {
 
     public static void main(String[] args) {
-
-        List<Supplier<Collection<String>>> suppliersCollections = List.of(
-                LinkedList::new,
-                ArrayList::new,
-                ArrayDeque::new
-        );
-
-        List<String> namesCollections = List.of("LinkedList", "ArrayList", "ArrayDeque");
-        List<String> namesMethods = List.of("getUniqueWords", "getMostFrequentWords", "countWordsContaining");
         List<String> text = TextProcesser.parseText();
 
-        int indexCollection = 0;
+        Collection<String> linkedList = createStringCollection(LinkedList::new, text);
+        Collection<String> arrayList = createStringCollection(ArrayList::new, text);
+        Collection<String> arrayDeque = createStringCollection(ArrayDeque::new, text);
 
-        for (Supplier<Collection<String>> supplier : suppliersCollections) {
+        performanceCheck(linkedList);
+        performanceCheck(arrayList);
+        performanceCheck(arrayDeque);
+    }
 
-            TextStatistics statistics = new TextStatistics(supplier, text);
-            List<Long> timeMethods = new ArrayList<>(List.of(0L, 0L, 0L));
+    public static void performanceCheck(Collection<String> collection) {
+
+        final int countTest = 10;
+        TextStatistics statistics = new TextStatistics(collection);
+        List<Long> timeMethods = new ArrayList<>(List.of(0L, 0L, 0L));
+
+        for (int i = 0; i < countTest; ++i) {
 
             long time = System.nanoTime();
             statistics.getUniqueWords();
             timeMethods.set(0, timeMethods.get(0) + System.nanoTime() - time);
+
             time = System.nanoTime();
             statistics.getMostFrequentWords();
             timeMethods.set(1, timeMethods.get(1) + System.nanoTime() - time);
+
             time = System.nanoTime();
             statistics.countWordsContaining("s");
             timeMethods.set(2, timeMethods.get(2) + System.nanoTime() - time);
 
-            System.out.println("Время работы контейнера " + namesCollections.get(indexCollection) + " в методе " +
-                    namesMethods.get(0) + " составило " + timeMethods.get(0) + " наносекунд");
-            System.out.println("Время работы контейнера " + namesCollections.get(indexCollection) + " в методе " +
-                    namesMethods.get(1) + " составило " + timeMethods.get(1) + " наносекунд");
-            System.out.println("Время работы контейнера " + namesCollections.get(indexCollection) + " в методе " +
-                    namesMethods.get(2) + " составило " + timeMethods.get(2) + " наносекунд");
-            System.out.println();
-            indexCollection++;
         }
+
+        System.out.println("Время работы контейнера " + collection.getClass().getSimpleName() + " в методе " +
+                statistics.getClass().getMethods()[0].getName() + " составило " + timeMethods.get(0) / countTest
+                + " наносекунд");
+        System.out.println("Время работы контейнера " + collection.getClass().getSimpleName() + " в методе " +
+                statistics.getClass().getMethods()[1].getName() + " составило " + timeMethods.get(1) / countTest
+                + " наносекунд");
+        System.out.println("Время работы контейнера " + collection.getClass().getSimpleName() + " в методе " +
+                statistics.getClass().getMethods()[2].getName() + " составило " + timeMethods.get(2) / countTest
+                + " наносекунд");
+        System.out.println();
+    }
+
+    public static Collection<String> createStringCollection(Supplier<Collection<String>> factory,
+                                                            List<String> sourceList) {
+        return sourceList.stream()
+                .collect(factory, Collection::add, Collection::addAll);
     }
 }

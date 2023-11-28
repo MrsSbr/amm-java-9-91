@@ -1,33 +1,34 @@
 import org.example.TextStatistics;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class TextStatisticsTests {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+public class TextStatisticsTests {
+    public static final List<String> inputText1 = List.of("apple", "banana", "apple", "orange", "banana", "grape");
+    public static final List<String> inputText2 = List.of("apple", "banana", "orange", "grape");
     @Test
     public void testGetUniqueWords() {
-        List<String> inputText = Arrays.asList("apple", "banana", "apple", "orange", "banana", "grape");
-        TextStatistics textStatistics = new TextStatistics(ArrayList::new, inputText);
+        TextStatistics textStatistics = new TextStatistics(inputText1);
 
         List<String> uniqueWords = textStatistics.getUniqueWords();
 
-        assertEquals(Arrays.asList("apple", "banana", "orange", "grape"), uniqueWords);
+        assertEquals(inputText2, uniqueWords);
     }
 
     @Test
     public void testGetMostFrequentWords() {
-        List<String> inputText = Arrays.asList("apple", "banana", "apple", "orange", "banana", "grape", "apple");
-        TextStatistics textStatistics = new TextStatistics(ArrayList::new, inputText);
+        TextStatistics textStatistics = new TextStatistics(inputText1);
 
         Map<String, Long> mostFrequentWords = textStatistics.getMostFrequentWords();
 
         assertEquals(4, mostFrequentWords.size());
-        assertEquals(3, mostFrequentWords.get("apple"));
+        assertEquals(2, mostFrequentWords.get("apple"));
         assertEquals(2, mostFrequentWords.get("banana"));
         assertEquals(1, mostFrequentWords.get("orange"));
         assertEquals(1, mostFrequentWords.get("grape"));
@@ -35,8 +36,7 @@ public class TextStatisticsTests {
 
     @Test
     public void testCountWordsContaining() {
-        List<String> inputText = Arrays.asList("apple", "banana", "orange", "grape");
-        TextStatistics textStatistics = new TextStatistics(ArrayList::new, inputText);
+        TextStatistics textStatistics = new TextStatistics(inputText2);
 
         long count = textStatistics.countWordsContaining("an");
 
@@ -45,7 +45,7 @@ public class TextStatisticsTests {
 
     @Test
     public void testGetMostFrequentWordsWithEmptyText() {
-        TextStatistics textStatistics = new TextStatistics(ArrayList::new, new ArrayList<>());
+        TextStatistics textStatistics = new TextStatistics(new ArrayList<>());
 
         Map<String, Long> mostFrequentWords = textStatistics.getMostFrequentWords();
         assertNotNull(mostFrequentWords);
@@ -54,8 +54,7 @@ public class TextStatisticsTests {
 
     @Test
     public void testCountWordsContainingWithNonexistentQuery() {
-        List<String> inputText = Arrays.asList("apple", "banana", "orange", "grape");
-        TextStatistics textStatistics = new TextStatistics(ArrayList::new, inputText);
+        TextStatistics textStatistics = new TextStatistics(inputText2);
 
         long count = textStatistics.countWordsContaining("watermelon");
         assertEquals(0, count);
