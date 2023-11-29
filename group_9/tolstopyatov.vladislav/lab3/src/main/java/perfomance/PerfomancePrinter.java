@@ -1,13 +1,13 @@
 package perfomance;
 
 public class PerfomancePrinter {
-    private final PerfomanceAnalyzer performanceAnalyzer;
+    private final PerformanceAnalyzer performanceAnalyzer;
 
-    public PerfomancePrinter(PerfomanceAnalyzer performanceAnalyzer) {
+    public PerfomancePrinter(PerformanceAnalyzer performanceAnalyzer) {
         this.performanceAnalyzer = performanceAnalyzer;
     }
 
-    public PerfomanceAnalyzer getPerformanceAnalyzer() {
+    public PerformanceAnalyzer getPerformanceAnalyzer() {
         return performanceAnalyzer;
     }
 

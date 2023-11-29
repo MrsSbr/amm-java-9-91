@@ -1,5 +1,5 @@
 import SacrificesOfThePriests.AccountingForSacrifice;
-import perfomance.PerfomanceAnalyzer;
+import perfomance.PerformanceAnalyzer;
 import perfomance.PerfomancePrinter;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class CollectionsTest {
     }
 
     private static void testCollection(Supplier<Collection<AccountingForSacrifice>> collectionSupplier, String collectionName) {
-        PerfomanceAnalyzer analyzer = new PerfomanceAnalyzer(collectionSupplier, collectionName);
+        PerformanceAnalyzer analyzer = new PerformanceAnalyzer(collectionSupplier, collectionName);
         PerfomancePrinter printer = new PerfomancePrinter(analyzer);
         printer.print();
     }

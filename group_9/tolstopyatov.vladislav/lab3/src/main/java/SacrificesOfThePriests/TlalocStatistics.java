@@ -3,18 +3,15 @@ package SacrificesOfThePriests;
 import java.time.Month;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.function.Supplier;
 
 public class TlalocStatistics {
     private final Collection<AccountingForSacrifice> sacrifices;
 
     public TlalocStatistics(Supplier<Collection<AccountingForSacrifice>> collectionSupplier,
-                            Collection<AccountingForSacrifice> accountingForSacrificesCollection) {
-        Collection<AccountingForSacrifice> temporalCollection = accountingForSacrificesCollection.stream()
-                .collect(collectionSupplier, Collection<AccountingForSacrifice>::add,
-                        Collection<AccountingForSacrifice>::addAll);
-        this.sacrifices = Collections.unmodifiableCollection(temporalCollection);
+                            Collection<AccountingForSacrifice> collection) {
+        this.sacrifices = collectionSupplier.get();
+        this.sacrifices.addAll(collection);
     }
 
     public Collection<AccountingForSacrifice> getSacrifices() {
@@ -26,15 +23,14 @@ public class TlalocStatistics {
     }
 
     public Month theLastMonthInWhichThereWereNoAnimalSacrifices() {
-        return Collections.max(sacrifices.stream().filter(x -> !Objects.equals(x.getVictim().getTypeOfVictim(), "животное")).
+        return Collections.max(sacrifices.stream().filter(x -> x.getVictimType() != VictimType.ANIMAL).
                 map(AccountingForSacrifice::getTimeOfSacrifice).toList()).getMonth();
-
     }
 
-    public boolean IsTheHumanSacrificesIsMoreEffectiveThanAnimal() {
-        int daysWithoutRainAfterHumanSacrifice = sacrifices.stream().filter(x -> !Objects.equals(x.getVictim().getTypeOfVictim(), "животное")).
+    public boolean isTheHumanSacrificesIsMoreEffectiveThanAnimal() {
+        int daysWithoutRainAfterHumanSacrifice = sacrifices.stream().filter(x -> x.getVictimType() != VictimType.ANIMAL).
                 mapToInt(AccountingForSacrifice::getNumberOfDaysUntilTheNextRain).sum();
-        int daysWithoutRainAfterAnimalSacrifice = sacrifices.stream().filter(x -> !Objects.equals(x.getVictim().getTypeOfVictim(), "человек")).
+        int daysWithoutRainAfterAnimalSacrifice = sacrifices.stream().filter(x -> x.getVictimType() != VictimType.PERSON).
                 mapToInt(AccountingForSacrifice::getNumberOfDaysUntilTheNextRain).sum();
 
         return daysWithoutRainAfterAnimalSacrifice > daysWithoutRainAfterHumanSacrifice;

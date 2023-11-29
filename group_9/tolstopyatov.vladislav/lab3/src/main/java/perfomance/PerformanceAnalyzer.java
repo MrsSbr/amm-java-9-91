@@ -8,14 +8,14 @@ import java.time.Month;
 import java.util.Collection;
 import java.util.function.Supplier;
 
-public class PerfomanceAnalyzer {
+public class PerformanceAnalyzer {
     private static final int ACCOUNTING_FOR_SACRIFICE_COUNT = 7243;
     private final RandomAccountingOfTheSacrificesFactory factory = new RandomAccountingOfTheSacrificesFactory(ACCOUNTING_FOR_SACRIFICE_COUNT);
     private final Supplier<Collection<AccountingForSacrifice>> collectionSupplier;
     private final String collectionName;
     private TlalocStatistics tlalocStatistics;
 
-    public PerfomanceAnalyzer(Supplier<Collection<AccountingForSacrifice>> collectionSupplier, String collectionName) {
+    public PerformanceAnalyzer(Supplier<Collection<AccountingForSacrifice>> collectionSupplier, String collectionName) {
         this.collectionSupplier = collectionSupplier;
         this.collectionName = collectionName;
     }
@@ -59,7 +59,7 @@ public class PerfomanceAnalyzer {
     public long getCompareTheEffectivenessOfHumanSacrificesComparedToAnimalsTime() {
         long startTime = System.currentTimeMillis();
 
-        boolean result = tlalocStatistics.IsTheHumanSacrificesIsMoreEffectiveThanAnimal();
+        boolean result = tlalocStatistics.isTheHumanSacrificesIsMoreEffectiveThanAnimal();
 
         long endTime = System.currentTimeMillis();
         return endTime - startTime;
@@ -76,10 +76,10 @@ public class PerfomanceAnalyzer {
             theLastMonthInWhichThereWereNoAnimalSacrifices += getTheLastMonthInWhichThereWereNoAnimalSacrificesTime();
             compareTheEffectivenessOfHumanSacrificesComparedToAnimals += getCompareTheEffectivenessOfHumanSacrificesComparedToAnimalsTime();
         }
-        return new ExecutionTime(creation/testCount,
-                theNumberOfSacrificesAfterWhichRainFellTheNextDay/testCount,
-                theLastMonthInWhichThereWereNoAnimalSacrifices/testCount,
-                compareTheEffectivenessOfHumanSacrificesComparedToAnimals/testCount);
+        return new ExecutionTime(creation / testCount,
+                theNumberOfSacrificesAfterWhichRainFellTheNextDay / testCount,
+                theLastMonthInWhichThereWereNoAnimalSacrifices / testCount,
+                compareTheEffectivenessOfHumanSacrificesComparedToAnimals / testCount);
     }
 
 }
