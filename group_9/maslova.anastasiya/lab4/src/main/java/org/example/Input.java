@@ -22,10 +22,8 @@ public class Input {
     }
 
     public static int getIntInRange(int left, int right) {
-        int result = 0;
-
         while (true) {
-            result = getInt();
+            int result = getInt();
             if (result >= left && result <= right) {
                 return result;
             } else {

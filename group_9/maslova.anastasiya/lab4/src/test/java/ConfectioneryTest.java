@@ -1,3 +1,4 @@
+import org.example.ConfectioneryService;
 import org.example.ConfectioneryServiceImpl;
 import org.example.Order;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ConfectioneryTest {
-    private final ConfectioneryServiceImpl confectioneryServiceImpl = new ConfectioneryServiceImpl();
+    private final ConfectioneryService confectioneryService = new ConfectioneryServiceImpl();
     private List<Order> orderList;
 
     @BeforeEach
@@ -30,7 +31,7 @@ public class ConfectioneryTest {
         orderList.add(new Order(LocalDate.now(), "cake", 5.0, new BigDecimal(300)));
         orderList.add(new Order(LocalDate.now().minusMonths(1), "cake", 5.0, new BigDecimal(500)));
 
-        YearMonth leastProfitableMonth = confectioneryServiceImpl.theLeastProfitableMonth(orderList);
+        YearMonth leastProfitableMonth = confectioneryService.theLeastProfitableMonth(orderList);
 
         assertEquals(YearMonth.now(), leastProfitableMonth);
     }
@@ -39,7 +40,7 @@ public class ConfectioneryTest {
     public void testTheLeastProfitableMonthWithNoOrders() {
         // Тест на поиск самого низкого дохода (заказов нет)
 
-        assertThrows(NoSuchElementException.class, () -> confectioneryServiceImpl.theLeastProfitableMonth(orderList));
+        assertThrows(NoSuchElementException.class, () -> confectioneryService.theLeastProfitableMonth(orderList));
     }
 
     @Test
@@ -49,7 +50,7 @@ public class ConfectioneryTest {
         orderList.add(new Order(LocalDate.now(), "cake", 5.0, new BigDecimal(100)));
         orderList.add(new Order(LocalDate.now(), "cake2", 7.0, new BigDecimal(100)));
 
-        Map<YearMonth, Order> heaviestCakes = confectioneryServiceImpl.theHeaviestCakeInEveryMonthOfThisYear(orderList);
+        Map<YearMonth, Order> heaviestCakes = confectioneryService.theHeaviestCakeInEveryMonthOfThisYear(orderList);
 
         assertEquals(Map.of(YearMonth.now(), orderList.get(1)), heaviestCakes);
     }
@@ -58,7 +59,7 @@ public class ConfectioneryTest {
     public void testTheHeaviestCakeInEveryMonthOfThisYearWithNoOrders() {
         // Тест на поиск самого тяжелого торта в каждом месяце текущего года (заказов нет)
 
-        Map<YearMonth, Order> heaviestCakes = confectioneryServiceImpl.theHeaviestCakeInEveryMonthOfThisYear(orderList);
+        Map<YearMonth, Order> heaviestCakes = confectioneryService.theHeaviestCakeInEveryMonthOfThisYear(orderList);
 
         assertEquals(Map.of(), heaviestCakes);
     }
@@ -70,7 +71,7 @@ public class ConfectioneryTest {
         orderList.add(new Order(LocalDate.now(), "cake", 5.0, new BigDecimal(100)));
         orderList.add(new Order(LocalDate.now().minusMonths(1), "cake2", 7.0, new BigDecimal(100)));
 
-        Map<YearMonth, List<Order>> ordersByMonth = confectioneryServiceImpl.ordersByMonth(orderList);
+        Map<YearMonth, List<Order>> ordersByMonth = confectioneryService.ordersByMonth(orderList);
 
         assertEquals(
                 Map.of(
@@ -85,7 +86,7 @@ public class ConfectioneryTest {
     public void testOrdersByMonthWithNoOrders() {
         // Тест на вывод списка заказов тортов по месяцам (заказов нет)
 
-        Map<YearMonth, List<Order>> ordersByMonth = confectioneryServiceImpl.ordersByMonth(orderList);
+        Map<YearMonth, List<Order>> ordersByMonth = confectioneryService.ordersByMonth(orderList);
 
         assertEquals(Map.of(), ordersByMonth);
     }

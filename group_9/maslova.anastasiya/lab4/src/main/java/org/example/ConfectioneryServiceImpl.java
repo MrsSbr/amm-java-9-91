@@ -22,9 +22,9 @@ public class ConfectioneryServiceImpl implements ConfectioneryService {
         // Создаем Map, в котором ключами будут YearMonth, а значениями - суммарная прибыль за каждый месяц
         Map<YearMonth, BigDecimal> profitForMonth = orderList.stream()
                 .collect(Collectors.groupingBy( // группируем по дате начала месяца
-                        order -> YearMonth.of(order.getDate().getYear(), order.getDate().getMonth()),
+                        order -> YearMonth.of(order.date().getYear(), order.date().getMonth()),
                         Collectors.mapping( // вычисляем суммарную стоимость заказов в месяц
-                                Order::getCost,
+                                Order::cost,
                                 Collectors.reducing(BigDecimal.ZERO, BigDecimal::add)
                         )
                 ));
@@ -42,12 +42,12 @@ public class ConfectioneryServiceImpl implements ConfectioneryService {
         logger.info("Вызвана функция theHeaviestCakeInEveryMonthOfThisYear");
         // Фильтруем заказы для текущего года, оставляем только те, что были сделаны в текущем году
         return orderList.stream()
-                .filter(order -> order.getDate().getYear() == YearMonth.now().getYear())
+                .filter(order -> order.date().getYear() == YearMonth.now().getYear())
                 .collect(
                         Collectors.toMap(
-                                order -> YearMonth.of(order.getDate().getYear(), order.getDate().getMonth()), // ключ - YearMonth
+                                order -> YearMonth.of(order.date().getYear(), order.date().getMonth()), // ключ - YearMonth
                                 Function.identity(), // значение - сам заказ (Order)
-                                BinaryOperator.maxBy(Comparator.comparingDouble(Order::getWeight))  // находим максимальный заказ по весу
+                                BinaryOperator.maxBy(Comparator.comparingDouble(Order::weight))  // находим максимальный заказ по весу
                         )
                 );
     }
@@ -58,7 +58,7 @@ public class ConfectioneryServiceImpl implements ConfectioneryService {
         // Группируем заказы по YearMonth, чтобы получить списки заказов по месяцам
         return orderList.stream()
                 .collect(Collectors.groupingBy(
-                        order -> YearMonth.of(order.getDate().getYear(), order.getDate().getMonth())
+                        order -> YearMonth.of(order.date().getYear(), order.date().getMonth())
                 ));
     }
 }
