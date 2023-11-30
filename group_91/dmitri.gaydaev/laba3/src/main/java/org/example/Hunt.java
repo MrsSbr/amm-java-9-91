@@ -13,6 +13,8 @@ public class Hunt {
         this.date = LocalDate.of(year, month, day);
     }
 
+
+
     public String getHunter() {
         return hunter;
     }
