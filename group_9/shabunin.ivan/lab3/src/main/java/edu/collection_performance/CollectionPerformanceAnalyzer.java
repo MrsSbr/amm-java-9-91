@@ -13,8 +13,8 @@ public final class CollectionPerformanceAnalyzer {
     private CollectionPerformanceAnalyzer() {
     }
 
-    private static int SURVEY_SAMPLE_SIZE = 1500;
-    private static int RUNS_COUNT = 500;
+    private static final int SURVEY_SAMPLE_SIZE = 1500;
+    private static final int RUNS_COUNT = 500;
 
     public static void main(String[] args) {
         CollectionPerformanceAnalyzer.printSurveyMethodsAverageExecutionTime(LinkedList::new);
