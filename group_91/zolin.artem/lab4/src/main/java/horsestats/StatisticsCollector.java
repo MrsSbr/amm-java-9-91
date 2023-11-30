@@ -42,14 +42,15 @@ public class StatisticsCollector {
             Map<String, IntermediateHorseStat> m1,
             Map<String, IntermediateHorseStat> m2
     ) {
+        var result = new HashMap<>(m1);
         for (var e : m2.entrySet()) {
-            m1.merge(e.getKey(), e.getValue(), (s1, s2) -> {
-                s1.racesCount += s2.racesCount;
-                s1.positionAccumulator += s2.positionAccumulator;
-                return s1;
+            result.merge(e.getKey(), e.getValue(), (stat1, stat2) -> {
+                stat1.racesCount += stat2.racesCount;
+                stat1.positionAccumulator += stat2.positionAccumulator;
+                return stat1;
             });
         }
-        return m1;
+        return result;
     }
 
     private static Map<String, HorseStatistics> finish(Map<String, IntermediateHorseStat> stat) {

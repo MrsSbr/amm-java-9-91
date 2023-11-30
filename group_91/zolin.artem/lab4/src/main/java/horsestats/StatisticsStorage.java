@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class StatisticsStorage {
 
@@ -30,12 +31,12 @@ public class StatisticsStorage {
         return stats.getOrDefault(name, null);
     }
 
-    public HorseStatistics getMostCompetingHorse() {
-        return mostCompetingHorse;
+    public Optional<HorseStatistics> getMostCompetingHorse() {
+        return Optional.ofNullable(mostCompetingHorse);
     }
 
-    public HorseStatistics getMostPerformantHorse() {
-        return mostPerformantHorse;
+    public Optional<HorseStatistics> getMostPerformantHorse() {
+        return Optional.ofNullable(mostPerformantHorse);
     }
 
 }
