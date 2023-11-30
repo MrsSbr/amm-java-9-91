@@ -32,8 +32,8 @@ public final class SoldDrinkCollectionAnalyzerImpl implements SoldDrinkCollectio
     }
 
     @Override
-    public int getCappuccinoOrdersCount(@NotNull Collection<SoldDrink> collection) {
-        return (int) collection.stream()
+    public long getCappuccinoOrdersCount(@NotNull Collection<SoldDrink> collection) {
+        return collection.stream()
                 .filter(soldDrink -> soldDrink.type().equals(DrinkType.CAPPUCCINO))
                 .count();
     }

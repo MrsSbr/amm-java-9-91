@@ -12,5 +12,5 @@ public interface SoldDrinkCollectionAnalyzer {
 
     Set<DrinkType> getNotOrderedDrinksLastThreeMonths(@NotNull Collection<SoldDrink> collection);
 
-    int getCappuccinoOrdersCount(@NotNull Collection<SoldDrink> collection);
+    long getCappuccinoOrdersCount(@NotNull Collection<SoldDrink> collection);
 }

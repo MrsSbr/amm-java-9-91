@@ -5,19 +5,20 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import tasks.SoldDrinkCollectionAnalyzer;
 import tasks.SoldDrinkCollectionAnalyzerImpl;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class SoldDrinkCollectionAnalyzerImplTest {
 
-    private static SoldDrinkCollectionAnalyzerImpl soldDrinkCollectionAnalyzer;
+    private static SoldDrinkCollectionAnalyzer soldDrinkCollectionAnalyzer;
 
     @BeforeAll
     static void setUp() {
@@ -102,7 +103,7 @@ public class SoldDrinkCollectionAnalyzerImplTest {
             add(new SoldDrink(DrinkType.CAPPUCCINO, LocalDate.of(2022, 1, 1),
                     LocalTime.of(10, 0, 0)));
         }};
-        int result = soldDrinkCollectionAnalyzer.getCappuccinoOrdersCount(testCollection);
+        long result = soldDrinkCollectionAnalyzer.getCappuccinoOrdersCount(testCollection);
         Assertions.assertThat(result).isEqualTo(3);
     }
 
@@ -113,7 +114,7 @@ public class SoldDrinkCollectionAnalyzerImplTest {
             Assertions.assertThatThrownBy(() -> soldDrinkCollectionAnalyzer.getCappuccinoOrdersCount(testCollection))
                     .isInstanceOf(IllegalArgumentException.class);
         } else {
-            int result = soldDrinkCollectionAnalyzer.getCappuccinoOrdersCount(testCollection);
+            long result = soldDrinkCollectionAnalyzer.getCappuccinoOrdersCount(testCollection);
             Assertions.assertThat(result).isEqualTo(0);
         }
     }
