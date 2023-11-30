@@ -9,46 +9,52 @@ import java.util.LinkedList;
 import java.util.Vector;
 import java.util.function.Supplier;
 
-public class CollectionPerformanceAnalyzer {
-    private static int SURVEY_SAMPLE_SIZE = 1500;
-
-    Supplier<Collection<BestCarForm>> collectionSupplier;
-
-    CollectionPerformanceAnalyzer(Supplier<Collection<BestCarForm>> collectionSupplier) {
-        this.collectionSupplier = collectionSupplier;
+public final class CollectionPerformanceAnalyzer {
+    private CollectionPerformanceAnalyzer() {
     }
+
+    private static int SURVEY_SAMPLE_SIZE = 1500;
+    private static int RUNS_COUNT = 500;
 
     public static void main(String[] args) {
-        CollectionPerformanceAnalyzer linkedListAnalyzer = new CollectionPerformanceAnalyzer(LinkedList::new);
-        CollectionPerformanceAnalyzer arrayListAnalyzer = new CollectionPerformanceAnalyzer(ArrayList::new);
-        CollectionPerformanceAnalyzer vectorAnalyzer = new CollectionPerformanceAnalyzer(Vector::new);
-
-        linkedListAnalyzer.printSurveyMethodsExecutionTime();
+        CollectionPerformanceAnalyzer.printSurveyMethodsAverageExecutionTime(LinkedList::new);
         System.out.println();
-        arrayListAnalyzer.printSurveyMethodsExecutionTime();
+        CollectionPerformanceAnalyzer.printSurveyMethodsAverageExecutionTime(ArrayList::new);
         System.out.println();
-        vectorAnalyzer.printSurveyMethodsExecutionTime();
+        CollectionPerformanceAnalyzer.printSurveyMethodsAverageExecutionTime(Vector::new);
         System.out.println();
     }
 
-    public void printSurveyMethodsExecutionTime() {
+    public static void printSurveyMethodsAverageExecutionTime(Supplier<Collection<BestCarForm>> collectionSupplier) {
         System.out.println("Тип коллекции: " + collectionSupplier.get().getClass().getSimpleName());
 
-        long generationStart = System.nanoTime();
-        BestCarSurvey survey = BestCarSurvey.generate(SURVEY_SAMPLE_SIZE, collectionSupplier);
-        long generationEnd = System.nanoTime();
-        System.out.println("Время генерации: " + (generationEnd - generationStart));
+        long totalGenerationTime = 0;
+        long totalFindingMostPopularBrandTime = 0;
+        long totalFindingMostPopularBrandsByAgeTime = 0;
+        long totalGettingUniqueBrandsTime = 0;
 
-        System.out.println("Время нахождения самой популярной марки автомобиля: "
-                + measureExecutionTime(survey::findMostPopularBrand));
-        System.out.println("Время нахождения самых популярных марок авто в зависимости от возраста: "
-                + measureExecutionTime(survey::findMostPopularBrandsByAge));
-        System.out.println("Время получения списка уникальных брендов: "
-                + measureExecutionTime(survey::getUniqueBrands));
+        for (int i = 0; i < RUNS_COUNT; ++i) {
+            long generationStart = System.nanoTime();
+            BestCarSurvey survey = BestCarSurvey.generate(SURVEY_SAMPLE_SIZE, collectionSupplier);
+            long generationEnd = System.nanoTime();
+            totalGenerationTime += (generationEnd - generationStart);
+
+            totalFindingMostPopularBrandTime += measureExecutionTime(survey::findMostPopularBrand);
+            totalFindingMostPopularBrandsByAgeTime += measureExecutionTime(survey::findMostPopularBrandsByAge);
+            totalGettingUniqueBrandsTime += measureExecutionTime(survey::getUniqueBrands);
+        }
+
+        System.out.println("Среднее время генерации: " + totalGenerationTime / RUNS_COUNT);
+        System.out.println("Среднее время нахождения самой популярной марки автомобиля: "
+                + totalFindingMostPopularBrandTime / RUNS_COUNT);
+        System.out.println("Среднее время нахождения самых популярных марок авто в зависимости от возраста: "
+                + totalFindingMostPopularBrandsByAgeTime / RUNS_COUNT);
+        System.out.println("Среднее время получения списка уникальных брендов: "
+                + totalGettingUniqueBrandsTime / RUNS_COUNT);
 
     }
 
-    private <T> long measureExecutionTime(Supplier<T> method) {
+    private static <T> long measureExecutionTime(Supplier<T> method) {
         long start = System.nanoTime();
         T methodResult = method.get();
         long end = System.nanoTime();

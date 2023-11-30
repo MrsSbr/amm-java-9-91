@@ -1,16 +1,17 @@
 package edu.best_car_survey.survey;
 
-import edu.best_car_survey.form.BestCarForm;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
+import edu.best_car_survey.form.BestCarForm;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class BestCarSurveyTest {
     private BestCarSurvey bestCarSurvey;
@@ -41,10 +42,21 @@ public class BestCarSurveyTest {
     }
 
     @Test
+    public void testGenerateWhenNonPositiveSampleSizeShouldThrowException() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> BestCarSurvey.generate(-1, LinkedList::new));
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> BestCarSurvey.generate(0, LinkedList::new));
+    }
+
+    @Test
     public void testFindMostPopularBrand() {
         String expected = "BMW";
-        String result = bestCarSurvey.findMostPopularBrand();
+        String result = bestCarSurvey.findMostPopularBrand().get();
         assertThat(result).isEqualTo(expected);
+
+        BestCarSurvey emptySurvey = new BestCarSurvey(new ArrayList<>());
+        assertThat(emptySurvey.findMostPopularBrand()).isEmpty();
     }
 
     @Test
@@ -56,13 +68,19 @@ public class BestCarSurveyTest {
         assertThat(result).containsEntry(30, "Skoda");
         assertThat(result).containsEntry(45, "BMW");
         assertThat(result).containsEntry(60, "Ford");
+
+        BestCarSurvey emptySurvey = new BestCarSurvey(new ArrayList<>());
+        assertThat(emptySurvey.findMostPopularBrandsByAge()).isEmpty();
     }
 
     @Test
     public void testGetUniqueBrands() {
-        List<String> expected = List.of("BMW", "Audi", "Skoda", "Ford", "Peugeot");
-        List<String> result = bestCarSurvey.getUniqueBrands();
+        Set<String> expected = Set.of("BMW", "Audi", "Skoda", "Ford", "Peugeot");
+        Set<String> result = bestCarSurvey.getUniqueBrands();
         assertThat(result.size()).isEqualTo(expected.size());
         assertThat(result).containsAll(expected);
+
+        BestCarSurvey emptySurvey = new BestCarSurvey(new ArrayList<>());
+        assertThat(emptySurvey.getUniqueBrands()).isEmpty();
     }
 }

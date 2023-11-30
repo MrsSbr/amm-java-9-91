@@ -4,11 +4,14 @@ import edu.best_car_survey.form.BestCarForm;
 import edu.best_car_survey.form.BestCarFormFactory;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.jetbrains.annotations.NotNull;
 
 public class BestCarSurvey {
     Collection<BestCarForm> survey;
@@ -16,12 +19,16 @@ public class BestCarSurvey {
     private BestCarSurvey() {
     }
 
-    BestCarSurvey(Collection<BestCarForm> survey) {
+    BestCarSurvey(@NotNull Collection<BestCarForm> survey) {
         this.survey = survey;
     }
 
     public static BestCarSurvey generate(int sampleSize,
                                          Supplier<Collection<BestCarForm>> collectionSupplier) {
+        if (sampleSize <= 0) {
+            throw new IllegalArgumentException("Sample size must be positive");
+        }
+
         BestCarSurvey result = new BestCarSurvey();
 
         result.survey = Stream.generate(BestCarFormFactory::generate)
@@ -35,13 +42,12 @@ public class BestCarSurvey {
         return survey.size();
     }
 
-    public String findMostPopularBrand() {
+    public Optional<String> findMostPopularBrand() {
         return survey.stream()
                 .collect(Collectors.groupingBy(BestCarForm::brand, Collectors.counting()))
                 .entrySet().stream()
                 .max(Map.Entry.comparingByValue())
-                .map(Map.Entry::getKey)
-                .orElse(null);
+                .map(Map.Entry::getKey);
     }
 
     public Map<Integer, String> findMostPopularBrandsByAge() {
@@ -56,10 +62,9 @@ public class BestCarSurvey {
                                 .orElse("")));
     }
 
-    public List<String> getUniqueBrands() {
+    public Set<String> getUniqueBrands() {
         return survey.stream()
                 .map(BestCarForm::brand)
-                .distinct()
-                .toList();
+                .collect(Collectors.toSet());
     }
 }
