@@ -40,16 +40,16 @@ public class StatisticsStorageTest {
     void horseStatsShouldBeCalculatedCorrectly() {
         var storage = new StatisticsStorage(RESULTS);
         assertThat(storage.getStats().values()).containsExactlyInAnyOrderElementsOf(EXPECTED_STATISTICS);
-        assertThat(storage.getMostCompetingHorse()).isEqualTo(EXPECTED_MOST_COMPETING_HORSE);
-        assertThat(storage.getMostPerformantHorse()).isEqualTo(EXPECTED_MOST_PERFORMANT_HORSE);
+        assertThat(storage.getMostCompetingHorse()).contains(EXPECTED_MOST_COMPETING_HORSE);
+        assertThat(storage.getMostPerformantHorse()).contains(EXPECTED_MOST_PERFORMANT_HORSE);
     }
 
     @Test
     void emptyStorageShouldContainNulls() {
         var storage = new StatisticsStorage(List.of());
         assertThat(storage.getStats()).isEmpty();
-        assertThat(storage.getMostPerformantHorse()).isNull();
-        assertThat(storage.getMostCompetingHorse()).isNull();
+        assertThat(storage.getMostPerformantHorse()).isEmpty();
+        assertThat(storage.getMostCompetingHorse()).isEmpty();
     }
 
 }
