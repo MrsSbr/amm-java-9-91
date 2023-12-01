@@ -1,31 +1,26 @@
 package service;
 
+import entity.Pair;
 import entity.PowerPlant;
 import entity.TypePowerPlant;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toList;
 import static util.LocalDateUtil.dateIsCorrectMonth;
 
+@AllArgsConstructor
+@Getter
 public class SolverService {
-
     public static final int PRODUCTION_CAPACITY_FOR_MONTH = 50;
     private static final int ONE_MONTH = 1;
     private static final int THREE_MONTH = 3;
     private static final int TWELVE_MONTH = 12;
 
-    @Getter //для автоматического получения типа коллекции при печати(так не нужен)
     private final Collection<PowerPlant> powerPlants;
-    
-    public SolverService(Collection<PowerPlant> powerPlants) {
-        this.powerPlants = powerPlants;
-    }
 
     /*Список типов электростанций, которые хотя бы один раз произвели больше 50 МВт/ч за последний месяц*/
     public List<TypePowerPlant> getSpecialTypePowerPlant() {
@@ -34,15 +29,31 @@ public class SolverService {
                 .filter(powerPlant -> powerPlant.getProductionCapacity() >= PRODUCTION_CAPACITY_FOR_MONTH)
                 .map(PowerPlant::getTypePowerPlant)
                 .distinct()
-                .collect(toList());
+                .toList();
     }
 
-    /*Средняя мощность для каждого типа электростанций за последние 3 месяца*/
-    public Map<TypePowerPlant, Double> getAverageProductionCapacityByTypePowerPlants() {
-        return powerPlants.stream()
-                .filter(powerPlant -> dateIsCorrectMonth(powerPlant.getDate(), THREE_MONTH))
-                .collect(groupingBy(PowerPlant::getTypePowerPlant, Collectors.averagingLong(PowerPlant::getProductionCapacity)));
+    /*БЕЗ МАП Средняя мощность для каждого типа электростанций за последние 3 месяца*/
+    public List<Pair<TypePowerPlant, Double>> getAverageProductionCapacityByTypePowerPlants() {
+
+        var result = new ArrayList<Pair<TypePowerPlant, Double>>();
+
+        //получаем listы с электростанциями по каждому типу(учитывая условие на дату)
+        var listAtomicPowerPlant = getListByPowerPlants(TypePowerPlant.ATOMIC);
+        var listHydroPowerPlant = getListByPowerPlants(TypePowerPlant.HYDRO);
+        var listSolarPowerPlant = getListByPowerPlants(TypePowerPlant.SOLAR);
+
+        //считаем avg по каждому list (по каждому типу электростанций)
+        var averageByAtomic = getAverageByPowerPlantType(listAtomicPowerPlant);
+        var averageByHydro = getAverageByPowerPlantType(listHydroPowerPlant);
+        var averageBySolar = getAverageByPowerPlantType(listSolarPowerPlant);
+
+        result.add(Pair.of(TypePowerPlant.ATOMIC, averageByAtomic));
+        result.add(Pair.of(TypePowerPlant.HYDRO, averageByHydro));
+        result.add(Pair.of(TypePowerPlant.SOLAR, averageBySolar));
+
+        return result;
     }
+
 
     /*Суммарная производимая мощность за последний год*/
     public int getSummaryProductionCapacityLastYear() {
@@ -50,5 +61,19 @@ public class SolverService {
                 .filter(powerPlant -> dateIsCorrectMonth(powerPlant.getDate(), TWELVE_MONTH))
                 .mapToInt(PowerPlant::getProductionCapacity)
                 .sum();
+    }
+
+    private double getAverageByPowerPlantType(List<PowerPlant> powerPlants) {
+        return powerPlants.stream()
+                .mapToInt(PowerPlant::getProductionCapacity)
+                .summaryStatistics()
+                .getAverage();
+    }
+
+    private List<PowerPlant> getListByPowerPlants(TypePowerPlant typePowerPlant) {
+        return powerPlants.stream()
+                .filter(powerPlant -> dateIsCorrectMonth(powerPlant.getDate(), THREE_MONTH))
+                .filter(powerPlant -> powerPlant.getTypePowerPlant().equals(typePowerPlant))
+                .toList();
     }
 }

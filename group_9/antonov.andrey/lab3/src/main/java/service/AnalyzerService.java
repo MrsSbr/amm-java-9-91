@@ -1,18 +1,16 @@
 package service;
 
 import entity.StatisticBySolverService;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import static util.TimeExecutionUtil.getExecutionTime;
 
+@AllArgsConstructor
+@Getter
 public class AnalyzerService {
     private static final int DEFAULT_COUNT_TESTS = 555;
-    @Getter
     private final SolverService solverService;
-
-    public AnalyzerService(SolverService solverService) {
-        this.solverService = solverService;
-    }
 
     public StatisticBySolverService getStatisticsBySolverService() {
         long timeSearchSpecialPowerPlantType = 0;

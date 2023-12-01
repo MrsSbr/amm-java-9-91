@@ -13,7 +13,7 @@ public class LocalDateUtilTest {
 
     @ParameterizedTest
     @MethodSource("getArgumentsForDateTest")
-     void checkDate(LocalDate localDate, int month, boolean result) {
+    void checkDate(LocalDate localDate, int month, boolean result) {
         var actualResult = LocalDateUtil.dateIsCorrectMonth(localDate, month);
         assertEquals(result, actualResult);
     }

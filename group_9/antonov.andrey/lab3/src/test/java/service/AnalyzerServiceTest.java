@@ -2,7 +2,6 @@ package service;
 
 import entity.PowerPlant;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import util.CollectionPowerPlantUtil;
 
@@ -27,10 +26,10 @@ class AnalyzerServiceTest {
     }
 
      /*
-        здесь хочу увеличить размер коллекции в 10 раз, а таймаут такой же оставить, чтобы теперь не успел выполниться,
-        но так похоже нельзя
+        Здесь хочу увеличить размер коллекции в 10 раз, а таймаут такой же оставить, чтобы теперь не успел выполниться.
+        То есть проверить ожидаемое поведение теста -- время выполнения минимум заданный timeout, но так похоже нельзя
      */
-//    @Test
+//
 //    @Timeout(value = 500, unit = MILLISECONDS)
 //    @RepeatedTest(5)
 //    void shouldFailFindStatisticTest() {
