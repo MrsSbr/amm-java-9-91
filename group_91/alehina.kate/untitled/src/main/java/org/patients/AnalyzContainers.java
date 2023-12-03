@@ -24,16 +24,17 @@ public class AnalyzContainers {
             PatientTask task = new PatientTask(supplier, getGeneratedListPatients(1200));
             //List<Long> timeMethods = new ArrayList<>(List.of(0L, 0L, 0L));
             long time = System.nanoTime();
-            for(int i = 0; i < countTest; ++i) {
+            for (int i = 0; i < countTest; ++i) {
                 task.countHealthyPatients();
                 task.lastThreeYearsPatients();
                 task.lastFiveNotLastTwoPatients();
             }
             System.out.println("Время работы контейнера " + namesCollections.get(indexCollection) +
-                    " составило в среднем " + time/countTest + " наносекунд");
+                    " составило в среднем " + time / countTest + " наносекунд");
             indexCollection++;
         }
     }
+
     public static List<Patient> getGeneratedListPatients(int countPatients) {
         return Stream.generate(RandomPatient::generatePatient)
                 .limit(countPatients)

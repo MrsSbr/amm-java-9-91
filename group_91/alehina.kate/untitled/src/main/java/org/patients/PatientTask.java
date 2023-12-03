@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class PatientTask {
     private final Collection<Patient> patients;
+
     public PatientTask(Supplier<Collection<Patient>> supplier, List<Patient> listPatients) {
         patients = supplier.get();
         patients.addAll(listPatients);

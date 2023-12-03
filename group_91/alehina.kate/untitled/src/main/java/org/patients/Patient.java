@@ -21,15 +21,19 @@ public class Patient {
     public String getSurname() {
         return surname;
     }
+
     public String getName() {
         return name;
     }
+
     public String getPatronymic() {
         return patronymic;
     }
+
     public FluorogramResult getResult() {
         return result;
     }
+
     public LocalDate getDate() {
         return date;
     }
@@ -37,9 +41,11 @@ public class Patient {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
     }

@@ -56,7 +56,7 @@ public class PatientTaskTest {
 
     @Test
     public void countHealthyPatients() {
-        for(Supplier<Collection<Patient>> supplier : listSuppliers) {
+        for (Supplier<Collection<Patient>> supplier : listSuppliers) {
             PatientTask task = new PatientTask(supplier, people);
             assertEquals(7, task.countHealthyPatients());
         }
@@ -64,7 +64,7 @@ public class PatientTaskTest {
 
     @Test
     public void lastThreeYearsPatients() {
-        for(Supplier<Collection<Patient>> supplier : listSuppliers) {
+        for (Supplier<Collection<Patient>> supplier : listSuppliers) {
             PatientTask task = new PatientTask(supplier, people);
             assertEquals(List.of(
                     new Patient("Тагаева", "Диана", "Артуровна",
@@ -75,7 +75,7 @@ public class PatientTaskTest {
 
     @Test
     public void lastFiveNotLastTwoPatients() {
-        for(Supplier<Collection<Patient>> supplier : listSuppliers) {
+        for (Supplier<Collection<Patient>> supplier : listSuppliers) {
             PatientTask task = new PatientTask(supplier, people);
             assertEquals(List.of(
                     new Patient("Филатов", "Сергей", "Степанович",
@@ -91,20 +91,23 @@ public class PatientTaskTest {
             assertEquals(0, task.countHealthyPatients());
         }
     }
+
     @Test
     public void lastThreeYearsEmptyCollection() {
-        for(Supplier<Collection<Patient>> supplier : listSuppliers) {
+        for (Supplier<Collection<Patient>> supplier : listSuppliers) {
             PatientTask task = new PatientTask(supplier, emptyPeople);
             assertEquals(List.of(), task.lastThreeYearsPatients());
         }
     }
+
     @Test
     public void lastFiveNotLastTwoPatientsEmptyCollection() {
-        for(Supplier<Collection<Patient>> supplier : listSuppliers) {
+        for (Supplier<Collection<Patient>> supplier : listSuppliers) {
             PatientTask task = new PatientTask(supplier, emptyPeople);
             assertEquals(List.of(), task.lastFiveNotLastTwoPatients());
         }
     }
+
     @Test
     public void countHealthyPatientsNoSuitable() {
         for (Supplier<Collection<Patient>> supplier : listSuppliers) {
@@ -112,16 +115,18 @@ public class PatientTaskTest {
             assertEquals(0, task.countHealthyPatients());
         }
     }
+
     @Test
     public void lastThreeYearsNoSuitable() {
-        for(Supplier<Collection<Patient>> supplier : listSuppliers) {
+        for (Supplier<Collection<Patient>> supplier : listSuppliers) {
             PatientTask task = new PatientTask(supplier, peoplNoSuitable);
             assertEquals(List.of(), task.lastThreeYearsPatients());
         }
     }
+
     @Test
     public void lastFiveNotLastTwoPatientsNoSuitable() {
-        for(Supplier<Collection<Patient>> supplier : listSuppliers) {
+        for (Supplier<Collection<Patient>> supplier : listSuppliers) {
             PatientTask task = new PatientTask(supplier, peoplNoSuitable);
             assertEquals(List.of(), task.lastFiveNotLastTwoPatients());
         }

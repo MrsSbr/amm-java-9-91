@@ -7,6 +7,7 @@ public class RandomPatient {
     private static final List<String> MAN_NAMES;
     private static final List<String> WOMAN_NAMES;
     private static final List<String> SURNAMES;
+
     static {
         MAN_NAMES = List.of("Иван", "Александр", "Антон", "Константин",
                 "Олег", "Артем", "Артур", "Виктор", "Владимир", "Владислав", "Кирилл");
@@ -15,6 +16,7 @@ public class RandomPatient {
         SURNAMES = List.of("Иванов", "Петров", "Алексеев", "Михайлов", "Дмитриев",
                 "Демидов", "Туманов", "Александров", "Сафронов", "Скворцов");
     }
+
     public static Patient generatePatient() {
         Random random = new Random();
         boolean isFemale = random.nextBoolean();
@@ -24,7 +26,7 @@ public class RandomPatient {
         int maxDay = new GregorianCalendar(year, month - 1, 1).getActualMaximum(Calendar.DAY_OF_MONTH);
         int day = 1 + random.nextInt(maxDay); // случайный день от 1 до последнего дня месяца
 
-        if(!isFemale) {
+        if (!isFemale) {
             return new Patient(SURNAMES.get(random.nextInt(SURNAMES.size())),
                     MAN_NAMES.get(random.nextInt(MAN_NAMES.size())),
                     MAN_NAMES.get(random.nextInt(MAN_NAMES.size())) + "ович",
