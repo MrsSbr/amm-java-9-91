@@ -2,6 +2,7 @@ package Tests;
 
 import Convertors.JsonToPojoConvertor;
 import Convertors.PojoToJsonConvertor;
+import Examples.Classes.Simple.ClassWithClassFields;
 import Examples.Classes.Simple.ManyEnumOnly;
 import Examples.Classes.Simple.ManyStringOnly;
 import Examples.Classes.Simple.MixedAll;
@@ -30,7 +31,8 @@ public class SimpleClassesTest {
                 Arguments.of(new ManyEnumOnly()),
                 Arguments.of(new ManyStringOnly()),
                 Arguments.of(new MixedPrimWrap()),
-                Arguments.of(new MixedAll())
+                Arguments.of(new MixedAll()),
+                Arguments.of(new ClassWithClassFields())
         );
     }
 
