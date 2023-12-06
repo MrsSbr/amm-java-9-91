@@ -3,10 +3,19 @@ package test.java;
 import main.java.org.example.TeaPackage;
 import main.java.org.example.TeaPlantationFunctionality;
 import main.java.org.example.TeaType;
-import org.junit.jupiter.api.Test;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,42 +39,78 @@ class TeaPlantationFunctionalityTest {
             new TeaPackage(TeaType.TAIPING_HOUKUI, 2019, 500),
             new TeaPackage(TeaType.TAIPING_HOUKUI, 2022, 600)
     };
-    private final List<Supplier<Collection<TeaPackage>>> suppliers =
-            List.of(ArrayList::new, LinkedList::new, HashSet::new);
+    private final List<TeaPackage> emptyCollectionTP = Collections.emptyList();
 
-    @Test
-    void findTheMostPlenteousYearsTest() {
+    private static final List<Supplier<Collection<TeaPackage>>> suppliers =
+            List.of(HashSet::new, ArrayList::new, LinkedList::new);
+
+    private static Stream<Arguments> supplierOption() {
+        return Stream.of(
+                Arguments.of(suppliers.get(0)),
+                Arguments.of(suppliers.get(1)),
+                Arguments.of(suppliers.get(2))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("supplierOption")
+    void findTheMostPlenteousYearsTest(Supplier<Collection<TeaPackage>> supplier) {
+
         TeaPlantationFunctionality tpf = new TeaPlantationFunctionality();
-        List<Integer> years = Stream.of(2018, 2019, 2023, 2019)
-                .collect(Collectors.toList());
+        List<Integer> years = List.of(2018, 2019, 2023, 2019);
 
-        for(Supplier<Collection<TeaPackage>> supplier : suppliers) {
-            Collection<TeaPackage> teaPackages = Stream.of(tp).collect(Collectors.toCollection(supplier));
-            assertEquals(years, (tpf.findTheMostPlenteousYears(teaPackages)));
-        }
+        Collection<TeaPackage> teaPackages = Stream.of(tp).collect(Collectors.toCollection(supplier));
+        assertEquals(years, (tpf.findTheMostPlenteousYears(teaPackages)));
+
+    }
+    @ParameterizedTest
+    @MethodSource("supplierOption")
+    void findTheMostPlenteousYearsTestEmptyCollection(Supplier<Collection<TeaPackage>> supplier) {
+        TeaPlantationFunctionality tpf = new TeaPlantationFunctionality();
+        List<Integer> years = List.of(0, 0, 0, 0);
+        Collection<TeaPackage> teaPackages = supplier.get();
+        teaPackages.addAll(emptyCollectionTP);
+        assertEquals(years, (tpf.findTheMostPlenteousYears(teaPackages)));
     }
 
-    @Test
-    void findTeaTypesHarvestedIn2018Test() {
+    @ParameterizedTest
+    @MethodSource("supplierOption")
+    void findTeaTypesHarvestedIn2018Test(Supplier<Collection<TeaPackage>> supplier) {
         TeaPlantationFunctionality tpf= new TeaPlantationFunctionality();
-        List<TeaType> teaTypes = Stream.of(TeaType.FUXI_HUANGSHAN_MAOFENG, TeaType.QIMEN_HUANGSHAN_MAOFENG,
-                TeaType.YUAN_GUAPIAN).collect(Collectors.toList());
+        List<TeaType> teaTypes = List.of(TeaType.FUXI_HUANGSHAN_MAOFENG, TeaType.QIMEN_HUANGSHAN_MAOFENG,
+                TeaType.YUAN_GUAPIAN);
 
-        for(Supplier<Collection<TeaPackage>> supplier : suppliers) {
-            Collection<TeaPackage> teaPackages = Stream.of(tp).collect(Collectors.toCollection(supplier));
-            assertEquals(teaTypes, tpf.findTeaTypesHarvestedIn2018(teaPackages));
-        }
+        Collection<TeaPackage> teaPackages = Stream.of(tp).collect(Collectors.toCollection(supplier));
+        assertEquals(teaTypes, tpf.findTeaTypesHarvestedIn2018(teaPackages));
     }
 
-    @Test
-    void findMaxWeightForEachTeaTypeTest() {
+    @ParameterizedTest
+    @MethodSource("supplierOption")
+    void findTeaTypesHarvestedIn2018TestEmptyCollection(Supplier<Collection<TeaPackage>> supplier) {
         TeaPlantationFunctionality tpf= new TeaPlantationFunctionality();
-        List<Integer> weights = Stream.of(1200, 1000, 1500, 600)
-                .collect(Collectors.toList());
 
-        for(Supplier<Collection<TeaPackage>> supplier : suppliers) {
-            Collection<TeaPackage> teaPackages = Stream.of(tp).collect(Collectors.toCollection(supplier));
-            assertEquals(weights, tpf.findMaxWeightForEachTeaType(teaPackages));
-        }
+        Collection<TeaPackage> teaPackages = supplier.get();
+        teaPackages.addAll(emptyCollectionTP);
+        assertEquals(Collections.emptyList(), (tpf.findTeaTypesHarvestedIn2018(teaPackages)));
+    }
+
+    @ParameterizedTest
+    @MethodSource("supplierOption")
+    void findMaxWeightForEachTeaTypeTest(Supplier<Collection<TeaPackage>> supplier) {
+        TeaPlantationFunctionality tpf= new TeaPlantationFunctionality();
+        List<Integer> weights = List.of(1200, 1000, 1500, 600);
+
+        Collection<TeaPackage> teaPackages = Stream.of(tp).collect(Collectors.toCollection(supplier));
+        assertEquals(weights, tpf.findMaxWeightForEachTeaType(teaPackages));
+    }
+
+    @ParameterizedTest
+    @MethodSource("supplierOption")
+    void findMaxWeightForEachTeaTypeTestEmptyCollection(Supplier<Collection<TeaPackage>> supplier) {
+        TeaPlantationFunctionality tpf= new TeaPlantationFunctionality();
+        List<Integer> weights = List.of(0, 0, 0, 0);
+        Collection<TeaPackage> teaPackages = supplier.get();
+        teaPackages.addAll(emptyCollectionTP);
+        assertEquals(weights, (tpf.findMaxWeightForEachTeaType(teaPackages)));
     }
 }

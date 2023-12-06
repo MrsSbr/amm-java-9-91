@@ -25,6 +25,10 @@ public class TeaPlantation {
     public static void main(String[] args) {
        TeaPlantationCollectionsAnalysis teaPlantationCollectionsAnalysis = new TeaPlantationCollectionsAnalysis();
 
-       teaPlantationCollectionsAnalysis.testDifferentCollections();
+        try {
+            teaPlantationCollectionsAnalysis.testDifferentCollections();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
