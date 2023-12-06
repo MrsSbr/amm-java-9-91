@@ -1,5 +1,9 @@
-package org.example;
+package test.java.org.example;
 
+import main.java.org.example.PerformanceTester;
+import main.java.org.example.RepresentativeSelector;
+import main.java.org.example.VoteCounter;
+import main.java.org.example.VotingSimulator;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
