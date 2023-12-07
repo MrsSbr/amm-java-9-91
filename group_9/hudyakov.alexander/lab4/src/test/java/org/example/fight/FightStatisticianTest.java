@@ -41,24 +41,23 @@ class FightStatisticianTest {
             5, Set.of("Liu Kang", "Jade")
     );
 
+    final FightStatisticService fightStatisticService = new FightStatisticServiceImpl();
+
     @Test
     void getMonthsWithMostFatalitiesCountOverPastThreeYears() {
-        FightStatistician statistician = new FightStatistician(RESULTS);
-        Set<Month> months = statistician.getMonthsWithMostFatalitiesCountOverPastThreeYears();
+        Set<Month> months = fightStatisticService.getMonthsWithMostFatalitiesCountOverPastThreeYears(RESULTS);
         assertEquals(MONTHS, months);
     }
 
     @Test
     void getMonthsWithMostFatalitiesCountOverPastThreeYearsInEmptyCollection() {
-        FightStatistician statistician = new FightStatistician(Collections.emptyList());
-        Set<Month> months = statistician.getMonthsWithMostFatalitiesCountOverPastThreeYears();
+        Set<Month> months = fightStatisticService.getMonthsWithMostFatalitiesCountOverPastThreeYears(RESULTS);
         assertTrue(months.isEmpty());
     }
 
     @Test
     void getFightersVictoryCount() {
-        FightStatistician statistician = new FightStatistician(RESULTS);
-        Map<String, Integer> fightersVictories = statistician.getFightersVictoryCount();
+        Map<String, Integer> fightersVictories = fightStatisticService.getFightersVictoryCount(RESULTS);
         assertEquals(FIGHTERS_VICTORIES.size(), fightersVictories.size());
         FIGHTERS_VICTORIES.forEach((fighter, victoriesCount) -> {
             assertTrue(fightersVictories.containsKey(fighter));
@@ -68,15 +67,13 @@ class FightStatisticianTest {
 
     @Test
     void getFightersVictoryCountInEmptyCollection() {
-        FightStatistician statistician = new FightStatistician(Collections.emptyList());
-        Map<String, Integer> fightersVictories = statistician.getFightersVictoryCount();
+        Map<String, Integer> fightersVictories = fightStatisticService.getFightersVictoryCount(RESULTS);
         assertTrue(fightersVictories.isEmpty());
     }
 
     @Test
     void getTournamentsFighters() {
-        FightStatistician statistician = new FightStatistician(RESULTS);
-        Map<Integer, Set<String>> fighters = statistician.getTournamentsFighters();
+        Map<Integer, Set<String>> fighters = fightStatisticService.getTournamentsFighters(RESULTS);
         assertEquals(TOURNAMENTS_FIGHTERS.size(), fighters.size());
         TOURNAMENTS_FIGHTERS.forEach((key, expectedCollection) -> {
             assertTrue(fighters.containsKey(key));
@@ -87,8 +84,7 @@ class FightStatisticianTest {
 
     @Test
     void getTournamentsFightersInEmptyCollection() {
-        FightStatistician statistician = new FightStatistician(Collections.emptyList());
-        Map<Integer, Set<String>> fighters = statistician.getTournamentsFighters();
+        Map<Integer, Set<String>> fighters = fightStatisticService.getTournamentsFighters(RESULTS);
         assertTrue(fighters.isEmpty());
     }
 }

@@ -1,8 +1,18 @@
-package pokemon;
+package Pokemon;
+
+import java.util.Objects;
 
 // Наследник класса AbstractPokemon, представляющий электрического покемона
 public class ElectricPokemon extends AbstractPokemon {
     private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     // Конструктор с параметрами, использующий конструктор класса-предка
     public ElectricPokemon(String name, int level, String type) {
@@ -17,27 +27,23 @@ public class ElectricPokemon extends AbstractPokemon {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
-        ElectricPokemon that = (ElectricPokemon) o;
-
-        return type.equals(that.type);
+    public String toString() {
+        return "Покемон " + type;
     }
 
+    // Переопределение метода equals для сравнения двух покемонов
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true; // Если объекты ссылаются на одну и ту же память
+        if (obj == null || getClass() != obj.getClass()) return false; // Если объекты разных классов
+        ElectricPokemon that = (ElectricPokemon) obj;
+        return super.equals(obj) && type.equals(that.type); // Сравнение полей name и level
+    }
+
+    // Переопределение метода hashCode для вычисления хэш-кода покемона
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + type.hashCode();
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "ElectricPokemon{" +
-                "type='" + type + '\'' +
-                '}';
+        int result = type.hashCode(); // Хэш-код для поля type
+        return Objects.hash(super.hashCode(), result);
     }
 }

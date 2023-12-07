@@ -6,14 +6,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class FightStatistician {
-    private final List<FightResult> fightResults;
+public class FightStatisticServiceImpl implements FightStatisticService {
 
-    public FightStatistician(Collection<FightResult> fightResults) {
-        this.fightResults = new ArrayList<>(fightResults);
-    }
-
-    public Set<Month> getMonthsWithMostFatalitiesCountOverPastThreeYears() {
+    @Override
+    public Set<Month> getMonthsWithMostFatalitiesCountOverPastThreeYears(List<FightResult> fightResults) {
         LocalDate minimumDate = LocalDate.now().minusYears(3);
 
         Map<Month, Integer> monthMap = fightResults.stream()
@@ -30,12 +26,14 @@ public class FightStatistician {
                 .collect(Collectors.toSet());
     }
 
-    public Map<String, Integer> getFightersVictoryCount() {
+    @Override
+    public Map<String, Integer> getFightersVictoryCount(List<FightResult> fightResults) {
         return fightResults.stream()
                 .collect(Collectors.toMap(x -> x.firstWon() ? x.firstFighter() : x.secondFighter(), x -> 1, Integer::sum));
     }
 
-    public Map<Integer, Set<String>> getTournamentsFighters() {
+    @Override
+    public Map<Integer, Set<String>> getTournamentsFighters(List<FightResult> fightResults) {
         return fightResults.stream()
                 .collect(Collectors.groupingBy(FightResult::tournamentNumber))
                 .entrySet().stream()

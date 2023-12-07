@@ -1,6 +1,9 @@
-package pokemon;
+package Pokemon;
 
 // Интерфейс для классов, представляющих покемонов
 public interface Pokemon {
+    String toString(); // Метод для представления покемона в виде строки
+    boolean equals(Object obj); // Переопределение метода сравнения объектов
+    int hashCode(); // Переопределение метода вычисления хэш-кода
     void speak(); // Метод для голосового общения покемона
 }

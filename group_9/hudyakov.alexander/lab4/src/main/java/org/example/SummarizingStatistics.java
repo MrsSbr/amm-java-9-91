@@ -1,7 +1,8 @@
 package org.example;
 
 import org.example.fight.FightResult;
-import org.example.fight.FightStatistician;
+import org.example.fight.FightStatisticService;
+import org.example.fight.FightStatisticServiceImpl;
 import org.example.json.JsonFightResultsDeserializer;
 
 import java.net.URI;
@@ -25,14 +26,14 @@ public class SummarizingStatistics {
 
             logger.log(Level.FINE, "File read successfully");
 
-            FightStatistician statistician = new FightStatistician(results);
+            FightStatisticService statistician = new FightStatisticServiceImpl();
 
             System.out.print("Fighters victories count: ");
-            System.out.println(statistician.getFightersVictoryCount());
+            System.out.println(statistician.getFightersVictoryCount(results));
             System.out.print("Tournaments fighters: ");
-            System.out.println(statistician.getTournamentsFighters());
+            System.out.println(statistician.getTournamentsFighters(results));
             System.out.print("Months with most fatalities count over past three years: ");
-            System.out.println(statistician.getMonthsWithMostFatalitiesCountOverPastThreeYears());
+            System.out.println(statistician.getMonthsWithMostFatalitiesCountOverPastThreeYears(results));
 
             logger.log(Level.FINE, "Statistics summarized successfully");
 
