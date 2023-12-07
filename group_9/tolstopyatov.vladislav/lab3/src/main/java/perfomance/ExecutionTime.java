@@ -1,20 +1,18 @@
 package perfomance;
 
 public class ExecutionTime {
-    private long creation;
     private long theNumberOfSacrificesAfterWhichRainFellTheNextDay;
     private long theLastMonthInWhichThereWereNoAnimalSacrifices;
     private long compareTheEffectivenessOfHumanSacrificesComparedToAnimals;
 
-    public ExecutionTime(long creation, long theNumberOfSacrificesAfterWhichRainFellTheNextDay, long theLastMonthInWhichThereWereNoAnimalSacrifices, long compareTheEffectivenessOfHumanSacrificesComparedToAnimals) {
-        this.creation = creation;
+    public ExecutionTime(
+            long theNumberOfSacrificesAfterWhichRainFellTheNextDay,
+            long theLastMonthInWhichThereWereNoAnimalSacrifices,
+            long compareTheEffectivenessOfHumanSacrificesComparedToAnimals
+    ) {
         this.theNumberOfSacrificesAfterWhichRainFellTheNextDay = theNumberOfSacrificesAfterWhichRainFellTheNextDay;
         this.theLastMonthInWhichThereWereNoAnimalSacrifices = theLastMonthInWhichThereWereNoAnimalSacrifices;
         this.compareTheEffectivenessOfHumanSacrificesComparedToAnimals = compareTheEffectivenessOfHumanSacrificesComparedToAnimals;
-    }
-
-    public long getCreation() {
-        return creation;
     }
 
     public long getTheNumberOfSacrificesAfterWhichRainFellTheNextDay() {
@@ -27,10 +25,6 @@ public class ExecutionTime {
 
     public long getCompareTheEffectivenessOfHumanSacrificesComparedToAnimals() {
         return compareTheEffectivenessOfHumanSacrificesComparedToAnimals;
-    }
-
-    public void setCreation(long creation) {
-        this.creation = creation;
     }
 
     public void setTheNumberOfSacrificesAfterWhichRainFellTheNextDay(long theNumberOfSacrificesAfterWhichRainFellTheNextDay) {

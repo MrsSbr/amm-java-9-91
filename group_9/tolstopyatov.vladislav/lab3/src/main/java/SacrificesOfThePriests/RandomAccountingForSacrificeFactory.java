@@ -21,7 +21,6 @@ public class RandomAccountingForSacrificeFactory {
     private LocalDate getRandLocalDate() {
         LocalDate start = LocalDate.of(1970, Month.JANUARY, 1);
         long days = ChronoUnit.DAYS.between(start, LocalDate.now());
-        LocalDate randomDate = start.plusDays(new Random().nextInt((int) days + 1));
-        return randomDate;
+        return start.plusDays(new Random().nextInt((int) days + 1));
     }
 }
