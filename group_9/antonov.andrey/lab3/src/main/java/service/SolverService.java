@@ -1,6 +1,6 @@
 package service;
 
-import entity.Pair;
+import entity.TypeToCapacity;
 import entity.PowerPlant;
 import entity.TypePowerPlant;
 import lombok.AllArgsConstructor;
@@ -33,9 +33,9 @@ public class SolverService {
     }
 
     /*БЕЗ МАП Средняя мощность для каждого типа электростанций за последние 3 месяца*/
-    public List<Pair<TypePowerPlant, Double>> getAverageProductionCapacityByTypePowerPlants() {
+    public List<TypeToCapacity<TypePowerPlant, Double>> getAverageProductionCapacityByTypePowerPlants() {
 
-        var result = new ArrayList<Pair<TypePowerPlant, Double>>();
+        var result = new ArrayList<TypeToCapacity<TypePowerPlant, Double>>();
 
         //получаем listы с электростанциями по каждому типу(учитывая условие на дату)
         var listAtomicPowerPlant = getListByPowerPlants(TypePowerPlant.ATOMIC);
@@ -47,9 +47,9 @@ public class SolverService {
         var averageByHydro = getAverageByPowerPlantType(listHydroPowerPlant);
         var averageBySolar = getAverageByPowerPlantType(listSolarPowerPlant);
 
-        result.add(Pair.of(TypePowerPlant.ATOMIC, averageByAtomic));
-        result.add(Pair.of(TypePowerPlant.HYDRO, averageByHydro));
-        result.add(Pair.of(TypePowerPlant.SOLAR, averageBySolar));
+        result.add(TypeToCapacity.of(TypePowerPlant.ATOMIC, averageByAtomic));
+        result.add(TypeToCapacity.of(TypePowerPlant.HYDRO, averageByHydro));
+        result.add(TypeToCapacity.of(TypePowerPlant.SOLAR, averageBySolar));
 
         return result;
     }

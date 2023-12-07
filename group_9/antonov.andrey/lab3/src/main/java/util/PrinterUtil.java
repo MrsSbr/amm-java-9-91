@@ -1,11 +1,11 @@
 package util;
 
 import lombok.experimental.UtilityClass;
-import service.AnalyzerService;
+import service.AnalyzerServiceImpl;
 
 @UtilityClass
 public class PrinterUtil {
-    public static void printStatisticByPerformanceService(AnalyzerService analyzerService, String message) {
+    public static void printStatisticByPerformanceService(AnalyzerServiceImpl analyzerService, String message) {
         var statistics = analyzerService.getStatisticsBySolverService();
         System.out.println("Средняя статистика выполнения для: " + message);
         System.out.println("Время получения специального списка электростанций: " + statistics.getAvgTimeSearchSpecialPowerPlantType());

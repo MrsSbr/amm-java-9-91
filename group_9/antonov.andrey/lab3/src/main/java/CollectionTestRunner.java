@@ -1,4 +1,4 @@
-import service.AnalyzerService;
+import service.AnalyzerServiceImpl;
 import service.SolverService;
 
 import java.util.ArrayList;
@@ -22,14 +22,14 @@ public class CollectionTestRunner {
         var solverService2 = new SolverService(powerPlants2);
         var solverService3 = new SolverService(powerPlants3);
 
-        var analyzerService1 = new AnalyzerService(solverService1);
-        var analyzerService2 = new AnalyzerService(solverService2);
-        var analyzerService3 = new AnalyzerService(solverService3);
+        var analyzerService1 = new AnalyzerServiceImpl(solverService1);
+        var analyzerService2 = new AnalyzerServiceImpl(solverService2);
+        var analyzerService3 = new AnalyzerServiceImpl(solverService3);
 
         printStatisticByAnalyzerServices(analyzerService1, analyzerService2, analyzerService3);
     }
 
-    private static void printStatisticByAnalyzerServices(AnalyzerService... analyzerServices) {
+    private static void printStatisticByAnalyzerServices(AnalyzerServiceImpl... analyzerServices) {
         for (var analyzerService : analyzerServices) {
             var collection = analyzerService.getSolverService().getPowerPlants();
             printStatisticByPerformanceService(analyzerService, getTypeCollection(collection));

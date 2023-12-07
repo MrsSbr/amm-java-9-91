@@ -1,7 +1,7 @@
 package service;
 
 
-import entity.Pair;
+import entity.TypeToCapacity;
 import entity.PowerPlant;
 import entity.TypePowerPlant;
 import org.junit.jupiter.api.Test;
@@ -26,10 +26,10 @@ class SolverServiceTest {
             PowerPlant.of(LocalDate.of(2023, 10, 18), TypePowerPlant.HYDRO, 55),
             PowerPlant.of(LocalDate.of(2023, 9, 19), TypePowerPlant.SOLAR, 53));
 
-    private static final List<Pair<TypePowerPlant, Double>> LIST_AVG_BY_POWER_PLANTS = List.of(
-            Pair.of(TypePowerPlant.ATOMIC, 105.0),
-            Pair.of(TypePowerPlant.HYDRO, 55.0),
-            Pair.of(TypePowerPlant.SOLAR, 56.5)
+    private static final List<TypeToCapacity<TypePowerPlant, Double>> LIST_AVG_BY_POWER_PLANTS = List.of(
+            TypeToCapacity.of(TypePowerPlant.ATOMIC, 105.0),
+            TypeToCapacity.of(TypePowerPlant.HYDRO, 55.0),
+            TypeToCapacity.of(TypePowerPlant.SOLAR, 56.5)
     );
 
     private static final List<TypePowerPlant> TYPE_POWER_PLANT_LIST = List.of(TypePowerPlant.SOLAR, TypePowerPlant.HYDRO);

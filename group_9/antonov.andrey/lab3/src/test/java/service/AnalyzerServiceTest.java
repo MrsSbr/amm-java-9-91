@@ -21,7 +21,7 @@ class AnalyzerServiceTest {
     void shouldSuccessFindStatisticTest() {
         var collectionForTest = getCollectionForTest(DEFAULT_CAPACITY);
         var solverService = new SolverService(collectionForTest);
-        var analyzerService = new AnalyzerService(solverService);
+        var analyzerService = new AnalyzerServiceImpl(solverService);
         var statisticsBySolverService = analyzerService.getStatisticsBySolverService();
     }
 
