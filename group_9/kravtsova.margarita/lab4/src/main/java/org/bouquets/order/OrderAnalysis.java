@@ -32,13 +32,14 @@ public class OrderAnalysis {
        int maxCountFlowers = monthWithFlowers.values().stream()
                                                       .map(Set::size)
                                                       .max(Comparator.naturalOrder())
-                                                      .get();
+                                                      .orElseThrow();
        return monthWithFlowers.entrySet().stream()
                                          .filter(month -> month.getValue().size() == maxCountFlowers)
                                          .map(Map.Entry::getKey)
                                          .collect(Collectors.toList());
     }
-    public Map<BouquetType,Integer> floristEarnings() {                                  //найти сколько заработал флорист по каждому типу букетов за последний год
+    public Map<BouquetType,Integer> floristEarnings() {
+        //найти сколько заработал флорист по каждому типу букетов за последний год
         Map<BouquetType,Integer> earnings = new HashMap<>();
         LocalDate date = LocalDate.now().minusYears(1);
         orders.stream()
@@ -51,7 +52,8 @@ public class OrderAnalysis {
         orders.forEach(order -> order.getFlowers().forEach(flower -> receiving.merge(flower,
                                                             order.getReceivingType().equals(ReceivingType.DELIVERY) ? 1 : -1, Integer::sum)));
         return receiving.entrySet().stream()
-                                   .map(flower -> Map.entry(flower.getKey(),flower.getValue() > 0 ? ReceivingType.DELIVERY : ReceivingType.MANUALLY))
+                                   .map(flower -> Map.entry(flower.getKey(),flower.getValue() > 0
+                                           ? ReceivingType.DELIVERY : ReceivingType.MANUALLY))
                                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 }
