@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PojoToJsonConvertor {
 
-    public static String getJSONStr(Object obj) {
+    public String getJSONStr(Object obj) {
         Class type = obj.getClass();
         if (type.isPrimitive() || WrappedPrimitiveUtils.isWrappedPrimitive(type)
                 || type.isEnum() || type == String.class) {
@@ -19,18 +19,17 @@ public class PojoToJsonConvertor {
         return getJSONStrHelper(obj, obj.getClass(), 0);
     }
 
-    private static String getJSONStrHelper(Object obj, Class objType, int indentCount) {
+    private String getJSONStrHelper(Object obj, Class objType, int indentCount) {
         if (obj == null) {
             return "null";
         }
 
-        if (objType.isEnum() || objType == String.class
-                || WrappedPrimitiveUtils.wrappedFromUnknown(objType) == Character.class) {
-            return convertEnumOrStringOrChar(obj);
+        if (objType.isEnum() || objType == String.class || WrappedPrimitiveUtils.wrappedFromUnknown(objType) == Character.class) {
+            return convertStringCharEnum(obj);
         }
 
         if (objType.isPrimitive() || WrappedPrimitiveUtils.isWrappedPrimitive(objType)) {
-            return convertPrimitive(obj);
+            return obj.toString();
         }
 
         if (Collection.class.isAssignableFrom(objType)) {
@@ -44,20 +43,28 @@ public class PojoToJsonConvertor {
         return convertComplex(obj, indentCount);
     }
 
-    private static String convertPrimitive(Object obj) {
-        return obj.toString();
-    }
-
-    private static String convertEnumOrStringOrChar(Object obj) {
+    private String convertStringCharEnum(Object obj) {
         StringBuilder jsonStrBuilder = new StringBuilder();
+        String transformedStr;
+
+        if (obj.getClass() == Character.class) {
+            transformedStr = EscapeSymbolUtils.transformWithEscapes((Character) obj);
+        } else if (obj.getClass() == String.class) {
+            transformedStr = EscapeSymbolUtils.transformWithEscapes((String) obj);
+        } else if (obj.getClass().isEnum()) {
+            transformedStr = obj.toString();
+        } else {
+            transformedStr = EscapeSymbolUtils.transformWithEscapes((char) obj);
+        }
+
         return jsonStrBuilder
                 .append("\"")
-                .append(obj)
+                .append(transformedStr)
                 .append("\"")
                 .toString();
     }
 
-    private static String convertCollection(Object obj, int indentCount) {
+    private String convertCollection(Object obj, int indentCount) {
         Collection collection = ((Collection) obj);
 
         if (collection.isEmpty()) {
@@ -84,7 +91,7 @@ public class PojoToJsonConvertor {
                 .toString();
     }
 
-    private static String convertArray(Object obj, int indentCount) {
+    private String convertArray(Object obj, int indentCount) {
         String indentStr = getIndentStr(indentCount);
         StringBuilder jsonStrBuilder = new StringBuilder("[");
 
@@ -111,7 +118,7 @@ public class PojoToJsonConvertor {
                 .toString();
     }
 
-    private static String convertComplex(Object obj, int indentCount) {
+    private String convertComplex(Object obj, int indentCount) {
         String indentStr = getIndentStr(indentCount);
         StringBuilder jsonStrBuilder = new StringBuilder("{");
 
@@ -144,14 +151,15 @@ public class PojoToJsonConvertor {
         return jsonStrBuilder
                 .append("\n")
                 .append(indentStr)
-                .append("}").toString();
+                .append("}")
+                .toString();
     }
 
-    private static String getIndentStr(int indentCount) {
+    private String getIndentStr(int indentCount) {
         return " ".repeat(indentCount);
     }
 
-    private static List<Field> getAllFields(Class type) {
+    private List<Field> getAllFields(Class type) {
         List<Field> fields = new ArrayList<>();
         for (Class superType = type; superType != null; superType = superType.getSuperclass()) {
             fields.addAll(Arrays.stream(superType.getDeclaredFields()).toList());

@@ -25,7 +25,9 @@ public class InvalidArgsTest {
     @ParameterizedTest
     @MethodSource("getIllegalArgs")
     void serializerThrowsIllegalArgumentException(Object arg) {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> PojoToJsonConvertor.getJSONStr(arg));
+        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> serializer.getJSONStr(arg));
     }
 
     @ParameterizedTest
@@ -33,6 +35,7 @@ public class InvalidArgsTest {
     void deserializerThrowsIllegalArgumentException(Object arg) {
         JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
         Class argType = arg.getClass();
+
         Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.getObject(argType, ""));
         Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.getCollection(argType, null, ""));
         Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.getCollectionArray(argType, null,""));

@@ -24,9 +24,12 @@ public class WithInheritanceClassesTest {
     @ParameterizedTest
     @MethodSource("getInheritanceArgs")
     void serializeAndDeserializeTest(Object obj) {
+        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
         JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
-        String jsonString = PojoToJsonConvertor.getJSONStr(obj);
+
+        String jsonString = serializer.getJSONStr(obj);
         Object deserializedObj = deserializer.getObject(obj.getClass(), jsonString);
+
         Assertions.assertEquals(obj, deserializedObj);
     }
 }

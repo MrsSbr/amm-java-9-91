@@ -24,12 +24,12 @@ public class WithSimpleArraysClassesTest {
     @ParameterizedTest
     @MethodSource("getArrArgs")
     void serializeAndDeserializeTest(Object obj) {
+        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
         JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
-        String jsonString = PojoToJsonConvertor.getJSONStr(obj);
-        System.out.println(jsonString);
+
+        String jsonString = serializer.getJSONStr(obj);
         Object deserializedObj = deserializer.getObject(obj.getClass(), jsonString);
-        System.out.println();
-        System.out.println(PojoToJsonConvertor.getJSONStr(deserializedObj));
+
         Assertions.assertEquals(obj, deserializedObj);
     }
 }

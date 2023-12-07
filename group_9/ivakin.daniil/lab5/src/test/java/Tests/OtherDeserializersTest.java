@@ -18,9 +18,12 @@ public class OtherDeserializersTest {
         intList.add(null);
         intList.add(3);
 
+        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
         JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
-        String jsonString = PojoToJsonConvertor.getJSONStr(intList);
+
+        String jsonString = serializer.getJSONStr(intList);
         Object deserializedList = deserializer.getCollection(intList.getClass(), List.of(Integer.class), jsonString);
+
         Assertions.assertEquals(intList, deserializedList);
     }
 
@@ -31,9 +34,12 @@ public class OtherDeserializersTest {
         intArr[1] = null;
         intArr[2] = 1;
 
+        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
         JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
-        String jsonString = PojoToJsonConvertor.getJSONStr(intArr);
+
+        String jsonString = serializer.getJSONStr(intArr);
         Object deserializedArr = deserializer.getSimpleArray(intArr.getClass(), jsonString);
+
         Assertions.assertTrue(Arrays.equals(intArr, (Integer[]) deserializedArr));
     }
 
@@ -51,9 +57,12 @@ public class OtherDeserializersTest {
         listArr[1] = null;
         listArr[2] = list2;
 
+        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
         JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
-        String jsonString = PojoToJsonConvertor.getJSONStr(listArr);
+
+        String jsonString = serializer.getJSONStr(listArr);
         Object deserializedArr = deserializer.getCollectionArray(listArr.getClass(), List.of(Integer.class), jsonString);
+
         Assertions.assertTrue(Arrays.equals(listArr, (List<Integer>[]) deserializedArr));
     }
 }

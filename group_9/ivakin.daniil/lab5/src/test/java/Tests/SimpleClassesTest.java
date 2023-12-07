@@ -3,6 +3,7 @@ package Tests;
 import Convertors.JsonToPojoConvertor;
 import Convertors.PojoToJsonConvertor;
 import Examples.Classes.Simple.ClassWithClassFields;
+import Examples.Classes.Simple.EscapeSymbols;
 import Examples.Classes.Simple.ManyEnumOnly;
 import Examples.Classes.Simple.ManyStringOnly;
 import Examples.Classes.Simple.MixedAll;
@@ -32,16 +33,23 @@ public class SimpleClassesTest {
                 Arguments.of(new ManyStringOnly()),
                 Arguments.of(new MixedPrimWrap()),
                 Arguments.of(new MixedAll()),
-                Arguments.of(new ClassWithClassFields())
+                Arguments.of(new ClassWithClassFields()),
+                Arguments.of(new EscapeSymbols())
         );
     }
 
     @ParameterizedTest
     @MethodSource("getSimpleArgs")
     void serializeAndDeserializeTest(Object obj) {
+        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
         JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
-        String jsonString = PojoToJsonConvertor.getJSONStr(obj);
+
+        String jsonString = serializer.getJSONStr(obj);
+        System.out.println(jsonString);
         Object deserializedObj = deserializer.getObject(obj.getClass(), jsonString);
+
+        System.out.println(jsonString);
+
         Assertions.assertEquals(obj, deserializedObj);
     }
 }

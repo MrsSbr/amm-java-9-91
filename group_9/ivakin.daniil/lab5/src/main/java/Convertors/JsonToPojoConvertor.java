@@ -52,7 +52,8 @@ public class JsonToPojoConvertor {
     }
 
     private static Iterator<String> getJsonIt(String jsonString) {
-        return jsonString.lines().map(String::trim).toList().iterator();
+        return jsonString.
+                lines().map(String::trim).toList().iterator();
     }
 
     //Получить объект

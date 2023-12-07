@@ -28,26 +28,26 @@ public class ComplexClassesTest {
         Map<String, List<Class>> colInColMap = new HashMap<>();
         colInColMap.put("listOfList", List.of(List.class, MixedAll.class));
 
-        Map<String, List<Class>> colOfcolInArr = new HashMap<>();
-        colOfcolInArr.put("list", List.of(List[].class, MixedAll.class));
+        Map<String, List<Class>> colOfcolInArrMap = new HashMap<>();
+        colOfcolInArrMap.put("list", List.of(List[].class, MixedAll.class));
 
         return Stream.of(
                 Arguments.of(new ArrayInCollection(), arrInColMap),
                 Arguments.of(new CollectionInArray(), colInArrMap),
                 Arguments.of(new CollectionInCollection(), colInColMap),
-                Arguments.of(new CollectionOfCollectionInArray(), colOfcolInArr)
+                Arguments.of(new CollectionOfCollectionInArray(), colOfcolInArrMap)
         );
     }
 
     @ParameterizedTest
     @MethodSource("getComplexArgs")
     void serializeAndDeserializeTest(Object obj, Map<String, List<Class>> mapper) {
+        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
         JsonToPojoConvertor deserializer = new JsonToPojoConvertor(mapper);
-        String jsonString = PojoToJsonConvertor.getJSONStr(obj);
-        //System.out.println(jsonString);
+
+        String jsonString = serializer.getJSONStr(obj);
         Object deserializedObj = deserializer.getObject(obj.getClass(), jsonString);
-        //System.out.println();
-        //System.out.println( PojoToJsonConvertor.getJSONStr(deserializedObj));
+
         Assertions.assertEquals(obj, deserializedObj);
     }
 }

@@ -7,14 +7,17 @@ public class Demonstration {
     public static void main(String[] args) {
         Cat cat = new Cat("Матроскин", 10, Gender.MALE, null, false);
 
-        String jsonString = PojoToJsonConvertor.getJSONStr(cat);
+        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
+        JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
+
+
+        String jsonString = serializer.getJSONStr(cat);
 
         System.out.println("Объект в формате JSON:");
         System.out.println(jsonString);
 
-        JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
         Cat deserializedCat = (Cat) deserializer.getObject(Cat.class, jsonString);
-        jsonString = PojoToJsonConvertor.getJSONStr(deserializedCat);
+        jsonString = serializer.getJSONStr(deserializedCat);
         System.out.println("Десериализованный объект в формате JSON:");
         System.out.println(jsonString);
 

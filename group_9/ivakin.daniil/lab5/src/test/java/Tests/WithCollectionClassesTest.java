@@ -33,9 +33,12 @@ public class WithCollectionClassesTest {
     @ParameterizedTest
     @MethodSource("getCollectionArgs")
     void serializeAndDeserializeTest(Object obj, Map<String, List<Class>> mapper) {
+        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
         JsonToPojoConvertor deserializer = new JsonToPojoConvertor(mapper);
-        String jsonString = PojoToJsonConvertor.getJSONStr(obj);
+
+        String jsonString = serializer.getJSONStr(obj);
         Object deserializedObj = deserializer.getObject(obj.getClass(), jsonString);
+
         Assertions.assertEquals(obj, deserializedObj);
     }
 }
