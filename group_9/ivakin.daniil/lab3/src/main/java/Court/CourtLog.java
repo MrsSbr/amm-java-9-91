@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CourtLog {
-    private Collection<Lawsuit> lawsuits;
+    private final Collection<Lawsuit> lawsuits;
 
     public CourtLog(Supplier<Collection<Lawsuit>> collectionSupplier,
                     Collection<Lawsuit> collection) {
