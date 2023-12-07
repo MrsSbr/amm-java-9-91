@@ -21,12 +21,12 @@ public class WorkingWithBouquets {
                                              .collect(Collectors.toList()), "orders.json");
         List<Order> orders = readJsonFile(fileJson.getName());
         System.out.println(orders + "\n");
-        OrderAnalysis orderAnalysis = new OrderAnalysis(orders);
+        OrderAnalysis orderAnalysis = new OrderAnalysis();
         System.out.println("Месяцы, в которые заказывают букеты, состоящие из наиболее разнообразных цветов:\n" +
-                 orderAnalysis.monthMostDiverseFlowers() + "\n");
+                 orderAnalysis.monthMostDiverseFlowers(orders) + "\n");
         System.out.println("Заработок флориста по каждому типу букетов за последний год\n" +
-                 orderAnalysis.floristEarnings() + "\n");
-        System.out.println("Способы получения цветов:\n" + orderAnalysis.receivingFlowers() + "\n");
+                 orderAnalysis.floristEarnings(orders) + "\n");
+        System.out.println("Способы получения цветов:\n" + orderAnalysis.receivingFlowers(orders) + "\n");
     }
     private static List<Order> readJsonFile(String fileName) {
         try {

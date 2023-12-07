@@ -16,11 +16,11 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class OrderAnalysisTest {
-    OrderAnalysis orderAnalysis = new OrderAnalysis(List.of(
+    OrderAnalysis orderAnalysis = new OrderAnalysis();
+    List<Order> orders = List.of(
             new Order(LocalDate.of(2023, 1, 15),
                     BouquetType.JUBILEE,
                     List.of(FlowersType.ASTER, FlowersType.CHAMOMILE, FlowersType.ROSE,
@@ -56,9 +56,8 @@ class OrderAnalysisTest {
                     List.of(FlowersType.ROSE, FlowersType.LILY, FlowersType.CHRYSANTHEMUM, FlowersType.CHAMOMILE,
                             FlowersType.PEONY, FlowersType.TULIP, FlowersType.ASTER),
                     4000,
-                    ReceivingType.MANUALLY)));
-    OrderAnalysis orderAnalysisEmptyContainer = new OrderAnalysis(new ArrayList<>());
-    OrderAnalysis orderAnalysisEmptyListFlowers = new OrderAnalysis(List.of(
+                    ReceivingType.MANUALLY));
+    List<Order> emptyListFlowersOrders = List.of(
             new Order(LocalDate.of(2023, 5, 19),
                     BouquetType.JUBILEE,
                     List.of(),
@@ -73,10 +72,10 @@ class OrderAnalysisTest {
                     BouquetType.BOX,
                     List.of(),
                     3000,
-                    ReceivingType.DELIVERY)));
+                    ReceivingType.DELIVERY));
     @Test
     void monthMostDiverseFlowers() {
-        assertEquals(List.of(Month.JUNE), orderAnalysis.monthMostDiverseFlowers());
+        assertEquals(List.of(Month.JUNE), orderAnalysis.monthMostDiverseFlowers(orders));
     }
 
     @Test
@@ -86,7 +85,7 @@ class OrderAnalysisTest {
                             BouquetType.BOX, 1000,
                             BouquetType.WEDDING, 6000,
                             BouquetType.BUSINESS, 2000,
-                            BouquetType.ROMANTIC, 4000), orderAnalysis.floristEarnings());
+                            BouquetType.ROMANTIC, 4000), orderAnalysis.floristEarnings(orders));
     }
 
     @Test
@@ -99,33 +98,33 @@ class OrderAnalysisTest {
                             FlowersType.GYPSOFHILA, ReceivingType.MANUALLY,
                             FlowersType.HYDRANGEA, ReceivingType.DELIVERY,
                             FlowersType.CHRYSANTHEMUM, ReceivingType.MANUALLY,
-                            FlowersType.TULIP, ReceivingType.MANUALLY), orderAnalysis.receivingFlowers());
+                            FlowersType.TULIP, ReceivingType.MANUALLY), orderAnalysis.receivingFlowers(orders));
     }
 
     @Test
     void monthMostDiverseFlowersEmptyContainer() {
-        List<Month> actualResult = orderAnalysisEmptyContainer.monthMostDiverseFlowers();
+        List<Month> actualResult = orderAnalysis.monthMostDiverseFlowers(new ArrayList<>());
         assertEquals(Month.values().length, actualResult.size());
         assertTrue(actualResult.containsAll(Arrays.stream(Month.values()).toList()));
     }
 
     @Test
     void floristEarningsEmptyContainer() {
-        assertEquals(new HashMap<>(), orderAnalysisEmptyContainer.floristEarnings());
+        assertEquals(new HashMap<>(), orderAnalysis.floristEarnings(new ArrayList<>()));
     }
 
     @Test
     void receivingFlowersEmptyContainer() {
-        assertEquals(new HashMap<>(), orderAnalysisEmptyContainer.receivingFlowers());
+        assertEquals(new HashMap<>(), orderAnalysis.receivingFlowers(new ArrayList<>()));
     }
     @Test
     void monthMostDiverseFlowersEmptyListFlowers() {
-        List<Month> actualResult = orderAnalysisEmptyListFlowers.monthMostDiverseFlowers();
+        List<Month> actualResult = orderAnalysis.monthMostDiverseFlowers(emptyListFlowersOrders);
         assertEquals(Month.values().length, actualResult.size());
         assertTrue(actualResult.containsAll(Arrays.stream(Month.values()).toList()));
     }
     @Test
     void receivingFlowersEmptyListFlowers() {
-        assertEquals(new HashMap<>(), orderAnalysisEmptyListFlowers.receivingFlowers());
+        assertEquals(new HashMap<>(), orderAnalysis.receivingFlowers(emptyListFlowersOrders));
     }
 }

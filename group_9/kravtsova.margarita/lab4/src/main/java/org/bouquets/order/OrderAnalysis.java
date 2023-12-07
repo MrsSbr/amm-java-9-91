@@ -2,7 +2,6 @@ package org.bouquets.order;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,17 +11,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class OrderAnalysis {
-    private List<Order> orders;
-    public OrderAnalysis(List<Order> orders) {
-        this.orders = orders;
-    }
-    public Collection<Order> getOrders() {
-        return orders;
-    }
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
-    public List<Month> monthMostDiverseFlowers() {                                         //найти месяцы в которые заказывают букеты, состоящие из наиболее разнообразных цветов
+    public List<Month> monthMostDiverseFlowers(List<Order> orders) {
+        //найти месяцы в которые заказывают букеты, состоящие из наиболее разнообразных цветов
        Map<Month, Set<FlowersType>> monthWithFlowers = new HashMap<>();
        for(Month month : Month.values()) {
            monthWithFlowers.put(month, new HashSet<>());
@@ -38,7 +28,7 @@ public class OrderAnalysis {
                                          .map(Map.Entry::getKey)
                                          .collect(Collectors.toList());
     }
-    public Map<BouquetType,Integer> floristEarnings() {
+    public Map<BouquetType,Integer> floristEarnings(List<Order> orders) {
         //найти сколько заработал флорист по каждому типу букетов за последний год
         Map<BouquetType,Integer> earnings = new HashMap<>();
         LocalDate date = LocalDate.now().minusYears(1);
@@ -47,10 +37,11 @@ public class OrderAnalysis {
               .forEach(order -> earnings.merge(order.getBouquetType(), order.getPrice(), Integer::sum));
         return earnings;
     }
-    public Map<FlowersType, ReceivingType> receivingFlowers() {                           //для каждого цветка узнать его чаще доставляют (1) или забирают самовывозом (-1)
+    public Map<FlowersType, ReceivingType> receivingFlowers(List<Order> orders) {
+        //для каждого цветка узнать его чаще доставляют (1) или забирают самовывозом (-1)
         Map<FlowersType,Integer> receiving = new HashMap<>();
         orders.forEach(order -> order.getFlowers().forEach(flower -> receiving.merge(flower,
-                                                            order.getReceivingType().equals(ReceivingType.DELIVERY) ? 1 : -1, Integer::sum)));
+                order.getReceivingType().equals(ReceivingType.DELIVERY) ? 1 : -1, Integer::sum)));
         return receiving.entrySet().stream()
                                    .map(flower -> Map.entry(flower.getKey(),flower.getValue() > 0
                                            ? ReceivingType.DELIVERY : ReceivingType.MANUALLY))
