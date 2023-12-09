@@ -31,7 +31,7 @@ public class CollectorBySport implements Collector<OlympicStatistic,
     public BiConsumer<Map<Sport, List<String>>, OlympicStatistic> accumulator() {
         return (map, olympicStatistic) -> {
             if (predicate.test(olympicStatistic)) {
-                final var defaultList = new ArrayList<String>();
+                final List<String> defaultList = new ArrayList<>();
                 final var actualList = map.getOrDefault(olympicStatistic.getSport(), defaultList);
                 actualList.add(olympicStatistic.getAthlete());
                 map.put(olympicStatistic.getSport(), actualList);
@@ -42,7 +42,7 @@ public class CollectorBySport implements Collector<OlympicStatistic,
     @Override
     public BinaryOperator<Map<Sport, List<String>>> combiner() {
         return (map1, map2) -> {
-            final var result = new HashMap<Sport, List<String>>();
+            final Map<Sport, List<String>> result = new HashMap<>();
             map2.forEach((k, v) -> {
                 final var orDefault = new ArrayList<String>();
                 final var actualList = result.getOrDefault(k, orDefault);
@@ -56,7 +56,7 @@ public class CollectorBySport implements Collector<OlympicStatistic,
     @Override
     public Function<Map<Sport, List<String>>, Map<Sport, List<String>>> finisher() {
         return (map) -> {
-            final var result = new HashMap<Sport, List<String>>();
+            final Map<Sport, List<String>> result = new HashMap<>();
             map.forEach((key, value) -> {
                 final var distinctSortedNames = value
                     .stream()
