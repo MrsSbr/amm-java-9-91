@@ -30,35 +30,6 @@ public class Deserializer {
         this.fieldInnerTypes = null;
     }
 
-    //Десериализация значения из преобразованной строки-значения
-    private Object deserializeValue(Class valueType, String valueStr, Iterator<String> jsonIt) {
-        if (valueStr.equals("null"))
-            return null;
-
-        if (WrappedPrimitiveUtils.wrappedFromUnknown(valueType) == Character.class) {
-            String desStrValue = EscSymbDeserializer.deserializeWithEsc(valueStr.substring(1, valueStr.length() - 1));
-            return WrappedPrimitiveUtils.getWrappedFromStr(valueType, desStrValue);
-        }
-
-        if (valueType == String.class) {
-            return EscSymbDeserializer.deserializeWithEsc(valueStr.substring(1, valueStr.length() - 1));
-        }
-
-        if (valueType.isEnum()) {
-            return Enum.valueOf(valueType, valueStr.substring(1, valueStr.length() - 1));
-        }
-
-        if (valueType.isPrimitive() || WrappedPrimitiveUtils.isWrappedPrimitive(valueType)) {
-            return WrappedPrimitiveUtils.getWrappedFromStr(valueType, valueStr);
-        }
-
-        if (valueType.isArray()) {
-            return deserializeSimpleArray(valueType, jsonIt);
-        }
-
-        return deserializeComplex(valueType, jsonIt);
-    }
-
     //Получить объект
     public Object deserializeObject(Class objType, String jsonString) {
         if (objType.isPrimitive() || WrappedPrimitiveUtils.isWrappedPrimitive(objType) || objType.isArray()
@@ -123,6 +94,34 @@ public class Deserializer {
         return null;
     }
 
+    //Десериализация значения из преобразованной строки-значения
+    private Object deserializeValue(Class valueType, String valueStr, Iterator<String> jsonIt) {
+        if (valueStr.equals("null"))
+            return null;
+
+        if (WrappedPrimitiveUtils.wrappedFromUnknown(valueType) == Character.class) {
+            String desStrValue = EscSymbDeserializer.deserializeWithEsc(valueStr.substring(1, valueStr.length() - 1));
+            return WrappedPrimitiveUtils.getWrappedFromStr(valueType, desStrValue);
+        }
+
+        if (valueType == String.class) {
+            return EscSymbDeserializer.deserializeWithEsc(valueStr.substring(1, valueStr.length() - 1));
+        }
+
+        if (valueType.isEnum()) {
+            return Enum.valueOf(valueType, valueStr.substring(1, valueStr.length() - 1));
+        }
+
+        if (valueType.isPrimitive() || WrappedPrimitiveUtils.isWrappedPrimitive(valueType)) {
+            return WrappedPrimitiveUtils.getWrappedFromStr(valueType, valueStr);
+        }
+
+        if (valueType.isArray()) {
+            return deserializeSimpleArray(valueType, jsonIt);
+        }
+
+        return deserializeComplex(valueType, jsonIt);
+    }
 
     //Преобразование в объект
     private Object deserializeComplex(Class objType, Iterator<String> jsonIt) {
