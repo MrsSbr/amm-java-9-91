@@ -1,4 +1,4 @@
-package ExampleEnum;
+package Example;
 
 import java.util.Objects;
 

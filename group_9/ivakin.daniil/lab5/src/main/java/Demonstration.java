@@ -1,7 +1,7 @@
 import Serialization.Deserializer;
 import Serialization.Serializer;
-import ExampleEnum.Cat;
-import ExampleEnum.Gender;
+import Example.Cat;
+import Example.Gender;
 
 public class Demonstration {
     public static void main(String[] args) {
