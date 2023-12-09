@@ -36,9 +36,7 @@ public class InvalidArgsTest {
         Deserializer deserializer = new Deserializer();
         Class argType = arg.getClass();
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.deserializeObject(argType, ""));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.deserializeCollection(argType, null, ""));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.deserializeCollectionArray(argType, null,""));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.deserializeSimpleArray(argType, ""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.deserializeObj(argType, ""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.deserializeBuffer(argType, null, ""));
     }
 }

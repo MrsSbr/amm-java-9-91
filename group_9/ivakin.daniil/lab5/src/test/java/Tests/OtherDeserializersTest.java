@@ -22,7 +22,7 @@ public class OtherDeserializersTest {
         Deserializer deserializer = new Deserializer();
 
         String jsonString = serializer.serialize(intList);
-        Object deserializedList = deserializer.deserializeCollection(intList.getClass(), List.of(Integer.class), jsonString);
+        Object deserializedList = deserializer.deserializeBuffer(intList.getClass(), List.of(Integer.class), jsonString);
 
         Assertions.assertEquals(intList, deserializedList);
     }
@@ -38,7 +38,7 @@ public class OtherDeserializersTest {
         Deserializer deserializer = new Deserializer();
 
         String jsonString = serializer.serialize(intArr);
-        Object deserializedArr = deserializer.deserializeSimpleArray(intArr.getClass(), jsonString);
+        Object deserializedArr = deserializer.deserializeBuffer(intArr.getClass(), null, jsonString);
 
         Assertions.assertTrue(Arrays.equals(intArr, (Integer[]) deserializedArr));
     }
@@ -61,7 +61,7 @@ public class OtherDeserializersTest {
         Deserializer deserializer = new Deserializer();
 
         String jsonString = serializer.serialize(listArr);
-        Object deserializedArr = deserializer.deserializeCollectionArray(listArr.getClass(), List.of(Integer.class), jsonString);
+        Object deserializedArr = deserializer.deserializeBuffer(listArr.getClass(), List.of(Integer.class), jsonString);
 
         Assertions.assertTrue(Arrays.equals(listArr, (List<Integer>[]) deserializedArr));
     }

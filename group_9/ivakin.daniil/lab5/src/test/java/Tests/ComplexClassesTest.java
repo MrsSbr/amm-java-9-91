@@ -20,16 +20,16 @@ import java.util.stream.Stream;
 public class ComplexClassesTest {
     static Stream<Arguments> getComplexArgs() {
         Map<String, List<Class>> arrInColMap = new HashMap<>();
-        arrInColMap.put("listOfArr", List.of(MixedAll[].class));
+        arrInColMap.put("ArrayInCollectionlistOfArr", List.of(MixedAll[].class));
 
         Map<String, List<Class>> colInArrMap = new HashMap<>();
-        colInArrMap.put("arrOfList", List.of(MixedAll.class));
+        colInArrMap.put("CollectionInArrayarrOfList", List.of(MixedAll.class));
 
         Map<String, List<Class>> colInColMap = new HashMap<>();
-        colInColMap.put("listOfList", List.of(List.class, MixedAll.class));
+        colInColMap.put("CollectionInCollectionlistOfList", List.of(List.class, MixedAll.class));
 
         Map<String, List<Class>> colOfcolInArrMap = new HashMap<>();
-        colOfcolInArrMap.put("list", List.of(List[].class, MixedAll.class));
+        colOfcolInArrMap.put("CollectionOfCollectionInArraylist", List.of(List[].class, MixedAll.class));
 
         return Stream.of(
                 Arguments.of(new ArrayInCollection(), arrInColMap),
@@ -46,7 +46,7 @@ public class ComplexClassesTest {
         Deserializer deserializer = new Deserializer(mapper);
 
         String jsonString = serializer.serialize(obj);
-        Object deserializedObj = deserializer.deserializeObject(obj.getClass(), jsonString);
+        Object deserializedObj = deserializer.deserializeObj(obj.getClass(), jsonString);
 
         Assertions.assertEquals(obj, deserializedObj);
     }

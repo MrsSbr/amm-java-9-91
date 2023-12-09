@@ -19,15 +19,15 @@ import java.util.stream.Stream;
 public class WithCollectionsClassesTest {
     static Stream<Arguments> getCollectionArgs() {
         Map<String, List<Class>> simpleMap = new HashMap<>();
-        simpleMap.put("listInteger", List.of(Integer.class));
-        simpleMap.put("queueString", List.of(String.class));
+        simpleMap.put("CollectionSimplelistInteger", List.of(Integer.class));
+        simpleMap.put("CollectionSimplequeueString", List.of(String.class));
 
         Map<String, List<Class>> objectMap = new HashMap<>();
-        objectMap.put("listMixed", List.of(MixedAll.class));
+        objectMap.put("CollectionObjectlistMixed", List.of(MixedAll.class));
 
         Map<String, List<Class>> notInterfaceColMap = new HashMap<>();
-        notInterfaceColMap.put("arrList", List.of(MixedAll.class));
-        notInterfaceColMap.put("linkList", List.of(MixedAll.class));
+        notInterfaceColMap.put("CollectionNotInterfacearrList", List.of(MixedAll.class));
+        notInterfaceColMap.put("CollectionNotInterfacelinkList", List.of(MixedAll.class));
 
         return Stream.of(
                 Arguments.of(new CollectionSimple(), simpleMap),
@@ -43,7 +43,7 @@ public class WithCollectionsClassesTest {
         Deserializer deserializer = new Deserializer(mapper);
 
         String jsonString = serializer.serialize(obj);
-        Object deserializedObj = deserializer.deserializeObject(obj.getClass(), jsonString);
+        Object deserializedObj = deserializer.deserializeObj(obj.getClass(), jsonString);
 
         Assertions.assertEquals(obj, deserializedObj);
     }

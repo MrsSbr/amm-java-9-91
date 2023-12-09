@@ -9,6 +9,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -27,11 +28,11 @@ public class Deserializer {
     }
 
     public Deserializer() {
-        this.fieldInnerTypes = null;
+        this.fieldInnerTypes = Collections.EMPTY_MAP;
     }
 
-    //Получить объект
-    public Object deserializeObject(Class objType, String jsonString) {
+    //Десериализовать объект
+    public Object deserializeObj(Class objType, String jsonString) {
         if (objType.isPrimitive() || WrappedPrimitiveUtils.isWrappedPrimitive(objType) || objType.isArray()
                 || objType.isEnum() || objType == String.class || Collection.class.isAssignableFrom(objType)) {
             throw new IllegalArgumentException();
@@ -41,15 +42,15 @@ public class Deserializer {
 
         if (jsonIt.hasNext()) {
             jsonIt.next();
-            return deserializeComplex(objType, jsonIt);
+            return deserializeValue(objType, "", null, jsonIt);
         }
 
         return null;
     }
 
-    //Получить коллекцию
-    public Object deserializeCollection(Class objType, List<Class> innerTypes, String jsonString) {
-        if (!Collection.class.isAssignableFrom(objType)) {
+    //Десериализовать JSON массив
+    public Object deserializeBuffer(Class bufferType, List<Class> innerTypes, String jsonString) {
+        if (!bufferType.isArray() && !Collection.class.isAssignableFrom(bufferType)) {
             throw new IllegalArgumentException();
         }
 
@@ -57,45 +58,14 @@ public class Deserializer {
 
         if (jsonIt.hasNext()) {
             jsonIt.next();
-            return deserializeCollection(objType, innerTypes, jsonIt);
-        }
-        return null;
-    }
-
-    //Получить массив из НЕ коллекций
-    public Object deserializeSimpleArray(Class objType, String jsonString) {
-        if (!objType.isArray() || Collection.class.isAssignableFrom(objType.getComponentType())) {
-            throw new IllegalArgumentException();
-        }
-
-        Iterator<String> jsonIt = getJsonIt(jsonString);
-
-        if (jsonIt.hasNext()) {
-            jsonIt.next();
-            return deserializeSimpleArray(objType, jsonIt);
-        }
-
-        return null;
-    }
-
-    //Получить массив из коллекций (могут быть вложенными)
-    public Object deserializeCollectionArray(Class objType, List<Class> innerTypes, String jsonString) {
-        if (!objType.isArray() || !Collection.class.isAssignableFrom(objType.getComponentType())) {
-            throw new IllegalArgumentException();
-        }
-
-        Iterator<String> jsonIt = getJsonIt(jsonString);
-
-        if (jsonIt.hasNext()) {
-            jsonIt.next();
-            return deserializeCollectionArray(objType, innerTypes, jsonIt);
+            return deserializeValue(bufferType, "", innerTypes, jsonIt);
         }
 
         return null;
     }
 
     //Десериализация значения из преобразованной строки-значения
-    private Object deserializeValue(Class valueType, String valueStr, Iterator<String> jsonIt) {
+    private Object deserializeValue(Class valueType, String valueStr, List<Class> innerTypes, Iterator<String> jsonIt) {
         if (valueStr.equals("null"))
             return null;
 
@@ -116,11 +86,70 @@ public class Deserializer {
             return WrappedPrimitiveUtils.getWrappedFromStr(valueType, valueStr);
         }
 
-        if (valueType.isArray()) {
-            return deserializeSimpleArray(valueType, jsonIt);
+        if (valueType.isArray() || Collection.class.isAssignableFrom(valueType)) {
+            return deserializeBuffer(valueType, innerTypes, jsonIt);
         }
 
         return deserializeComplex(valueType, jsonIt);
+    }
+
+    private Object deserializeBuffer(Class bufferType, List<Class> innerTypes, Iterator<String> jsonIt) {
+        String curLine;
+        Collection collectedValues = new ArrayList();
+        Class topInnerType;
+        List<Class> bottomInnerTypes;
+
+        if (bufferType.isArray()) {
+            topInnerType = bufferType.getComponentType();
+            bottomInnerTypes = innerTypes;
+        } else {
+            topInnerType = innerTypes.get(0);
+            bottomInnerTypes = innerTypes.subList(1, innerTypes.size());
+        }
+
+        while (jsonIt.hasNext()) {
+            curLine = jsonIt.next();
+            if (curLine.equals("]") || curLine.equals("],")) {
+                break;
+            }
+
+            String valueStr = getValueStr(curLine, -1);
+
+            collectedValues.add(deserializeValue(topInnerType, valueStr, bottomInnerTypes, jsonIt));
+        }
+
+        return decideBufferType(bufferType, collectedValues);
+    }
+
+    private Object decideBufferType(Class bufferType, Collection collectedValues) {
+
+        if (bufferType.isArray()) {
+            Object arrObj = Array.newInstance(bufferType.getComponentType(), collectedValues.size());
+            Iterator colValIt = collectedValues.iterator();
+            int i = 0;
+            while (colValIt.hasNext()) {
+                Array.set(arrObj, i, colValIt.next());
+                i++;
+            }
+            return arrObj;
+        }
+
+        if (bufferType.isInterface()) {
+            if (Set.class.isAssignableFrom(bufferType)) {
+                return new TreeSet(collectedValues);
+            } else if (Queue.class.isAssignableFrom(bufferType)) {
+                return new ArrayDeque(collectedValues);
+            } else {
+                return new ArrayList(collectedValues);
+            }
+        }
+
+        try {
+            return bufferType.getConstructor(Collection.class).newInstance(collectedValues);
+        } catch (InstantiationException | IllegalAccessException
+                 | InvocationTargetException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     //Преобразование в объект
@@ -155,152 +184,14 @@ public class Deserializer {
 
             if (field.trySetAccessible()) {
                 try {
-                    //Тут нужно проверить, не является ли поле коллекцией или массивом коллекций
-                    //Проверяется это тем, что оно должно быть заранее указано в мапе
-                    if (fieldInnerTypes != null && fieldInnerTypes.containsKey(fieldStr)) {
-                        if (field.getType().isArray()) {
-                            field.set(obj, deserializeCollectionArray(field.getType(), fieldInnerTypes.get(fieldStr), jsonIt));
-                        } else {
-                            field.set(obj, deserializeCollection(field.getType(), fieldInnerTypes.get(fieldStr), jsonIt));
-                        }
-                    } else {
-                        field.set(obj, deserializeValue(field.getType(), valueStr, jsonIt));
-                    }
+                    field.set(obj, deserializeValue(field.getType(), valueStr,
+                            fieldInnerTypes.get(objType.getSimpleName() + fieldStr), jsonIt));
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
             }
         }
         return obj;
-    }
-
-    //Преобразование коллекции
-    private Object deserializeCollection(Class collectionType, List<Class> innerTypes, Iterator<String> jsonIt) {
-        String curLine;
-        Collection collection = new ArrayList();
-        Class topInnerType = innerTypes.get(0);
-        List<Class> bottomInnerTypes = innerTypes.subList(1, innerTypes.size());
-
-//        if (Set.class.isAssignableFrom(collectionType)) {
-//            collection = new TreeSet();
-//        } else if (Queue.class.isAssignableFrom(collectionType)) {
-//            collection = new ArrayDeque();
-//        } else {
-//            collection = new ArrayList();
-//        }
-
-        //Тут идет разборка с тем, является ли коллекция вложенной
-        if (Collection.class.isAssignableFrom(topInnerType)) {
-            while (jsonIt.hasNext()) {
-                curLine = jsonIt.next();
-                if (curLine.equals("]")) {
-                    break;
-                }
-
-                if (curLine.equals("null") || curLine.equals("null,")) {
-                    collection.add(null);
-                } else {
-                    collection.add(deserializeCollection(topInnerType, bottomInnerTypes, jsonIt));
-                }
-            }
-            //Или это коллекция массивов, элементы которых - коллекции
-        } else if (topInnerType.isArray() &&
-                Collection.class.isAssignableFrom(topInnerType.getComponentType())) {
-            //bottomInnerTypes = bottomInnerTypes.subList(1, bottomInnerTypes.size());
-            while (jsonIt.hasNext()) {
-                curLine = jsonIt.next();
-                if (curLine.equals("]")) {
-                    break;
-                }
-                if (curLine.equals("null") || curLine.equals("null,")) {
-                    collection.add(null);
-                } else {
-                    collection.add(deserializeCollectionArray(topInnerType, bottomInnerTypes, jsonIt));
-                }
-            }
-        } else {    //Иначе это либо коллекция из обычных элементов / коллекция массивов, элементы которых - НЕ коллекции
-            Object arr = deserializeSimpleArray(topInnerType.arrayType(), jsonIt);
-            int arrSize = Array.getLength(arr);
-            for (int i = 0; i < arrSize; i++) {
-                collection.add(Array.get(arr, i));
-            }
-        }
-
-        if (collectionType.isInterface()) {
-            if (Set.class.isAssignableFrom(collectionType)) {
-                return new TreeSet(collection);
-            } else if (Queue.class.isAssignableFrom(collectionType)) {
-                return new ArrayDeque(collection);
-            } else {
-                return new ArrayList(collection);
-            }
-        }
-
-        try {
-            return collectionType.getConstructor(Collection.class).newInstance(collection);
-        } catch (InstantiationException | IllegalAccessException
-                 | InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
-        // return collection;
-    }
-
-    //Преобразование массива коллекций
-    private Object deserializeCollectionArray(Class arrType, List<Class> innerTypes, Iterator<String> jsonIt) {
-        String curLine;
-        Class componentType = arrType.getComponentType();
-        Collection collection = new ArrayList();
-
-        while (jsonIt.hasNext()) {
-            curLine = jsonIt.next();
-
-            if (curLine.equals("]") || curLine.equals("],")) {
-                break;
-            }
-
-            String valueStr = getValueStr(curLine, -1);
-
-            if (valueStr.equals("null")) {
-                collection.add(null);
-            } else {
-                collection.add(deserializeCollection(componentType, innerTypes, jsonIt));
-            }
-        }
-
-        Object arrObj = Array.newInstance(componentType, collection.size());
-        Iterator colIt = collection.iterator();
-        for (int i = 0; i < collection.size(); i++) {
-            Array.set(arrObj, i, colIt.next());
-        }
-
-        return arrObj;
-    }
-
-    //Получение массива НЕ коллекций
-    private Object deserializeSimpleArray(Class arrType, Iterator<String> jsonIt) {
-        String curLine;
-        Class componentType = arrType.getComponentType();
-        Collection collection = new ArrayList();
-
-        while (jsonIt.hasNext()) {
-            curLine = jsonIt.next();
-
-            if (curLine.equals("]") || curLine.equals("],")) {
-                break;
-            }
-
-            String valueStr = getValueStr(curLine, -1);
-
-            collection.add(deserializeValue(componentType, valueStr, jsonIt));
-        }
-
-        Object arrObj = Array.newInstance(componentType, collection.size());
-        Iterator colIt = collection.iterator();
-        for (int i = 0; i < collection.size(); i++) {
-            Array.set(arrObj, i, colIt.next());
-        }
-
-        return arrObj;
     }
 
     private String getFieldStr(String jsonLine, int separatorIndex) {

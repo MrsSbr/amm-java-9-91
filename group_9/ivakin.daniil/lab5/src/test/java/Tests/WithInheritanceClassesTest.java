@@ -28,7 +28,7 @@ public class WithInheritanceClassesTest {
         Deserializer deserializer = new Deserializer();
 
         String jsonString = serializer.serialize(obj);
-        Object deserializedObj = deserializer.deserializeObject(obj.getClass(), jsonString);
+        Object deserializedObj = deserializer.deserializeObj(obj.getClass(), jsonString);
 
         Assertions.assertEquals(obj, deserializedObj);
     }

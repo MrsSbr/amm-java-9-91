@@ -94,6 +94,7 @@ public class Serializer {
     private String serializeArray(Object arrObj, int indentCount) {
         String indentStr = getIndentStr(indentCount);
         StringBuilder jsonStrBuilder = new StringBuilder("[");
+
         Class componentType = arrObj.getClass().getComponentType();
         int arrLength = Array.getLength(arrObj);
 

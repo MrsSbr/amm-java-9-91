@@ -16,7 +16,7 @@ public class Demonstration {
         System.out.println("Объект в формате JSON:");
         System.out.println(jsonString);
 
-        Cat deserializedCat = (Cat) deserializer.deserializeObject(Cat.class, jsonString);
+        Cat deserializedCat = (Cat) deserializer.deserializeObj(Cat.class, jsonString);
         jsonString = serializer.serialize(deserializedCat);
         System.out.println("Десериализованный объект в формате JSON:");
         System.out.println(jsonString);
