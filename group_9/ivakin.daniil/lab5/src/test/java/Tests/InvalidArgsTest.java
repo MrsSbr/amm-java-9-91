@@ -1,7 +1,7 @@
 package Tests;
 
-import Convertors.JsonToPojoConvertor;
-import Convertors.PojoToJsonConvertor;
+import Serialization.Deserializer;
+import Serialization.Serializer;
 import Examples.Enums.Color;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,20 +25,20 @@ public class InvalidArgsTest {
     @ParameterizedTest
     @MethodSource("getIllegalArgs")
     void serializerThrowsIllegalArgumentException(Object arg) {
-        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
+        Serializer serializer = new Serializer();
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> serializer.getJSONStr(arg));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> serializer.serialize(arg));
     }
 
     @ParameterizedTest
     @MethodSource("getIllegalArgs")
     void deserializerThrowsIllegalArgumentException(Object arg) {
-        JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
+        Deserializer deserializer = new Deserializer();
         Class argType = arg.getClass();
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.getObject(argType, ""));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.getCollection(argType, null, ""));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.getCollectionArray(argType, null,""));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.getSimpleArray(argType, ""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.deserializeObject(argType, ""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.deserializeCollection(argType, null, ""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.deserializeCollectionArray(argType, null,""));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.deserializeSimpleArray(argType, ""));
     }
 }

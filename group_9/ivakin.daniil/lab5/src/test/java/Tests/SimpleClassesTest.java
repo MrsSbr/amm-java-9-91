@@ -1,7 +1,7 @@
 package Tests;
 
-import Convertors.JsonToPojoConvertor;
-import Convertors.PojoToJsonConvertor;
+import Serialization.Deserializer;
+import Serialization.Serializer;
 import Examples.Classes.Simple.ClassWithClassFields;
 import Examples.Classes.Simple.EscapeSymbols;
 import Examples.Classes.Simple.ManyEnumOnly;
@@ -41,14 +41,11 @@ public class SimpleClassesTest {
     @ParameterizedTest
     @MethodSource("getSimpleArgs")
     void serializeAndDeserializeTest(Object obj) {
-        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
-        JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
+        Serializer serializer = new Serializer();
+        Deserializer deserializer = new Deserializer();
 
-        String jsonString = serializer.getJSONStr(obj);
-        System.out.println(jsonString);
-        Object deserializedObj = deserializer.getObject(obj.getClass(), jsonString);
-
-        System.out.println(jsonString);
+        String jsonString = serializer.serialize(obj);
+        Object deserializedObj = deserializer.deserializeObject(obj.getClass(), jsonString);
 
         Assertions.assertEquals(obj, deserializedObj);
     }

@@ -1,7 +1,7 @@
 package Tests;
 
-import Convertors.JsonToPojoConvertor;
-import Convertors.PojoToJsonConvertor;
+import Serialization.Deserializer;
+import Serialization.Serializer;
 import Examples.Classes.WithSimpleArrays.ArrayObject;
 import Examples.Classes.WithSimpleArrays.ArraySimple;
 import Examples.Classes.WithSimpleArrays.MatrixObject;
@@ -24,11 +24,11 @@ public class WithSimpleArraysClassesTest {
     @ParameterizedTest
     @MethodSource("getArrArgs")
     void serializeAndDeserializeTest(Object obj) {
-        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
-        JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
+        Serializer serializer = new Serializer();
+        Deserializer deserializer = new Deserializer();
 
-        String jsonString = serializer.getJSONStr(obj);
-        Object deserializedObj = deserializer.getObject(obj.getClass(), jsonString);
+        String jsonString = serializer.serialize(obj);
+        Object deserializedObj = deserializer.deserializeObject(obj.getClass(), jsonString);
 
         Assertions.assertEquals(obj, deserializedObj);
     }

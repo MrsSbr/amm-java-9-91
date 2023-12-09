@@ -1,4 +1,7 @@
-package Convertors;
+package Serialization;
+
+import Serialization.Utils.EscSymbSerializer;
+import Serialization.Utils.WrappedPrimitiveUtils;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -7,54 +10,51 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class PojoToJsonConvertor {
+public class Serializer {
 
-    public String getJSONStr(Object obj) {
+    public String serialize(Object obj) {
         Class type = obj.getClass();
         if (type.isPrimitive() || WrappedPrimitiveUtils.isWrappedPrimitive(type)
                 || type.isEnum() || type == String.class) {
             throw new IllegalArgumentException();
         }
 
-        return getJSONStrHelper(obj, obj.getClass(), 0);
+        return serializeValue(obj, obj.getClass(), 0);
     }
 
-    private String getJSONStrHelper(Object obj, Class objType, int indentCount) {
-        if (obj == null) {
+    private String serializeValue(Object value, Class valueType, int indentCount) {
+        if (value == null) {
             return "null";
         }
 
-        if (objType.isEnum() || objType == String.class || WrappedPrimitiveUtils.wrappedFromUnknown(objType) == Character.class) {
-            return convertStringCharEnum(obj);
+        if (valueType.isEnum() || valueType == String.class
+                || WrappedPrimitiveUtils.wrappedFromUnknown(valueType) == Character.class) {
+            return serializeStringCharEnum(value);
         }
 
-        if (objType.isPrimitive() || WrappedPrimitiveUtils.isWrappedPrimitive(objType)) {
-            return obj.toString();
+        if (valueType.isPrimitive() || WrappedPrimitiveUtils.isWrappedPrimitive(valueType)) {
+            return value.toString();
         }
 
-        if (Collection.class.isAssignableFrom(objType)) {
-            return convertCollection(obj, indentCount);
+        if (Collection.class.isAssignableFrom(valueType)) {
+            return serializeCollection(value, indentCount);
         }
 
-        if (objType.isArray()) {
-            return convertArray(obj, indentCount);
+        if (valueType.isArray()) {
+            return serializeArray(value, indentCount);
         }
 
-        return convertComplex(obj, indentCount);
+        return serializeComplex(value, indentCount);
     }
 
-    private String convertStringCharEnum(Object obj) {
+    private String serializeStringCharEnum(Object obj) {
         StringBuilder jsonStrBuilder = new StringBuilder();
         String transformedStr;
 
-        if (obj.getClass() == Character.class) {
-            transformedStr = EscapeSymbolUtils.transformWithEscapes((Character) obj);
-        } else if (obj.getClass() == String.class) {
-            transformedStr = EscapeSymbolUtils.transformWithEscapes((String) obj);
-        } else if (obj.getClass().isEnum()) {
+        if (obj.getClass().isEnum()) {
             transformedStr = obj.toString();
         } else {
-            transformedStr = EscapeSymbolUtils.transformWithEscapes((char) obj);
+            transformedStr = EscSymbSerializer.serializeWithEsc(obj);
         }
 
         return jsonStrBuilder
@@ -64,11 +64,11 @@ public class PojoToJsonConvertor {
                 .toString();
     }
 
-    private String convertCollection(Object obj, int indentCount) {
-        Collection collection = ((Collection) obj);
+    private String serializeCollection(Object collObj, int indentCount) {
+        Collection collection = ((Collection) collObj);
 
         if (collection.isEmpty()) {
-            return convertArray(new Object[0], indentCount);
+            return serializeArray(new Object[0], indentCount);
         }
 
         String indentStr = getIndentStr(indentCount);
@@ -80,7 +80,7 @@ public class PojoToJsonConvertor {
                 .append("\n")
                 .append(indentStr)
                 .append("  ")
-                .append(getJSONStrHelper(item, componentType, indentCount + 2))
+                .append(serializeValue(item, componentType, indentCount + 2))
                 .append(","));
 
         return jsonStrBuilder
@@ -91,19 +91,18 @@ public class PojoToJsonConvertor {
                 .toString();
     }
 
-    private String convertArray(Object obj, int indentCount) {
+    private String serializeArray(Object arrObj, int indentCount) {
         String indentStr = getIndentStr(indentCount);
         StringBuilder jsonStrBuilder = new StringBuilder("[");
-
-        Class componentType = obj.getClass().getComponentType();
-        int arrLength = Array.getLength(obj);
+        Class componentType = arrObj.getClass().getComponentType();
+        int arrLength = Array.getLength(arrObj);
 
         for (int i = 0; i < arrLength; ++i) {
             jsonStrBuilder
                     .append("\n")
                     .append(indentStr)
                     .append("  ")
-                    .append(getJSONStrHelper(Array.get(obj, i), componentType, indentCount + 2))
+                    .append(serializeValue(Array.get(arrObj, i), componentType, indentCount + 2))
                     .append(",");
         }
 
@@ -118,7 +117,7 @@ public class PojoToJsonConvertor {
                 .toString();
     }
 
-    private String convertComplex(Object obj, int indentCount) {
+    private String serializeComplex(Object obj, int indentCount) {
         String indentStr = getIndentStr(indentCount);
         StringBuilder jsonStrBuilder = new StringBuilder("{");
 
@@ -135,7 +134,7 @@ public class PojoToJsonConvertor {
                         .append("\" : ");
 
                 try {
-                    jsonStrBuilder.append(getJSONStrHelper(field.get(obj), field.getType(), indentCount + 2));
+                    jsonStrBuilder.append(serializeValue(field.get(obj), field.getType(), indentCount + 2));
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }

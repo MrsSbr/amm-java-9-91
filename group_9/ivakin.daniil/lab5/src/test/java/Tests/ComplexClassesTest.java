@@ -1,7 +1,7 @@
 package Tests;
 
-import Convertors.JsonToPojoConvertor;
-import Convertors.PojoToJsonConvertor;
+import Serialization.Deserializer;
+import Serialization.Serializer;
 import Examples.Classes.Complex.ArrayInCollection;
 import Examples.Classes.Complex.CollectionInArray;
 import Examples.Classes.Complex.CollectionInCollection;
@@ -42,11 +42,11 @@ public class ComplexClassesTest {
     @ParameterizedTest
     @MethodSource("getComplexArgs")
     void serializeAndDeserializeTest(Object obj, Map<String, List<Class>> mapper) {
-        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
-        JsonToPojoConvertor deserializer = new JsonToPojoConvertor(mapper);
+        Serializer serializer = new Serializer();
+        Deserializer deserializer = new Deserializer(mapper);
 
-        String jsonString = serializer.getJSONStr(obj);
-        Object deserializedObj = deserializer.getObject(obj.getClass(), jsonString);
+        String jsonString = serializer.serialize(obj);
+        Object deserializedObj = deserializer.deserializeObject(obj.getClass(), jsonString);
 
         Assertions.assertEquals(obj, deserializedObj);
     }

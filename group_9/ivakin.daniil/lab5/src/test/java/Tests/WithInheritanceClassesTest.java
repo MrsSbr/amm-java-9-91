@@ -1,7 +1,7 @@
 package Tests;
 
-import Convertors.JsonToPojoConvertor;
-import Convertors.PojoToJsonConvertor;
+import Serialization.Deserializer;
+import Serialization.Serializer;
 import Examples.Classes.WithInheritence.BaseClass;
 import Examples.Classes.WithInheritence.ChildClass;
 import Examples.Classes.WithInheritence.ChildOfChildClass;
@@ -24,11 +24,11 @@ public class WithInheritanceClassesTest {
     @ParameterizedTest
     @MethodSource("getInheritanceArgs")
     void serializeAndDeserializeTest(Object obj) {
-        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
-        JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
+        Serializer serializer = new Serializer();
+        Deserializer deserializer = new Deserializer();
 
-        String jsonString = serializer.getJSONStr(obj);
-        Object deserializedObj = deserializer.getObject(obj.getClass(), jsonString);
+        String jsonString = serializer.serialize(obj);
+        Object deserializedObj = deserializer.deserializeObject(obj.getClass(), jsonString);
 
         Assertions.assertEquals(obj, deserializedObj);
     }

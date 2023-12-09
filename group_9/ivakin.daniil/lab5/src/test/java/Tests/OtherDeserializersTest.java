@@ -1,7 +1,7 @@
 package Tests;
 
-import Convertors.JsonToPojoConvertor;
-import Convertors.PojoToJsonConvertor;
+import Serialization.Deserializer;
+import Serialization.Serializer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -18,11 +18,11 @@ public class OtherDeserializersTest {
         intList.add(null);
         intList.add(3);
 
-        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
-        JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
+        Serializer serializer = new Serializer();
+        Deserializer deserializer = new Deserializer();
 
-        String jsonString = serializer.getJSONStr(intList);
-        Object deserializedList = deserializer.getCollection(intList.getClass(), List.of(Integer.class), jsonString);
+        String jsonString = serializer.serialize(intList);
+        Object deserializedList = deserializer.deserializeCollection(intList.getClass(), List.of(Integer.class), jsonString);
 
         Assertions.assertEquals(intList, deserializedList);
     }
@@ -34,11 +34,11 @@ public class OtherDeserializersTest {
         intArr[1] = null;
         intArr[2] = 1;
 
-        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
-        JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
+        Serializer serializer = new Serializer();
+        Deserializer deserializer = new Deserializer();
 
-        String jsonString = serializer.getJSONStr(intArr);
-        Object deserializedArr = deserializer.getSimpleArray(intArr.getClass(), jsonString);
+        String jsonString = serializer.serialize(intArr);
+        Object deserializedArr = deserializer.deserializeSimpleArray(intArr.getClass(), jsonString);
 
         Assertions.assertTrue(Arrays.equals(intArr, (Integer[]) deserializedArr));
     }
@@ -57,11 +57,11 @@ public class OtherDeserializersTest {
         listArr[1] = null;
         listArr[2] = list2;
 
-        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
-        JsonToPojoConvertor deserializer = new JsonToPojoConvertor();
+        Serializer serializer = new Serializer();
+        Deserializer deserializer = new Deserializer();
 
-        String jsonString = serializer.getJSONStr(listArr);
-        Object deserializedArr = deserializer.getCollectionArray(listArr.getClass(), List.of(Integer.class), jsonString);
+        String jsonString = serializer.serialize(listArr);
+        Object deserializedArr = deserializer.deserializeCollectionArray(listArr.getClass(), List.of(Integer.class), jsonString);
 
         Assertions.assertTrue(Arrays.equals(listArr, (List<Integer>[]) deserializedArr));
     }

@@ -1,4 +1,4 @@
-package Example;
+package ExampleEnum;
 
 public enum Gender {
     MALE("MALE"),

@@ -1,8 +1,9 @@
 package Tests;
 
-import Convertors.JsonToPojoConvertor;
-import Convertors.PojoToJsonConvertor;
+import Serialization.Deserializer;
+import Serialization.Serializer;
 import Examples.Classes.Simple.MixedAll;
+import Examples.Classes.WithCollections.CollectionNotInterface;
 import Examples.Classes.WithCollections.CollectionObject;
 import Examples.Classes.WithCollections.CollectionSimple;
 import org.junit.jupiter.api.Assertions;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class WithCollectionClassesTest {
+public class WithCollectionsClassesTest {
     static Stream<Arguments> getCollectionArgs() {
         Map<String, List<Class>> simpleMap = new HashMap<>();
         simpleMap.put("listInteger", List.of(Integer.class));
@@ -24,20 +25,25 @@ public class WithCollectionClassesTest {
         Map<String, List<Class>> objectMap = new HashMap<>();
         objectMap.put("listMixed", List.of(MixedAll.class));
 
+        Map<String, List<Class>> notInterfaceColMap = new HashMap<>();
+        notInterfaceColMap.put("arrList", List.of(MixedAll.class));
+        notInterfaceColMap.put("linkList", List.of(MixedAll.class));
+
         return Stream.of(
                 Arguments.of(new CollectionSimple(), simpleMap),
-                Arguments.of(new CollectionObject(), objectMap)
+                Arguments.of(new CollectionObject(), objectMap),
+                Arguments.of(new CollectionNotInterface(), notInterfaceColMap)
         );
     }
 
     @ParameterizedTest
     @MethodSource("getCollectionArgs")
     void serializeAndDeserializeTest(Object obj, Map<String, List<Class>> mapper) {
-        PojoToJsonConvertor serializer = new PojoToJsonConvertor();
-        JsonToPojoConvertor deserializer = new JsonToPojoConvertor(mapper);
+        Serializer serializer = new Serializer();
+        Deserializer deserializer = new Deserializer(mapper);
 
-        String jsonString = serializer.getJSONStr(obj);
-        Object deserializedObj = deserializer.getObject(obj.getClass(), jsonString);
+        String jsonString = serializer.serialize(obj);
+        Object deserializedObj = deserializer.deserializeObject(obj.getClass(), jsonString);
 
         Assertions.assertEquals(obj, deserializedObj);
     }

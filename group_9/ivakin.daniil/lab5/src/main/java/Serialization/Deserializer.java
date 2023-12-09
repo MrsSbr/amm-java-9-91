@@ -1,4 +1,7 @@
-package Convertors;
+package Serialization;
+
+import Serialization.Utils.EscSymbDeserializer;
+import Serialization.Utils.WrappedPrimitiveUtils;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -14,50 +17,50 @@ import java.util.Set;
 import java.util.TreeSet;
 
 
-public class JsonToPojoConvertor {
+public class Deserializer {
 
     //Мап для восстановления типов полей-коллекций (коллекции могут быть вложенными)
     private Map<String, List<Class>> fieldInnerTypes;
 
-    public JsonToPojoConvertor(Map<String, List<Class>> collFieldTypes) {
+    public Deserializer(Map<String, List<Class>> collFieldTypes) {
         this.fieldInnerTypes = collFieldTypes;
     }
 
-    public JsonToPojoConvertor() {
+    public Deserializer() {
         this.fieldInnerTypes = null;
     }
 
-    private static String getFieldStr(String jsonLine, int separatorIndex) {
-        String fieldStr = jsonLine.substring(0, separatorIndex).trim();
-        return fieldStr.substring(1, fieldStr.length() - 1);
-    }
+    //Десериализация значения из преобразованной строки-значения
+    private Object deserializeValue(Class valueType, String valueStr, Iterator<String> jsonIt) {
+        if (valueStr.equals("null"))
+            return null;
 
-    private static String getValueStr(String jsonLine, int separatorIndex) {
-        String valueStr = jsonLine.substring(separatorIndex + 1).trim();
-        if (valueStr.endsWith(","))
-            valueStr = valueStr.substring(0, valueStr.length() - 1);
-        return valueStr;
-    }
-
-    private static Field getFieldByName(Class<?> objType, String fieldStr) throws NoSuchFieldException {
-        Class superType = objType;
-        while (superType != null) {
-            try {
-                return superType.getDeclaredField(fieldStr);
-            } catch (NoSuchFieldException e) {
-                superType = superType.getSuperclass();
-            }
+        if (WrappedPrimitiveUtils.wrappedFromUnknown(valueType) == Character.class) {
+            String desStrValue = EscSymbDeserializer.deserializeWithEsc(valueStr.substring(1, valueStr.length() - 1));
+            return WrappedPrimitiveUtils.getWrappedFromStr(valueType, desStrValue);
         }
-        throw new NoSuchFieldException(fieldStr);
-    }
 
-    private static Iterator<String> getJsonIt(String jsonString) {
-        return jsonString.
-                lines().map(String::trim).toList().iterator();
+        if (valueType == String.class) {
+            return EscSymbDeserializer.deserializeWithEsc(valueStr.substring(1, valueStr.length() - 1));
+        }
+
+        if (valueType.isEnum()) {
+            return Enum.valueOf(valueType, valueStr.substring(1, valueStr.length() - 1));
+        }
+
+        if (valueType.isPrimitive() || WrappedPrimitiveUtils.isWrappedPrimitive(valueType)) {
+            return WrappedPrimitiveUtils.getWrappedFromStr(valueType, valueStr);
+        }
+
+        if (valueType.isArray()) {
+            return deserializeSimpleArray(valueType, jsonIt);
+        }
+
+        return deserializeComplex(valueType, jsonIt);
     }
 
     //Получить объект
-    public Object getObject(Class objType, String jsonString) {
+    public Object deserializeObject(Class objType, String jsonString) {
         if (objType.isPrimitive() || WrappedPrimitiveUtils.isWrappedPrimitive(objType) || objType.isArray()
                 || objType.isEnum() || objType == String.class || Collection.class.isAssignableFrom(objType)) {
             throw new IllegalArgumentException();
@@ -67,14 +70,14 @@ public class JsonToPojoConvertor {
 
         if (jsonIt.hasNext()) {
             jsonIt.next();
-            return getComplex(objType, jsonIt);
+            return deserializeComplex(objType, jsonIt);
         }
 
         return null;
     }
 
     //Получить коллекцию
-    public Object getCollection(Class objType, List<Class> innerTypes, String jsonString) {
+    public Object deserializeCollection(Class objType, List<Class> innerTypes, String jsonString) {
         if (!Collection.class.isAssignableFrom(objType)) {
             throw new IllegalArgumentException();
         }
@@ -83,13 +86,13 @@ public class JsonToPojoConvertor {
 
         if (jsonIt.hasNext()) {
             jsonIt.next();
-            return getCollection(objType, innerTypes, jsonIt);
+            return deserializeCollection(objType, innerTypes, jsonIt);
         }
         return null;
     }
 
     //Получить массив из НЕ коллекций
-    public Object getSimpleArray(Class objType, String jsonString) {
+    public Object deserializeSimpleArray(Class objType, String jsonString) {
         if (!objType.isArray() || Collection.class.isAssignableFrom(objType.getComponentType())) {
             throw new IllegalArgumentException();
         }
@@ -98,14 +101,14 @@ public class JsonToPojoConvertor {
 
         if (jsonIt.hasNext()) {
             jsonIt.next();
-            return getSimpleArray(objType, jsonIt);
+            return deserializeSimpleArray(objType, jsonIt);
         }
 
         return null;
     }
 
     //Получить массив из коллекций (могут быть вложенными)
-    public Object getCollectionArray(Class objType, List<Class> innerTypes, String jsonString) {
+    public Object deserializeCollectionArray(Class objType, List<Class> innerTypes, String jsonString) {
         if (!objType.isArray() || !Collection.class.isAssignableFrom(objType.getComponentType())) {
             throw new IllegalArgumentException();
         }
@@ -114,7 +117,7 @@ public class JsonToPojoConvertor {
 
         if (jsonIt.hasNext()) {
             jsonIt.next();
-            return getCollectionArray(objType, innerTypes, jsonIt);
+            return deserializeCollectionArray(objType, innerTypes, jsonIt);
         }
 
         return null;
@@ -122,7 +125,7 @@ public class JsonToPojoConvertor {
 
 
     //Преобразование в объект
-    private Object getComplex(Class objType, Iterator<String> jsonIt) {
+    private Object deserializeComplex(Class objType, Iterator<String> jsonIt) {
         Object obj;
         Field field;
         String curLine;
@@ -157,12 +160,12 @@ public class JsonToPojoConvertor {
                     //Проверяется это тем, что оно должно быть заранее указано в мапе
                     if (fieldInnerTypes != null && fieldInnerTypes.containsKey(fieldStr)) {
                         if (field.getType().isArray()) {
-                            field.set(obj, getCollectionArray(field.getType(), fieldInnerTypes.get(fieldStr), jsonIt));
+                            field.set(obj, deserializeCollectionArray(field.getType(), fieldInnerTypes.get(fieldStr), jsonIt));
                         } else {
-                            field.set(obj, getCollection(field.getType(), fieldInnerTypes.get(fieldStr), jsonIt));
+                            field.set(obj, deserializeCollection(field.getType(), fieldInnerTypes.get(fieldStr), jsonIt));
                         }
                     } else {
-                        field.set(obj, getValue(field.getType(), valueStr, jsonIt));
+                        field.set(obj, deserializeValue(field.getType(), valueStr, jsonIt));
                     }
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
@@ -173,19 +176,19 @@ public class JsonToPojoConvertor {
     }
 
     //Преобразование коллекции
-    private Object getCollection(Class collectionType, List<Class> innerTypes, Iterator<String> jsonIt) {
+    private Object deserializeCollection(Class collectionType, List<Class> innerTypes, Iterator<String> jsonIt) {
         String curLine;
-        Collection collection;
+        Collection collection = new ArrayList();
         Class topInnerType = innerTypes.get(0);
         List<Class> bottomInnerTypes = innerTypes.subList(1, innerTypes.size());
 
-        if (Set.class.isAssignableFrom(collectionType)) {
-            collection = new TreeSet();
-        } else if (Queue.class.isAssignableFrom(collectionType)) {
-            collection = new ArrayDeque();
-        } else {
-            collection = new ArrayList();
-        }
+//        if (Set.class.isAssignableFrom(collectionType)) {
+//            collection = new TreeSet();
+//        } else if (Queue.class.isAssignableFrom(collectionType)) {
+//            collection = new ArrayDeque();
+//        } else {
+//            collection = new ArrayList();
+//        }
 
         //Тут идет разборка с тем, является ли коллекция вложенной
         if (Collection.class.isAssignableFrom(topInnerType)) {
@@ -198,10 +201,10 @@ public class JsonToPojoConvertor {
                 if (curLine.equals("null") || curLine.equals("null,")) {
                     collection.add(null);
                 } else {
-                    collection.add(getCollection(topInnerType, bottomInnerTypes, jsonIt));
+                    collection.add(deserializeCollection(topInnerType, bottomInnerTypes, jsonIt));
                 }
             }
-        //Или это коллекция массивов, элементы которых - коллекции
+            //Или это коллекция массивов, элементы которых - коллекции
         } else if (topInnerType.isArray() &&
                 Collection.class.isAssignableFrom(topInnerType.getComponentType())) {
             //bottomInnerTypes = bottomInnerTypes.subList(1, bottomInnerTypes.size());
@@ -213,22 +216,38 @@ public class JsonToPojoConvertor {
                 if (curLine.equals("null") || curLine.equals("null,")) {
                     collection.add(null);
                 } else {
-                    collection.add(getCollectionArray(topInnerType, bottomInnerTypes, jsonIt));
+                    collection.add(deserializeCollectionArray(topInnerType, bottomInnerTypes, jsonIt));
                 }
             }
         } else {    //Иначе это либо коллекция из обычных элементов / коллекция массивов, элементы которых - НЕ коллекции
-            Object arr = getSimpleArray(topInnerType.arrayType(), jsonIt);
+            Object arr = deserializeSimpleArray(topInnerType.arrayType(), jsonIt);
             int arrSize = Array.getLength(arr);
             for (int i = 0; i < arrSize; i++) {
                 collection.add(Array.get(arr, i));
             }
         }
 
-        return collection;
+        if (collectionType.isInterface()) {
+            if (Set.class.isAssignableFrom(collectionType)) {
+                return new TreeSet(collection);
+            } else if (Queue.class.isAssignableFrom(collectionType)) {
+                return new ArrayDeque(collection);
+            } else {
+                return new ArrayList(collection);
+            }
+        }
+
+        try {
+            return collectionType.getConstructor(Collection.class).newInstance(collection);
+        } catch (InstantiationException | IllegalAccessException
+                 | InvocationTargetException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+        // return collection;
     }
 
     //Преобразование массива коллекций
-    private Object getCollectionArray(Class arrType, List<Class> innerTypes, Iterator<String> jsonIt) {
+    private Object deserializeCollectionArray(Class arrType, List<Class> innerTypes, Iterator<String> jsonIt) {
         String curLine;
         Class componentType = arrType.getComponentType();
         Collection collection = new ArrayList();
@@ -245,7 +264,7 @@ public class JsonToPojoConvertor {
             if (valueStr.equals("null")) {
                 collection.add(null);
             } else {
-                collection.add(getCollection(componentType, innerTypes, jsonIt));
+                collection.add(deserializeCollection(componentType, innerTypes, jsonIt));
             }
         }
 
@@ -259,7 +278,7 @@ public class JsonToPojoConvertor {
     }
 
     //Получение массива НЕ коллекций
-    private Object getSimpleArray(Class arrType, Iterator<String> jsonIt) {
+    private Object deserializeSimpleArray(Class arrType, Iterator<String> jsonIt) {
         String curLine;
         Class componentType = arrType.getComponentType();
         Collection collection = new ArrayList();
@@ -273,7 +292,7 @@ public class JsonToPojoConvertor {
 
             String valueStr = getValueStr(curLine, -1);
 
-            collection.add(getValue(componentType, valueStr, jsonIt));
+            collection.add(deserializeValue(componentType, valueStr, jsonIt));
         }
 
         Object arrObj = Array.newInstance(componentType, collection.size());
@@ -285,31 +304,31 @@ public class JsonToPojoConvertor {
         return arrObj;
     }
 
-    //Получение значения из преобразованной строки-значения. Тип значения берется от поля
-    private Object getValue(Class valueType, String valueStr, Iterator<String> jsonIt) {
-        if (valueStr.equals("null"))
-            return null;
+    private String getFieldStr(String jsonLine, int separatorIndex) {
+        String fieldStr = jsonLine.substring(0, separatorIndex).trim();
+        return fieldStr.substring(1, fieldStr.length() - 1);
+    }
 
-        if (WrappedPrimitiveUtils.wrappedFromUnknown(valueType) == Character.class) {
-            return WrappedPrimitiveUtils.getWrappedFromStr(valueType, valueStr.substring(1, valueStr.length() - 1));
+    private String getValueStr(String jsonLine, int separatorIndex) {
+        String valueStr = jsonLine.substring(separatorIndex + 1).trim();
+        if (valueStr.endsWith(","))
+            valueStr = valueStr.substring(0, valueStr.length() - 1);
+        return valueStr;
+    }
+
+    private Field getFieldByName(Class<?> objType, String fieldStr) throws NoSuchFieldException {
+        Class superType = objType;
+        while (superType != null) {
+            try {
+                return superType.getDeclaredField(fieldStr);
+            } catch (NoSuchFieldException e) {
+                superType = superType.getSuperclass();
+            }
         }
+        throw new NoSuchFieldException(fieldStr);
+    }
 
-        if (valueType.isPrimitive() || WrappedPrimitiveUtils.isWrappedPrimitive(valueType)) {
-            return WrappedPrimitiveUtils.getWrappedFromStr(valueType, valueStr);
-        }
-
-        if (valueType.isEnum()) {
-            return Enum.valueOf(valueType, valueStr.substring(1, valueStr.length() - 1));
-        }
-
-        if (valueType == String.class) {
-            return valueStr.substring(1, valueStr.length() - 1);
-        }
-
-        if (valueType.isArray()) {
-            return getSimpleArray(valueType, jsonIt);
-        }
-
-        return getComplex(valueType, jsonIt);
+    private Iterator<String> getJsonIt(String jsonString) {
+        return jsonString.lines().map(String::trim).toList().iterator();
     }
 }
