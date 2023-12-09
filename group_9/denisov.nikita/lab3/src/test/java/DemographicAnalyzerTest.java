@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import ru.nikitadenisov.lab3.analyzer.DemographicAnalyzer;
 import ru.nikitadenisov.lab3.analyzer.Gender;
 import ru.nikitadenisov.lab3.analyzer.Month;
@@ -12,65 +15,49 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DemographicAnalyzerTest {
-    @Test
-    void testGetNumberStudents() {
-        Collection<Student> students = Arrays.asList(
-                new Student(Gender.MALE, Month.JANUARY),
-                new Student(Gender.MALE, Month.MARCH),
-                new Student(Gender.MALE, Month.MARCH),
-                new Student(Gender.MALE, Month.APRIL),
-                new Student(Gender.MALE, Month.SEPTEMBER),
-                new Student(Gender.FEMALE, Month.JANUARY),
-                new Student(Gender.FEMALE, Month.MARCH),
-                new Student(Gender.FEMALE, Month.APRIL),
-                new Student(Gender.FEMALE, Month.APRIL),
-                new Student(Gender.FEMALE, Month.AUGUST),
-                new Student(Gender.FEMALE, Month.AUGUST),
-                new Student(Gender.FEMALE, Month.SEPTEMBER),
-                new Student(Gender.FEMALE, Month.SEPTEMBER)
-        );
+    private static final Collection<Student> STUDENTS = Arrays.asList(
+            new Student(Gender.MALE, Month.JANUARY),
+            new Student(Gender.MALE, Month.MARCH),
+            new Student(Gender.MALE, Month.MARCH),
+            new Student(Gender.MALE, Month.APRIL),
+            new Student(Gender.MALE, Month.SEPTEMBER),
+            new Student(Gender.FEMALE, Month.JANUARY),
+            new Student(Gender.FEMALE, Month.MARCH),
+            new Student(Gender.FEMALE, Month.APRIL),
+            new Student(Gender.FEMALE, Month.APRIL),
+            new Student(Gender.FEMALE, Month.AUGUST),
+            new Student(Gender.FEMALE, Month.AUGUST),
+            new Student(Gender.FEMALE, Month.SEPTEMBER),
+            new Student(Gender.FEMALE, Month.SEPTEMBER)
+    );
 
-        DemographicAnalyzer demographicAnalyzer = new DemographicAnalyzer(students);
+    @ParameterizedTest
+    @CsvSource({"JANUARY, 2", "APRIL, 3", "OCTOBER, 0"})
+    void testGetNumberStudentsBornInMonth(Month month, int expectedNumber) {
+        DemographicAnalyzer demographicAnalyzer = new DemographicAnalyzer(STUDENTS);
 
-        assertEquals(2, demographicAnalyzer.numberStudentsInMonth(Month.JANUARY));
-        assertEquals(3, demographicAnalyzer.numberStudentsInMonth(Month.APRIL));
-        assertEquals(0, demographicAnalyzer.numberStudentsInMonth(Month.OCTOBER));
+        assertEquals(expectedNumber, demographicAnalyzer.numberStudentsBornInMonth(month));
     }
 
-    @Test
-    void testGetNumberStudentsWithEmptyCollection() {
+    @ParameterizedTest
+    @ValueSource(strings = {"OCTOBER", "NOVEMBER", "DECEMBER"})
+    void testGetNumberStudentsBornInMonthWithEmptyCollection(Month month) {
         DemographicAnalyzer demographicAnalyzer = new DemographicAnalyzer(Collections.emptyList());
 
-        assertEquals(0, demographicAnalyzer.numberStudentsInMonth(Month.OCTOBER));
+        assertEquals(0, demographicAnalyzer.numberStudentsBornInMonth(month));
     }
 
     @Test
-    void testGetNumberStudentsWithNullCollection() {
+    void testGetNumberStudentsBornInMonthWithNullCollection() {
         DemographicAnalyzer demographicAnalyzer = new DemographicAnalyzer(null);
 
         assertThrows(NullPointerException.class, () ->
-                demographicAnalyzer.numberStudentsInMonth(Month.APRIL));
+                demographicAnalyzer.numberStudentsBornInMonth(Month.APRIL));
     }
 
     @Test
     void testMonthsWithMoreFemalesThanMales() {
-        Collection<Student> students = Arrays.asList(
-                new Student(Gender.MALE, Month.JANUARY),
-                new Student(Gender.MALE, Month.MARCH),
-                new Student(Gender.MALE, Month.MARCH),
-                new Student(Gender.MALE, Month.APRIL),
-                new Student(Gender.MALE, Month.SEPTEMBER),
-                new Student(Gender.FEMALE, Month.JANUARY),
-                new Student(Gender.FEMALE, Month.MARCH),
-                new Student(Gender.FEMALE, Month.APRIL),
-                new Student(Gender.FEMALE, Month.APRIL),
-                new Student(Gender.FEMALE, Month.AUGUST),
-                new Student(Gender.FEMALE, Month.AUGUST),
-                new Student(Gender.FEMALE, Month.SEPTEMBER),
-                new Student(Gender.FEMALE, Month.SEPTEMBER)
-        );
-
-        DemographicAnalyzer demographicAnalyzer = new DemographicAnalyzer(students);
+        DemographicAnalyzer demographicAnalyzer = new DemographicAnalyzer(STUDENTS);
         List<Month> result = demographicAnalyzer.monthsWithMoreFemalesThanMales();
 
         assertEquals(3, result.size());
