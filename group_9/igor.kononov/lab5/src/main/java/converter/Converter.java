@@ -2,8 +2,8 @@ package converter;
 
 
 public class Converter {
-    private Serializer serializer;
-    private Deserializer deserializer;
+    private final Serializer serializer;
+    private final Deserializer deserializer;
 
     public Converter() {
         serializer = new Serializer();

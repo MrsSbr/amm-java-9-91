@@ -2,62 +2,134 @@ package converter;
 
 import lombok.SneakyThrows;
 
+
+import java.util.Iterator;
+
+
 public class Deserializer {
     public Object DeserializeJSON(String json, Class<?> objType) {
-        if (objType.isEnum() || objType.isPrimitive() || objType.isArray()) {
+        if (objType.isPrimitive()
+                || Utils.isWrappedPrimitive(objType)
+                || objType.isEnum()
+                || objType == String.class) {
+//                || objType.isArray()
+//                || Collection.class.isAssignableFrom(objType)) {
             throw new IllegalArgumentException();
         }
 
         return deserializeType(json, objType);
     }
 
-    private Object deserializeType(String json, Class<?> type) {
+    private Iterator<String> getJsonIt(String jsonString) {
+        return jsonString.lines().map(String::trim).toList().iterator();
+    }
+
+    private Object deserializeType(String json, Class<?> objType) {
         if (json.equals("null")) {
             return null;
-        } else if (type.isPrimitive()) {
-            return deserializePrimitive(json, type);
-        } else if (type == String.class) {
+        }
+        if (objType.isPrimitive()) {
+            return deserializePrimitive(json, objType);
+        }
+        if (Utils.isWrappedPrimitive(objType)) {
+            return deserializeWrapperPrimitive(json, objType);
+        }
+        if (objType.isEnum()){
+            return deserializeEnum(json, objType);
+        }
+        if (objType == String.class) {
             return deserializeString(json);
-        } else if (type.isEnum()){
-            return deserializeEnum(json, type);
         }
+//        if (objType.isArray()) {
+//            return deserializeArray(json, objType);
+//        }
+//        if (Collection.class.isAssignableFrom(objType)) {
+//            return deserializeCollection(json, objType);
+//        }
 
-        return deserializeObject(json, type);
+        return deserializeObject(json, objType);
     }
 
-    private Object deserializeEnum(String json, Class<?> type) {
-        if (!type.isEnum()) {
-            throw new IllegalArgumentException("Type is not an enum");
-        }
-
-        return Enum.valueOf((Class<Enum>) type, json.substring(1, json.length() - 1));
-    }
 
     private Object deserializePrimitive(String json, Class<?> objType) {
         if (objType == int.class) {
             return Integer.parseInt(json);
-        } else if (objType == double.class) {
+        }
+        if (objType == double.class) {
             return Double.parseDouble(json);
-        } else if (objType == boolean.class) {
+        }
+        if (objType == boolean.class) {
             return Boolean.parseBoolean(json);
-        } else if (objType == long.class) {
+        }
+        if (objType == long.class) {
             return Long.parseLong(json);
-        } else if (objType == float.class) {
+        }
+        if (objType == float.class) {
             return Float.parseFloat(json);
-        } else if (objType == short.class) {
+        }
+        if (objType == short.class) {
             return Short.parseShort(json);
-        } else if (objType == byte.class) {
+        }
+        if (objType == byte.class) {
             return Byte.parseByte(json);
-        } else if (objType == char.class) {
+        }
+        if (objType == char.class) {
             return json.charAt(0);
         }
 
         throw new IllegalArgumentException();
     }
 
+    private Object deserializeWrapperPrimitive(String json, Class<?> objType) {
+        if (objType == Integer.class) {
+            return Integer.valueOf(json);
+        }
+        if (objType == Double.class) {
+            return Double.valueOf(json);
+        }
+        if (objType == Boolean.class) {
+            return Boolean.valueOf(json);
+        }
+        if (objType == Long.class) {
+            return Long.valueOf(json);
+        }
+        if (objType == Float.class) {
+            return Float.valueOf(json);
+        }
+        if (objType == Short.class) {
+            return Short.valueOf(json);
+        }
+        if (objType == Byte.class) {
+            return Byte.valueOf(json);
+        }
+        if (objType == Character.class) {
+            return json.charAt(0);
+        }
+
+        throw new IllegalArgumentException();
+    }
+
+    private Object deserializeEnum(String json, Class<?> objType) {
+        if (!objType.isEnum()) {
+            throw new IllegalArgumentException("Type is not an enum");
+        }
+        return Enum.valueOf((Class<Enum>) objType, json.substring(1, json.length() - 1));
+    }
+
     private String deserializeString(String json) {
         return json.substring(1, json.length() - 1);
     }
+
+//    private Object deserializeArray(String json, Class<?> objType) {
+//        var splits = json.substring(1, json.length() - 1).split(",");
+//
+//        var array = Array.newInstance(objType.getComponentType(), splits.length);
+//        for (int i = 0; i < splits.length; i++) {
+//            Array.set(array, i, deserializeType(splits[i].trim(), objType.getComponentType()));
+//        }
+//        return array;
+//    }
+
 
     @SneakyThrows
     private Object deserializeObject(String json, Class<?> objType) {

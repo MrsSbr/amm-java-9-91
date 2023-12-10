@@ -1,6 +1,8 @@
 package example;
 
-@lombok.Getter
+import lombok.Getter;
+
+@Getter
 public enum Gender {
     MALE("MALE"),
     FEMALE("FEMALE");
