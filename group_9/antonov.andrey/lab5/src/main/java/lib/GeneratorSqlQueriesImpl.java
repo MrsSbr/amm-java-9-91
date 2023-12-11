@@ -4,18 +4,21 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import annotaion.Column;
 import annotaion.Table;
-import lombok.AllArgsConstructor;
 import util.ReflectionApiUtil;
 
 
-@AllArgsConstructor
 public class GeneratorSqlQueriesImpl<K, E> implements GeneratorSqlQueries<K, E> {
 
     private final Class<?> CLASS;
+
+    public GeneratorSqlQueriesImpl(final Class<?> CLASS) {
+        this.CLASS = Objects.requireNonNull(CLASS, "CLASS не может быть null");
+    }
 
     private static final String INSERT_TEMPLATE_SQL = """
         INSERT INTO %s.%s (%s)
@@ -33,13 +36,13 @@ public class GeneratorSqlQueriesImpl<K, E> implements GeneratorSqlQueries<K, E> 
         FROM %s.%s;
         """;
 
-    public static final String UPDATE_SQL = """
+    public static final String UPDATE_TEMPLATE_SQL = """
         UPDATE %s.%s
         SET %s
         WHERE id = %s;
         """;
 
-    public static final String DELETE_SQL = """
+    public static final String DELETE_TEMPLATE_SQL = """
         DELETE FROM %s.%s
         WHERE id = %s;
         """;
@@ -82,13 +85,13 @@ public class GeneratorSqlQueriesImpl<K, E> implements GeneratorSqlQueries<K, E> 
             .collect(Collectors.joining(", "));
         final var getterMethod = ReflectionApiUtil.getGetterMethod(entity, "Id");
         final var id = ReflectionApiUtil.getRepresentationValueInQuery(getterMethod, entity);
-        return String.format(UPDATE_SQL, table.schema(), table.name(), update, id);
+        return String.format(UPDATE_TEMPLATE_SQL, table.schema(), table.name(), update, id);
     }
 
     @Override
     public String buildDeleteQuery(final K id) {
         final var table = CLASS.getAnnotation(Table.class);
-        return String.format(DELETE_SQL, table.schema(), table.name(), id);
+        return String.format(DELETE_TEMPLATE_SQL, table.schema(), table.name(), id);
     }
 
     private static <E> Collector<Field, ?, Map<String, String>> getFieldMapCollector(final E entity) {

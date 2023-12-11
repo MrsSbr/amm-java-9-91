@@ -19,20 +19,24 @@ public class ReflectionApiUtil {
             throw new RuntimeException(e);
         }
     }
-    
+
     public static <E> String getRepresentationValueInQuery(Method method, E entity) {
         final Class<?> returnType = method.getReturnType();
         final var invoke = methodInvoke(method, entity);
-        if (returnType == Long.class) {
-            return invoke + "L";
-        }
-        if (returnType == String.class ||
-            returnType == LocalDate.class ||
-            returnType == LocalDateTime.class) {
-            return "'" + invoke + "'";
+        if (invoke == null) {
+            return String.valueOf((Object) null);
         } else {
-            return String.valueOf(invoke);
+            if (returnType == Long.class) {
+                return invoke + "L";
+            }
+            if (returnType == String.class ||
+                returnType == LocalDate.class ||
+                returnType == LocalDateTime.class ||
+                returnType.isEnum()) {
+                return "'" + invoke + "'";
+            }
         }
+        return String.valueOf(invoke);
     }
 
     private static <E> Object methodInvoke(final Method method, final E entity) {
