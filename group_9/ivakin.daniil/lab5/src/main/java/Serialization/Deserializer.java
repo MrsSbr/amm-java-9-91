@@ -22,7 +22,7 @@ import java.util.TreeSet;
 public class Deserializer {
 
     //Мап для восстановления типов полей-коллекций (коллекции могут быть вложенными)
-    private Map<String, List<Class>> fieldInnerTypes;
+    private final Map<String, List<Class>> fieldInnerTypes;
 
     public Deserializer(Map<String, List<Class>> collFieldTypes) {
         this.fieldInnerTypes = collFieldTypes;
