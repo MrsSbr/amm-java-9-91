@@ -31,7 +31,7 @@ public class ChroniclesAnalysis {
             ChronicleInfo chronicleInfo = new ChronicleInfo(battleChronicles);
 
             System.out.println("Khanate with the highest casualties in winter: " +
-                    chronicleInfo.findMostCasualtiesByEnemyInWinter());
+                    chronicleInfo.findMostCasualtiesByEnemyInWinter());// TODO: 11.12.2023 NPE
             System.out.println("Locations with the fewest battles: " +
                     chronicleInfo.findLocationsWithLeastBattles());
 

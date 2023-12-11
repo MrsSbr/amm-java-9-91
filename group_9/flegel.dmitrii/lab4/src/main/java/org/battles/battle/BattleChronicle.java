@@ -8,7 +8,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import java.time.LocalDate;
 
 @JsonSerialize
-public record BattleChronicle(
+public record BattleChronicle(// TODO: 11.12.2023 как с точки зрения jvm
         @JsonDeserialize(using = LocalDateDeserializer.class)
         @JsonSerialize(using = LocalDateSerializer.class)
         LocalDate date,
