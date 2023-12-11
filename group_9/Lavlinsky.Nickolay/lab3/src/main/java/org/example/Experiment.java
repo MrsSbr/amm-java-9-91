@@ -1,9 +1,9 @@
 package org.example;
 
 public class Experiment {
-    AlcoholType alcoholType;
-    double amount;
-    boolean peakAchieved;
+    private final AlcoholType alcoholType;
+    private final double amount;
+    private final boolean peakAchieved;
 
     public Experiment(AlcoholType alcoholType, double amount, boolean peakAchieved) {
         this.alcoholType = alcoholType;
