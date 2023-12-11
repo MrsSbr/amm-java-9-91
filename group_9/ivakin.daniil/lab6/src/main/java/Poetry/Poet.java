@@ -51,11 +51,6 @@ public class Poet extends Thread {
     public void run() {
         while (poem.size() > currentLineIndex) {
             writeLine();
-            try {
-                Thread.sleep(1);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
         }
     }
 
@@ -64,10 +59,7 @@ public class Poet extends Thread {
     }
 
     private void writeLine() {
-        synchronized (tissue) {
-            tissue.addPoemLine(poem.get(currentLineIndex));
-            currentLineIndex++;
-        }
+        tissue.addPoemLine(poem.get(currentLineIndex));
+        currentLineIndex++;
     }
-
 }

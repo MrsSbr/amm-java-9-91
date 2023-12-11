@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class InspirationProcessTest {
 
@@ -13,7 +13,7 @@ public class InspirationProcessTest {
     void startProcessWithNoPoets() {
         InspirationProcess insProc = new InspirationProcess(new ArrayList<>());
 
-        List<String> resultPoem = insProc.beginInspitrationProcces();
+        ConcurrentLinkedQueue<String> resultPoem = insProc.beginInspitrationProcces();
 
         Assertions.assertTrue(resultPoem.isEmpty());
     }
@@ -26,7 +26,7 @@ public class InspirationProcessTest {
         insProc.addPoet(new Poet("EmptyPoet2"));
         insProc.addPoet(new Poet("EmptyPoet3"));
 
-        List<String> resultPoem = insProc.beginInspitrationProcces();
+        ConcurrentLinkedQueue<String> resultPoem = insProc.beginInspitrationProcces();
 
         Assertions.assertTrue(resultPoem.isEmpty());
     }
@@ -54,10 +54,10 @@ public class InspirationProcessTest {
         insProc.addPoet(notEmptyPoet);
         insProc.addPoet(new Poet("EmptyPoet2"));
 
-        List<String> resultPoem = insProc.beginInspitrationProcces();
-        List<String> notEmptyPoetPoem = notEmptyPoet.getPoem();
+        ConcurrentLinkedQueue<String> resultPoem = insProc.beginInspitrationProcces();
+        ConcurrentLinkedQueue<String> notEmptyPoem = new ConcurrentLinkedQueue<>(notEmptyPoet.getPoem());
 
-        Assertions.assertEquals(notEmptyPoetPoem, resultPoem);
+        Assertions.assertIterableEquals(notEmptyPoem, resultPoem);
     }
 
     @Test
@@ -73,9 +73,10 @@ public class InspirationProcessTest {
         insProc.addPoet(poet1);
         insProc.addPoet(poet3);
 
-        List<String> resultPoem = insProc.beginInspitrationProcces();
+        ConcurrentLinkedQueue<String> resultPoem = insProc.beginInspitrationProcces();
 
-        List<String> poetPoems = poet1.getPoem();
+        ConcurrentLinkedQueue<String> poetPoems = new ConcurrentLinkedQueue<String>();
+        poetPoems.addAll(poet1.getPoem());
         poetPoems.addAll(poet2.getPoem());
         poetPoems.addAll(poet3.getPoem());
 

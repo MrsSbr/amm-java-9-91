@@ -1,15 +1,12 @@
 import Poetry.InspirationProcess;
 import Poetry.Poet;
-import Poetry.Tissue;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Demonstration {
 
@@ -27,10 +24,10 @@ public class Demonstration {
         }
 
         InspirationProcess inspirationProcess = new InspirationProcess(poets);
-        List<String> resultPoem = inspirationProcess.beginInspitrationProcces();
+        ConcurrentLinkedQueue<String> resultPoem = inspirationProcess.beginInspitrationProcces();
 
-        for(String line : resultPoem) {
-            System.out.println(line);
+        while (!resultPoem.isEmpty()) {
+            System.out.println(resultPoem.poll());
         }
     }
 }

@@ -2,6 +2,7 @@ package Poetry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class InspirationProcess {
     private Tissue tissue;
@@ -39,6 +40,10 @@ public class InspirationProcess {
 
     public void setPoets(List<Poet> poets) {
         this.poets = poets;
+
+        for (Poet poet : this.poets) {
+            poet.setTissue(this.tissue);
+        }
     }
 
     public void addPoet(Poet poet) {
@@ -46,12 +51,12 @@ public class InspirationProcess {
         this.poets.add(poet);
     }
 
-    public List<String> beginInspitrationProcces() {
-        for(Poet poet : poets) {
+    public ConcurrentLinkedQueue<String> beginInspitrationProcces() {
+        for (Poet poet : poets) {
             poet.start();
         }
 
-        for(Poet poet : poets) {
+        for (Poet poet : poets) {
             try {
                 poet.join();
             } catch (InterruptedException e) {

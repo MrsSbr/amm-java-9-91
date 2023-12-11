@@ -1,20 +1,19 @@
 package Poetry;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Tissue {
-    private List<String> poemLines;
+    private ConcurrentLinkedQueue<String> poemLines;
 
     public Tissue() {
-        poemLines = new ArrayList<>();
+        poemLines = new ConcurrentLinkedQueue<>();
     }
 
-    public List<String> getPoemLines() {
+    public ConcurrentLinkedQueue<String> getPoemLines() {
         return poemLines;
     }
 
-    public void setPoemLines(List<String> poemLines) {
+    public void setPoemLines(ConcurrentLinkedQueue<String> poemLines) {
         this.poemLines = poemLines;
     }
 
