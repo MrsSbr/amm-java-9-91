@@ -1,5 +1,6 @@
 package Serialization;
 
+import Serialization.Exceptions.DeserializeException;
 import Serialization.Utils.EscSymbDeserializer;
 import Serialization.Utils.WrappedPrimitiveUtils;
 
@@ -35,7 +36,7 @@ public class Deserializer {
     public Object deserializeObj(Class objType, String jsonString) {
         if (objType.isPrimitive() || WrappedPrimitiveUtils.isWrappedPrimitive(objType) || objType.isArray()
                 || objType.isEnum() || objType == String.class || Collection.class.isAssignableFrom(objType)) {
-            throw new IllegalArgumentException();
+            throw new DeserializeException("Попытка десериализации неправильного типа");
         }
 
         Iterator<String> jsonIt = getJsonIt(jsonString);
@@ -51,7 +52,7 @@ public class Deserializer {
     //Десериализовать JSON массив
     public Object deserializeBuffer(Class bufferType, List<Class> innerTypes, String jsonString) {
         if (!bufferType.isArray() && !Collection.class.isAssignableFrom(bufferType)) {
-            throw new IllegalArgumentException();
+            throw new DeserializeException("Попытка десериализации неправильного типа");
         }
 
         Iterator<String> jsonIt = getJsonIt(jsonString);
@@ -148,7 +149,7 @@ public class Deserializer {
             return bufferType.getConstructor(Collection.class).newInstance(collectedValues);
         } catch (InstantiationException | IllegalAccessException
                  | InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException(e);
+            throw new DeserializeException("Не найден конструктор для внутренней коллекции", e);
         }
     }
 
@@ -179,7 +180,7 @@ public class Deserializer {
             try {
                 field = getFieldByName(objType, fieldStr);
             } catch (NoSuchFieldException e) {
-                throw new RuntimeException(e);
+                throw new DeserializeException("Не найдено поле с именем " + fieldStr, e);
             }
 
             if (field.trySetAccessible()) {
@@ -187,7 +188,7 @@ public class Deserializer {
                     field.set(obj, deserializeValue(field.getType(), valueStr,
                             fieldInnerTypes.get(objType.getSimpleName() + fieldStr), jsonIt));
                 } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
+                    throw new DeserializeException("Поле " + fieldStr + " не доступно для записи", e);
                 }
             }
         }
@@ -201,8 +202,11 @@ public class Deserializer {
 
     private String getValueStr(String jsonLine, int separatorIndex) {
         String valueStr = jsonLine.substring(separatorIndex + 1).trim();
-        if (valueStr.endsWith(","))
+
+        if (valueStr.endsWith(",")) {
             valueStr = valueStr.substring(0, valueStr.length() - 1);
+        }
+
         return valueStr;
     }
 

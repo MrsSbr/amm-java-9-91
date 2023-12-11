@@ -1,5 +1,7 @@
 package Serialization.Utils;
 
+import Serialization.Exceptions.GetValueFromStrException;
+
 import java.lang.reflect.InvocationTargetException;
 
 public class WrappedPrimitiveUtils {
@@ -10,53 +12,89 @@ public class WrappedPrimitiveUtils {
     }
 
     public static Class primitiveFromUnknown(Class wrappedOrPrimitiveType) {
-        if (wrappedOrPrimitiveType.isPrimitive())
+        if (wrappedOrPrimitiveType.isPrimitive()) {
             return wrappedOrPrimitiveType;
+        }
 
-        if (wrappedOrPrimitiveType == Integer.class)
+        if (wrappedOrPrimitiveType == Integer.class) {
             return Integer.TYPE;
-        if (wrappedOrPrimitiveType == Long.class)
+        }
+
+        if (wrappedOrPrimitiveType == Long.class) {
             return Long.TYPE;
-        if (wrappedOrPrimitiveType == Boolean.class)
+        }
+
+        if (wrappedOrPrimitiveType == Boolean.class) {
             return Boolean.TYPE;
-        if (wrappedOrPrimitiveType == Byte.class)
+        }
+
+        if (wrappedOrPrimitiveType == Byte.class) {
             return Byte.TYPE;
-        if (wrappedOrPrimitiveType == Character.class)
+        }
+
+        if (wrappedOrPrimitiveType == Character.class) {
             return Character.TYPE;
-        if (wrappedOrPrimitiveType == Float.class)
+        }
+
+        if (wrappedOrPrimitiveType == Float.class) {
             return Float.TYPE;
-        if (wrappedOrPrimitiveType == Double.class)
+        }
+
+        if (wrappedOrPrimitiveType == Double.class) {
             return Double.TYPE;
-        if (wrappedOrPrimitiveType == Short.class)
+        }
+
+        if (wrappedOrPrimitiveType == Short.class) {
             return Short.TYPE;
-        if (wrappedOrPrimitiveType == Void.class)
+        }
+
+        if (wrappedOrPrimitiveType == Void.class) {
             return Void.TYPE;
+        }
 
         return wrappedOrPrimitiveType;
     }
 
     public static Class wrappedFromUnknown(Class wrappedOrPrimitiveType) {
-        if (!wrappedOrPrimitiveType.isPrimitive())
+        if (!wrappedOrPrimitiveType.isPrimitive()) {
             return wrappedOrPrimitiveType;
+        }
 
-        if (wrappedOrPrimitiveType == Integer.TYPE)
+        if (wrappedOrPrimitiveType == Integer.TYPE) {
             return Integer.class;
-        if (wrappedOrPrimitiveType == Long.TYPE)
+        }
+
+        if (wrappedOrPrimitiveType == Long.TYPE) {
             return Long.class;
-        if (wrappedOrPrimitiveType == Boolean.TYPE)
+        }
+
+        if (wrappedOrPrimitiveType == Boolean.TYPE) {
             return Boolean.class;
-        if (wrappedOrPrimitiveType == Byte.TYPE)
+        }
+
+        if (wrappedOrPrimitiveType == Byte.TYPE) {
             return Byte.class;
-        if (wrappedOrPrimitiveType == Character.TYPE)
+        }
+
+        if (wrappedOrPrimitiveType == Character.TYPE) {
             return Character.class;
-        if (wrappedOrPrimitiveType == Float.TYPE)
+        }
+
+        if (wrappedOrPrimitiveType == Float.TYPE) {
             return Float.class;
-        if (wrappedOrPrimitiveType == Double.TYPE)
+        }
+
+        if (wrappedOrPrimitiveType == Double.TYPE) {
             return Double.class;
-        if (wrappedOrPrimitiveType == Short.TYPE)
+        }
+
+        if (wrappedOrPrimitiveType == Short.TYPE) {
             return Short.class;
-        if (wrappedOrPrimitiveType == Void.TYPE)
+        }
+
+        if (wrappedOrPrimitiveType == Void.TYPE) {
             return Void.class;
+        }
 
         return wrappedOrPrimitiveType;
     }
@@ -70,10 +108,10 @@ public class WrappedPrimitiveUtils {
             try {
                 tmp = wrappedType.getDeclaredMethod("valueOf", char.class).invoke(null, valueStr.charAt(0));
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                throw new RuntimeException(e);
+                throw new GetValueFromStrException("Не найден метод для преобразования",e);
             }
         } catch (InvocationTargetException | IllegalAccessException ex) {
-            throw new RuntimeException(ex);
+            throw new GetValueFromStrException("Не найден метод для преобразования", ex);
         }
         return wrappedType.cast(tmp);
     }

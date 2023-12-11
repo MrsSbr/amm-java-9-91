@@ -3,11 +3,11 @@ package Example;
 import java.util.Objects;
 
 public class Cat {
-    String name;
-    int age;
-    Gender gender;
-    String breed;
-    boolean defertilized;
+    private String name;
+    private int age;
+    private Gender gender;
+    private String breed;
+    private boolean defertilized;
 
     public Cat() {
     }

@@ -1,6 +1,8 @@
 package Tests;
 
 import Serialization.Deserializer;
+import Serialization.Exceptions.DeserializeException;
+import Serialization.Exceptions.SerializeException;
 import Serialization.Serializer;
 import Examples.Enums.Color;
 import org.junit.jupiter.api.Assertions;
@@ -27,7 +29,7 @@ public class InvalidArgsTest {
     void serializerThrowsIllegalArgumentException(Object arg) {
         Serializer serializer = new Serializer();
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> serializer.serialize(arg));
+        Assertions.assertThrows(SerializeException.class, () -> serializer.serialize(arg));
     }
 
     @ParameterizedTest
@@ -36,7 +38,7 @@ public class InvalidArgsTest {
         Deserializer deserializer = new Deserializer();
         Class argType = arg.getClass();
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.deserializeObj(argType, ""));
-        Assertions.assertThrows(IllegalArgumentException.class, () -> deserializer.deserializeBuffer(argType, null, ""));
+        Assertions.assertThrows(DeserializeException.class, () -> deserializer.deserializeObj(argType, ""));
+        Assertions.assertThrows(DeserializeException.class, () -> deserializer.deserializeBuffer(argType, null, ""));
     }
 }

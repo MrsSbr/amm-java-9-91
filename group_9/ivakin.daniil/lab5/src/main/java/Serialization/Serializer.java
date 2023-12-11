@@ -1,5 +1,6 @@
 package Serialization;
 
+import Serialization.Exceptions.SerializeException;
 import Serialization.Utils.EscSymbSerializer;
 import Serialization.Utils.WrappedPrimitiveUtils;
 
@@ -16,7 +17,7 @@ public class Serializer {
         Class type = obj.getClass();
         if (type.isPrimitive() || WrappedPrimitiveUtils.isWrappedPrimitive(type)
                 || type.isEnum() || type == String.class) {
-            throw new IllegalArgumentException();
+            throw new SerializeException("Попытка сериализации неправильного объекта");
         }
 
         return serializeValue(obj, obj.getClass(), 0);
@@ -137,7 +138,7 @@ public class Serializer {
                 try {
                     jsonStrBuilder.append(serializeValue(field.get(obj), field.getType(), indentCount + 2));
                 } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
+                    throw new SerializeException("Поле " + field.getName() + " не доступно для чтения", e);
                 }
 
                 jsonStrBuilder.append(",");
@@ -161,9 +162,11 @@ public class Serializer {
 
     private List<Field> getAllFields(Class type) {
         List<Field> fields = new ArrayList<>();
+
         for (Class superType = type; superType != null; superType = superType.getSuperclass()) {
             fields.addAll(Arrays.stream(superType.getDeclaredFields()).toList());
         }
+
         return fields;
     }
 }
