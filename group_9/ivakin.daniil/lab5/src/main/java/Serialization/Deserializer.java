@@ -67,8 +67,9 @@ public class Deserializer {
 
     //Десериализация значения из преобразованной строки-значения
     private Object deserializeValue(Class valueType, String valueStr, List<Class> innerTypes, Iterator<String> jsonIt) {
-        if (valueStr.equals("null"))
+        if (valueStr.equals("null")) {
             return null;
+        }
 
         if (WrappedPrimitiveUtils.wrappedFromUnknown(valueType) == Character.class) {
             String desStrValue = EscSymbDeserializer.deserializeWithEsc(valueStr.substring(1, valueStr.length() - 1));
