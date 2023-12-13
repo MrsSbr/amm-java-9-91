@@ -64,9 +64,10 @@ public class Serializer {
         for (var i = 0; i < length; i++) {
             stringBuilder
                     .append(serializeType(Array.get(obj, i), componentType))
-                    .append(",");
+                    .append(", ");
         }
         if (length != 0) {
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         }
 
@@ -87,9 +88,10 @@ public class Serializer {
 
         collection.forEach(component -> stringBuilder
                 .append(serializeType(component, componentType))
-                .append(","));
+                .append(", "));
 
         return stringBuilder
+                .deleteCharAt(stringBuilder.length() - 1)
                 .deleteCharAt(stringBuilder.length() - 1)
                 .append("]")
                 .toString();

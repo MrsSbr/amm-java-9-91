@@ -7,10 +7,16 @@ import lombok.SneakyThrows;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 
 public class Deserializer {
+    private List<Class> innerTypes;
+
     public Object DeserializeJSON(String json, Class<?> objType) {
+        innerTypes = Collections.EMPTY_LIST;
+
         if (objType.isPrimitive()
                 || Utils.isWrappedPrimitive(objType)
                 || objType.isEnum()
@@ -22,6 +28,19 @@ public class Deserializer {
         return deserializeType(json, objType);
     }
 
+    public Object DeserializeJSON(String json, Class<?> objType, List<Class> innerTypes) {
+        this.innerTypes = innerTypes;
+
+        if (objType.isPrimitive()
+                || Utils.isWrappedPrimitive(objType)
+                || objType.isEnum()
+                || objType == String.class) {
+
+            throw new DeserializeException("Illegal deserialization objType");
+        }
+
+        return deserializeType(json, objType);
+    }
 
     private Object deserializeType(String json, Class<?> objType) {
         if (json.equals("null")) {
@@ -40,11 +59,11 @@ public class Deserializer {
             return deserializeString(json);
         }
         if (objType.isArray()) {
-            return deserializePrimitiveArray(json, objType);
+            return deserializeArray(json, objType);
         }
-//        if (Collection.class.isAssignableFrom(objType)) {
-//            return deserializePrimitiveCollection(json, objType);
-//        }
+        if (Collection.class.isAssignableFrom(objType)) {
+            return deserializeCollection(json, objType);
+        }
 
         return deserializeObject(json, objType);
     }
@@ -104,7 +123,7 @@ public class Deserializer {
             return json.charAt(0);
         }
 
-        throw new IllegalArgumentException();
+        throw new DeserializeException("Illegal deserialization objType");
     }
 
     private Object deserializeEnum(String json, Class<?> objType) {
@@ -118,8 +137,8 @@ public class Deserializer {
         return json.substring(1, json.length() - 1);
     }
 
-    private Object deserializePrimitiveArray(String json, Class<?> objType) {
-        var splits = json.substring(1, json.length() - 1).split(",");
+    private Object deserializeArray(String json, Class<?> objType) {
+        var splits = json.substring(1, json.length() - 1).split(", ");
 
         var array = Array.newInstance(objType.getComponentType(), splits.length);
         for (int i = 0; i < splits.length; i++) {
@@ -128,15 +147,24 @@ public class Deserializer {
         return array;
     }
 
-//    private Object deserializePrimitiveCollection(String json, Class<?> objType) {
-//        var splits = json.substring(1, json.length() - 1).split(",");
-//
-//        var collection = new ArrayList<>();
-//        for (var split : splits) {
-//            collection.add(deserializeType(split.trim(), objType.getComponentType()));
-//        }
-//        return collection;
-//    }
+    private Object deserializeCollection(String json, Class<?> objType) {
+        Class type;
+        if (!innerTypes.isEmpty()) {
+            type = innerTypes.get(0);
+        }
+        else {
+            type = objType.getComponentType();
+        }
+        var splits = json.substring(1, json.length() - 1).split(", ");
+
+        var collection = new ArrayList<>();
+        for (var split : splits) {
+            collection.add(deserializeType(split.trim(), type));
+        }
+        return collection;
+    }
+
+
 
     @SneakyThrows
     private Object deserializeObject(String json, Class<?> objType) {

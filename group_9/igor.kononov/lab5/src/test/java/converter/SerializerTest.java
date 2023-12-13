@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -74,10 +75,10 @@ class SerializerTest {
         var arrayJson = serializer.serializeJSON(array);
         var primitiveListJson = serializer.serializeJSON(primitiveList);
 
-        assertEquals("[{\"size\":26,\"tire\":\"SUMMER\"},{\"size\":26,\"tire\":\"SUMMER\"},{\"size\":26,\"tire\":\"SUMMER\"},{\"size\":26,\"tire\":\"SUMMER\"}]", listJson);
-        assertEquals("[{\"size\":26,\"tire\":\"SUMMER\"},{\"size\":26,\"tire\":\"SUMMER\"},{\"size\":26,\"tire\":\"SUMMER\"},{\"size\":26,\"tire\":\"SUMMER\"}]", queueJson);
-        assertEquals("[{\"size\":26,\"tire\":\"SUMMER\"},{\"size\":26,\"tire\":\"SUMMER\"},{\"size\":26,\"tire\":\"SUMMER\"},{\"size\":26,\"tire\":\"SUMMER\"}]", arrayJson);
-        assertEquals("[0,1,2,3]", primitiveListJson);
+        assertEquals("[{\"size\":26,\"tire\":\"SUMMER\"}, {\"size\":26,\"tire\":\"SUMMER\"}, {\"size\":26,\"tire\":\"SUMMER\"}, {\"size\":26,\"tire\":\"SUMMER\"}]", listJson);
+        assertEquals("[{\"size\":26,\"tire\":\"SUMMER\"}, {\"size\":26,\"tire\":\"SUMMER\"}, {\"size\":26,\"tire\":\"SUMMER\"}, {\"size\":26,\"tire\":\"SUMMER\"}]", queueJson);
+        assertEquals("[{\"size\":26,\"tire\":\"SUMMER\"}, {\"size\":26,\"tire\":\"SUMMER\"}, {\"size\":26,\"tire\":\"SUMMER\"}, {\"size\":26,\"tire\":\"SUMMER\"}]", arrayJson);
+        assertEquals("[0, 1, 2, 3]", primitiveListJson);
     }
 
     @Test
@@ -85,9 +86,7 @@ class SerializerTest {
         var size = 4;
         var wheel = new Wheel(26, Type.SUMMER);
         var wheels = new Wheel[size];
-        for (var i = 0; i < size; i++) {
-            wheels[i] = wheel;
-        }
+        Arrays.fill(wheels, wheel);
 
         var listCar = new CarCollection();
         listCar.setModel("Lada");
@@ -106,8 +105,8 @@ class SerializerTest {
         var listCarJson = serializer.serializeJSON(listCar);
         var arrayCarJson = serializer.serializeJSON(arrayCar);
 
-        assertEquals("{\"mark\":\"Vesta\",\"model\":\"Lada\",\"wheels\":[{\"size\":26,\"tire\":\"SUMMER\"},{\"size\":26,\"tire\":\"SUMMER\"},{\"size\":26,\"tire\":\"SUMMER\"},{\"size\":26,\"tire\":\"SUMMER\"}]}", listCarJson);
-        assertEquals("{\"mark\":\"Vesta\",\"model\":\"Lada\",\"wheels\":[{\"size\":26,\"tire\":\"SUMMER\"},{\"size\":26,\"tire\":\"SUMMER\"},{\"size\":26,\"tire\":\"SUMMER\"},{\"size\":26,\"tire\":\"SUMMER\"}]}", arrayCarJson);
+        assertEquals("{\"mark\":\"Vesta\",\"model\":\"Lada\",\"wheels\":[{\"size\":26,\"tire\":\"SUMMER\"}, {\"size\":26,\"tire\":\"SUMMER\"}, {\"size\":26,\"tire\":\"SUMMER\"}, {\"size\":26,\"tire\":\"SUMMER\"}]}", listCarJson);
+        assertEquals("{\"mark\":\"Vesta\",\"model\":\"Lada\",\"wheels\":[{\"size\":26,\"tire\":\"SUMMER\"}, {\"size\":26,\"tire\":\"SUMMER\"}, {\"size\":26,\"tire\":\"SUMMER\"}, {\"size\":26,\"tire\":\"SUMMER\"}]}", arrayCarJson);
     }
 
     @Test
