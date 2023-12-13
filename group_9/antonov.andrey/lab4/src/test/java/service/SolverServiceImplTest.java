@@ -50,11 +50,10 @@ class SolverServiceImplTest {
 
     private static final Country COUNTRY_THIRD_PLACE = UKRAINE;
 
-    private static final SolverService SOLVER_SERVICE = new SolverServiceImpl(TEST_LIST);
 
     @Test
     void getTop3BestCountriesTest() {
-        final var actualResult = SOLVER_SERVICE.getTop3BestCountries();
+        final var actualResult = new SolverServiceImpl().getTop3BestCountries(TEST_LIST);
         assertEquals(3, actualResult.size());
         assertEquals(COUNTRY_FIRST_PLACE, actualResult.get(0));
         assertEquals(COUNTRY_SECOND_PLACE, actualResult.get(1));
@@ -63,7 +62,7 @@ class SolverServiceImplTest {
 
     @Test
     void getAthletesBySportTest() {
-        final var actualResult = SOLVER_SERVICE.getAthletesBySport();
+        final var actualResult = new SolverServiceImpl().getAthletesBySport(TEST_LIST);
 
         assertEquals(3, actualResult.size());
 
@@ -78,10 +77,26 @@ class SolverServiceImplTest {
 
     @Test
     void getBestAthleteTest() {
-        final var bestAthlete = SOLVER_SERVICE.getBestAthlete();
+        final var bestAthlete = new SolverServiceImpl().getBestAthlete(TEST_LIST);
         bestAthlete.ifPresentOrElse(
             (result) -> assertEquals(THE_BEST_ATHLETE, result),
             Assertions::fail
         );
+    }
+
+    @Test
+    void shouldEmptyResultIfListEmpty() {
+        final var solverService = new SolverServiceImpl();
+        Assertions.assertTrue(solverService.getBestAthlete(List.of()).isEmpty());
+        Assertions.assertTrue(solverService.getAthletesBySport(List.of()).isEmpty());
+        Assertions.assertTrue(solverService.getTop3BestCountries(List.of()).isEmpty());
+    }
+
+    @Test
+    void shouldThrownIAEIfListNull() {
+        final var solverService = new SolverServiceImpl();
+        Assertions.assertThrows(IllegalArgumentException.class, () -> solverService.getAthletesBySport(null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> solverService.getTop3BestCountries(null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> solverService.getBestAthlete(null));
     }
 }

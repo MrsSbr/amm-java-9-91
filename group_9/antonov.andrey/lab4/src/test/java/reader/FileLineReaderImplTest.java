@@ -3,6 +3,7 @@ package reader;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 import static entity.Country.BELARUS;
 import static entity.Country.RUSSIA;
 import static entity.Country.UKRAINE;
@@ -21,9 +22,9 @@ import parser.ParserImpl;
 
 class FileLineReaderImplTest {
 
-    private static final FileLineReader FILE_LINE_READER = new FileLineReaderImpl();
+    private static final FileLineReader<OlympicStatistic> FILE_LINE_READER = new FileLineReaderImpl();
 
-    private static final Parser PARSER = new ParserImpl();
+    private static final Parser<OlympicStatistic> PARSER = new ParserImpl();
 
     private static final String RIGHT_FILE_NAME = "rightData.txt";
 
@@ -42,7 +43,8 @@ class FileLineReaderImplTest {
     @Test
     void readAllLinesSuccess() {
         try {
-            final var path = Paths.get(this.getClass().getClassLoader().getResource(RIGHT_FILE_NAME).toURI());
+            final var path = Paths.get(
+                Objects.requireNonNull(this.getClass().getClassLoader().getResource(RIGHT_FILE_NAME)).toURI());
             final var actualResult = FILE_LINE_READER.readAllLines(path, PARSER);
             assertEquals(TEST_LIST, actualResult);
         } catch (URISyntaxException uriSyntaxException) {
@@ -51,10 +53,11 @@ class FileLineReaderImplTest {
     }
 
     @Test
-    void shouldThrownIfResourceFileIsNull() {
+    void shouldThrownParseExceptionIfResourceFileIsNull() {
         assertThrows(ParseException.class,
             () -> {
-                final var path = Paths.get(this.getClass().getClassLoader().getResource(WRONG_FILE_NAME).toURI());
+                final var path = Paths.get(
+                    Objects.requireNonNull(this.getClass().getClassLoader().getResource(WRONG_FILE_NAME)).toURI());
                 FILE_LINE_READER.readAllLines(path, PARSER);
             });
     }
@@ -62,6 +65,7 @@ class FileLineReaderImplTest {
     @Test
     void shouldThrownNpeIfResourceFileIsNull() {
         assertThrows(NullPointerException.class,
-            () -> Paths.get(this.getClass().getClassLoader().getResource(NON_EXISTENT_FILE_NAME).toURI()));
+            () -> Paths.get(
+                Objects.requireNonNull(this.getClass().getClassLoader().getResource(NON_EXISTENT_FILE_NAME)).toURI()));
     }
 }

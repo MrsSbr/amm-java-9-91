@@ -13,14 +13,12 @@ import service.collector.CollectorBySport;
 
 public class SolverServiceImpl implements SolverService {
 
-    private final List<OlympicStatistic> list;
-
-    public SolverServiceImpl(final List<OlympicStatistic> list) {
-        this.list = list;
-    }
-
     @Override
-    public List<Country> getTop3BestCountries() {
+    public List<Country> getTop3BestCountries(final List<OlympicStatistic> list) {
+        if (list == null) {
+            throw new IllegalArgumentException("the list cannot be null");
+        }
+
         return list.stream()
             .filter(SolverServiceImpl::isPrizePlace)
             .collect(
@@ -34,14 +32,20 @@ public class SolverServiceImpl implements SolverService {
     }
 
     @Override
-    public Map<Sport, List<String>> getAthletesBySport() {
+    public Map<Sport, List<String>> getAthletesBySport(final List<OlympicStatistic> list) {
+        if (list == null) {
+            throw new IllegalArgumentException("the list cannot be null");
+        }
         return list.stream()
             .filter(SolverServiceImpl::isPrizePlace)
             .collect(new CollectorBySport((SolverServiceImpl::isPrizePlace)));
     }
 
     @Override
-    public Optional<String> getBestAthlete() {
+    public Optional<String> getBestAthlete(final List<OlympicStatistic> list) {
+        if (list == null) {
+            throw new IllegalArgumentException("the list cannot be null");
+        }
         return list.stream()
             .filter(SolverServiceImpl::isPrizePlace)
             .collect(Collectors.groupingBy(OlympicStatistic::getAthlete, Collectors.counting()))

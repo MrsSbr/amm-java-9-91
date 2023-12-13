@@ -1,4 +1,5 @@
 import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.logging.Logger;
 import parser.ParserImpl;
 import reader.FileLineReaderImpl;
@@ -14,7 +15,7 @@ public class ServiceRunner {
         logger.info(String.format("%s start", ServiceRunner.class.getName()));
 
         try {
-            final var path = Paths.get(ServiceRunner.class.getResource(FILE_NAME).toURI());
+            final var path = Paths.get(Objects.requireNonNull(ServiceRunner.class.getResource(FILE_NAME)).toURI());
 
 
             final FileLineReaderImpl fileLineReader = new FileLineReaderImpl();
@@ -25,10 +26,10 @@ public class ServiceRunner {
 
                 logger.info("Read data: " + list);
 
-                final var solverService = new SolverServiceImpl(list);
-                final var top3BestCountries = solverService.getTop3BestCountries();
-                final var athletesBySport = solverService.getAthletesBySport();
-                final var bestAthlete = solverService.getBestAthlete();
+                final var solverService = new SolverServiceImpl();
+                final var top3BestCountries = solverService.getTop3BestCountries(list);
+                final var athletesBySport = solverService.getAthletesBySport(list);
+                final var bestAthlete = solverService.getBestAthlete(list);
 
                 logger.info("Топ 3 страны медального зачета: " + top3BestCountries);
                 logger.info("Страны и списки медалистов: " + athletesBySport);

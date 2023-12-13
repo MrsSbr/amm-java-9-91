@@ -20,7 +20,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class ParserImplTest {
 
-    private static final Parser PARSER = new ParserImpl();
+    private static final Parser<OlympicStatistic> PARSER = new ParserImpl();
 
 
     private static Stream<Arguments> getRightLinesForParsing() {
@@ -48,7 +48,6 @@ class ParserImplTest {
             Arguments.of("Беларусь;Метание;Сидоров;1", OlympicStatistic.of(BELARUS, RUNNING, "Сидоров", 1))
         );
     }
-
 
     @ParameterizedTest
     @MethodSource("getRightLinesForParsing")
