@@ -3,6 +3,7 @@ package converter;
 import lombok.SneakyThrows;
 
 
+import java.lang.reflect.Array;
 import java.util.Iterator;
 
 
@@ -40,9 +41,9 @@ public class Deserializer {
         if (objType == String.class) {
             return deserializeString(json);
         }
-//        if (objType.isArray()) {
-//            return deserializeArray(json, objType);
-//        }
+        if (objType.isArray()) {
+            return deserializeArray(json, objType);
+        }
 //        if (Collection.class.isAssignableFrom(objType)) {
 //            return deserializeCollection(json, objType);
 //        }
@@ -120,15 +121,15 @@ public class Deserializer {
         return json.substring(1, json.length() - 1);
     }
 
-//    private Object deserializeArray(String json, Class<?> objType) {
-//        var splits = json.substring(1, json.length() - 1).split(",");
-//
-//        var array = Array.newInstance(objType.getComponentType(), splits.length);
-//        for (int i = 0; i < splits.length; i++) {
-//            Array.set(array, i, deserializeType(splits[i].trim(), objType.getComponentType()));
-//        }
-//        return array;
-//    }
+    private Object deserializeArray(String json, Class<?> objType) {
+        var splits = json.substring(1, json.length() - 1).split(",");
+
+        var array = Array.newInstance(objType.getComponentType(), splits.length);
+        for (int i = 0; i < splits.length; i++) {
+            Array.set(array, i, deserializeType(splits[i].trim(), objType.getComponentType()));
+        }
+        return array;
+    }
 
 
     @SneakyThrows
