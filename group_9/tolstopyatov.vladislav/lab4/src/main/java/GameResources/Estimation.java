@@ -24,5 +24,4 @@ public enum Estimation {
                 .filter(estimation -> estimation.value == estimationInt)
                 .findFirst();
     }
-
 }

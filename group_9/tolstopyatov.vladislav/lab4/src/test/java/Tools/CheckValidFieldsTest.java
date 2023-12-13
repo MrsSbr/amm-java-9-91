@@ -22,32 +22,28 @@ public class CheckValidFieldsTest {
 
     @Test
     void checkValidTitle() {
-        assertThrows(NotValidTitleException.class, () ->
-        {
+        assertThrows(NotValidTitleException.class, () -> {
             checker.checkValidTitle(NOT_VALID_TITLE);
         });
     }
 
     @Test
     void checkValidGenre() {
-        assertThrows(NotValidGenreException.class, () ->
-        {
+        assertThrows(NotValidGenreException.class, () -> {
             checker.checkValidGenre(NOT_VALID_GENRE_VALUE);
         });
     }
 
     @Test
     void checkValidTimeInHours() {
-        assertThrows(NotValidDateOfCompletionException.class, () ->
-        {
+        assertThrows(NotValidDateOfCompletionException.class, () -> {
             checker.checkValidDateOfCompletion(NOT_VALID_DATE_OF_COMPLETION);
         });
     }
 
     @Test
     void checkValidDateOfCompletion() {
-        assertThrows(NotValidGameTimeInHoursException.class, () ->
-        {
+        assertThrows(NotValidGameTimeInHoursException.class, () -> {
             checker.checkGameTimeInHours(NOT_VALID_GAME_TIME_IN_HOURS);
         });
     }

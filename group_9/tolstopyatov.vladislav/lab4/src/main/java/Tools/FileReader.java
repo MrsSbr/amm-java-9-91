@@ -37,7 +37,7 @@ public class FileReader {
                         LocalDate dateOfCompletion = LocalDate.parse(struct[2]);
                         checkValid.checkValidDateOfCompletion(dateOfCompletion);
 
-                        Integer gameTimeInHours = Integer.parseInt(struct[3]);
+                        int gameTimeInHours = Integer.parseInt(struct[3]);
                         checkValid.checkGameTimeInHours(gameTimeInHours);
 
                         Estimation estimation = Estimation.valueOf(struct[4]);

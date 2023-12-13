@@ -3,6 +3,7 @@ package GameResources;
 import java.time.Month;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,10 @@ public class GameStatistics {
     // найти жанр, игры в котором получили самый высокий средний балл
     public Genre genreWithTheHighestAverageEstimation(List<Game> gamesList) {
         logger.info("Вызов метода genreWithTheHighestAverageEstimation");
+
+        if (gamesList.isEmpty()) {
+            throw new NullPointerException();
+        }
 
         Map<Genre, Double> genreAverages1 = gamesList.stream()
                 .collect(Collectors.groupingBy(Game::getGenre,
@@ -59,6 +64,10 @@ public class GameStatistics {
     // найти в какой месяц, Иннокентий потратил больше время времени на игры;
     public Month monthWithTheHighestInnocentisGameActivity(List<Game> gamesList) {
         logger.info("Вызов метода monthWithTheHighestInnocentisGameActivity");
+
+        if (gamesList.isEmpty()) {
+            throw new NoSuchElementException();
+        }
 
         // сначала делаем Map, где ключом будет месяц, а значение - суммарное время,
         // проведенное Инокентием в данный месяц

@@ -10,7 +10,6 @@ import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class GamesStatisticsTest {
@@ -62,8 +61,9 @@ public class GamesStatisticsTest {
 
     @Test
     void findGenreWithTheHighestAverageEstimationInEmptyList() {
-        Genre genre = gameStatistics.genreWithTheHighestAverageEstimation(EMPTY_GAME_LIST);
-        assertNull(genre);
+        assertThrows(NullPointerException.class, () -> {
+            gameStatistics.genreWithTheHighestAverageEstimation(EMPTY_GAME_LIST);
+        });
     }
 
     @Test

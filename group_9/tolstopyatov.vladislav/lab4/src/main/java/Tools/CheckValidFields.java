@@ -21,7 +21,7 @@ public class CheckValidFields {
     }
 
     public void checkValidGenre(String genre) {
-        if (!Genre.find(genre).isPresent()) {
+        if (Genre.find(genre).isEmpty()) {
             throw new NotValidGenreException("Не найден заданный жанр!");
         }
     }
@@ -39,7 +39,7 @@ public class CheckValidFields {
     }
 
     public void checkValidEstimation(Integer estimation) {
-        if (!Estimation.find(estimation).isPresent()) {
+        if (Estimation.find(estimation).isEmpty()) {
             throw new NotValidEstimationException("Некорректная оценка игры!");
         }
     }
