@@ -4,6 +4,7 @@ import lombok.SneakyThrows;
 
 
 import java.lang.reflect.Array;
+import java.util.Collection;
 import java.util.Iterator;
 
 
@@ -13,17 +14,17 @@ public class Deserializer {
                 || Utils.isWrappedPrimitive(objType)
                 || objType.isEnum()
                 || objType == String.class) {
-//                || objType.isArray()
-//                || Collection.class.isAssignableFrom(objType)) {
+                || objType.isArray()
+                || Collection.class.isAssignableFrom(objType)) {
             throw new IllegalArgumentException();
         }
 
         return deserializeType(json, objType);
     }
 
-    private Iterator<String> getJsonIt(String jsonString) {
-        return jsonString.lines().map(String::trim).toList().iterator();
-    }
+//    private Iterator<String> getJsonIt(String jsonString) {
+//        return jsonString.lines().map(String::trim).toList().iterator();
+//    }
 
     private Object deserializeType(String json, Class<?> objType) {
         if (json.equals("null")) {
@@ -159,3 +160,5 @@ public class Deserializer {
         return object;
     }
 }
+
+

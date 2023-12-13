@@ -9,7 +9,10 @@ import example.Cat;
 import example.Gender;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
