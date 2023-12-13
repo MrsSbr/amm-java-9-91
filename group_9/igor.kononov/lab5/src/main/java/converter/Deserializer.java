@@ -1,11 +1,12 @@
 package converter;
 
+import exceptions.DeserializeException;
 import lombok.SneakyThrows;
 
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 
 public class Deserializer {
@@ -14,17 +15,13 @@ public class Deserializer {
                 || Utils.isWrappedPrimitive(objType)
                 || objType.isEnum()
                 || objType == String.class) {
-                || objType.isArray()
-                || Collection.class.isAssignableFrom(objType)) {
-            throw new IllegalArgumentException();
+
+            throw new DeserializeException("Illegal deserialization objType");
         }
 
         return deserializeType(json, objType);
     }
 
-//    private Iterator<String> getJsonIt(String jsonString) {
-//        return jsonString.lines().map(String::trim).toList().iterator();
-//    }
 
     private Object deserializeType(String json, Class<?> objType) {
         if (json.equals("null")) {
@@ -43,15 +40,14 @@ public class Deserializer {
             return deserializeString(json);
         }
         if (objType.isArray()) {
-            return deserializeArray(json, objType);
+            return deserializePrimitiveArray(json, objType);
         }
 //        if (Collection.class.isAssignableFrom(objType)) {
-//            return deserializeCollection(json, objType);
+//            return deserializePrimitiveCollection(json, objType);
 //        }
 
         return deserializeObject(json, objType);
     }
-
 
     private Object deserializePrimitive(String json, Class<?> objType) {
         if (objType == int.class) {
@@ -79,7 +75,7 @@ public class Deserializer {
             return json.charAt(0);
         }
 
-        throw new IllegalArgumentException();
+        throw new DeserializeException("Illegal deserialization objType");
     }
 
     private Object deserializeWrapperPrimitive(String json, Class<?> objType) {
@@ -113,7 +109,7 @@ public class Deserializer {
 
     private Object deserializeEnum(String json, Class<?> objType) {
         if (!objType.isEnum()) {
-            throw new IllegalArgumentException("Type is not an enum");
+            throw new DeserializeException("Type is not an enum");
         }
         return Enum.valueOf((Class<Enum>) objType, json.substring(1, json.length() - 1));
     }
@@ -122,7 +118,7 @@ public class Deserializer {
         return json.substring(1, json.length() - 1);
     }
 
-    private Object deserializeArray(String json, Class<?> objType) {
+    private Object deserializePrimitiveArray(String json, Class<?> objType) {
         var splits = json.substring(1, json.length() - 1).split(",");
 
         var array = Array.newInstance(objType.getComponentType(), splits.length);
@@ -132,6 +128,15 @@ public class Deserializer {
         return array;
     }
 
+//    private Object deserializePrimitiveCollection(String json, Class<?> objType) {
+//        var splits = json.substring(1, json.length() - 1).split(",");
+//
+//        var collection = new ArrayList<>();
+//        for (var split : splits) {
+//            collection.add(deserializeType(split.trim(), objType.getComponentType()));
+//        }
+//        return collection;
+//    }
 
     @SneakyThrows
     private Object deserializeObject(String json, Class<?> objType) {
@@ -152,7 +157,7 @@ public class Deserializer {
                     try {
                         field.set(object, deserializeType(value, field.getType()));
                     } catch (IllegalArgumentException e) {
-                        throw new RuntimeException(e);
+                        throw new DeserializeException("Illegal arguments to set" + e.getMessage());
                     }
                 }
             }
@@ -160,5 +165,6 @@ public class Deserializer {
         return object;
     }
 }
+
 
 

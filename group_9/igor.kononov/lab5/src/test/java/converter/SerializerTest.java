@@ -7,6 +7,7 @@ import entities.car.Type;
 import entities.car.Wheel;
 import example.Cat;
 import example.Gender;
+import exceptions.SerializeException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayDeque;
@@ -111,10 +112,9 @@ class SerializerTest {
 
     @Test
     void illegalArgumentsSerializeTest() {
-        assertThrows(IllegalArgumentException.class, () -> serializer.serializeJSON(5));
-        assertThrows(IllegalArgumentException.class, () -> serializer.serializeJSON(5.0));
-        assertThrows(IllegalArgumentException.class, () -> serializer.serializeJSON(false));
-        assertThrows(IllegalArgumentException.class, () -> serializer.serializeJSON(Type.SUMMER));
+        assertThrows(SerializeException.class, () -> serializer.serializeJSON(5));
+        assertThrows(SerializeException.class, () -> serializer.serializeJSON(5.0));
+        assertThrows(SerializeException.class, () -> serializer.serializeJSON(false));
+        assertThrows(SerializeException.class, () -> serializer.serializeJSON(Type.SUMMER));
     }
-
 }

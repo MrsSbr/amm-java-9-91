@@ -1,5 +1,7 @@
 package converter;
 
+import exceptions.SerializeException;
+
 import java.lang.reflect.Array;
 import java.util.Collection;
 
@@ -14,7 +16,7 @@ public class Serializer {
                 || Utils.isWrappedPrimitive(objectType)
                 || objectType.isEnum()
                 || objectType == String.class) {
-            throw new IllegalArgumentException();
+            throw new SerializeException("Illegal serialization objType");
         }
 
         return serializeType(obj, objectType);
@@ -108,7 +110,7 @@ public class Serializer {
             try {
                 stringBuilder.append(serializeType(field.get(obj), field.getType()));
             } catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
+                throw new SerializeException("Illegal arguments to append" + e.getMessage());
             }
             stringBuilder.append(",");
         }
