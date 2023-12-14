@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +21,8 @@ public class ChroniclesAnalysis {
         logger.log(Level.INFO, "Battle statistics calculation started");
 
         try {
-            URI uri = Thread.currentThread().getContextClassLoader().getResource("battle_records.json").toURI();
+            URI uri = Objects.requireNonNull(Thread.currentThread()
+                    .getContextClassLoader().getResource("battle_records.json")).toURI();
             Path path = Paths.get(uri);
 
             BattleChronicleDeserializer deserializer = new BattleChronicleDeserializer();
@@ -30,15 +32,18 @@ public class ChroniclesAnalysis {
 
             ChronicleInfo chronicleInfo = new ChronicleInfo(battleChronicles);
 
-            System.out.println("Khanate with the highest casualties in winter: " +
-                    chronicleInfo.findMostCasualtiesByEnemyInWinter());// TODO: 11.12.2023 NPE
+            String result = chronicleInfo.findMostCasualtiesByEnemyInWinter();
+            if (result != null) {
+                System.out.println("Khanate with the highest casualties in winter: " + result);
+            } else {
+                System.out.println("No Khanate found with casualties in winter.");
+            }
             System.out.println("Locations with the fewest battles: " +
                     chronicleInfo.findLocationsWithLeastBattles());
 
             Map<String, List<String>> battlesByEnemy = chronicleInfo.listBattlesByEnemy();
-            battlesByEnemy.forEach((enemy, battleList) -> {
-                System.out.println("Battles with " + enemy + ": " + battleList);
-            });
+            battlesByEnemy.forEach((enemy, battleList) ->
+                    System.out.println("Battles with " + enemy + ": " + battleList));
 
             logger.log(Level.FINE, "Battle statistics calculated successfully");
 
