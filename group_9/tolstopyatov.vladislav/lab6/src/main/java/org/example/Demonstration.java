@@ -46,10 +46,8 @@ public class Demonstration {
         for (Visitor visitor : visitors) {
             visitor.start();
         }
-        /*
         for (Visitor visitor : visitors) {
             visitor.join();
         }
-         */
     }
 }
