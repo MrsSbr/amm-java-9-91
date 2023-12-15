@@ -17,7 +17,7 @@ public class Barber implements Runnable {
         this.reception = reception;
     }
 
-    @SneakyThrows
+
     @Override
     public void run() {
         while (true) {
@@ -38,7 +38,11 @@ public class Barber implements Runnable {
                 }
                 if (freeReception) {
                     System.out.println("Барбер спит");
-                    workPlace.wait();
+                    try {
+                        workPlace.wait();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     currentClient = workPlace.getClient();
                 }
             }
@@ -46,7 +50,11 @@ public class Barber implements Runnable {
             workPlace.setClient(currentClient);
             workPlace.setFree(false);
             System.out.println("Работает с " + currentClient.getName());
-            sleep(WORK_TIME);
+            try {
+                sleep(WORK_TIME);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             System.out.println("Барбер подстриг " + currentClient.getName());
             workPlace.setFree(true);
             workPlace.setClient(null);

@@ -13,11 +13,15 @@ public class Client implements Runnable {
     private final Reception reception;
     private boolean tonsured = false;
 
-    @SneakyThrows
+
     @Override
     public void run() {
         while (true) {
-            sleep(WAIT);
+            try {
+                sleep(WAIT);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
             var workPlace = reception.getWorkplace();
             synchronized (workPlace) {
@@ -35,7 +39,11 @@ public class Client implements Runnable {
                         reception.addClient(this);
                         System.out.println(name + " встал в очередь");
 
-                        clientQueue.wait();
+                        try {
+                            clientQueue.wait();
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                     else {
                         System.out.println(name + " ушел, мест нет");
