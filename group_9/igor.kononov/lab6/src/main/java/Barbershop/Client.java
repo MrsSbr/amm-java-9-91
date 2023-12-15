@@ -1,8 +1,6 @@
 package Barbershop;
 
-import Barbershop.Reception;
 import lombok.Data;
-import lombok.SneakyThrows;
 
 import static java.lang.Thread.sleep;
 
