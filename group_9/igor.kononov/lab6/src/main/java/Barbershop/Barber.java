@@ -6,16 +6,13 @@ import static java.lang.Thread.sleep;
 
 @Data
 public class Barber implements Runnable {
-    private static final int WORK_TIME = 5000;
-    private final String name;
+    private static final int WORK_TIME = 3000;
     private final Reception reception;
     private Client currentClient;
 
-    public Barber(String name, Reception reception) {
-        this.name = name;
+    public Barber(Reception reception) {
         this.reception = reception;
     }
-
 
     @Override
     public void run() {
@@ -48,7 +45,7 @@ public class Barber implements Runnable {
 
             workPlace.setClient(currentClient);
             workPlace.setFree(false);
-            System.out.println("Работает с " + currentClient.getName());
+            System.out.println("Барбер работает с " + currentClient.getName());
             try {
                 sleep(WORK_TIME);
             } catch (InterruptedException e) {
