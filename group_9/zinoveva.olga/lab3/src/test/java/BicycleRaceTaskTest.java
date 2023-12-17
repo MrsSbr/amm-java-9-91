@@ -20,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BicycleRaceTaskTest {
     private final BicycleRace[] bicycleRaces = {
-            new BicycleRace(Map.of(1, 3, 2, 4, 3, 7, 4, 10, 5, 8),
-                    List.of(3, 4, 8, 7, 10),
+            new BicycleRace(Map.of(1, 3, 2, 4, 3, 7, 4, 10, 5, 8, 6, 11),
+                    List.of(3, 4, 8, 7, 10, 11),
                     new GregorianCalendar(2023, Calendar.JANUARY, 6)),
             new BicycleRace(Map.of(1, 6, 2, 15, 3, 7, 4, 9, 5, 21, 6, 10),
                     List.of(6, 15, 7, 9, 21, 10),
