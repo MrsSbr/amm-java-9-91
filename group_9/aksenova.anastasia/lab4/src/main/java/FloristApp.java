@@ -99,7 +99,7 @@ public class FloristApp {
         Map<String, String> deliveryPreferences = determineDeliveryPreferenceForEachFlower(floristRecord);
         System.out.println("Предпочтения доставки для каждого цветка: " + deliveryPreferences);
         // Запись результатов в файл
-        writeResultsToFile("E:/прога/3 курс/Java/output.txt", mostDiverseMonth, earningsByBouquetType, deliveryPreferences);
+        writeResultsToFile("E:/прога/3 курс/Java/output.txt",  mostDiverseMonth, earningsByBouquetType, deliveryPreferences);
     }
 
     public static void writeResultsToFile(String filePath, String mostDiverseMonth,

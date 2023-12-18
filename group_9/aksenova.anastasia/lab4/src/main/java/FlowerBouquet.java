@@ -17,14 +17,17 @@ public class FlowerBouquet {
     }
 
     public String getDate() {
+
         return date;
     }
 
     public String getBouquetType() {
+
         return bouquetType;
     }
 
     public List<String> getBouquetComposition() {
+
         return bouquetComposition;
     }
 
