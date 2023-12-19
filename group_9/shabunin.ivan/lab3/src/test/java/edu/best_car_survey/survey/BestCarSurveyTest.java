@@ -4,14 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import edu.best_car_survey.form.BestCarForm;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Set;
 
+import edu.best_car_survey.form.CarBrand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.*;
 
 public class BestCarSurveyTest {
     private BestCarSurvey bestCarSurvey;
@@ -19,16 +17,16 @@ public class BestCarSurveyTest {
     @BeforeEach
     public void setUp() {
         List<BestCarForm> bestCarFormList = new ArrayList<>() {{
-            add(new BestCarForm(20, "BMW"));
-            add(new BestCarForm(30, "Skoda"));
-            add(new BestCarForm(30, "Skoda"));
-            add(new BestCarForm(30, "Skoda"));
-            add(new BestCarForm(30, "Peugeot"));
-            add(new BestCarForm(45, "BMW"));
-            add(new BestCarForm(45, "BMW"));
-            add(new BestCarForm(45, "BMW"));
-            add(new BestCarForm(45, "Audi"));
-            add(new BestCarForm(60, "Ford"));
+            add(new BestCarForm(20, CarBrand.BMW));
+            add(new BestCarForm(30, CarBrand.SKODA));
+            add(new BestCarForm(30, CarBrand.SKODA));
+            add(new BestCarForm(30, CarBrand.SKODA));
+            add(new BestCarForm(30, CarBrand.PEUGEOT));
+            add(new BestCarForm(45, CarBrand.BMW));
+            add(new BestCarForm(45, CarBrand.BMW));
+            add(new BestCarForm(45, CarBrand.BMW));
+            add(new BestCarForm(45, CarBrand.AUDI));
+            add(new BestCarForm(60, CarBrand.FORD));
         }};
 
         bestCarSurvey = new BestCarSurvey(bestCarFormList);
@@ -51,8 +49,8 @@ public class BestCarSurveyTest {
 
     @Test
     public void testFindMostPopularBrand() {
-        String expected = "BMW";
-        String result = bestCarSurvey.findMostPopularBrand().get();
+        CarBrand expected = CarBrand.BMW;
+        CarBrand result = bestCarSurvey.findMostPopularBrand().get();
         assertThat(result).isEqualTo(expected);
 
         BestCarSurvey emptySurvey = new BestCarSurvey(new ArrayList<>());
@@ -61,13 +59,13 @@ public class BestCarSurveyTest {
 
     @Test
     public void testFindMostPopularBrandsByAge() {
-        Map<Integer, String> result = bestCarSurvey.findMostPopularBrandsByAge();
+        Map<Integer, Optional<CarBrand>> result = bestCarSurvey.findMostPopularBrandsByAge();
 
         assertThat(result.size()).isEqualTo(4);
-        assertThat(result).containsEntry(20, "BMW");
-        assertThat(result).containsEntry(30, "Skoda");
-        assertThat(result).containsEntry(45, "BMW");
-        assertThat(result).containsEntry(60, "Ford");
+        assertThat(result).containsEntry(20, Optional.of(CarBrand.BMW));
+        assertThat(result).containsEntry(30, Optional.of(CarBrand.SKODA));
+        assertThat(result).containsEntry(45, Optional.of(CarBrand.BMW));
+        assertThat(result).containsEntry(60, Optional.of(CarBrand.FORD));
 
         BestCarSurvey emptySurvey = new BestCarSurvey(new ArrayList<>());
         assertThat(emptySurvey.findMostPopularBrandsByAge()).isEmpty();
@@ -75,8 +73,8 @@ public class BestCarSurveyTest {
 
     @Test
     public void testGetUniqueBrands() {
-        Set<String> expected = Set.of("BMW", "Audi", "Skoda", "Ford", "Peugeot");
-        Set<String> result = bestCarSurvey.getUniqueBrands();
+        Set<CarBrand> expected = Set.of(CarBrand.BMW, CarBrand.AUDI, CarBrand.SKODA, CarBrand.FORD, CarBrand.PEUGEOT);
+        Set<CarBrand> result = bestCarSurvey.getUniqueBrands();
         assertThat(result.size()).isEqualTo(expected.size());
         assertThat(result).containsAll(expected);
 

@@ -20,8 +20,8 @@ public class BestCarFormFactoryTest {
 
     @RepeatedTest(TEST_REPETITIONS_COUNT)
     public void shouldReturnBestCarFormWithBrandFromBrandsList() {
-        String brand = BestCarFormFactory.generate().brand();
-        assertThat(BestCarFormFactory.BRANDS.contains(brand)).isTrue();
+        CarBrand brand = BestCarFormFactory.generate().brand();
+        assertThat(BestCarFormFactory.BRANDS).contains(brand);
     }
 
     @Test

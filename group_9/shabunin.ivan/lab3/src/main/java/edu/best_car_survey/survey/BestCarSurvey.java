@@ -11,6 +11,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import edu.best_car_survey.form.CarBrand;
 import org.jetbrains.annotations.NotNull;
 
 public class BestCarSurvey {
@@ -42,7 +43,7 @@ public class BestCarSurvey {
         return survey.size();
     }
 
-    public Optional<String> findMostPopularBrand() {
+    public Optional<CarBrand> findMostPopularBrand() {
         return survey.stream()
                 .collect(Collectors.groupingBy(BestCarForm::brand, Collectors.counting()))
                 .entrySet().stream()
@@ -50,7 +51,7 @@ public class BestCarSurvey {
                 .map(Map.Entry::getKey);
     }
 
-    public Map<Integer, String> findMostPopularBrandsByAge() {
+    public Map<Integer, Optional<CarBrand>> findMostPopularBrandsByAge() {
         return survey.stream()
                 .collect(Collectors.groupingBy(BestCarForm::age,
                         Collectors.groupingBy(BestCarForm::brand, Collectors.counting())))
@@ -58,11 +59,10 @@ public class BestCarSurvey {
                 .collect(Collectors.toMap(Map.Entry::getKey,
                         entry -> entry.getValue().entrySet().stream()
                                 .max(Map.Entry.comparingByValue())
-                                .map(Map.Entry::getKey)
-                                .orElse("")));
+                                .map(Map.Entry::getKey)));
     }
 
-    public Set<String> getUniqueBrands() {
+    public Set<CarBrand> getUniqueBrands() {
         return survey.stream()
                 .map(BestCarForm::brand)
                 .collect(Collectors.toSet());
