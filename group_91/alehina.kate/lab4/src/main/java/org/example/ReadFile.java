@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ReadFromFile {
-    private static final Logger logger = LogManager.getLogger(FileReader.class);
+public class ReadFile {
+    private static final Logger logger = LogManager.getLogger(ReadFile.class);
 
     public List<Entry> readEntriesFromFile(Path path) {
         logger.info("Начало чтения записей из файла.");

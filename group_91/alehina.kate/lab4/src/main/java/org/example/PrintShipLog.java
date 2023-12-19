@@ -16,7 +16,7 @@ public class PrintShipLog {
 
     public PrintShipLog() {
         logger.info("Создание printShipLog.");
-        FileReader fileReader = new FileReader();
+        ReadFile fileReader = new ReadFile();
         entryList = fileReader.readEntriesFromFile(PATH);
         shipAccountingLog = new ShipAccountingLog();
         logger.info("ShipLog создан.");
