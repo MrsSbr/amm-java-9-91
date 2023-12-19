@@ -22,7 +22,7 @@ public class Main {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Файл не найден: " + e.getMessage());
+            System.out.println("Файл увы не найден: " + e.getMessage());
             return;
         } catch (IOException e) {
             System.out.println("Ошибка при чтении файла: " + e.getMessage());
