@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class FileReader {
+public class ReadFromFile {
     private static final Logger logger = LogManager.getLogger(FileReader.class);
 
     public List<Entry> readEntriesFromFile(Path path) {
