@@ -83,8 +83,10 @@ public class FloristApp {
     }
 
     public static void main(String[] args) {
+
         // Пример использования
-        List<String> inputData = readFromFile("E:/прога/3 курс/Java/input.txt");
+        String inputFilePath = "group_9/aksenova.anastasia/lab4/src/resources/input.txt";
+        List<String> inputData = readFromFile(inputFilePath);
         FloristRecord floristRecord = processFlowerBouquets(inputData);
 
         // Задача 1: Найти месяц с наибольшим разнообразием цветов
@@ -99,7 +101,7 @@ public class FloristApp {
         Map<String, String> deliveryPreferences = determineDeliveryPreferenceForEachFlower(floristRecord);
         System.out.println("Предпочтения доставки для каждого цветка: " + deliveryPreferences);
         // Запись результатов в файл
-        writeResultsToFile("E:/прога/3 курс/Java/output.txt",  mostDiverseMonth, earningsByBouquetType, deliveryPreferences);
+        writeResultsToFile("group_9/aksenova.anastasia/lab4/src/resources/output.txt",  mostDiverseMonth, earningsByBouquetType, deliveryPreferences);
     }
 
     public static void writeResultsToFile(String filePath, String mostDiverseMonth,
