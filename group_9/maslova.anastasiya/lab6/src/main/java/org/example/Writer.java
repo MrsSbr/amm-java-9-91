@@ -16,10 +16,8 @@ public class Writer extends Thread {
     @Override
     public void run() {
         for (String line : poem) {
-            synchronized (napkin) {
-                // System.out.println(currentThread().getName()+"  " + line);
-                napkin.addLine(line + "\n");
-            }
+            // System.out.println(currentThread().getName()+"  " + line);
+            napkin.addLine(line + "\n");
             try {
                 int sleepTime = random.nextInt(3000);
                 sleep(sleepTime);

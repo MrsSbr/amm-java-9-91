@@ -1,7 +1,7 @@
 package org.example;
 
 public class Napkin {
-    private final StringBuilder poem = new StringBuilder();
+    private final StringBuffer poem = new StringBuffer();
 
     public String getPoem() {
         return poem.toString();
