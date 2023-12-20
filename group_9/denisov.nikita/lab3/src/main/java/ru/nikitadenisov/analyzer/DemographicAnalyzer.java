@@ -1,6 +1,11 @@
 package ru.nikitadenisov.analyzer;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.EnumSet;
+import java.util.Vector;
 
 public class DemographicAnalyzer {
     private final Collection<Student> students;
