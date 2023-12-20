@@ -2,17 +2,29 @@ package src.Aircrafts;
 
 public class Bomber extends Aircraft {
 
-    public Bomber(String model) {
-        super(model);
+    private final int maxBombLoad;
+
+    public Bomber(AircraftModel model, String boardNumber, int maxBombLoad) {
+        super(model, boardNumber);
+        this.maxBombLoad = maxBombLoad;
+    }
+
+    public int getMaxBombLoad() {
+        return maxBombLoad;
     }
 
     @Override
     public void fly() {
-        System.out.println("Bomber plane " + super.toString() + " is flying.");
+        super.fly();
+        System.out.println("Carrying a bomb load of " + maxBombLoad + ".");
     }
 
     @Override
     public void refuel() {
-        System.out.println("Refueling the bomber plane.");
+        System.out.println("Bomber " + this + " is being refueled.");
+    }
+
+    public void bomb() {
+        System.out.println("Bomber " + this + " is dropping a bomb.");
     }
 }

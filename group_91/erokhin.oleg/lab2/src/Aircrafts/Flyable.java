@@ -1,5 +1,5 @@
 package src.Aircrafts;
 
-public interface IFlyable {
+public interface Flyable {
     void fly();
 }

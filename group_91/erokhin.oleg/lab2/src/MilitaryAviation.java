@@ -1,27 +1,39 @@
 package src;
 
 import src.Aircrafts.Aircraft;
+import src.Aircrafts.AircraftModel;
 import src.Aircrafts.Bomber;
-import src.Aircrafts.Fighter;
+import src.Aircrafts.FighterJet;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MilitaryAviation {
+
     public static void main(String[] args) {
-        Aircraft fighter = new Fighter("F-16");
-        Aircraft bomber = new Bomber("B-52");
+        FighterJet f22_1 = new FighterJet(AircraftModel.F22_RAPTOR, "22A-01F", 6);
+        FighterJet f22_2 = new FighterJet(AircraftModel.F22_RAPTOR, "22A-02F", 6);
+        Bomber b52 = new Bomber(AircraftModel.B52_STRATOFORTRESS, "52B-02B", 32);
+        FighterJet su57 = new FighterJet(AircraftModel.SU57, "57S-01R", 4);
 
-        System.out.println(fighter);
-        System.out.println(bomber);
+        f22_1.refuel();
+        b52.bomb();
+        su57.engage();
 
-        fighter.fly();
-        fighter.refuel();
+        List<Aircraft> militaryPlanes = new ArrayList<>();
+        militaryPlanes.add(f22_1);
+        militaryPlanes.add(f22_2);
+        militaryPlanes.add(b52);
+        militaryPlanes.add(su57);
 
-        bomber.fly();
-        bomber.refuel();
-
-        Aircraft fighter2 = new Fighter("F-16");
-        System.out.println(fighter.equals(fighter2));
-
-        Aircraft bomber2 = new Bomber("B-50");
-        System.out.println(bomber.equals(bomber2));
+        for (Aircraft militaryPlane : militaryPlanes) {
+            militaryPlane.fly();
+        }
+        
+        if (militaryPlanes.get(0).equals(militaryPlanes.get(2))) {
+            System.out.println("Одна и та же модель и бортовой номер.");
+        } else {
+            System.out.println("Не одна и та же модель и бортовой номер.");
+        }
     }
 }

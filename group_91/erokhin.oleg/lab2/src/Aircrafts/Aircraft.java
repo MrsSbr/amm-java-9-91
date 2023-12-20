@@ -2,32 +2,38 @@ package src.Aircrafts;
 
 import java.util.Objects;
 
-public abstract class Aircraft implements IFlyable {
+public abstract class Aircraft implements Flyable {
 
-    private String model;
+    protected final AircraftModel model;
+    protected String boardNumber;
 
-    public Aircraft(String model) {
+    public Aircraft(AircraftModel model, String boardNumber) {
         this.model = model;
+        this.boardNumber = boardNumber;
     }
 
-    public String getModel() {
+    public AircraftModel getModel() {
         return model;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public String getBoardNumber() {
+        return boardNumber;
+    }
+
+    public void setBoardNumber(String boardNumber) {
+        this.boardNumber = boardNumber;
     }
 
     @Override
     public void fly() {
-        System.out.println(model + " is flying.");
+        System.out.println(this + " is flying.");
     }
 
     public abstract void refuel();
 
     @Override
     public String toString() {
-        return model;
+        return model.getDescription() + " with board number " + boardNumber;
     }
 
     @Override
@@ -40,11 +46,11 @@ public abstract class Aircraft implements IFlyable {
             return false;
         }
 
-        return Objects.equals(model, aircraft.model);
+        return Objects.equals(model, aircraft.model) && Objects.equals(boardNumber, aircraft.boardNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(model);
+        return Objects.hash(model, boardNumber);
     }
 }
