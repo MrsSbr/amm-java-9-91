@@ -9,7 +9,12 @@ import edu.best_car_survey.form.CarBrand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Map;
+import java.util.Set;
 
 public class BestCarSurveyTest {
     private BestCarSurvey bestCarSurvey;
