@@ -24,7 +24,8 @@ import java.util.logging.Logger;
 
 public class Demonstration {
 
-    private static final Path path = Path.of("C:/Users/vladi/IdeaProjects/amm-java-9-91/group_9/tolstopyatov.vladislav/lab4/src/main/java/Resources/data.txt");
+
+    private static final Path path = Path.of("src/main/java/Resources/data.txt");
     private static final Logger logger = Logger.getLogger(Demonstration.class.getName());
 
     public static void main(String[] args) {
