@@ -22,7 +22,7 @@ public class ParserImpl implements Parser<OlympicStatistic> {
     @Override
     public OlympicStatistic parseLine(String line) {
         var strings = List.of(line.trim().split(DELIMITER));
-        return OlympicStatistic.of(
+        return new OlympicStatistic(
             Country.find(strings.get(0)).orElseThrow(() -> new NotFoundCountryException(COUNTRY_NOT_FOUND_MESSAGE)),
             Sport.find(strings.get(1)).orElseThrow(() -> new NotFoundSportException(SPORT_NOT_FOUND_MESSAGE)),
             strings.get(2),

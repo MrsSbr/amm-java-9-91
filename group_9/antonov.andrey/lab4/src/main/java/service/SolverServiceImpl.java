@@ -22,7 +22,7 @@ public class SolverServiceImpl implements SolverService {
         return list.stream()
             .filter(SolverServiceImpl::isPrizePlace)
             .collect(
-                Collectors.groupingBy(OlympicStatistic::getCountry, Collectors.summingInt(OlympicStatistic::getPlace)))
+                Collectors.groupingBy(OlympicStatistic::country, Collectors.summingInt(OlympicStatistic::place)))
             .entrySet()
             .stream()
             .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
@@ -48,7 +48,7 @@ public class SolverServiceImpl implements SolverService {
         }
         return list.stream()
             .filter(SolverServiceImpl::isPrizePlace)
-            .collect(Collectors.groupingBy(OlympicStatistic::getAthlete, Collectors.counting()))
+            .collect(Collectors.groupingBy(OlympicStatistic::athlete, Collectors.counting()))
             .entrySet()
             .stream()
             .max(Map.Entry.comparingByValue())
@@ -56,6 +56,6 @@ public class SolverServiceImpl implements SolverService {
     }
 
     private static boolean isPrizePlace(OlympicStatistic olympicStatistic) {
-        return olympicStatistic.getPlace() >= 1 && olympicStatistic.getPlace() <= 3;
+        return olympicStatistic.place() >= 1 && olympicStatistic.place() <= 3;
     }
 }

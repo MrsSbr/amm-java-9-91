@@ -25,10 +25,10 @@ class ParserImplTest {
 
     private static Stream<Arguments> getRightLinesForParsing() {
         return Stream.of(
-            Arguments.of("Сша;Плавание;Антонов;1", OlympicStatistic.of(USA, SWIMMING, "Антонов", 1)),
-            Arguments.of("Россия;Бег;Иванов;3", OlympicStatistic.of(RUSSIA, RUNNING, "Иванов", 3)),
-            Arguments.of("Украина;Лыжи;Петров;5", OlympicStatistic.of(UKRAINE, SKI, "Петров", 5)),
-            Arguments.of("Беларусь;Бег;Сидоров;1", OlympicStatistic.of(BELARUS, RUNNING, "Сидоров", 1))
+            Arguments.of("Сша;Плавание;Антонов;1", new OlympicStatistic(USA, SWIMMING, "Антонов", 1)),
+            Arguments.of("Россия;Бег;Иванов;3", new OlympicStatistic(RUSSIA, RUNNING, "Иванов", 3)),
+            Arguments.of("Украина;Лыжи;Петров;5", new OlympicStatistic(UKRAINE, SKI, "Петров", 5)),
+            Arguments.of("Беларусь;Бег;Сидоров;1", new OlympicStatistic(BELARUS, RUNNING, "Сидоров", 1))
         );
     }
 
@@ -42,10 +42,10 @@ class ParserImplTest {
 
     private static Stream<Arguments> getWrongLinesForParsingBySport() {
         return Stream.of(
-            Arguments.of("Сша;Футбол;Антонов;1", OlympicStatistic.of(USA, SWIMMING, "Антонов", 1)),
-            Arguments.of("Россия;Хоккей;Иванов;3", OlympicStatistic.of(RUSSIA, RUNNING, "Иванов", 3)),
-            Arguments.of("Украина;Баскетбол;Петров;5", OlympicStatistic.of(UKRAINE, SKI, "Петров", 5)),
-            Arguments.of("Беларусь;Метание;Сидоров;1", OlympicStatistic.of(BELARUS, RUNNING, "Сидоров", 1))
+            Arguments.of("Сша;Футбол;Антонов;1", new OlympicStatistic(USA, SWIMMING, "Антонов", 1)),
+            Arguments.of("Россия;Хоккей;Иванов;3", new OlympicStatistic(RUSSIA, RUNNING, "Иванов", 3)),
+            Arguments.of("Украина;Баскетбол;Петров;5", new OlympicStatistic(UKRAINE, SKI, "Петров", 5)),
+            Arguments.of("Беларусь;Метание;Сидоров;1", new OlympicStatistic(BELARUS, RUNNING, "Сидоров", 1))
         );
     }
 

@@ -32,9 +32,9 @@ public class CollectorBySport implements Collector<OlympicStatistic,
         return (map, olympicStatistic) -> {
             if (predicate.test(olympicStatistic)) {
                 final List<String> defaultList = new ArrayList<>();
-                final var actualList = map.getOrDefault(olympicStatistic.getSport(), defaultList);
-                actualList.add(olympicStatistic.getAthlete());
-                map.put(olympicStatistic.getSport(), actualList);
+                final var actualList = map.getOrDefault(olympicStatistic.sport(), defaultList);
+                actualList.add(olympicStatistic.athlete());
+                map.put(olympicStatistic.sport(), actualList);
             }
         };
     }

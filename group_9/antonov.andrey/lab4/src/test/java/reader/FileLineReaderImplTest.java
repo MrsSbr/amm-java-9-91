@@ -33,10 +33,10 @@ class FileLineReaderImplTest {
     private static final String NON_EXISTENT_FILE_NAME = "nonExistentFile.txt";
 
     private static final List<OlympicStatistic> TEST_LIST = List.of(
-        OlympicStatistic.of(RUSSIA, RUNNING, "Антонов", 3),
-        OlympicStatistic.of(USA, RUNNING, "Смит", 2),
-        OlympicStatistic.of(UKRAINE, SWIMMING, "Антонов", 3),
-        OlympicStatistic.of(BELARUS, SKI, "Петров", 10)
+        new OlympicStatistic(RUSSIA, RUNNING, "Антонов", 3),
+        new OlympicStatistic(USA, RUNNING, "Смит", 2),
+        new OlympicStatistic(UKRAINE, SWIMMING, "Антонов", 3),
+        new OlympicStatistic(BELARUS, SKI, "Петров", 10)
     );
 
 

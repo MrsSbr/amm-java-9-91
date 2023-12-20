@@ -16,15 +16,14 @@ import org.junit.jupiter.api.Test;
 
 class SolverServiceImplTest {
     private static final List<OlympicStatistic> TEST_LIST = List.of(
-        OlympicStatistic.of(RUSSIA, SWIMMING, "Антонов", 3),
-        OlympicStatistic.of(RUSSIA, SWIMMING, "Антонов", 2),
-        OlympicStatistic.of(USA, RUNNING, "Смит", 2),
-        OlympicStatistic.of(UKRAINE, SWIMMING, "Иванов", 3),
-        OlympicStatistic.of(BELARUS, SKI, "Петров", 10),
-        OlympicStatistic.of(USA, RUNNING, "Тейлор", 3),
-        OlympicStatistic.of(USA, RUNNING, "Джеймс", 1),
-        OlympicStatistic.of(USA, SKI, "Мур", 2)
-
+        new OlympicStatistic(RUSSIA, SWIMMING, "Антонов", 3),
+        new OlympicStatistic(RUSSIA, SWIMMING, "Антонов", 2),
+        new OlympicStatistic(USA, RUNNING, "Смит", 2),
+        new OlympicStatistic(UKRAINE, SWIMMING, "Иванов", 3),
+        new OlympicStatistic(BELARUS, SKI, "Петров", 10),
+        new OlympicStatistic(USA, RUNNING, "Тейлор", 3),
+        new OlympicStatistic(USA, RUNNING, "Джеймс", 1),
+        new OlympicStatistic(USA, SKI, "Мур", 2)
     );
 
     private static final List<String> BEST_ATHLETES_RUNNING = List.of(
