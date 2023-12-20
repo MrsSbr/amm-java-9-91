@@ -1,4 +1,4 @@
-package ru.nikitadenisov.lab3.analyzer;
+package ru.nikitadenisov.analyzer;
 
 public class Student {
     private final Gender gender;

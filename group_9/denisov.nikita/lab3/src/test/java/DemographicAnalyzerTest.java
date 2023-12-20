@@ -1,11 +1,8 @@
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
-import ru.nikitadenisov.lab3.analyzer.DemographicAnalyzer;
-import ru.nikitadenisov.lab3.analyzer.Gender;
-import ru.nikitadenisov.lab3.analyzer.Month;
-import ru.nikitadenisov.lab3.analyzer.Student;
+import ru.nikitadenisov.analyzer.DemographicAnalyzer;
+import ru.nikitadenisov.analyzer.Gender;
+import ru.nikitadenisov.analyzer.Month;
+import ru.nikitadenisov.analyzer.Student;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -31,28 +28,35 @@ public class DemographicAnalyzerTest {
             new Student(Gender.FEMALE, Month.SEPTEMBER)
     );
 
-    @ParameterizedTest
-    @CsvSource({"JANUARY, 2", "APRIL, 3", "OCTOBER, 0"})
-    void testGetNumberStudentsBornInMonth(Month month, int expectedNumber) {
+    @Test
+    void testGetNumberStudentsBornInMonth() {
         DemographicAnalyzer demographicAnalyzer = new DemographicAnalyzer(STUDENTS);
 
-        assertEquals(expectedNumber, demographicAnalyzer.numberStudentsBornInMonth(month));
+        List<List<Long>> counts = demographicAnalyzer.numberStudentsBornInMonths();
+
+        assertEquals(1L, counts.get(Gender.MALE.ordinal()).get(Month.JANUARY.ordinal()));
+        assertEquals(1L, counts.get(Gender.FEMALE.ordinal()).get(Month.MARCH.ordinal()));
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"OCTOBER", "NOVEMBER", "DECEMBER"})
-    void testGetNumberStudentsBornInMonthWithEmptyCollection(Month month) {
+    @Test
+    void testGetNumberStudentsBornInMonthWithEmptyCollection() {
         DemographicAnalyzer demographicAnalyzer = new DemographicAnalyzer(Collections.emptyList());
 
-        assertEquals(0, demographicAnalyzer.numberStudentsBornInMonth(month));
+        List<List<Long>> counts = demographicAnalyzer.numberStudentsBornInMonths();
+
+        // Идем сначала по списку мужчин, потом женщин.
+        for (List<Long> gender : counts) {
+            for (Long count : gender) {
+                assertEquals(0L, count);
+            }
+        }
     }
 
     @Test
     void testGetNumberStudentsBornInMonthWithNullCollection() {
         DemographicAnalyzer demographicAnalyzer = new DemographicAnalyzer(null);
 
-        assertThrows(NullPointerException.class, () ->
-                demographicAnalyzer.numberStudentsBornInMonth(Month.APRIL));
+        assertThrows(NullPointerException.class, demographicAnalyzer::numberStudentsBornInMonths);
     }
 
     @Test

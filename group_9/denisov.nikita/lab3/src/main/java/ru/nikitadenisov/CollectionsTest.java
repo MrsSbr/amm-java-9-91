@@ -1,9 +1,8 @@
-package ru.nikitadenisov.lab3;
+package ru.nikitadenisov;
 
-import ru.nikitadenisov.lab3.analyzer.DemographicAnalyzer;
-import ru.nikitadenisov.lab3.analyzer.Month;
-import ru.nikitadenisov.lab3.analyzer.Student;
-import ru.nikitadenisov.lab3.analyzer.StudentFactory;
+import ru.nikitadenisov.analyzer.DemographicAnalyzer;
+import ru.nikitadenisov.analyzer.Student;
+import ru.nikitadenisov.analyzer.StudentFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,13 +33,13 @@ public class CollectionsTest {
 
         int number = 1000;
         long finalTime = 0;
-        long startTime = 0;
-        long endTime = 0;
+        long startTime;
+        long endTime;
 
         for (int i = 0; i < number; ++i) {
             startTime = System.nanoTime();
 
-            demographicAnalyzer.numberStudentsBornInMonth(Month.values()[0]);
+            demographicAnalyzer.numberStudentsBornInMonths();
             demographicAnalyzer.monthsWithMoreFemalesThanMales();
 
             endTime = System.nanoTime();
