@@ -9,7 +9,7 @@ import java.util.List;
 class ExperimentRunnerTest {
 
     @Test
-    void calculateAverageAmountForPeak_withMixedResults_returnsCorrectAverage() {
+    void calculateAverageAmountForPeakWithMixedResultsReturnsCorrectAverage() {
         List<Experiment> experiments = new ArrayList<>();
         experiments.add(new Experiment(AlcoholType.VODKA, 100, true));
         experiments.add(new Experiment(AlcoholType.WINE, 200, false));
@@ -21,7 +21,7 @@ class ExperimentRunnerTest {
     }
 
     @Test
-    void getAlcoholTypesTasted_withVariousTypes_returnsAllTypes() {
+    void getAlcoholTypesTastedWithVariousTypesReturnsAllTypes() {
         List<Experiment> experiments = new ArrayList<>();
         experiments.add(new Experiment(AlcoholType.VODKA, 100, true));
         experiments.add(new Experiment(AlcoholType.WINE, 200, false));
@@ -34,7 +34,7 @@ class ExperimentRunnerTest {
     }
 
     @Test
-    void getTotalAlcoholConsumed_withVariousAmounts_returnsTotalAmount() {
+    void getTotalAlcoholConsumedWithVariousAmountsReturnsTotalAmount() {
         List<Experiment> experiments = new ArrayList<>();
         experiments.add(new Experiment(AlcoholType.VODKA, 100, true));
         experiments.add(new Experiment(AlcoholType.WINE, 200, false));
@@ -46,7 +46,7 @@ class ExperimentRunnerTest {
     }
 
     @Test
-    void calculateAverageAmountForPeak_withNoSuccessfulExperiments_returnsZero() {
+    void calculateAverageAmountForPeakWithNoSuccessfulExperimentsReturnsZero() {
         List<Experiment> experiments = new ArrayList<>();
         experiments.add(new Experiment(AlcoholType.WINE, 100, false));
         experiments.add(new Experiment(AlcoholType.BEER, 200, false));
@@ -57,7 +57,7 @@ class ExperimentRunnerTest {
     }
 
     @Test
-    void calculateAverageAmountForPeak_withAllSuccessfulExperiments_returnsCorrectAverage() {
+    void calculateAverageAmountForPeakWithAllSuccessfulExperimentsReturnsCorrectAverage() {
         List<Experiment> experiments = new ArrayList<>();
         experiments.add(new Experiment(AlcoholType.VODKA, 100, true));
         experiments.add(new Experiment(AlcoholType.WHISKEY, 200, true));
@@ -68,7 +68,7 @@ class ExperimentRunnerTest {
     }
 
     @Test
-    void calculateAverageAmountForPeak_withNoExperiments_returnsZero() {
+    void calculateAverageAmountForPeakWithNoExperimentsReturnsZero() {
         List<Experiment> experiments = new ArrayList<>();
 
         ExperimentRunner runner = new ExperimentRunner(ArrayList::new, experiments);
@@ -77,7 +77,7 @@ class ExperimentRunnerTest {
     }
 
     @Test
-    void getAlcoholTypesTasted_withNoExperiments_returnsEmptySet() {
+    void getAlcoholTypesTastedWithNoExperimentsReturnsEmptySet() {
         List<Experiment> experiments = new ArrayList<>();
 
         ExperimentRunner runner = new ExperimentRunner(ArrayList::new, experiments);
@@ -86,7 +86,7 @@ class ExperimentRunnerTest {
     }
 
     @Test
-    void getTotalAlcoholConsumed_withNoExperiments_returnsZero() {
+    void getTotalAlcoholConsumedWithNoExperimentsReturnsZero() {
         List<Experiment> experiments = new ArrayList<>();
 
         ExperimentRunner runner = new ExperimentRunner(ArrayList::new, experiments);
