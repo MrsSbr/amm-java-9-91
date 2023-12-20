@@ -1,0 +1,101 @@
+[ {
+  "date" : [ 2023, 8, 11 ],
+  "placeOfBattle" : "Переяславль",
+  "enemy" : "Батый",
+  "numberOfKilledBasurman" : 0
+}, {
+  "date" : [ 2021, 4, 20 ],
+  "placeOfBattle" : "Псков",
+  "enemy" : "Орда",
+  "numberOfKilledBasurman" : 10
+}, {
+  "date" : [ 2023, 12, 1 ],
+  "placeOfBattle" : "Чернигов",
+  "enemy" : "Орда",
+  "numberOfKilledBasurman" : 20
+}, {
+  "date" : [ 2023, 12, 2 ],
+  "placeOfBattle" : "Галич",
+  "enemy" : "Шайтан-Хан",
+  "numberOfKilledBasurman" : 30
+}, {
+  "date" : [ 2021, 2, 18 ],
+  "placeOfBattle" : "Рязань",
+  "enemy" : "Ахмат-Хан",
+  "numberOfKilledBasurman" : 40
+}, {
+  "date" : [ 2020, 5, 31 ],
+  "placeOfBattle" : "Переяславль",
+  "enemy" : "Орда",
+  "numberOfKilledBasurman" : 50
+}, {
+  "date" : [ 2020, 7, 16 ],
+  "placeOfBattle" : "Смоленск",
+  "enemy" : "Орда",
+  "numberOfKilledBasurman" : 60
+}, {
+  "date" : [ 2023, 4, 11 ],
+  "placeOfBattle" : "Смоленск",
+  "enemy" : "Барак-Хан",
+  "numberOfKilledBasurman" : 70
+}, {
+  "date" : [ 2021, 11, 14 ],
+  "placeOfBattle" : "Смоленск",
+  "enemy" : "Абакан",
+  "numberOfKilledBasurman" : 80
+}, {
+  "date" : [ 2021, 3, 1 ],
+  "placeOfBattle" : "Ярославль",
+  "enemy" : "Баймак",
+  "numberOfKilledBasurman" : 90
+}, {
+  "date" : [ 2023, 6, 11 ],
+  "placeOfBattle" : "Киев",
+  "enemy" : "Куманы",
+  "numberOfKilledBasurman" : 100
+}, {
+  "date" : [ 2022, 7, 17 ],
+  "placeOfBattle" : "Киев",
+  "enemy" : "Золотая Орда",
+  "numberOfKilledBasurman" : 110
+}, {
+  "date" : [ 2022, 11, 9 ],
+  "placeOfBattle" : "Киев",
+  "enemy" : "Чеблиг",
+  "numberOfKilledBasurman" : 120
+}, {
+  "date" : [ 2020, 2, 12 ],
+  "placeOfBattle" : "Киев",
+  "enemy" : "Ханбабыч",
+  "numberOfKilledBasurman" : 130
+}, {
+  "date" : [ 2020, 6, 18 ],
+  "placeOfBattle" : "Владимир",
+  "enemy" : "Узбек-Хан",
+  "numberOfKilledBasurman" : 140
+}, {
+  "date" : [ 2021, 3, 29 ],
+  "placeOfBattle" : "Судак",
+  "enemy" : "Орда",
+  "numberOfKilledBasurman" : 150
+}, {
+  "date" : [ 2020, 3, 28 ],
+  "placeOfBattle" : "Владимир",
+  "enemy" : "Ханбабыч",
+  "numberOfKilledBasurman" : 160
+}, {
+  "date" : [ 2023, 8, 23 ],
+  "placeOfBattle" : "Владимир",
+  "enemy" : "Ханбабыч",
+  "numberOfKilledBasurman" : 170
+}, {
+  "date" : [ 2022, 1, 2 ],
+  "placeOfBattle" : "Суздаль",
+  "enemy" : "Саркел",
+  "numberOfKilledBasurman" : 180
+}, {
+  "date" : [ 2020, 11, 8 ],
+  "placeOfBattle" : "Суздаль",
+  "enemy" : "Тевтонский Орден",
+  "numberOfKilledBasurman" : 190
+} ]
