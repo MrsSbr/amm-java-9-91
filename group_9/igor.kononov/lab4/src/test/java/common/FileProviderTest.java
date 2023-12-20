@@ -5,17 +5,15 @@ import exceptions.InvalidDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.net.URISyntaxException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class FileProviderTest {
-    private static final String GOOD_FILE = "D:\\Учеба\\3 курс\\Java\\group_9\\igor.kononov\\lab4\\src\\test\\resources\\Good.json";
-    private static final String BAD_FILE = "D:\\Учеба\\3 курс\\Java\\group_9\\igor.kononov\\lab4\\src\\test\\resources\\Bad.json";
-    private static final String EMPTY_FILE = "D:\\Учеба\\3 курс\\Java\\group_9\\igor.kononov\\lab4\\src\\test\\resources\\Empty.json";
+    private static final String GOOD_FILE = "src/test/resources/Good.json";
+    private static final String BAD_FILE = "src/test/resources/Bad.json";
+    private static final String EMPTY_FILE = "src/test/resources/Empty.json";
 
     private final FileProvider fileProvider = new FileProvider();
 
@@ -42,12 +40,8 @@ class FileProviderTest {
 
     @Test
     void readEmptyFileTest() throws  InvalidDataException{
-        var records = List.of();
-
         var recordsFromFile = fileProvider.readFile(Path.of(EMPTY_FILE));
 
-        for (var i = 0; i < recordsFromFile.size(); i++) {
-            assertEquals(records.get(i), recordsFromFile.get(i));
-        }
+        assertEquals(0, recordsFromFile.size());
     }
 }

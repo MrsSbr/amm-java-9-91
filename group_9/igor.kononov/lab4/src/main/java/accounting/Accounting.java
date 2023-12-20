@@ -29,8 +29,7 @@ public class Accounting {
     public Map<String, List<SalaryRecord>> groupTheRecordsByDepartments() throws InvalidDataException {
         logger.info("The method \"groupTheRecordsByDepartments\" has started working");
 
-        if (salaryRecords.isEmpty())
-        {
+        if (salaryRecords.isEmpty()) {
             throw new InvalidDataException("List is empty");
         }
 
@@ -43,8 +42,7 @@ public class Accounting {
     public String findDepartmentWithHighestAverageSalary() throws InvalidDataException {
         logger.info("The method \"findDepartmentWithHighestAverageSalary\" has started working");
 
-        if (salaryRecords.isEmpty())
-        {
+        if (salaryRecords.isEmpty()) {
             throw new InvalidDataException("List is empty");
         }
 
@@ -62,8 +60,7 @@ public class Accounting {
     public String findDepartmentWithHighestTotalPayout() throws InvalidDataException {
         logger.info("The method \"findDepartmentWithHighestTotalPayout\" has started working");
 
-        if (salaryRecords.isEmpty())
-        {
+        if (salaryRecords.isEmpty()) {
             throw new InvalidDataException("List is empty");
         }
 
