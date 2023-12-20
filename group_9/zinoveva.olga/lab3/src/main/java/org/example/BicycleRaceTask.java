@@ -14,10 +14,11 @@ public class BicycleRaceTask {
 
     // Участники гонок, которые занимали призовые места за последние 3 года
     public Set<Integer> findAthletesWithPrizesInThreeYears(Collection<BicycleRace> BicycleRaces) {
+        int threeYearsAgo = NOW_YEAR - 3;
         Set<Integer> winnersThisYear = new HashSet<>();
         BicycleRaces.stream()
                 .filter(x -> x.getDateRace().get(Calendar.YEAR) <= NOW_YEAR &&
-                        x.getDateRace().get(Calendar.YEAR) > NOW_YEAR - 3)
+                        x.getDateRace().get(Calendar.YEAR) > threeYearsAgo)
                 .forEach(x -> {
                     winnersThisYear.add(x.getFinalList().get(1));
                     winnersThisYear.add(x.getFinalList().get(2));
@@ -37,10 +38,11 @@ public class BicycleRaceTask {
     //Найти всех спортсменов, которые занимали места за последний год, при чем до этого 5 лет участвовали в гонках,
     //но не занимали мест
     public Set<Integer> findAthletesByCondition(Collection<BicycleRace> BicycleRaces) {
+        int fiveYearsAgo = NOW_YEAR - 5;
         Set<Integer> winnersThisYear = new HashSet<>();
         List<ArrayList<Integer>> matrix = new ArrayList<ArrayList<Integer>>();
         BicycleRaces.stream()
-                .filter(x -> x.getDateRace().get(Calendar.YEAR) >= NOW_YEAR - 5)
+                .filter(x -> x.getDateRace().get(Calendar.YEAR) >= fiveYearsAgo)
                 .forEach(x -> {
                     ArrayList<Integer> tmp = new ArrayList<Integer>();
                     if (x.getDateRace().get(Calendar.YEAR) == NOW_YEAR) {
