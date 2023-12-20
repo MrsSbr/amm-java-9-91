@@ -16,7 +16,7 @@ public class GameStatistics {
     public Genre genreWithTheHighestAverageEstimation(List<Game> gamesList) {
         logger.info("Вызов метода genreWithTheHighestAverageEstimation");
 
-        if (gamesList.isEmpty()) {
+        if (gamesList == null || gamesList.isEmpty()) {
             throw new NullPointerException();
         }
 
@@ -65,7 +65,7 @@ public class GameStatistics {
     public Month monthWithTheHighestInnocentisGameActivity(List<Game> gamesList) {
         logger.info("Вызов метода monthWithTheHighestInnocentisGameActivity");
 
-        if (gamesList.isEmpty()) {
+        if (gamesList == null || gamesList.isEmpty()) {
             throw new NoSuchElementException();
         }
 
