@@ -19,7 +19,7 @@ public enum FluorogramResult {
     }
 
     public static FluorogramResult randomResult() {
-        FluorogramResult[] results = values();
-        return results[random.nextInt(results.length)];
+        Random random = new Random();
+        return FluorogramResult.values()[random.nextInt(0,3)];
     }
 }

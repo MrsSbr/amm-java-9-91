@@ -38,6 +38,6 @@ public class AnalyzContainers {
     public static List<Patient> getGeneratedListPatients(int countPatients) {
         return Stream.generate(RandomPatient::generatePatient)
                 .limit(countPatients)
-                .collect(Collectors.toList());
+                .toList();
     }
 }

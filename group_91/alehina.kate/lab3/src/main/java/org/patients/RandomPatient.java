@@ -1,7 +1,10 @@
 package org.patients;
 
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Random;
 
 public class RandomPatient {
     private static final List<String> MAN_NAMES;
