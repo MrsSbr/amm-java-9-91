@@ -1,0 +1,2 @@
+0052-01-10;Lorenzo;Pompeii;Bear;true;false
+0049-07-30;Luca;null;Leopard;true;false
