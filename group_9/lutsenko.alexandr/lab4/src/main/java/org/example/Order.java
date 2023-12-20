@@ -1,6 +1,5 @@
 package org.example;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Order {
@@ -8,9 +7,10 @@ public class Order {
     private String courier;
     private String restaurant;
     private String items;
-    private LocalDateTime deliveryTime;
+    //private LocalTime deliveryTime;
+    private int deliveryTime;
 
-    public Order(LocalDate date, String courier, String restaurant, String items, LocalDateTime deliveryTime) {
+    public Order(LocalDate date, String courier, String restaurant, String items, int deliveryTime) {
         this.date = date;
         this.courier = courier;
         this.restaurant = restaurant;
@@ -50,11 +50,11 @@ public class Order {
         this.items = items;
     }
 
-    public LocalDateTime getDeliveryTime() {
+    public int getDeliveryTime() {
         return deliveryTime;
     }
 
-    public void setDeliveryTime(LocalDateTime deliveryTime) {
+    public void setDeliveryTime(int deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
 
