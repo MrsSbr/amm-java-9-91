@@ -4,7 +4,7 @@ import org.example.cat.Breed;
 import org.example.cat.Cat;
 import org.example.cat.Gender;
 
-public class Main {
+public class Convertor {
     public static void main(String[] args) {
         // Сериализация объекта в JSON
         Cat cat = new Cat("Мурка", 3, Gender.FEMALE, Breed.THAI, true);
