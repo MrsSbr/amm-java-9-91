@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Random;
@@ -11,8 +12,6 @@ import java.util.stream.IntStream;
 
 public class BicycleRaceFactory {
     private static final int MAX_COUNT = 50;
-    private static final Calendar FIRST = new GregorianCalendar(1980, Calendar.JANUARY, 1);
-    private static final Calendar SECOND = GregorianCalendar.getInstance();
 
     public static BicycleRace createBicycleRace() {
         Random random = new Random();
@@ -36,19 +35,17 @@ public class BicycleRaceFactory {
         for (int i = 0; i < numbersParticipant.size(); i++) {
             finalList.put(uniqueFinalNumber.get(i), numbersParticipant.get(i)); //Ключ -> место, значение -> участник
         }
-        Calendar dateRace = between(FIRST, SECOND, random);
+        LocalDate dateRace = betweenRandom();
 
         return new BicycleRace(finalList, numbersParticipant, dateRace);
     }
 
-    public static Calendar between(Calendar first, Calendar second, Random random) {
-        int newYear = first.get(Calendar.YEAR) + random.nextInt(0, second.get(Calendar.YEAR));
-        int newMonth = first.get(Calendar.MONTH) + random.nextInt(0, 11);
-        int newDay = first.get(Calendar.DAY_OF_MONTH) + random.nextInt(0, 11);
-        Calendar res = new GregorianCalendar(newYear, newMonth, newDay);
-        if (res.compareTo(GregorianCalendar.getInstance()) > 0) {
-            res = GregorianCalendar.getInstance();
-        }
-        return res;
+    public static LocalDate betweenRandom() {
+        Random random = new Random();
+        int year = 1990 + random.nextInt(33);
+        int month = 1 + random.nextInt(12);
+        int maxDayInMonth = new GregorianCalendar(year, month - 1, 1).getActualMaximum(Calendar.DAY_OF_MONTH);
+        int day = 1 + random.nextInt(maxDayInMonth);
+        return LocalDate.of(year, month, day);
     }
 }

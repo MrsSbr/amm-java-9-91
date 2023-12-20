@@ -1,8 +1,10 @@
 package org.example;
 
+
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.function.Supplier;
@@ -14,21 +16,21 @@ public class BicycleRaceCollectionsAnalysis {
     private static final int COUNT_ELEM = 12427;
 
     public static void main(String[] args) {
-        List<Supplier<Collection<BicycleRace>>> suppliers = List.of(
+        List<Supplier<Collection<BicycleRace>>> suppliers = Arrays.asList(
                 ArrayList::new,
                 HashSet::new,
                 LinkedList::new
         );
-        List<String> suppliersNames = List.of("ArrayList", "HashSet", "LinkedList");
         List<String> methodsNames = List.of("findAthletesWithPrizesInThreeYears", "countWinner", "findAthletesByCondition");
         BicycleRaceTask task = new BicycleRaceTask();
-        for (int i = 0; i < suppliers.size(); i++) {
-            Collection<BicycleRace> bicycleRaces = createCollection(COUNT_ELEM, suppliers.get(i));
-            int finalI = i;
+        int i = 0;
+        for (Supplier<Collection<BicycleRace>> supplier : suppliers) {
+            Collection<BicycleRace> bicycleRaces = createCollection(COUNT_ELEM, supplier);
             methodsNames.forEach(method ->
-                    System.out.println("Время работы " + suppliersNames.get(finalI) + " для " +
+                    System.out.println("Время работы " + supplier.get().getClass().getSimpleName() + " для " +
                             method + " составляет: " + timeForCollection(bicycleRaces, method) + " наносекунд")
             );
+            i++;
         }
     }
 

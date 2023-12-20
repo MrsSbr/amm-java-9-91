@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -7,10 +8,11 @@ import java.util.Objects;
 
 public class BicycleRace {
     private final List<Integer> numbersParticipant;
-    private final Calendar dateRace;
+    //private final Calendar dateRace;
+    private final LocalDate dateRace;
     private final Map<Integer, Integer> finalList;
 
-    public BicycleRace(Map<Integer, Integer> finalList, List<Integer> numbersParticipant, Calendar dateRace) {
+    public BicycleRace(Map<Integer, Integer> finalList, List<Integer> numbersParticipant, LocalDate dateRace) {
         this.finalList = finalList;
         this.numbersParticipant = numbersParticipant;
         this.dateRace = dateRace;
@@ -24,7 +26,7 @@ public class BicycleRace {
         return numbersParticipant;
     }
 
-    public Calendar getDateRace() {
+    public LocalDate getDateRace() {
         return dateRace;
     }
 

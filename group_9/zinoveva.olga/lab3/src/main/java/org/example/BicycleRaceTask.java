@@ -1,24 +1,20 @@
 package org.example;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
-import java.util.Objects;
 
 public class BicycleRaceTask {
-    private static final int NOW_YEAR = GregorianCalendar.getInstance().get(Calendar.YEAR);
+    private static final int NOW_YEAR = LocalDate.now().getYear();
 
     // Участники гонок, которые занимали призовые места за последние 3 года
     public Set<Integer> findAthletesWithPrizesInThreeYears(Collection<BicycleRace> BicycleRaces) {
         int threeYearsAgo = NOW_YEAR - 3;
         Set<Integer> winnersThisYear = new HashSet<>();
         BicycleRaces.stream()
-                .filter(x -> x.getDateRace().get(Calendar.YEAR) <= NOW_YEAR &&
-                        x.getDateRace().get(Calendar.YEAR) > threeYearsAgo)
+                .filter(x -> x.getDateRace().getYear() <= NOW_YEAR &&
+                        x.getDateRace().getYear() > threeYearsAgo)
                 .forEach(x -> {
                     winnersThisYear.add(x.getFinalList().get(1));
                     winnersThisYear.add(x.getFinalList().get(2));
@@ -38,6 +34,34 @@ public class BicycleRaceTask {
     //Найти всех спортсменов, которые занимали места за последний год, при чем до этого 5 лет участвовали в гонках,
     //но не занимали мест
     public Set<Integer> findAthletesByCondition(Collection<BicycleRace> BicycleRaces) {
+        int fiveYearsAgo = NOW_YEAR - 5;
+        Set<Integer> winnersThisYear = new HashSet<>();
+        Set<Integer> notWinFiveYears = new HashSet<>();
+        BicycleRaces.stream()
+                .filter(x -> x.getDateRace().getYear() >= fiveYearsAgo)
+                .forEach(x -> {
+                    if (x.getDateRace().getYear() == NOW_YEAR) {
+                        winnersThisYear.add(x.getFinalList().get(1));
+                        winnersThisYear.add(x.getFinalList().get(2));
+                        winnersThisYear.add(x.getFinalList().get(3));
+                    } else {
+                        for (int i = 1; i <= x.getNumbersParticipant().size(); i++) {
+                            if (i < 4) {
+                                winnersThisYear.remove(x.getFinalList().get(i)); //т. к. в notWin может добавится повторно позже при прохождении условия
+                            } else {
+                                notWinFiveYears.add(x.getFinalList().get(i));
+                            }
+                        }
+                    }
+                });
+        Set<Integer> res = new HashSet<>();
+        winnersThisYear.stream()
+                .filter(notWinFiveYears::contains)
+                .forEach(res::add);
+        return res;
+    }
+
+    /* public Set<Integer> findAthletesByCondition(Collection<BicycleRace> BicycleRaces) {
         int fiveYearsAgo = NOW_YEAR - 5;
         Set<Integer> winnersThisYear = new HashSet<>();
         List<ArrayList<Integer>> matrix = new ArrayList<ArrayList<Integer>>();
@@ -93,4 +117,5 @@ public class BicycleRaceTask {
         }
         return false;
     }
+     */
 }
