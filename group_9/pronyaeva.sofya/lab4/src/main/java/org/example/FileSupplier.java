@@ -17,10 +17,12 @@ public class FileSupplier {
         List<Fight> fights;
         logger.info("Чтение списка поединков из файла");
 
-        if (new File(path.toString()).length() == 0) {
+        File file = new File(path.toString());
+        if (file.exists() && file.length() == 0) {
             logger.info("Файл пустой");
             return Collections.emptyList();
         }
+
         try (Stream<String> fileStream = Files.lines(path)){
             fights = fileStream
                     .map(line -> line.split(";"))

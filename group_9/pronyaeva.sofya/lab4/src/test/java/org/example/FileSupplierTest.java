@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,7 +35,6 @@ class FileSupplierTest {
 
     @Test
     void readFightsListEmptyFile() {
-        List<Fight> fightsEmptyList = Collections.emptyList();
-        assertEquals(fightsEmptyList, fileSupplier.readFightsListFromFile(PATH_TO_EMPTY_FILE));
+        assertEquals(0, fileSupplier.readFightsListFromFile(PATH_TO_EMPTY_FILE).size());
     }
 }
