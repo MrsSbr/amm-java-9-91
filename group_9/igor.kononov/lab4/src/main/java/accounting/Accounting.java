@@ -1,5 +1,6 @@
 package accounting;
 
+import exceptions.InvalidDataException;
 import lombok.Data;
 
 import java.util.List;
@@ -33,7 +34,12 @@ public class Accounting {
                 ));
     }
 
-    public String findDepartmentWithHighestAverageSalary() {
+    public String findDepartmentWithHighestAverageSalary() throws InvalidDataException {
+        if (salaryRecords.isEmpty())
+        {
+            throw new InvalidDataException("List is empty");
+        }
+
         logger.info("The method \"findDepartmentWithHighestAverageSalary\" has started working");
         return salaryRecords.stream()
                 .collect(Collectors.groupingBy(
@@ -43,10 +49,15 @@ public class Accounting {
                 .entrySet().stream()
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
-                .orElse(null);
+                .orElseThrow(NullPointerException::new);
     }
 
-    public String findDepartmentWithHighestTotalPayout() {
+    public String findDepartmentWithHighestTotalPayout() throws InvalidDataException {
+        if (salaryRecords.isEmpty())
+        {
+            throw new InvalidDataException("List is empty");
+        }
+
         logger.info("The method \"findDepartmentWithHighestTotalPayout\" has started working");
         return salaryRecords.stream()
                 .collect(Collectors.groupingBy(
@@ -56,6 +67,6 @@ public class Accounting {
                 .entrySet().stream()
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
-                .orElse(null);
+                .orElseThrow(NullPointerException::new);
     }
 }
