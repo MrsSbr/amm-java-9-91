@@ -19,8 +19,8 @@ public class SqlQueryGenerator {
                 .collect(Collectors.joining(", "));
         String values = listFields.stream()
                 .filter(field -> !field.isAnnotationPresent(PrimaryKey.class))
-                .peek(field -> field.setAccessible(true))
                 .map(field -> {
+                    field.setAccessible(true);
                     try {
                         return field.get(entity) != null ? convertField(field.get(entity)) : "NULL";
                     } catch (IllegalAccessException ex) {
@@ -103,8 +103,8 @@ public class SqlQueryGenerator {
                 .nameTable();
         String fields = entityFields.stream()
                 .filter(field -> !field.isAnnotationPresent(PrimaryKey.class))
-                .peek(field -> field.setAccessible(true))
                 .map(field -> {
+                    field.setAccessible(true);
                     try {
                         return field.getName() + " = " + convertField(field.get(entity));
                     } catch (IllegalAccessException ex) {
