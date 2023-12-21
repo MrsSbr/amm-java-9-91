@@ -23,26 +23,22 @@ public class TaskPlants {
             WorkingWhithUser.menuInstructions();
             checkbox = WorkingWhithUser.inputIntInRange(1, 4);
             switch (checkbox) {
-                case 1: {
+                case 1 -> {
                     LOGGER.info("Вызов averagePurityOfIrrigation");
                     Map<String, Double> result = itwp.averagePurityOfIrrigation(diaryWithDataPlants);
                     result.forEach((plant, avgIrrigation) -> System.out.println("Цветок: " + plant + " -> " + avgIrrigation + " л"));
-                    break;
                 }
-                case 2: {
+                case 2 -> {
                     LOGGER.info("Вызов findNamesPlantByTypeFertilizer");
                     Map<String, HashSet<String>> result = itwp.findNamesPlantByTypeFertilizer(diaryWithDataPlants);
                     result.forEach((fertilizer, plants) -> System.out.println("Удобрение: " + fertilizer + " -> " + plants.toString()));
-                    break;
                 }
-                case 3: {
+                case 3 -> {
                     LOGGER.info("Вызов findPlantWithMaxWater");
                     String result = itwp.findPlantWithMaxWater(diaryWithDataPlants);
                     System.out.println("Цветок, в который вылили больше всего воды: " + result);
-                    break;
                 }
-                default:
-                    System.out.println("Конец работы");
+                default -> System.out.println("Конец работы");
             }
         }
         LOGGER.info("Завершение выполнения программы");
