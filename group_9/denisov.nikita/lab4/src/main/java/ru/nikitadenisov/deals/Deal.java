@@ -3,10 +3,10 @@ package ru.nikitadenisov.deals;
 import java.time.LocalDate;
 
 public class Deal {
-    private String manager;
-    private String buyer;
-    private double dealAmount;
-    private LocalDate serviceDate;
+    private final String manager;
+    private final String buyer;
+    private final double dealAmount;
+    private final LocalDate serviceDate;
 
     public Deal(String manager, String buyer, double dealAmount, LocalDate serviceDate) {
         this.manager = manager;
@@ -19,31 +19,15 @@ public class Deal {
         return manager;
     }
 
-    public void setManager(String manager) {
-        this.manager = manager;
-    }
-
     public String getBuyer() {
         return buyer;
-    }
-
-    public void setBuyer(String buyer) {
-        this.buyer = buyer;
     }
 
     public double getDealAmount() {
         return dealAmount;
     }
 
-    public void setDealAmount(double dealAmount) {
-        this.dealAmount = dealAmount;
-    }
-
     public LocalDate getServiceDate() {
         return serviceDate;
-    }
-
-    public void setServiceDate(LocalDate serviceDate) {
-        this.serviceDate = serviceDate;
     }
 }
