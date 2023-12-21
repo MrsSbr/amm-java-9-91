@@ -3,7 +3,9 @@ package org.example;
 import org.example.annotations.Autowired;
 import org.example.annotations.Component;
 import org.example.annotations.Scope;
-import org.example.exceptions.*;
+import org.example.exceptions.ClassInstantiationException;
+import org.example.exceptions.ConstructorNotFoundException;
+import org.example.exceptions.NotComponentException;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
