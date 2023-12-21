@@ -59,14 +59,11 @@ public class SolverServiceImpl implements SolverService {
                 .stream()
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getValue);
-        if (max.isPresent()){
-            return map.entrySet()
-                    .stream()
-                    .filter(entry -> Objects.equals(entry.getValue(), max.get()))
-                    .map(Map.Entry::getKey)
-                    .toList();
-        }
-        return List.of();
+        return max.map(aLong -> map.entrySet()
+                .stream()
+                .filter(entry -> Objects.equals(entry.getValue(), aLong))
+                .map(Map.Entry::getKey)
+                .toList()).orElseGet(List::of);
     }
 
     // Найти напиток с наилучшим соотношением цена/время
