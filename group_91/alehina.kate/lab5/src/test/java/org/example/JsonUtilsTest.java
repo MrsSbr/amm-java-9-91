@@ -16,41 +16,46 @@ public class JsonUtilsTest {
 
     @Test
     public void testDeserializeFieldWithValidValue() {
-        String json = "{\"name\":\"Мурка\",\"age\":3,\"gender\":FEMALE,\"breed\":THAI,\"defertilized\":true}";
+        JsonUtils json = new JsonUtils();
+        String jsonString = "{\"name\":\"Мурка\",\"age\":3,\"gender\":FEMALE,\"breed\":THAI,\"defertilized\":true}";
 
-        Cat cat = JsonUtils.deserialize(json, Cat.class);
+        Cat cat = json.deserialize(jsonString, Cat.class);
 
         assertEquals(new Cat ("Мурка", 3, Gender.FEMALE, Breed.THAI, true), cat);
     }
 
     @Test
     public void testDeserializeFieldWithNullValue() {
-        String json = "{\"name\":\"Мурка\",\"age\":1,\"gender\":null,\"breed\":THAI,\"defertilized\":false}";
+        JsonUtils json = new JsonUtils();
+        String jsonString = "{\"name\":\"Мурка\",\"age\":1,\"gender\":null,\"breed\":THAI,\"defertilized\":false}";
 
-        Cat cat = JsonUtils.deserialize(json, Cat.class);
+        Cat cat = json.deserialize(jsonString, Cat.class);
 
         assertEquals(new Cat ("Мурка", 1, null, Breed.THAI, false), cat);
     }
 
     @Test
     public void testDeserializeFieldWithInvalidValue() {
-        String json = "{\"name\":\"Мурка\",\"age\":1,\"gender\":,\"breed\":THAI,\"defertilized\":false}";
+        JsonUtils json = new JsonUtils();
+        String jsonString = "{\"name\":\"Мурка\",\"age\":1,\"gender\":,\"breed\":THAI,\"defertilized\":false}";
 
-        assertEquals(null, JsonUtils.deserialize(json, Cat.class));
+        assertEquals(null, json.deserialize(jsonString, Cat.class));
     }
 
     @Test
     public void testDeserializeFieldWithEmptyString() {
-        String json = "";
+        JsonUtils json = new JsonUtils();
+        String jsonString = "";
 
-        assertEquals(null, JsonUtils.deserialize(json, Cat.class));
+        assertEquals(null, json.deserialize(jsonString, Cat.class));
     }
 
     @Test
-    public void testSerializeFieldWithValidValue() throws NoSuchFieldException, IllegalAccessException {
+    public void testSerializeFieldWithValidValue() {
+        JsonUtils json = new JsonUtils();
         Cat cat = new Cat("Мурка", 3, Gender.FEMALE, Breed.THAI, true);
 
-        String result = JsonUtils.serialize(cat);
+        String result = json.serialize(cat);
         String actual = "{\"gender\":FEMALE,\"name\":\"Мурка\",\"age\":3,\"breed\":THAI,\"defertilized\":true}";
 
         assertEquals(result, actual);
@@ -58,9 +63,10 @@ public class JsonUtilsTest {
 
     @Test
     public void testSerializeFieldWithNullValue() {
+        JsonUtils json = new JsonUtils();
         Cat cat = new Cat("Мурка", 1, null, Breed.THAI, false);
-        String json = "{\"gender\":null,\"name\":\"Мурка\",\"age\":1,\"breed\":THAI,\"defertilized\":false}";
+        String jsonString = "{\"gender\":null,\"name\":\"Мурка\",\"age\":1,\"breed\":THAI,\"defertilized\":false}";
 
-        assertEquals(json, JsonUtils.serialize(cat));
+        assertEquals(jsonString, json.serialize(cat));
     }
 }

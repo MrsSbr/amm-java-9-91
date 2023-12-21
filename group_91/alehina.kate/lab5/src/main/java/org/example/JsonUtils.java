@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JsonUtils {
-    public static String serialize(Object object) {
+    public String serialize(Object object) {
         try {
             Class<?> clazz = object.getClass();
             Map<String, Object> map = new HashMap<>();
@@ -43,7 +43,7 @@ public class JsonUtils {
         }
     }
 
-    public static <T> T deserialize(String json, Class<T> clazz) {
+    public <T> T deserialize(String json, Class<T> clazz) {
         try {
             T object = clazz.newInstance();
             Map<String, String> map = parseJson(json);
@@ -83,7 +83,7 @@ public class JsonUtils {
         }
     }
 
-    private static Map<String, String> parseJson(String json) {
+    private Map<String, String> parseJson(String json) {
         Map<String, String> map = new HashMap<>();
         String[] pairs = json.substring(1, json.length() - 1).split(",");
         for (String pair : pairs) {
