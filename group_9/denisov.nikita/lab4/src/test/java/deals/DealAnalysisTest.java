@@ -11,7 +11,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DealAnalysisTest {
-    private static final Collection<Deal> DEALS = Arrays.asList(
+    private static final List<Deal> DEALS = Arrays.asList(
             new Deal("Manager1", "Client1", 1000.0, LocalDate.now().minusDays(10)),
             new Deal("Manager2", "Client2", 1500.0, LocalDate.now().minusDays(5)),
             new Deal("Manager1", "Client1", 2000.0, LocalDate.now().minusDays(3))
@@ -69,7 +69,7 @@ class DealAnalysisTest {
 
     @Test
     void findMostProfitableMonthLastYear() {
-        Collection<Deal> deals = Arrays.asList(
+        List<Deal> deals = Arrays.asList(
                 new Deal("Manager1", "Client1", 1000.0, LocalDate.now().minusMonths(13)),
                 new Deal("Manager2", "Client2", 1500.0, LocalDate.now().minusMonths(11)),
                 new Deal("Manager1", "Client1", 2000.0, LocalDate.now().minusMonths(10))

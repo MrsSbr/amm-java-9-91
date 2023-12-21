@@ -2,7 +2,7 @@ package ru.nikitadenisov.deals;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 
 public class DealAnalysis {
     private static final Logger LOGGER = Logger.getLogger(DealAnalysis.class.getSimpleName());
-    private final Collection<Deal> deals;
+    private final List<Deal> deals;
 
-    public DealAnalysis(Collection<Deal> deals) {
+    public DealAnalysis(List<Deal> deals) {
         this.deals = deals;
     }
 
