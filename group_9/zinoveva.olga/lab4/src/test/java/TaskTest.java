@@ -17,7 +17,7 @@ public class TaskTest {
             new DataPlant(LocalDate.of(2023, 10, 11), "Цветок2", 1.6, "LUX"),
             new DataPlant(LocalDate.of(2023, 10, 3), "Цветок3", 0.7, null)
     );
-    private final List<DataPlant> emptyDataPlants = new ArrayList<DataPlant>();
+    private final List<DataPlant> emptyDataPlants = new ArrayList<>();
 
     @Test
     public void testFindPlantWithMaxWater() {
@@ -25,7 +25,7 @@ public class TaskTest {
     }
 
     @Test
-    public void testFindPlantWithMaxWaterOnEmptyList(){
+    public void testFindPlantWithMaxWaterOnEmptyList() {
         assertThrows(NoSuchElementException.class, () -> itwp.findPlantWithMaxWater(emptyDataPlants));
     }
 }

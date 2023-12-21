@@ -15,8 +15,8 @@ public class ImplementationTasksWithPlants {
     //Для каждого цветка найти среднюю чистоту полива.
     public Map<String, Double> averagePurityOfIrrigation(List<DataPlant> listDataPlants) {
         LOGGER.info("Выполнение averagePurityOfIrrigation");
-        Map<String, Double> pairPlantIrrigation = new HashMap<String, Double>();
-        Map<String, Integer> pairPlantCount = new HashMap<String, Integer>();
+        Map<String, Double> pairPlantIrrigation = new HashMap<>();
+        Map<String, Integer> pairPlantCount = new HashMap<>();
         listDataPlants.forEach(x -> {
             if (pairPlantIrrigation.containsKey(x.nameFlower())) {
                 pairPlantCount.put(x.nameFlower(), pairPlantCount.get(x.nameFlower()) + 1);
@@ -33,11 +33,11 @@ public class ImplementationTasksWithPlants {
     //Для каждого удобрения найти цветы, им удобренные.
     public Map<String, HashSet<String>> findNamesPlantByTypeFertilizer(List<DataPlant> listDataPlants) {
         LOGGER.info("Выполнение findNamesPlantByTypeFertilizer");
-        Map<String, HashSet<String>> pairFertilizerListPlants = new HashMap<String, HashSet<String>>();
+        Map<String, HashSet<String>> pairFertilizerListPlants = new HashMap<>();
         listDataPlants.stream()
                 .filter(DataPlant::isFertilized)
                 .forEach(x -> {
-                    HashSet<String> listPlants = new HashSet<String>();
+                    HashSet<String> listPlants = new HashSet<>();
                     if (pairFertilizerListPlants.containsKey(x.brandOfFertilizer())) {
                         listPlants = pairFertilizerListPlants.get(x.brandOfFertilizer());
                     }
