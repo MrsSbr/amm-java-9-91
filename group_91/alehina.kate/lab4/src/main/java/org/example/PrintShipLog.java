@@ -10,7 +10,7 @@ import java.util.List;
 public class PrintShipLog {
     private static final Logger logger = LogManager.getLogger(PrintShipLog.class);
     private static final Path PATH =
-            Paths.get("C:/Users/79192/IdeaProjects/amm-java-9-91/group_91/alehina.kate/lab4/src/main/resources/entries.txt");
+            Paths.get("alehina.kate/lab4/src/main/resources/entries.txt");
     private final ShipAccountingLog shipAccountingLog;
     private final List<Entry> entryList;
 
