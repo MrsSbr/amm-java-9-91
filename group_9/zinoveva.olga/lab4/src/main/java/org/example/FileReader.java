@@ -11,10 +11,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class FileReader {
-    private static final Logger logger = LogManager.getLogger(FileReader.class);
+    private static final Logger LOGGER = LogManager.getLogger(FileReader.class);
 
     public List<DataPlant> readPlantsFromFile(Path path) {
-        logger.info("Чтение из файла");
+        LOGGER.info("Чтение из файла");
         List<DataPlant> plants;
 
         try (Stream<String> fileDataStream = Files.lines(path)) {
@@ -29,10 +29,10 @@ public class FileReader {
                     })
                     .toList();
         } catch (IOException e) {
-            logger.error("Неудачная попытка чтения файла\n" + e.getMessage());
+            LOGGER.error("Неудачная попытка чтения файла\n" + e.getMessage());
             throw new RuntimeException(e);
         }
-        logger.info("Чтение успешно завершено. Все данные получены");
+        LOGGER.info("Чтение успешно завершено. Все данные получены");
         return plants;
     }
 }

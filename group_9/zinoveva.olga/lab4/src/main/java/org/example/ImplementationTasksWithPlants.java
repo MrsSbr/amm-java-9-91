@@ -1,12 +1,20 @@
 package org.example;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class ImplementationTasksWithPlants {
+    private static final Logger LOGGER = LogManager.getLogger(FileReader.class);
 
     //Для каждого цветка найти среднюю чистоту полива.
     public Map<String, Double> averagePurityOfIrrigation(List<DataPlant> listDataPlants) {
+        LOGGER.info("Выполнение averagePurityOfIrrigation");
         Map<String, Double> pairPlantIrrigation = new HashMap<String, Double>();
         Map<String, Integer> pairPlantCount = new HashMap<String, Integer>();
         listDataPlants.forEach(x -> {
@@ -24,6 +32,7 @@ public class ImplementationTasksWithPlants {
 
     //Для каждого удобрения найти цветы, им удобренные.
     public Map<String, HashSet<String>> findNamesPlantByTypeFertilizer(List<DataPlant> listDataPlants) {
+        LOGGER.info("Выполнение findNamesPlantByTypeFertilizer");
         Map<String, HashSet<String>> pairFertilizerListPlants = new HashMap<String, HashSet<String>>();
         listDataPlants.stream()
                 .filter(DataPlant::isFertilized)
@@ -40,6 +49,7 @@ public class ImplementationTasksWithPlants {
 
     //Найти цветок, в который вылили больше всего воды.
     public String findPlantWithMaxWater(List<DataPlant> listDataPlants) {
+        LOGGER.info("Выполнение findPlantWithMaxWater");
         Map<String, Double> pairPlantAllWater = new HashMap<>();
         listDataPlants.forEach(x -> {
             if (pairPlantAllWater.containsKey(x.nameFlower())) {
