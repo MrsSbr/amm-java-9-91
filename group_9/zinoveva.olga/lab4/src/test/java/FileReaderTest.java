@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FileReaderTest {
-    private static final Path PATH = Path.of("zinoveva.olga/lab4/src/main/resources/plants.txt");
+    private static final Path PATH = Path.of("lab4/src/main/resources/plants.txt");
     private final FileReader fileReader = new FileReader();
 
     @Test
