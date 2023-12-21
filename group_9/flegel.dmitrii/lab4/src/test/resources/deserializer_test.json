@@ -1,0 +1,11 @@
+[ {
+  "date" : [ 2021, 3, 12 ],
+  "placeOfBattle" : "Москва",
+  "enemy" : "Орда",
+  "numberOfKilledBasurman" : 100
+}, {
+  "date" : [ 2021, 6, 3 ],
+  "placeOfBattle" : "Новгород",
+  "enemy" : "Шайтан-Хан",
+  "numberOfKilledBasurman" : 90
+} ]
