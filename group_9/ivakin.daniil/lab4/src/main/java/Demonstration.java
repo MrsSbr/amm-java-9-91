@@ -1,4 +1,3 @@
-import moonshine.Ingredient;
 import moonshine.Moonshine;
 import moonshine.MoonshineInfo;
 import moonshine.MoonshineReader;
@@ -32,7 +31,7 @@ public class Demonstration {
                     .ifPresentOrElse(month -> System.out.println(month.name()),
                             () -> System.out.println("Переданный список настоек пуст"));
 
-            System.out.println("\nСуммарный объём для каждой настойки:");
+            System.out.println("\nСуммарный объём для каждой настойки в мл:");
             moonshineInfo.getTotalValueForMoonshines(moonshines)
                     .forEach(((moonshine, volume) ->
                             System.out.println(moonshine + " : " + volume)));
@@ -40,7 +39,7 @@ public class Demonstration {
             System.out.println();
 
         } catch (Exception ex) {
-            logger.log(Level.SEVERE,"Перехвачено исключение: " + ex.getMessage());
+            logger.log(Level.SEVERE, "Перехвачено исключение: " + ex.getMessage());
         }
         logger.log(Level.FINE, "Конец демонстрации");
     }

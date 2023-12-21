@@ -3,7 +3,7 @@ package moonshine;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Moonshine{
+public class Moonshine {
     private LocalDate date;
     private String name;
     private List<Ingredient> ingredients;
