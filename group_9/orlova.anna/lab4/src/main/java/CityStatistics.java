@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class CityStatistics {
 
     // Наиболее популярный ответ для городов, название которых начинается на 'А'
-    public static String mostPopularAnswerForCitiesStartingWithA(List<CityStatisticsEntry> data) {
+    public String mostPopularAnswerForCitiesStartingWithA(List<CityStatisticsEntry> data) {
         return data.stream()
                 .filter(entry -> entry.getCity().startsWith("А"))
                 .collect(Collectors.groupingBy(CityStatisticsEntry::getAnswer,
@@ -18,7 +18,7 @@ public class CityStatistics {
     }
 
     // Город, в котором дали больше всего разнообразных ответов
-    public static String cityWithMostDiverseAnswers(List<CityStatisticsEntry> data) {
+    public String cityWithMostDiverseAnswers(List<CityStatisticsEntry> data) {
         Map<String, Long> cityAnswersCount = data.stream()
                 .collect(Collectors.groupingBy(CityStatisticsEntry::getCity,
                         Collectors.mapping(CityStatisticsEntry::getAnswer,
@@ -41,7 +41,7 @@ public class CityStatistics {
     }
 
     // Города, где отвечали так же, как наиболее часто отвечали в Москве
-    public static List<String> citiesWithMatchingAnswersAsMoscow(List<CityStatisticsEntry> data) {
+    public List<String> citiesWithMatchingAnswersAsMoscow(List<CityStatisticsEntry> data) {
         String moscowMostFrequentAnswer = data.stream()
                 .filter(entry -> entry.getCity().equals("Москва"))
                 .collect(Collectors.groupingBy(CityStatisticsEntry::getAnswer,

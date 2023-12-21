@@ -17,7 +17,8 @@ public class CityStatisticsTest {
                 new CityStatisticsEntry("Москва", 20, "пипипи")
         );
 
-        String result = CityStatistics.mostPopularAnswerForCitiesStartingWithA(testData);
+        CityStatistics cityStatisticsCalculations = new CityStatistics();
+        String result = cityStatisticsCalculations.mostPopularAnswerForCitiesStartingWithA(testData);
         assertEquals("фырфырфыр", result);
     }
 
@@ -25,7 +26,8 @@ public class CityStatisticsTest {
     public void testNegativeMostPopularAnswerForCitiesStartingWithA() {
 
         List<CityStatisticsEntry> emptyList = new ArrayList<>();
-        String resultEmptyList = CityStatistics.mostPopularAnswerForCitiesStartingWithA(emptyList);
+        CityStatistics cityStatisticsCalculations = new CityStatistics();
+        String resultEmptyList = cityStatisticsCalculations.mostPopularAnswerForCitiesStartingWithA(emptyList);
         assertEquals("", resultEmptyList);
 
         List<CityStatisticsEntry> testDataWithoutCitiesStartingWithA = Arrays.asList(
@@ -35,8 +37,9 @@ public class CityStatisticsTest {
                 new CityStatisticsEntry("Москва", 40, "пипипи"),
                 new CityStatisticsEntry("Санкт-Петербург", 25, "фырфырфыр")
         );
+
         String resultWithoutCitiesStartingWithA =
-                CityStatistics.mostPopularAnswerForCitiesStartingWithA(testDataWithoutCitiesStartingWithA);
+                cityStatisticsCalculations.mostPopularAnswerForCitiesStartingWithA(testDataWithoutCitiesStartingWithA);
         assertEquals("", resultWithoutCitiesStartingWithA);
     }
 
@@ -52,7 +55,8 @@ public class CityStatisticsTest {
                 new CityStatisticsEntry("Астрахань", 25, "пипипи")
         );
 
-        String result = CityStatistics.cityWithMostDiverseAnswers(testData);
+        CityStatistics cityStatisticsCalculations = new CityStatistics();
+        String result = cityStatisticsCalculations.cityWithMostDiverseAnswers(testData);
         assertEquals("Астрахань", result);
     }
 
@@ -71,7 +75,8 @@ public class CityStatisticsTest {
                 new CityStatisticsEntry("Астрахань", 25, "фырфырфыр")
         );
 
-        String result = CityStatistics.cityWithMostDiverseAnswers(testData);
+        CityStatistics cityStatisticsCalculations = new CityStatistics();
+        String result = cityStatisticsCalculations.cityWithMostDiverseAnswers(testData);
         assertEquals("", result);
     }
 
@@ -85,7 +90,8 @@ public class CityStatisticsTest {
                 new CityStatisticsEntry("Воронеж", 20, "пипипи")
         );
 
-        List<String> result = CityStatistics.citiesWithMatchingAnswersAsMoscow(testData);
+        CityStatistics cityStatisticsCalculations = new CityStatistics();
+        List<String> result = cityStatisticsCalculations.citiesWithMatchingAnswersAsMoscow(testData);
         assertEquals(List.of("Санкт-Петербург"), result);
     }
 
@@ -99,7 +105,8 @@ public class CityStatisticsTest {
                 new CityStatisticsEntry("Воронеж", 20, "пипипи")
         );
 
-        List<String> result = CityStatistics.citiesWithMatchingAnswersAsMoscow(testData);
+        CityStatistics cityStatisticsCalculations = new CityStatistics();
+        List<String> result = cityStatisticsCalculations.citiesWithMatchingAnswersAsMoscow(testData);
         assertEquals(List.of(), result);
     }
 }
