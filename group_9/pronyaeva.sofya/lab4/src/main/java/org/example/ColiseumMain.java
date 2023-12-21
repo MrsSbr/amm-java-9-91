@@ -1,4 +1,4 @@
-package main.java.org.example;
+package org.example;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -31,10 +31,22 @@ public class ColiseumMain {
         List<Fight> fightsList = fileSupplier.readFightsListFromFile(PATH);
         ColiseumStatistics statistics = new ColiseumStatistics(fightsList);
 
-        System.out.println("Самое смертоносное животное -> " + statistics.theMostMurderousAnimal());
+         try {
+             System.out.println("Самое смертоносное животное -> " + statistics.theMostMurderousAnimal());
+         } catch (NullPointerException exception){
+             System.out.println("Функция вернула NULL");
+             throw new RuntimeException();
+        }
+
         System.out.println("Список гладиаторов не из лудуса, которые выжили не менее 3 раз, " +
                 "но затем погибли в битве, так и не получив помилование:\n"
                 + statistics.gladiatorsListThatSurvivedThreeTimes());
-        System.out.println("Лудус, который готовит лучших бойцов с животными -> " + statistics.theBestLudus());
+
+        try {
+            System.out.println("Лудус, который готовит лучших бойцов с животными -> " + statistics.theBestLudus());
+        } catch (NullPointerException exception){
+            System.out.println("Функция вернула NULL");
+            throw new RuntimeException();
+        }
     }
 }

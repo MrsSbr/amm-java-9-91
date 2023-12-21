@@ -1,9 +1,5 @@
-package test.java.org.example;
+package org.example;
 
-import main.java.org.example.Animal;
-import main.java.org.example.ColiseumStatistics;
-import main.java.org.example.Fight;
-import main.java.org.example.Ludus;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -11,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ColiseumStatisticsTest {
     private final List<Fight> fights = List.of (

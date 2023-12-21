@@ -1,21 +1,17 @@
-package test.java.org.example;
+package org.example;
 
-import main.java.org.example.Animal;
-import main.java.org.example.Fight;
-import main.java.org.example.FileSupplier;
-import main.java.org.example.Ludus;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class FileSupplierTest {
-    private static final Path PATH_TO_EXISTING_FILE = Path.of("C:\\Users\\HP\\Java\\group_9\\pronyaeva.sofya\\lab4\\src\\test\\resources\\fights.test.txt");
-    private static final Path PATH_TO_NONEXISTING_FILE = Path.of("C:\\Users\\HP\\Java\\group_9\\pronyaeva.sofya\\lab4\\src\\main\\resources\\fights.non.test.txt");
-    private static final Path PATH_TO_EMPTY_FILE = Path.of("C:\\Users\\HP\\Java\\group_9\\pronyaeva.sofya\\lab4\\src\\test\\resources\\fights.test.empty.txt");
+    private static final Path PATH_TO_EXISTING_FILE = Path.of("lab4/src/test/resources/fights.test.txt");
+    private static final Path PATH_TO_NONEXISTING_FILE = Path.of("lab4/src/test/resources/fights.non.test.txt");
+    private static final Path PATH_TO_EMPTY_FILE = Path.of("lab4/src/test/resources/fights.test.empty.txt");
+
     private static final FileSupplier fileSupplier = new FileSupplier();
 
     @Test
@@ -35,6 +31,6 @@ class FileSupplierTest {
 
     @Test
     void readFightsListEmptyFile() {
-        assertEquals(0, fileSupplier.readFightsListFromFile(PATH_TO_EMPTY_FILE).size());
+          assertEquals(0, fileSupplier.readFightsListFromFile(PATH_TO_EMPTY_FILE).size());
     }
 }

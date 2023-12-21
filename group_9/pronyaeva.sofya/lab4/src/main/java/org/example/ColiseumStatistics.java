@@ -1,4 +1,4 @@
-package main.java.org.example;
+package org.example;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -22,7 +22,9 @@ public class ColiseumStatistics {
         }
         animals.keySet()
                 .forEach(a -> {
-                    long animalWins = fights == null ? 0 : fights.stream().filter(f-> f.compareAnimals(a) && !f.win).count();
+                    long animalWins = fights == null ? 0 : fights.stream()
+                                                                 .filter(f-> f.compareAnimals(a) && !f.win)
+                                                                 .count();
                     animals.replace(a, animalWins);
                 }
         );
@@ -54,7 +56,9 @@ public class ColiseumStatistics {
         }
         ludusList.keySet()
                 .forEach(l -> {
-                            long ludusWins = fights == null ? 0 : fights.stream().filter(f-> f.compareLudus(l) && f.win).count();
+                            long ludusWins = fights == null ? 0 : fights.stream()
+                                                                        .filter(f-> f.compareLudus(l) && f.win)
+                                                                        .count();
                             ludusList.replace(l, ludusWins);
                         }
                 );
