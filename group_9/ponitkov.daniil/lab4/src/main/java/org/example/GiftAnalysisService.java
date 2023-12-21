@@ -18,8 +18,8 @@ public class GiftAnalysisService {
     public Map<String, Double> getMaxWeights(List<Gift> gifts) {
         return gifts.stream()
                 .collect(Collectors.groupingBy(Gift::getColor, Collectors.maxBy(Comparator.comparingDouble(Gift::getWeight))))
-                        .entrySet().stream()
-                        .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().get().getWeight()));
+                .entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().get().getWeight()));
     }
 
     public Map<GiftType, Double> getTotalWeights(List<Gift> gifts) {
