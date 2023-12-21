@@ -1,7 +1,5 @@
 package org.example;
 
-import org.example.cat.Cat;
-
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
