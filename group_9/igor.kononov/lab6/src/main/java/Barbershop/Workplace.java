@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class Workplace {
     private Client client;
-    private boolean isFree;
+    private volatile boolean isFree;
 }
