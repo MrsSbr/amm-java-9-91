@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import org.jetbrains.annotations.NotNull;
 
 public class DealsAnalyzer {
-    private static final Logger logger = LogManager.getLogger(DealsAnalyzer.class.getName());
+    private static final Logger logger = LogManager.getLogger(DealsAnalyzer.class);
     private final List<Deal> deals;
 
     public DealsAnalyzer(@NotNull List<Deal> deals) {
