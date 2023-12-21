@@ -1,6 +1,10 @@
 package org.example;
 
-import java.util.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Scanner;
 
 public class TaskFlight {
     public static int getCount(Flight flight) {
@@ -12,12 +16,12 @@ public class TaskFlight {
         return summ;
     }
 
-    public static int taskCount(Calendar date, Collection<Flight> flights) {
+    public static int taskCount(LocalDate date, Collection<Flight> flights) {
         var wrapper = new Object() {
             int counter = 0;
         };
         flights.stream()
-                .filter(elem -> isEqualDate(elem.getDate(),date))
+                .filter(elem -> elem.getDate().equals(date))
                 .forEach(elem -> wrapper.counter += getCount(elem));
         return wrapper.counter;
     }
@@ -33,14 +37,13 @@ public class TaskFlight {
         System.out.println("Введите год рейса:");
         year = in.nextInt();
 
-        Calendar date = new GregorianCalendar(year, month, day);
+        LocalDate date = LocalDate.of(year, month, day);
         Collection<Flight> flights = new ArrayList<Flight>();
         GeneratePassages.generateFlights(flights);
         System.out.println("Количество пассажиров в этот день: " + taskCount(date, flights));
     }
-    public static boolean isEqualDate(Calendar date1, Calendar date2){
-        return date1.get(Calendar.YEAR) == date2.get(Calendar.YEAR)&&
-                date1.get(Calendar.MONTH) == date2.get(Calendar.MONTH)&&
-                date1.get(Calendar.DAY_OF_MONTH) == date2.get(Calendar.DAY_OF_MONTH);
-    }
+
+//    public static boolean isEqualDate(LocalDate date1, LocalDate date2) {
+//        return date1.equals();
+//    }
 }

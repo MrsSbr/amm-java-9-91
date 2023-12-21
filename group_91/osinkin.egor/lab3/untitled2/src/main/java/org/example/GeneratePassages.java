@@ -1,7 +1,13 @@
 package org.example;
 
-import java.util.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.IntStream;
+
+import static java.lang.Math.abs;
 
 public class GeneratePassages {
     public static final int countFlightOfDay = 10;
@@ -42,7 +48,7 @@ public class GeneratePassages {
         int count = random.nextInt() % 4900 + 100;
         List<Integer> passages;
         for (int i = 0; i < count; i++) {
-            Calendar date = generateDate(random);
+            LocalDate date = generateDate(random);
             for (int j = 0; j < GeneratePassages.countFlightOfDay; j++) {
                 passages = generatePassages();
                 res.add(new Flight(j, date, passages));
@@ -50,18 +56,18 @@ public class GeneratePassages {
         }
     }
 
-    public static Calendar generateDate(Random random) {
+    public static LocalDate generateDate(Random random) {
         int year, month, day;
-        Calendar now = GregorianCalendar.getInstance();
-        year = random.nextInt() % (now.get(Calendar.YEAR) - 2011) + 2011;
-        month = random.nextInt() % now.get(Calendar.MONTH) + 1;
-        day = random.nextInt(now.get(Calendar.DAY_OF_MONTH)) % now.get(Calendar.DAY_OF_MONTH) + 1;
-        return new GregorianCalendar(year, month, day);
+        LocalDate now = LocalDate.now();
+        year = abs(random.nextInt()) % (now.getYear() - 2011) + 2011;
+        month = abs(random.nextInt()) % now.getMonthValue() + 1;
+        day = abs(random.nextInt()) % now.getDayOfMonth() + 1;
+        return LocalDate.of(year, month, day);
     }
 
     public static Flight generateFlight() {
         Random random = new Random();
-        Calendar date = generateDate(random);
+        LocalDate date = generateDate(random);
         return new Flight(random.nextInt(), date, generatePassages());
     }
 

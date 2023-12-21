@@ -1,16 +1,16 @@
 package org.example;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
 public class Flight {
     private Integer idFlight;
     private List<Integer> passages;
-    private Calendar date;
+    private LocalDate date;
 
-    public Flight(Integer number, Calendar date, List<Integer> passages) {
+    public Flight(Integer number, LocalDate date, List<Integer> passages) {
         this.date = date;
         this.passages = passages;
         this.idFlight = number;
@@ -38,11 +38,11 @@ public class Flight {
         this.passages = passages;
     }
 
-    public Calendar getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

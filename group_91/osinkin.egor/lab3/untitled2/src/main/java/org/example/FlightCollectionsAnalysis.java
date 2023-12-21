@@ -1,8 +1,8 @@
 package org.example;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toCollection;
@@ -33,7 +33,7 @@ public class FlightCollectionsAnalysis {
         long startTime = System.nanoTime();
         //BicycleRaceTask task = new BicycleRaceTask();
         for (int i = 0; i < COUNT_TEST; i++) {
-            Calendar date = GeneratePassages.generateDate(new Random());
+            LocalDate date = GeneratePassages.generateDate(new Random());
             TaskFlight.taskCount(date, flights);
         }
         long endTime = System.nanoTime();
