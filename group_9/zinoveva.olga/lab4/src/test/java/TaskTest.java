@@ -25,6 +25,15 @@ public class TaskTest {
     }
 
     @Test
+    public void testAveragePurityOfIrrigation() {
+        Map<String, Double> resultExpected = new HashMap<>();
+        resultExpected.put("Цветок1", (0.7 + 1.6 + 0.7) / 3);
+        resultExpected.put("Цветок2", 1.6);
+        resultExpected.put("Цветок3", 0.7);
+        assertEquals(resultExpected, itwp.averagePurityOfIrrigation(dataPlants));
+    }
+
+    @Test
     public void testFindPlantWithMaxWaterOnEmptyList() {
         assertThrows(NoSuchElementException.class, () -> itwp.findPlantWithMaxWater(emptyDataPlants));
     }

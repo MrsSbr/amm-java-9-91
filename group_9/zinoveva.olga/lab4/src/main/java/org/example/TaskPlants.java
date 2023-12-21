@@ -12,7 +12,6 @@ public class TaskPlants {
 
     public static final Logger LOGGER = LogManager.getLogger(TaskPlants.class);
     private static final Path PATH = Path.of("/Users/olga/IdeaProjects/amm-java-9-91/group_9/zinoveva.olga/lab4/src/main/resources/plants.txt");
-
     public static void main(String[] args) {
         LOGGER.info("Запуск выполнения программы");
         FileReader fileReader = new FileReader();
