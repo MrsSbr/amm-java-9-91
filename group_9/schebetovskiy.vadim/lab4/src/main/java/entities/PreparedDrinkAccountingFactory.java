@@ -20,6 +20,7 @@ public class PreparedDrinkAccountingFactory {
                 getRandomTimeOfPreparation(),
                 drink.getPrice());
     }
+
     private static LocalDateTime getRandomDateOfPreparation() {
         Random rand = new Random();
 
@@ -31,8 +32,8 @@ public class PreparedDrinkAccountingFactory {
         int second = rand.nextInt(60);
 
         return LocalDateTime.of(year, month, day, hour, minute, second).truncatedTo(ChronoUnit.SECONDS);
-
     }
+
     private static int getRandomTimeOfPreparation() {
         Random rand = new Random();
         return rand.nextInt(MAX_TIME_OF_PREPARATION_IN_SECONDS - MIN_TIME_OF_PREPARATION_IN_SECONDS + 1)
