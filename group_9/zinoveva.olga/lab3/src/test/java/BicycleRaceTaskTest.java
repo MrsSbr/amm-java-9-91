@@ -71,7 +71,7 @@ class BicycleRaceTaskTest {
 
     @Test
     void findAthletesByCondition() {
-        Set<Integer> winnersThisYear = Set.of(3, 4, 15, 6, 7);
+        Set<Integer> winnersThisYear = Set.of(3, 4, 7, 6);
         for (Supplier<Collection<BicycleRace>> supplier : suppliers) {
             BicycleRaceTask task = new BicycleRaceTask();
             Collection<BicycleRace> bicycleRaceCollection = Stream.of(bicycleRaces).collect(Collectors.toCollection(supplier));

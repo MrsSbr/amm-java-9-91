@@ -37,6 +37,7 @@ public class BicycleRaceTask {
         int fiveYearsAgo = NOW_YEAR - 5;
         Set<Integer> winnersThisYear = new HashSet<>();
         Set<Integer> notWinFiveYears = new HashSet<>();
+        Set<Integer> winFiveYears = new HashSet<>();
         BicycleRaces.stream()
                 .filter(x -> x.getDateRace().getYear() >= fiveYearsAgo)
                 .forEach(x -> {
@@ -47,7 +48,8 @@ public class BicycleRaceTask {
                     } else {
                         for (int i = 1; i <= x.getNumbersParticipant().size(); i++) {
                             if (i < 4) {
-                                notWinFiveYears.remove(x.getFinalList().get(i)); //т. к. в notWin может добавится повторно позже при прохождении условия
+                                //notWinFiveYears.remove(x.getFinalList().get(i)); //т. к. в notWin может добавится повторно позже при прохождении условия
+                                winFiveYears.add(x.getFinalList().get(i));
                             } else {
                                 notWinFiveYears.add(x.getFinalList().get(i));
                             }
@@ -56,7 +58,8 @@ public class BicycleRaceTask {
                 });
         Set<Integer> res = new HashSet<>();
         winnersThisYear.stream()
-                .filter(notWinFiveYears::contains)
+                //.filter(notWinFiveYears::contains)
+                .filter(x -> notWinFiveYears.contains(x) && !winFiveYears.contains(x))
                 .forEach(res::add);
         return res;
     }
