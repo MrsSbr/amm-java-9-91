@@ -11,11 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class TaskTest {
     private final ImplementationTasksWithPlants itwp = new ImplementationTasksWithPlants();
     private final List<DataPlant> dataPlants = List.of(
-            new DataPlant(LocalDate.of(2023, 10, 3), "Цветок1", 0.7, null),
+            new DataPlant(LocalDate.of(2023, 10, 3), "Цветок1", 0.7, "Аква"),
             new DataPlant(LocalDate.of(2023, 10, 5), "Цветок1", 1.6, "LUX"),
-            new DataPlant(LocalDate.of(2023, 10, 10), "Цветок1", 0.7, null),
+            new DataPlant(LocalDate.of(2023, 10, 10), "Цветок1", 0.7, "Аква"),
             new DataPlant(LocalDate.of(2023, 10, 11), "Цветок2", 1.6, "LUX"),
-            new DataPlant(LocalDate.of(2023, 10, 3), "Цветок3", 0.7, null)
+            new DataPlant(LocalDate.of(2023, 10, 3), "Цветок3", 0.7, "Аква")
     );
     private final List<DataPlant> emptyDataPlants = new ArrayList<>();
 
@@ -31,6 +31,14 @@ public class TaskTest {
         resultExpected.put("Цветок2", 1.6);
         resultExpected.put("Цветок3", 0.7);
         assertEquals(resultExpected, itwp.averagePurityOfIrrigation(dataPlants));
+    }
+
+    @Test
+    public void testFindNamesPlantByTypeFertilizer(){
+        Map<String, Set<String>> pairFertilizerListPlants = new HashMap<>();
+        pairFertilizerListPlants.put("LUX", Set.of("Цветок1", "Цветок2"));
+        pairFertilizerListPlants.put("Аква", Set.of("Цветок1", "Цветок3"));
+        assertEquals(pairFertilizerListPlants, itwp.findNamesPlantByTypeFertilizer(dataPlants));
     }
 
     @Test
