@@ -1,7 +1,8 @@
 package edu.deals;
 
 import edu.deals.exceptions.DealParseException;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,12 +11,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 public final class DealsParser {
+    private static final Logger logger = LogManager.getLogger(DealsParser.class);
     private static final String DELIMITER = ";";
 
     private DealsParser() {
     }
 
     public static List<Deal> parseFile(Path filePath) throws IOException, DealParseException {
+        logger.info("Парсинг файла \"" + filePath + "\".");
+
         try (BufferedReader reader = Files.newBufferedReader(filePath)) {
             return reader.lines()
                     .map(DealsParser::parseDeal)
