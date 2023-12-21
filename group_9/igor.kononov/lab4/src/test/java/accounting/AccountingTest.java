@@ -1,7 +1,6 @@
 package accounting;
 
-import common.FileProvider;
-import exceptions.InvalidDataException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +29,7 @@ class AccountingTest {
     }
 
     @Test
-    void groupTheRecordsByDepartmentsTest() throws InvalidDataException {
+    void groupTheRecordsByDepartmentsTest() {
         Map<String, List<SalaryRecord>> result = accounting.groupTheRecordsByDepartments();
 
         assertEquals(5, result.size());
@@ -47,19 +46,19 @@ class AccountingTest {
     }
 
     @Test
-    void findDepartmentWithHighestAverageSalaryTest() throws InvalidDataException {
+    void findDepartmentWithHighestAverageSalaryTest()  {
         String result = accounting.findDepartmentWithHighestAverageSalary();
         assertEquals("Legal", result);
     }
 
     @Test
-    void findDepartmentWithHighestTotalPayoutTest() throws InvalidDataException {
+    void findDepartmentWithHighestTotalPayoutTest()  {
         String result = accounting.findDepartmentWithHighestTotalPayout();
         assertEquals("IT", result);
     }
 
     @Test
-    void groupTheRecordsByDepartmentsWithEmptyListTest() throws InvalidDataException {
+    void groupTheRecordsByDepartmentsWithEmptyListTest() {
         accounting.setSalaryRecords(new ArrayList<>());
         assertTrue(accounting.groupTheRecordsByDepartments().isEmpty());
     }
@@ -71,7 +70,7 @@ class AccountingTest {
     }
 
     @Test
-    void findDepartmentWithHighestAverageSalaryWithEmptyListTest() throws InvalidDataException {
+    void findDepartmentWithHighestAverageSalaryWithEmptyListTest() {
         accounting.setSalaryRecords(new ArrayList<>());
         assertNull(accounting.findDepartmentWithHighestAverageSalary());
     }
@@ -83,7 +82,7 @@ class AccountingTest {
     }
 
     @Test
-    void findDepartmentWithHighestTotalPayoutWithEmptyListTest() throws InvalidDataException {
+    void findDepartmentWithHighestTotalPayoutWithEmptyListTest() {
         accounting.setSalaryRecords(new ArrayList<>());
         assertNull(accounting.findDepartmentWithHighestTotalPayout());
     }

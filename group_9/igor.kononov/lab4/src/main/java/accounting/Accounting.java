@@ -26,12 +26,8 @@ public class Accounting {
     }
 
 
-    public Map<String, List<SalaryRecord>> groupTheRecordsByDepartments() throws InvalidDataException {
+    public Map<String, List<SalaryRecord>> groupTheRecordsByDepartments(){
         logger.info("The method \"groupTheRecordsByDepartments\" has started working");
-
-        if (salaryRecords.isEmpty()) {
-            throw new InvalidDataException("List is empty");
-        }
 
         return salaryRecords.stream()
                 .collect(Collectors.groupingBy(
@@ -39,12 +35,8 @@ public class Accounting {
                 ));
     }
 
-    public String findDepartmentWithHighestAverageSalary() throws InvalidDataException {
+    public String findDepartmentWithHighestAverageSalary() {
         logger.info("The method \"findDepartmentWithHighestAverageSalary\" has started working");
-
-        if (salaryRecords.isEmpty()) {
-            throw new InvalidDataException("List is empty");
-        }
 
         return salaryRecords.stream()
                 .collect(Collectors.groupingBy(
@@ -54,15 +46,11 @@ public class Accounting {
                 .entrySet().stream()
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
-                .orElseThrow(NullPointerException::new);
+                .orElse(null);
     }
 
-    public String findDepartmentWithHighestTotalPayout() throws InvalidDataException {
+    public String findDepartmentWithHighestTotalPayout() {
         logger.info("The method \"findDepartmentWithHighestTotalPayout\" has started working");
-
-        if (salaryRecords.isEmpty()) {
-            throw new InvalidDataException("List is empty");
-        }
 
         return salaryRecords.stream()
                 .collect(Collectors.groupingBy(
@@ -72,6 +60,6 @@ public class Accounting {
                 .entrySet().stream()
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
-                .orElseThrow(NullPointerException::new);
+                .orElse(null);
     }
 }
