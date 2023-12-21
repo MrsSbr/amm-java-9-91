@@ -20,47 +20,32 @@ public class DealsAnalyzerDemo {
             List<Deal> deals = DealsParser.parseFile(DEALS_FILE_PATH);
             DealsAnalyzer dealsAnalyzer = new DealsAnalyzer(deals);
 
-            printMostEffectiveManagerOverPastMonth(dealsAnalyzer);
+            dealsAnalyzer.findMostEffectiveManagerOverPastMonth()
+                    .ifPresentOrElse(
+                            manager -> logger.info("Самый эффективный менеджер за последний месяц - " + manager + "."),
+                            () -> logger.info("Исходный файл не содержит информации о сделках, совершённых за последний месяц.")
+                    );
 
-            logger.info("");
-            printStatisticsOnIncomeFromEachBuyer(dealsAnalyzer);
+            Map<String, Double> incomeOfEachBuyer = dealsAnalyzer.collectStatisticsOnIncomeFromEachBuyer();
+            if (!incomeOfEachBuyer.isEmpty()) {
+                logger.info("Статистика по доходу от каждого клиента:");
+                for (var entry : incomeOfEachBuyer.entrySet()) {
+                    logger.info(entry.getKey() + " - " + entry.getValue());
+                }
+            } else {
+                logger.info("Информация о сделках отсутствует.");
+            }
 
-            logger.info("");
-            printMostProfitableMonthOverPastYear(dealsAnalyzer);
+            dealsAnalyzer.findMostProfitableMonthOverPastYear()
+                    .ifPresentOrElse(
+                            month -> logger.info("Самый прибыльный месяц за последний год - " + month + "."),
+                            () -> logger.info("В исходном файле отсутствует информация о сделках, совершённых за последний год.")
+                    );
 
         } catch (IOException e) {
             logger.error("Ошибка чтения из файла " + DEALS_FILE_PATH + "!");
         } catch (DealParseException e) {
             logger.error(e.getMessage() + ". Причина: " + e.getCause());
         }
-    }
-
-    public static void printMostEffectiveManagerOverPastMonth(DealsAnalyzer analyzer) {
-        analyzer.findMostEffectiveManagerOverPastMonth()
-                .ifPresentOrElse(
-                        manager -> logger.info("Самый эффективный менеджер за последний месяц - " + manager + "."),
-                        () -> logger.info("Исходный файл не содержит информации о сделках, совершённых за последний месяц.")
-                );
-    }
-
-    public static void printStatisticsOnIncomeFromEachBuyer(DealsAnalyzer analyzer) {
-        Map<String, Double> incomeOfEachBuyer = analyzer.collectStatisticsOnIncomeFromEachBuyer();
-
-        if (!incomeOfEachBuyer.isEmpty()) {
-            logger.info("Статистика по доходу от каждого клиента:");
-            for (var entry : incomeOfEachBuyer.entrySet()) {
-                logger.info(entry.getKey() + " - " + entry.getValue());
-            }
-        } else {
-            logger.info("Информация о сделках отсутствует.");
-        }
-    }
-
-    public static void printMostProfitableMonthOverPastYear(DealsAnalyzer analyzer) {
-        analyzer.findMostProfitableMonthOverPastYear()
-                .ifPresentOrElse(
-                        month -> logger.info("Самый прибыльный месяц за последний год - " + month + "."),
-                        () -> logger.info("В исходном файле отсутствует информация о сделках, совершённых за последний год.")
-                );
     }
 }

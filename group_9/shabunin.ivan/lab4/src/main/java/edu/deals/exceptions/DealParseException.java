@@ -12,6 +12,3 @@ public class DealParseException extends RuntimeException {
         return parsedString;
     }
 }
-
-
-
