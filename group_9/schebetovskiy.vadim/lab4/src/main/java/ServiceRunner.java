@@ -3,9 +3,7 @@ import entities.PreparedDrinkAccountingFactory;
 import service.SolverService;
 import service.SolverServiceImpl;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -30,7 +28,7 @@ public class ServiceRunner {
                     .toURI());
 
             PreparedDrinkAccountingFactory accountingFactory = new PreparedDrinkAccountingFactory();
-            UTILS.createJsonFile(Stream.generate(accountingFactory::getPreparedDrinkAccounting)
+            UTILS.fillJsonFile(Stream.generate(accountingFactory::getPreparedDrinkAccounting)
                     .limit(MAX_NUMBER_OF_ACCOUNTINGS)
                     .collect(Collectors.toList()), filePath);
             LOGGER.log(Level.FINE, "File written successfully");
@@ -48,6 +46,7 @@ public class ServiceRunner {
                     solverService.getMostOftenOrderedDrinksByCond(accountings) + "\n");
             System.out.println("Напиток с наилучшим соотношением цена/время:\n" +
                     solverService.getDrinkWithTheBestRatio(accountings) + "\n");
+            System.out.println("Число записей:" + accountings.size());
 
             LOGGER.log(Level.FINE, "Solved successfully");
 

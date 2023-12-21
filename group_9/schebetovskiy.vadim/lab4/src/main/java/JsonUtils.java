@@ -19,13 +19,12 @@ import java.util.logging.Logger;
 public class JsonUtils {
     private final Logger logger = Logger.getLogger(JsonUtils.class.getName());
 
-    public File createJsonFile(Collection<PreparedDrinkAccounting> accountings, Path filePath) throws IOException {
+    public void fillJsonFile(Collection<PreparedDrinkAccounting> accountings, Path filePath) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting()
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer())
                 .create();
         String jsonString = gson.toJson(accountings);
-        File fileJson = filePath.toFile();
-        try (FileWriter writer = new FileWriter(fileJson)) {
+        try (FileWriter writer = new FileWriter(filePath.toFile())) {
             logger.log(Level.INFO, "File writing begin");
             writer.write(jsonString);
             logger.log(Level.INFO, "File written");
@@ -33,7 +32,6 @@ public class JsonUtils {
             System.out.println(ex.getMessage());
         }
         logger.log(Level.INFO, "File close");
-        return fileJson;
     }
 
     public List<PreparedDrinkAccounting> readJsonFile(Path filePath) {

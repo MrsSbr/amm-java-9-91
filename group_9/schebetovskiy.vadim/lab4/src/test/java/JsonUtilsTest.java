@@ -50,7 +50,7 @@ class JsonUtilsTest {
     void createJsonFileTest() {
         try {
             file = File.createTempFile("createFileTest", ".json");
-            UTILS.createJsonFile(EXPECTED_ACCOUNTINGS, file.toPath());
+            UTILS.fillJsonFile(EXPECTED_ACCOUNTINGS, file.toPath());
             Gson gson = new GsonBuilder().setPrettyPrinting()
                     .registerTypeAdapter(LocalDate.class, new LocalDateTimeDeserializer())
                     .create();
