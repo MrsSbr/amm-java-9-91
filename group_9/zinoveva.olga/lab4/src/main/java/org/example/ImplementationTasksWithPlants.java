@@ -42,8 +42,12 @@ public class ImplementationTasksWithPlants {
     public String findPlantWithMaxWater(List<DataPlant> listDataPlants) {
         Map<String, Double> pairPlantAllWater = new HashMap<>();
         listDataPlants.forEach(x -> {
-            double value = pairPlantAllWater.get(x.nameFlower()) + x.amountOfWatering();
-            pairPlantAllWater.put(x.nameFlower(), value);
+            if(pairPlantAllWater.containsKey(x.nameFlower())){
+                double value = pairPlantAllWater.get(x.nameFlower()) + x.amountOfWatering();
+                pairPlantAllWater.put(x.nameFlower(), value);
+            } else {
+                pairPlantAllWater.put(x.nameFlower(), x.amountOfWatering());
+            }
         });
         return pairPlantAllWater.entrySet()
                 .stream()
