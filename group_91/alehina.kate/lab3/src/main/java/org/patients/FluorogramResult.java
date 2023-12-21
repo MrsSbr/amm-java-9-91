@@ -19,7 +19,6 @@ public enum FluorogramResult {
     }
 
     public static FluorogramResult randomResult() {
-        Random random = new Random();
         return FluorogramResult.values()[random.nextInt(0,3)];
     }
 }
