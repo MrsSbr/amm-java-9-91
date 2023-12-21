@@ -28,4 +28,14 @@ public class TaskTest {
     public void testFindPlantWithMaxWaterOnEmptyList() {
         assertThrows(NoSuchElementException.class, () -> itwp.findPlantWithMaxWater(emptyDataPlants));
     }
+
+    @Test
+    public void testAveragePurityOfIrrigationOnEmptyList() {
+        assertEquals(Map.of(), itwp.averagePurityOfIrrigation(emptyDataPlants));
+    }
+
+    @Test
+    public void testFindNamesPlantByTypeFertilizerOnEmptyList() {
+        assertEquals(Map.of(), itwp.averagePurityOfIrrigation(emptyDataPlants));
+    }
 }
