@@ -10,7 +10,7 @@ public class Election {
 
         List<Integer> votes = VotingSimulator.simulateVotingResults(300);
 
-        int threshold = (int) (0.1 * votes.size());
+        int threshold = (int) (0.1 * votes.size()) ;
 
         List<Integer> candidateVotes = VoteCounter.countVotes(votes);
 
