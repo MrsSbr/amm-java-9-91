@@ -31,8 +31,8 @@ class BicycleRaceTaskTest {
             new BicycleRace(Map.of(1, 15, 2, 61, 3, 22, 4, 3, 5, 7, 6, 4),
                     List.of(15, 61, 22, 3, 7, 4),
                     LocalDate.of(2021, 11, 16)),
-            new BicycleRace(Map.of(1, 20, 2, 8, 3, 6, 4, 7, 5, 3, 6, 15),
-                    List.of(20, 8, 6, 3, 7, 15),
+            new BicycleRace(Map.of(1, 20, 2, 8, 3, 5, 4, 7, 5, 3, 6, 15),
+                    List.of(20, 8, 5, 3, 7, 15),
                     LocalDate.of(2020, 2, 1)),
             new BicycleRace(Map.of(1, 5, 2, 9, 3, 10, 4, 12, 5, 7, 6, 15, 7, 3),
                     List.of(5, 9, 10, 12, 7, 3, 15),
@@ -71,7 +71,7 @@ class BicycleRaceTaskTest {
 
     @Test
     void findAthletesByCondition() {
-        Set<Integer> winnersThisYear = Set.of(3, 4, 7);
+        Set<Integer> winnersThisYear = Set.of(3, 4, 15, 6, 7);
         for (Supplier<Collection<BicycleRace>> supplier : suppliers) {
             BicycleRaceTask task = new BicycleRaceTask();
             Collection<BicycleRace> bicycleRaceCollection = Stream.of(bicycleRaces).collect(Collectors.toCollection(supplier));

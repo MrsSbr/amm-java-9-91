@@ -47,7 +47,7 @@ public class BicycleRaceTask {
                     } else {
                         for (int i = 1; i <= x.getNumbersParticipant().size(); i++) {
                             if (i < 4) {
-                                winnersThisYear.remove(x.getFinalList().get(i)); //т. к. в notWin может добавится повторно позже при прохождении условия
+                                notWinFiveYears.remove(x.getFinalList().get(i)); //т. к. в notWin может добавится повторно позже при прохождении условия
                             } else {
                                 notWinFiveYears.add(x.getFinalList().get(i));
                             }
