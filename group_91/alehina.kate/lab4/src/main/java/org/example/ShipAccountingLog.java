@@ -58,6 +58,6 @@ public class ShipAccountingLog {
         return entryList.stream()
                 .filter(entry -> entry.getDateRobbery().isAfter(LocalDate.now().minusYears(3))
                         && entry.getCountBarrelsRum() == largestStocks.get())
-                .collect(Collectors.toList());
+                .toList();
     }
 }

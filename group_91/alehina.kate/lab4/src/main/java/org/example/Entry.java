@@ -48,7 +48,10 @@ public class Entry {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Entry entry = (Entry) o;
-        return countBarrelsRum == entry.countBarrelsRum && Objects.equals(dateRobbery, entry.dateRobbery) && shipClass == entry.shipClass && citizenship == entry.citizenship && Objects.equals(gold, entry.gold) && isBoarded == entry.isBoarded;
+        return countBarrelsRum == entry.countBarrelsRum
+                && Objects.equals(dateRobbery, entry.dateRobbery)
+                && shipClass == entry.shipClass && citizenship == entry.citizenship
+                && Objects.equals(gold, entry.gold) && isBoarded == entry.isBoarded;
     }
 
     @Override

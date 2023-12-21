@@ -32,7 +32,7 @@ public class ReadFile {
 
                         return new Entry(dateRobbery, shipClass, citizenship, gold, countBarrelsRum, isBoarded);
                     })
-                    .collect(Collectors.toList());
+                    .toList();
         } catch (IOException e) {
             logger.error("Ошибка при чтении файла!\n" + e.getMessage());
             throw new RuntimeException(e);
