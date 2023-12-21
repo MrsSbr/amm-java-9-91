@@ -14,8 +14,9 @@ import java.util.stream.Collectors;
 public class CoffeeSuppliesStatisticsImpl implements CoffeeSuppliesStatistics {
     @Override
     public Map<ProcessingType, Set<CoffeeSort>> findSortsByProcessingType(List<CoffeeRecord> records) {
-        if (records == null)
+        if (records == null) {
             return new HashMap<>();
+        }
         return records.stream()
                 .collect(Collectors.groupingBy(CoffeeRecord::processingType,
                         Collectors.mapping(CoffeeRecord::sort, Collectors.toSet())));
@@ -23,8 +24,9 @@ public class CoffeeSuppliesStatisticsImpl implements CoffeeSuppliesStatistics {
 
     @Override
     public Set<String> findCountriesWithMoreThanHeight(List<CoffeeRecord> records, double height) {
-        if (records == null)
+        if (records == null) {
             return new HashSet<>();
+        }
         return records.stream()
                 .filter((coffeeRecord -> coffeeRecord.heightOfGrowth() > height))
                 .map(CoffeeRecord::country)
@@ -33,8 +35,9 @@ public class CoffeeSuppliesStatisticsImpl implements CoffeeSuppliesStatistics {
 
     @Override
     public Map<String, Integer> findAllSortsCountForEachFarm(List<CoffeeRecord> records) {
-        if (records == null)
+        if (records == null) {
             return new HashMap<>();
+        }
         return records.stream()
                 .collect(Collectors.groupingBy(CoffeeRecord::farm,
                         Collectors.collectingAndThen(
