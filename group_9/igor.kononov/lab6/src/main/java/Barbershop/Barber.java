@@ -16,22 +16,24 @@ public class Barber implements Runnable {
 
     @Override
     public void run() {
+
         while (true) {
             var workPlace = reception.getWorkplace();
             synchronized (workPlace) {
                 workPlace.setFree(true);
                 workPlace.notify();
+            }
 
-                var freeReception = true;
-                var clientQueue = reception.getClientQueue();
-
-                synchronized (clientQueue) {
-                    if (!clientQueue.isEmpty()) {
-                        freeReception = false;
-                        currentClient = clientQueue.poll();
-                        clientQueue.notifyAll();
-                    }
+            var freeReception = true;
+            var clientQueue = reception.getClientQueue();
+            synchronized (clientQueue) {
+                if (!clientQueue.isEmpty()) {
+                    freeReception = false;
+                    currentClient = clientQueue.poll();
+                    clientQueue.notifyAll();
                 }
+            }
+            synchronized (workPlace) {
                 if (freeReception) {
                     System.out.println("Барбер спит");
                     try {
@@ -51,6 +53,7 @@ public class Barber implements Runnable {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+
             System.out.println("Барбер подстриг " + currentClient.getName());
             workPlace.setFree(true);
             workPlace.setClient(null);
