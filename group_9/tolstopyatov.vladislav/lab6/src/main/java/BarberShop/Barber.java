@@ -34,18 +34,20 @@ public class Barber extends Thread {
                 reception.getWorkChair().setVisitor(null);
                 reception.getWorkChair().setFree(true);
                 reception.getWorkChair().notify();
-                // проверка очереди на пустоту
-                boolean isFreeReception;
-                synchronized (reception.getReception()) {
-                    if (reception.getReception().isEmpty()) {
-                        isFreeReception = true;
-                    } else {
-                        // забираем человека из очереди
-                        isFreeReception = false;
-                        currentVisitor = reception.getReception().poll();
-                        reception.getReception().notifyAll();
-                    }
+            }
+            // проверка очереди на пустоту
+            boolean isFreeReception;
+            synchronized (reception.getReception()) {
+                if (reception.getReception().isEmpty()) {
+                    isFreeReception = true;
+                } else {
+                    // забираем человека из очереди
+                    isFreeReception = false;
+                    currentVisitor = reception.getReception().poll();
+                    reception.getReception().notifyAll();
                 }
+            }
+            synchronized (reception.getWorkChair()) {
                 // если очередь пустая, то барбер спит
                 if (isFreeReception) {
                     try {
@@ -55,11 +57,12 @@ public class Barber extends Thread {
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
+                } else {    // иначе надо указать, что стул занят
+                    reception.getWorkChair().setFree(false);
+                    reception.getWorkChair().setVisitor(currentVisitor);
                 }
             }
-            // проснулся - идет работает
-            reception.getWorkChair().setVisitor(currentVisitor);
-            reception.getWorkChair().setFree(false);
+
             System.out.printf("Барбер %s работает с клиентом %s!\n", barberName, currentVisitor.getVisitorName());
             try {
                 sleep(WORKING_TIME);
@@ -67,8 +70,6 @@ public class Barber extends Thread {
                 throw new RuntimeException(e);
             }
             System.out.printf("Барбер %s обслужил клиента %s\n", barberName, currentVisitor.getVisitorName());
-            reception.getWorkChair().setVisitor(null);
-            reception.getWorkChair().setFree(true);
         }
     }
 }
