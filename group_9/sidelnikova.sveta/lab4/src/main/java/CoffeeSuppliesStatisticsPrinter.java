@@ -21,23 +21,23 @@ public class CoffeeSuppliesStatisticsPrinter {
         try {
             List<CoffeeRecord> records = reader.read();
 
-            logger.info("Сорта для каждого типа обработки:");
+            System.out.println("Сорта для каждого типа обработки:");
             CoffeeSuppliesStatistics statistics = new CoffeeSuppliesStatisticsImpl();
             Map<ProcessingType, Set<CoffeeSort>> sortsByProcessingType = statistics.findSortsByProcessingType(records);
             for (var entry : sortsByProcessingType.entrySet()) {
-                logger.info("Тип обработки: " + entry.getKey());
-                logger.info("Сорта, которые им обрабатываются: " + entry.getValue());
+                System.out.println("Тип обработки: " + entry.getKey());
+                System.out.println("Сорта, которые им обрабатываются: " + entry.getValue());
             }
 
-            logger.info("Страны, в которых кофе растет на высоте более 1500 м:");
+            System.out.println("Страны, в которых кофе растет на высоте более 1500 м:");
             Set<String> countries = statistics.findCountriesWithMoreThanHeight(records, 1500);
-            logger.info(countries);
+            System.out.println(countries);
 
-            logger.info("Количество сортов для каждой фермы:");
+            System.out.println("Количество сортов для каждой фермы:");
             Map<String, Integer> sortsCountForFarms = statistics.findAllSortsCountForEachFarm(records);
             for (var entry : sortsCountForFarms.entrySet()) {
-                logger.info("Название фермы: " + entry.getKey());
-                logger.info("Количество выращиваемых сортов: " + entry.getValue());
+                System.out.println("Название фермы: " + entry.getKey());
+                System.out.println("Количество выращиваемых сортов: " + entry.getValue());
             }
 
         } catch (IOException e) {
