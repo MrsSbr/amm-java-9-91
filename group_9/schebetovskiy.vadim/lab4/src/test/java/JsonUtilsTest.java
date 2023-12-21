@@ -24,7 +24,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class JsonUtilsTest {
-    private final JsonUtils utils = new JsonUtils();
+    private static final JsonUtils UTILS = new JsonUtils();
     private static File file = null;
 
     private static final List<PreparedDrinkAccounting> EXPECTED_ACCOUNTINGS = List.of(
@@ -49,12 +49,13 @@ class JsonUtilsTest {
     @Test
     void createJsonFileTest() {
         try {
-            file = File.createTempFile("createFileTest",".json");
-            utils.createJsonFile(EXPECTED_ACCOUNTINGS, file.toPath());
+            file = File.createTempFile("createFileTest", ".json");
+            UTILS.createJsonFile(EXPECTED_ACCOUNTINGS, file.toPath());
             Gson gson = new GsonBuilder().setPrettyPrinting()
                     .registerTypeAdapter(LocalDate.class, new LocalDateTimeDeserializer())
                     .create();
-            Type collectionType = new TypeToken<Collection<PreparedDrinkAccounting>>(){}.getType();
+            Type collectionType = new TypeToken<Collection<PreparedDrinkAccounting>>() {
+            }.getType();
             try (JsonReader reader = new JsonReader(new FileReader(file.getPath()))) {
                 List<PreparedDrinkAccounting> accountings = gson.fromJson(reader, collectionType);
                 assertEquals(EXPECTED_ACCOUNTINGS, accountings);
@@ -73,7 +74,7 @@ class JsonUtilsTest {
                     .getContextClassLoader()
                     .getResource("readFileTest.json")
                     .toURI());
-            final var accountings = utils.readJsonFile(filePath);
+            final var accountings = UTILS.readJsonFile(filePath);
             assertEquals(EXPECTED_ACCOUNTINGS, accountings);
         } catch (URISyntaxException ex) {
             throw new RuntimeException(ex);

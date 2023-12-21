@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 
 public class JsonUtils {
     private final Logger logger = Logger.getLogger(JsonUtils.class.getName());
+
     public File createJsonFile(Collection<PreparedDrinkAccounting> accountings, Path filePath) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting()
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer())
@@ -31,23 +32,25 @@ public class JsonUtils {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        logger.log(Level.INFO,"File close");
+        logger.log(Level.INFO, "File close");
         return fileJson;
     }
+
     public List<PreparedDrinkAccounting> readJsonFile(Path filePath) {
         File fileJson = filePath.toFile();
         Gson gson = new GsonBuilder().setPrettyPrinting()
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer())
                 .create();
-        Type collectionType = new TypeToken<Collection<PreparedDrinkAccounting>>(){}.getType();
+        Type collectionType = new TypeToken<Collection<PreparedDrinkAccounting>>() {
+        }.getType();
         try {
             JsonReader reader = new JsonReader(new FileReader(fileJson.getPath()));
-            logger.log(Level.INFO,"File reading begin");
+            logger.log(Level.INFO, "File reading begin");
             List<PreparedDrinkAccounting> accountings = gson.fromJson(reader, collectionType);
-            logger.log(Level.INFO,"File read");
+            logger.log(Level.INFO, "File read");
             return accountings;
         } catch (FileNotFoundException ex) {
-            logger.log(Level.SEVERE,"File Not Found");
+            logger.log(Level.SEVERE, "File Not Found");
             System.out.println(ex.getMessage());
         }
         return null;

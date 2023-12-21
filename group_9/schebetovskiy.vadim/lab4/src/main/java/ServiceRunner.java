@@ -16,13 +16,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ServiceRunner {
-    private static final Logger logger = Logger.getLogger(SolverServiceImpl.class.getName());
-    private static final JsonUtils utils = new JsonUtils();
+    private static final Logger LOGGER = Logger.getLogger(SolverServiceImpl.class.getName());
+    private static final JsonUtils UTILS = new JsonUtils();
     private static final int MAX_NUMBER_OF_ACCOUNTINGS = 10000;
     private static final String FILE_NAME = "accountings.json";
 
     public static void main(String[] args) {
-        logger.log(Level.INFO, "Solving started");
+        LOGGER.log(Level.INFO, "Solving started");
         try {
             Path filePath = Paths.get(Thread.currentThread()
                     .getContextClassLoader()
@@ -30,14 +30,14 @@ public class ServiceRunner {
                     .toURI());
 
             PreparedDrinkAccountingFactory accountingFactory = new PreparedDrinkAccountingFactory();
-            utils.createJsonFile(Stream.generate(accountingFactory::getPreparedDrinkAccounting)
+            UTILS.createJsonFile(Stream.generate(accountingFactory::getPreparedDrinkAccounting)
                     .limit(MAX_NUMBER_OF_ACCOUNTINGS)
                     .collect(Collectors.toList()), filePath);
-            logger.log(Level.FINE, "File written successfully");
+            LOGGER.log(Level.FINE, "File written successfully");
 
-            List<PreparedDrinkAccounting>  accountings= utils.readJsonFile(filePath);
+            List<PreparedDrinkAccounting> accountings = UTILS.readJsonFile(filePath);
             System.out.println();
-            logger.log(Level.FINE, "File read successfully");
+            LOGGER.log(Level.FINE, "File read successfully");
 
             SolverService solverService = new SolverServiceImpl();
             System.out.println("Для каждого напитка среднее время приготовления:\n" +
@@ -49,15 +49,14 @@ public class ServiceRunner {
             System.out.println("Напиток с наилучшим соотношением цена/время:\n" +
                     solverService.getDrinkWithTheBestRatio(accountings) + "\n");
 
-            System.out.println(accountings.size());
-            logger.log(Level.FINE, "Solved successfully");
+            LOGGER.log(Level.FINE, "Solved successfully");
 
         } catch (URISyntaxException e) {
-            logger.log(Level.SEVERE, "File " + FILE_NAME + " not found", e);
+            LOGGER.log(Level.SEVERE, "File " + FILE_NAME + " not found", e);
             System.out.println("File " + FILE_NAME + " not found");
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-        logger.log(Level.INFO, "Solving ended");
+        LOGGER.log(Level.INFO, "Solving ended");
     }
 }
