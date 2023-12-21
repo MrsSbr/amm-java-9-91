@@ -6,7 +6,7 @@ public class Smokers {
     public static void main(String[] args) {
         Random random = new Random();
         Bartender bartender = new Bartender(random);
-        Smoker weedSmoker = new Smoker(bartender.getWeedSmokerSemaphore(), "травка", random);
+        Smoker weedSmoker = new Smoker(bartender.getWeedSmokerSemaphore(), "табак", random);
         Smoker paperSmoker = new Smoker(bartender.getPaperSmokerSemaphore(), "бумага", random);
         Smoker matchesSmoker = new Smoker(bartender.getMatchesSmokerSemaphore(), "спички", random);
         bartender.setWeedSmoker(weedSmoker);
