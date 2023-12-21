@@ -26,11 +26,5 @@ public enum Drinks {
         this.name = name;
         this.price = price;
     }
-
-    public static Optional<Drinks> find(String drinkName) {
-        return Arrays.stream(values())
-                .filter(drink -> drink.name.equals(drinkName))
-                .findFirst();
-    }
 }
 
