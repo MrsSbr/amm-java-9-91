@@ -10,7 +10,7 @@ public class VoteCounter {
             candidateVotes.add(0);
         }
         for (Integer vote : votes) {
-            candidateVotes.set(vote - 1, candidateVotes.get(vote - 1) + 1);
+            candidateVotes.set(vote - 1, candidateVotes.get(vote - 1) + 1) ;
         }
         return candidateVotes;
     }

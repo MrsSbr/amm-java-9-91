@@ -9,6 +9,6 @@ public class VotingSimulator {
         for (int i = 0; i < numStudents; i++) {
             votes.add((int) (Math.random() * 12) + 1);
         }
-        return votes;
+        return votes ;
     }
 }

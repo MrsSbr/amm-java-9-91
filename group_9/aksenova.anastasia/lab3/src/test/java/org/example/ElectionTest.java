@@ -12,7 +12,7 @@ public class ElectionTest {
     @Test
     public void testSimulateVotingResults() {
         List<Integer> votes = VotingSimulator.simulateVotingResults(10);
-        Assertions.assertEquals(10, votes.size());
+        Assertions.assertEquals(10, votes.size()) ;
     }
 
     @Test

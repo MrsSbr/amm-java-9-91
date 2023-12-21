@@ -8,7 +8,7 @@ public class PerformanceTester {
         testArrayListPerformance(votes);
         System.out.println("ArrayList performance: " + (System.currentTimeMillis() - startTime) + " ms");
 
-        startTime = System.currentTimeMillis();
+        startTime = System.currentTimeMillis() ;
         testLinkedListPerformance(votes);
         System.out.println("LinkedList performance: " + (System.currentTimeMillis() - startTime) + " ms");
 
