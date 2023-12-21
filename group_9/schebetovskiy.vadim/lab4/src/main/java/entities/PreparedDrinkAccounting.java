@@ -1,6 +1,7 @@
 package entities;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class PreparedDrinkAccounting {
     public String drinkName;
@@ -46,5 +47,26 @@ public class PreparedDrinkAccounting {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PreparedDrinkAccounting that = (PreparedDrinkAccounting) o;
+        return timeOfPreparationInSeconds == that.timeOfPreparationInSeconds
+                && Double.compare(price, that.price) == 0
+                && Objects.equals(drinkName, that.drinkName)
+                && Objects.equals(dateOfPreparation, that.dateOfPreparation);
+    }
+
+    @Override
+    public String toString() {
+        return "PreparedDrinkAccounting{" +
+                "drinkName='" + drinkName + '\'' +
+                ", dateOfPreparation=" + dateOfPreparation +
+                ", timeOfPreparationInSeconds=" + timeOfPreparationInSeconds +
+                ", price=" + price +
+                '}';
     }
 }

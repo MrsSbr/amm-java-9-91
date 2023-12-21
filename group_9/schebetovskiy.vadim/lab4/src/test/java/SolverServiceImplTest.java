@@ -81,7 +81,7 @@ class SolverServiceImplTest {
         final var solverService = new SolverServiceImpl();
         Assertions.assertTrue(solverService.getTheBusiestHourOnRoutineDays(List.of()).isEmpty());
         Assertions.assertTrue(solverService.getDrinkWithTheBestRatio(List.of()).isEmpty());
-        //Assertions.assertTrue(solverService.getMostOftenOrderedDrinksByCond(List.of()).isEmpty());
+        Assertions.assertTrue(solverService.getMostOftenOrderedDrinksByCond(List.of()).isEmpty());
         Assertions.assertTrue(solverService.getAvgTimeOfPrepForEachDrink(List.of()).isEmpty());
     }
 

@@ -18,8 +18,8 @@ import java.util.stream.Stream;
 public class ServiceRunner {
     private static final Logger logger = Logger.getLogger(SolverServiceImpl.class.getName());
     private static final JsonUtils utils = new JsonUtils();
-    public static final int MAX_NUMBER_OF_ACCOUNTINGS = 10000;
-    public static final String FILE_NAME = "accountings.json";
+    private static final int MAX_NUMBER_OF_ACCOUNTINGS = 10000;
+    private static final String FILE_NAME = "accountings.json";
 
     public static void main(String[] args) {
         logger.log(Level.INFO, "Solving started");
@@ -35,7 +35,8 @@ public class ServiceRunner {
                     .collect(Collectors.toList()), filePath);
             logger.log(Level.FINE, "File written successfully");
 
-            List<PreparedDrinkAccounting> accountings = utils.readJsonFile(filePath);
+            List<PreparedDrinkAccounting>  accountings= utils.readJsonFile(filePath);
+            System.out.println();
             logger.log(Level.FINE, "File read successfully");
 
             SolverService solverService = new SolverServiceImpl();
@@ -48,6 +49,7 @@ public class ServiceRunner {
             System.out.println("Напиток с наилучшим соотношением цена/время:\n" +
                     solverService.getDrinkWithTheBestRatio(accountings) + "\n");
 
+            System.out.println(accountings.size());
             logger.log(Level.FINE, "Solved successfully");
 
         } catch (URISyntaxException e) {

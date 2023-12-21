@@ -55,12 +55,18 @@ public class SolverServiceImpl implements SolverService {
                         entry -> entry.drinkName,
                         Collectors.counting()
                 ));
-        Long max = Collections.max(map.values());
-        return map.entrySet()
+        Optional<Long> max = map.entrySet()
                 .stream()
-                .filter(entry -> Objects.equals(entry.getValue(), max))
-                .map(Map.Entry::getKey)
-                .toList();
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getValue);
+        if (max.isPresent()){
+            return map.entrySet()
+                    .stream()
+                    .filter(entry -> Objects.equals(entry.getValue(), max.get()))
+                    .map(Map.Entry::getKey)
+                    .toList();
+        }
+        return List.of();
     }
 
     // Найти напиток с наилучшим соотношением цена/время
