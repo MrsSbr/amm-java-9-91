@@ -1,14 +1,14 @@
 package org.example;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class VotingSimulator {
 
     public static List<Integer> simulateVotingResults(int numStudents) {
-        List<Integer> votes = new ArrayList<>();
-        for (int i = 0; i < numStudents; i++) {
-            votes.add((int) (Math.random() * 12) + 1);
-        }
-        return votes ;
+        return IntStream.range(0, numStudents)
+                .mapToObj(i -> (int) (Math.random() * 12) + 1)
+                .collect(Collectors.toList());
     }
 }

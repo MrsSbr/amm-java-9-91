@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Election {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in) ;
 
         List<Integer> votes = VotingSimulator.simulateVotingResults(300);
 
