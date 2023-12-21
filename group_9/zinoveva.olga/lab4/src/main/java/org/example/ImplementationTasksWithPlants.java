@@ -41,7 +41,10 @@ public class ImplementationTasksWithPlants {
     //Найти цветок, в который вылили больше всего воды.
     public String findPlantWithMaxWater(List<DataPlant> listDataPlants) {
         Map<String, Double> pairPlantAllWater = new HashMap<>();
-        listDataPlants .forEach(x -> pairPlantAllWater.put(x.nameFlower(), pairPlantAllWater.get(x.nameFlower()) + x.amountOfWatering()));
+        listDataPlants.forEach(x -> {
+            double value = pairPlantAllWater.get(x.nameFlower()) + x.amountOfWatering();
+            pairPlantAllWater.put(x.nameFlower(), value);
+        });
         return pairPlantAllWater.entrySet()
                 .stream()
                 .max(Map.Entry.comparingByValue())
