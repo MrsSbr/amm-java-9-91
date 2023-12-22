@@ -30,6 +30,7 @@ public class BarbershopDemonstration {
         Thread.sleep(4000);
 
         for (var clientThreadNew : clientThreadsNew) {
+            clientThreadNew.setName(clientThreadNew.getName());
             clientThreadNew.start();
         }
 

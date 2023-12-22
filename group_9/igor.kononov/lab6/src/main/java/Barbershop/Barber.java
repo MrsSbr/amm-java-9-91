@@ -1,6 +1,7 @@
 package Barbershop;
 
 import lombok.Data;
+import lombok.SneakyThrows;
 
 import static java.lang.Thread.sleep;
 
@@ -14,33 +15,32 @@ public class Barber implements Runnable {
         this.reception = reception;
     }
 
+    @SneakyThrows
     @Override
     public void run() {
-
         while (true) {
             var workPlace = reception.getWorkplace();
             synchronized (workPlace) {
+                workPlace.setClient(null);
                 workPlace.setFree(true);
                 workPlace.notify();
             }
 
             var freeReception = true;
             var clientQueue = reception.getClientQueue();
+
             synchronized (clientQueue) {
                 if (!clientQueue.isEmpty()) {
                     freeReception = false;
                     currentClient = clientQueue.poll();
-                    clientQueue.notifyAll();
+                    clientQueue.notify();
                 }
             }
+
             synchronized (workPlace) {
                 if (freeReception) {
                     System.out.println("Барбер спит");
-                    try {
-                        workPlace.wait();
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
+                    workPlace.wait();
                     currentClient = workPlace.getClient();
                 }
             }
@@ -48,15 +48,8 @@ public class Barber implements Runnable {
             workPlace.setClient(currentClient);
             workPlace.setFree(false);
             System.out.println("Барбер работает с " + currentClient.getName());
-            try {
-                sleep(WORK_TIME);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
+            sleep(WORK_TIME);
             System.out.println("Барбер подстриг " + currentClient.getName());
-            workPlace.setFree(true);
-            workPlace.setClient(null);
         }
     }
 }

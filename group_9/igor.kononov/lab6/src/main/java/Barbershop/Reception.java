@@ -2,9 +2,9 @@ package Barbershop;
 
 import lombok.Data;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
-import java.util.concurrent.LinkedBlockingQueue;
 
 @Data
 public class Reception {
@@ -14,7 +14,7 @@ public class Reception {
 
     public Reception(int queueSize) {
         this.queueSize = queueSize;
-        clientQueue = new LinkedBlockingQueue<>(this.queueSize);
+        clientQueue = new LinkedList<>();
         workplace = new Workplace();
     }
 

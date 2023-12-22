@@ -1,20 +1,23 @@
 package Barbershop;
 
 import lombok.Data;
+import lombok.SneakyThrows;
 
-import static java.lang.Thread.sleep;
 
 @Data
 public class Client implements Runnable {
-    private static final int WAIT = 5000;
+    private static final int WAIT = 1000;
     private final String name;
     private final Reception reception;
     private boolean tonsured = false;
 
+
+    @SneakyThrows
     @Override
     public void run() {
+
         try {
-            sleep(WAIT);
+            Thread.sleep(WAIT);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -29,17 +32,15 @@ public class Client implements Runnable {
                 workPlace.notify();
             }
         }
+
         if (!tonsured) {
             var clientQueue = reception.getClientQueue();
             synchronized (clientQueue) {
                 if (clientQueue.size() < reception.getQueueSize()) {
                     reception.addClient(this);
                     System.out.println(name + " встал в очередь");
-
-                    try {
+                    while (clientQueue.contains(this)) {
                         clientQueue.wait();
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
                     }
                 } else {
                     System.out.println(name + " ушел, мест нет");
