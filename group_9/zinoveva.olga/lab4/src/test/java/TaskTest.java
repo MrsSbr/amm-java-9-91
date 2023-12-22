@@ -48,11 +48,12 @@ public class TaskTest {
 
     @Test
     public void testAveragePurityOfIrrigationOnEmptyList() {
-        assertEquals(Map.of(), itwp.averagePurityOfIrrigation(emptyDataPlants));
+        //assertEquals(Map.of(), itwp.averagePurityOfIrrigation(emptyDataPlants));
+        assertEquals(0, itwp.averagePurityOfIrrigation(emptyDataPlants).size());
     }
 
     @Test
     public void testFindNamesPlantByTypeFertilizerOnEmptyList() {
-        assertEquals(Map.of(), itwp.averagePurityOfIrrigation(emptyDataPlants));
+        assertEquals(0, itwp.findNamesPlantByTypeFertilizer(emptyDataPlants).size());
     }
 }

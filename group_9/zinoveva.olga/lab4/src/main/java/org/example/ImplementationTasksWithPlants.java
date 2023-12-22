@@ -18,13 +18,8 @@ public class ImplementationTasksWithPlants {
         Map<String, Double> pairPlantIrrigation = new HashMap<>();
         Map<String, Integer> pairPlantCount = new HashMap<>();
         listDataPlants.forEach(x -> {
-            if (pairPlantIrrigation.containsKey(x.nameFlower())) {
-                pairPlantCount.put(x.nameFlower(), pairPlantCount.get(x.nameFlower()) + 1);
-                pairPlantIrrigation.put(x.nameFlower(), pairPlantIrrigation.get(x.nameFlower()) + x.amountOfWatering());
-            } else {
-                pairPlantIrrigation.put(x.nameFlower(), x.amountOfWatering());
-                pairPlantCount.put(x.nameFlower(), 1);
-            }
+            pairPlantCount.merge(x.nameFlower(), 1, Integer::sum);
+            pairPlantIrrigation.merge(x.nameFlower(), x.amountOfWatering(), Double::sum);
         });
         pairPlantIrrigation.forEach((key, value) -> pairPlantIrrigation.put(key, value / pairPlantCount.get(key)));
         return pairPlantIrrigation;
@@ -52,12 +47,13 @@ public class ImplementationTasksWithPlants {
         LOGGER.info("Выполнение findPlantWithMaxWater");
         Map<String, Double> pairPlantAllWater = new HashMap<>();
         listDataPlants.forEach(x -> {
-            if (pairPlantAllWater.containsKey(x.nameFlower())) {
+           /* if (pairPlantAllWater.containsKey(x.nameFlower())) {
                 double value = pairPlantAllWater.get(x.nameFlower()) + x.amountOfWatering();
                 pairPlantAllWater.put(x.nameFlower(), value);
             } else {
                 pairPlantAllWater.put(x.nameFlower(), x.amountOfWatering());
-            }
+            }*/
+            pairPlantAllWater.merge(x.nameFlower(), x.amountOfWatering(), Double::sum);
         });
         return pairPlantAllWater.entrySet()
                 .stream()
