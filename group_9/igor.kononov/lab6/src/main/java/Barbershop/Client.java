@@ -1,8 +1,6 @@
 package Barbershop;
 
 import lombok.Data;
-import lombok.SneakyThrows;
-
 
 @Data
 public class Client implements Runnable {
@@ -12,7 +10,6 @@ public class Client implements Runnable {
     private boolean tonsured = false;
 
 
-    @SneakyThrows
     @Override
     public void run() {
 
@@ -35,27 +32,12 @@ public class Client implements Runnable {
 
         if (!tonsured) {
             var clientQueue = reception.getClientQueue();
-            if (clientQueue.size() < reception.getQueueSize()) {
+            if (clientQueue.size() != reception.getQueueSize()) {
                 reception.addClient(this);
                 System.out.println(name + " встал в очередь");
             } else {
                 System.out.println(name + " ушел, мест нет");
             }
         }
-
-//        if (!tonsured) {
-//            var clientQueue = reception.getClientQueue();
-//            synchronized (clientQueue) {
-//                if (clientQueue.size() < reception.getQueueSize()) {
-//                    reception.addClient(this);
-//                    System.out.println(name + " встал в очередь");
-//                    while (clientQueue.contains(this)) {
-//                        clientQueue.wait();
-//                    }
-//                } else {
-//                    System.out.println(name + " ушел, мест нет");
-//                }
-//            }
-//        }
     }
 }

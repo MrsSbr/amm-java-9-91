@@ -2,9 +2,7 @@ package Barbershop;
 
 import lombok.Data;
 
-import java.util.LinkedList;
 import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 

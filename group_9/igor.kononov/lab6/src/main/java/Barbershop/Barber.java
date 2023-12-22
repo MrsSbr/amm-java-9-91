@@ -15,6 +15,7 @@ public class Barber implements Runnable {
         this.reception = reception;
     }
 
+
     @SneakyThrows
     @Override
     public void run() {
@@ -28,20 +29,11 @@ public class Barber implements Runnable {
 
             var freeReception = true;
 
-
             var clientQueue = reception.getClientQueue();
             if (!clientQueue.isEmpty()) {
                 freeReception = false;
                 currentClient = clientQueue.poll();
             }
-//            var clientQueue = reception.getClientQueue();
-//            synchronized (clientQueue) {
-//                if (!clientQueue.isEmpty()) {
-//                    freeReception = false;
-//                    currentClient = clientQueue.poll();
-//                    clientQueue.notify();
-//                }
-//            }
 
             synchronized (workPlace) {
                 if (freeReception) {
