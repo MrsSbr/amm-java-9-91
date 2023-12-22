@@ -22,13 +22,13 @@ class SerializerTest {
     private final Serializer serializer = new Serializer();
     @Test
     void simpleObjectSerializeTest() {
-        var cat = new Cat("Tom", 5, Gender.MALE, "Persian", false);
+        var cat = new Cat("Tom\"", 5, Gender.MALE, "Persian", false);
         var salaryRecord = new SalaryRecord("Vrn", "Kononov Igor", 60000);
 
         var jsonCat = serializer.serializeJSON(cat);
         var jsonSalaryRecord = serializer.serializeJSON(salaryRecord);
 
-        assertEquals("{\"name\":\"Tom\",\"age\":5,\"gender\":\"MALE\",\"breed\":\"Persian\",\"defertilized\":false}", jsonCat);
+        assertEquals("{\"name\":\"Tom\\\"\",\"age\":5,\"gender\":\"MALE\",\"breed\":\"Persian\",\"defertilized\":false}", jsonCat);
         assertEquals("{\"department\":\"Vrn\",\"fullName\":\"Kononov Igor\",\"salary\":60000}", jsonSalaryRecord);
     }
 

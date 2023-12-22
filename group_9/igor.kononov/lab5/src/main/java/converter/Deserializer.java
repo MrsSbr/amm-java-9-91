@@ -133,8 +133,12 @@ public class Deserializer {
         return Enum.valueOf((Class<Enum>) objType, json.substring(1, json.length() - 1));
     }
 
+    private String decodeString(String string) {
+        return string.replace("\\\"", "\"");
+    }
+
     private String deserializeString(String json) {
-        return json.substring(1, json.length() - 1);
+        return decodeString(json.substring(1, json.length() - 1));
     }
 
     private Object deserializeArray(String json, Class<?> objType) {

@@ -45,12 +45,17 @@ public class Serializer {
         return serializeObject(obj);
     }
 
+    private String encodeString(String string) {
+        return string.replace("\"", "\\\"");
+    }
+
+
     private String serializeStringEnum(Object obj) {
         var stringBuilder = new StringBuilder();
 
         return stringBuilder
                 .append("\"")
-                .append(obj.toString())
+                .append(encodeString(obj.toString()))
                 .append("\"")
                 .toString();
     }
