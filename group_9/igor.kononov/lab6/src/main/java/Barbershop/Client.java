@@ -35,17 +35,27 @@ public class Client implements Runnable {
 
         if (!tonsured) {
             var clientQueue = reception.getClientQueue();
-            synchronized (clientQueue) {
-                if (clientQueue.size() < reception.getQueueSize()) {
-                    reception.addClient(this);
-                    System.out.println(name + " встал в очередь");
-                    while (clientQueue.contains(this)) {
-                        clientQueue.wait();
-                    }
-                } else {
-                    System.out.println(name + " ушел, мест нет");
-                }
+            if (clientQueue.size() < reception.getQueueSize()) {
+                reception.addClient(this);
+                System.out.println(name + " встал в очередь");
+            } else {
+                System.out.println(name + " ушел, мест нет");
             }
         }
+
+//        if (!tonsured) {
+//            var clientQueue = reception.getClientQueue();
+//            synchronized (clientQueue) {
+//                if (clientQueue.size() < reception.getQueueSize()) {
+//                    reception.addClient(this);
+//                    System.out.println(name + " встал в очередь");
+//                    while (clientQueue.contains(this)) {
+//                        clientQueue.wait();
+//                    }
+//                } else {
+//                    System.out.println(name + " ушел, мест нет");
+//                }
+//            }
+//        }
     }
 }

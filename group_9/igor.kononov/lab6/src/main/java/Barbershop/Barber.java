@@ -27,15 +27,21 @@ public class Barber implements Runnable {
             }
 
             var freeReception = true;
-            var clientQueue = reception.getClientQueue();
 
-            synchronized (clientQueue) {
-                if (!clientQueue.isEmpty()) {
-                    freeReception = false;
-                    currentClient = clientQueue.poll();
-                    clientQueue.notify();
-                }
+
+            var clientQueue = reception.getClientQueue();
+            if (!clientQueue.isEmpty()) {
+                freeReception = false;
+                currentClient = clientQueue.poll();
             }
+//            var clientQueue = reception.getClientQueue();
+//            synchronized (clientQueue) {
+//                if (!clientQueue.isEmpty()) {
+//                    freeReception = false;
+//                    currentClient = clientQueue.poll();
+//                    clientQueue.notify();
+//                }
+//            }
 
             synchronized (workPlace) {
                 if (freeReception) {

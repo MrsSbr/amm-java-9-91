@@ -4,6 +4,8 @@ import lombok.Data;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 
 @Data
@@ -14,7 +16,8 @@ public class Reception {
 
     public Reception(int queueSize) {
         this.queueSize = queueSize;
-        clientQueue = new LinkedList<>();
+        //clientQueue = new ConcurrentLinkedQueue<>();
+        clientQueue = new LinkedBlockingQueue<>(queueSize);
         workplace = new Workplace();
     }
 
