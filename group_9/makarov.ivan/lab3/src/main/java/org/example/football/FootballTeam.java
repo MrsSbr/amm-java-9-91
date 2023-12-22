@@ -1,12 +1,9 @@
 package org.example.football;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class FootballTeam {
     private List<FootballPlayer> players;
@@ -48,26 +45,21 @@ public class FootballTeam {
         return players.stream()
                 .filter(player -> player.getVotes() == maxVotes)
                 .map(FootballPlayer::getNumber)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<Integer> findPlayersWithNoVotes() {
         return players.stream()
                 .filter(player -> player.getVotes() == 0)
                 .map(FootballPlayer::getNumber)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<Integer> findVotedPlayers() {
         return players.stream()
                 .filter(player -> player.getVotes() > 0)
                 .map(FootballPlayer::getNumber)
-                .collect(Collectors.toList());
+                .toList();
     }
 
-    public static void main(String[] args) {
-        FootballTeam footballTeam = new FootballTeam(22);
-        footballTeam.collectFanVotes(3000);
-        footballTeam.displayResults();
-    }
 }
