@@ -1,0 +1,5 @@
+Rose;Flowering;Medium;20.0;2023-01-15
+Tulip;Flowering;Small;15.0;2023-02-20
+Sunflower;Non-Flowering;Large;25.0;2023-03-10
+Lily;Flowering;Medium;18.0;2023-04-15
+Daisy;Flowering;Small;12.0;2023-05-25
