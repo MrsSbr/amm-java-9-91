@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Demo {
-    private static final Logger LOGGER = Logger.getLogger(Demo.class.getSimpleName());
+    private static final Logger logger = Logger.getLogger(Demo.class.getSimpleName());
     private static final Path PATH = Path.of("src", "main", "resources", "deals.txt");
 
     public static void main(String[] args) {
@@ -25,13 +25,11 @@ public class Demo {
             Map<String, Double> incomeByClient = dealAnalysis.calculateIncomeByClient();
             System.out.println("Статистика по доходу от каждого клиента: ");
 
-            incomeByClient.forEach((client, income) -> {
-                System.out.println("Клиент: " + client + ", доход: " + income);
-            });
+            incomeByClient.forEach((client, income) -> System.out.println("Клиент: " + client + ", доход: " + income));
 
             System.out.println("Самый прибыльный месяц за последний год:" + dealAnalysis.findMostProfitableMonthLastYear());
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.SEVERE, "Ошибка чтения файла: ", e.getMessage());
         }
     }
 }

@@ -6,9 +6,16 @@ import ru.nikitadenisov.deals.DealAnalysis;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DealAnalysisTest {
     private static final List<Deal> DEALS = Arrays.asList(
