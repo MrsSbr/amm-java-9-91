@@ -21,7 +21,7 @@ class DeserializerTest {
 
     @Test
     void simpleObjectDeserializeTest() {
-        var catJson = "{\"name\":\"Tom\\\"\",\"age\":5,\"gender\":\"MALE\",\"breed\":\"Persian\",\"defertilized\":false}";
+        var catJson = "{\"name\":\"Tom\\\"\",\"age\":5,\"gender\":\"MALE\",\"breed\":\"Per\\\"sian\",\"defertilized\":false}";
         var salaryRecordJson = "{\"department\":\"Vrn\",\"fullName\":\"Kononov Igor\",\"salary\":60000}";
 
         var cat = (Cat) deserializer.DeserializeJSON(catJson, Cat.class);
@@ -30,7 +30,7 @@ class DeserializerTest {
         assertEquals("Tom\"", cat.getName());
         assertEquals(5, cat.getAge());
         assertEquals(Gender.MALE, cat.getGender());
-        assertEquals("Persian", cat.getBreed());
+        assertEquals("Per\"sian", cat.getBreed());
         assertFalse(cat.isDefertilized());
 
         assertEquals("Vrn", salaryRecord.getDepartment());
