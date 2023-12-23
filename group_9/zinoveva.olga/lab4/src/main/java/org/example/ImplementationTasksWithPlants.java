@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 public class ImplementationTasksWithPlants {
     private static final Logger LOGGER = LogManager.getLogger(FileReader.class);
 
-    //Для каждого цветка найти среднюю чистоту полива.
+    //Для каждого цветка найти среднюю частоту полива.
     public Map<String, Double> averagePurityOfIrrigation(List<DataPlant> listDataPlants) {
         LOGGER.info("Выполнение averagePurityOfIrrigation");
         Map<String, Double> pairPlantIrrigation = new HashMap<>();
