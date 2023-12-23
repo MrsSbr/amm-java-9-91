@@ -3,7 +3,8 @@ package org.example;
 import benchmark.Benchmark;
 import service.IService;
 import service.Service;
-import statistics.Statistics;
+import statistics.MethodStat;
+import statistics.Stat;
 
 /*
 Создать универсальный прокси, который будет для каждого метода в интерфейсе с аннотацией @Benchmarked
@@ -32,7 +33,7 @@ public class Demonstration {
         trackedService.do1();
         trackedService.do2();
 
-        Statistics statistics = Benchmark.getStatistics(trackedService);
-        statistics.print(System.out);
+        Stat stat = Benchmark.getStatistics(trackedService);
+        stat.print(System.out);
     }
 }

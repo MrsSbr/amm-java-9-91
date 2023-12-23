@@ -1,19 +1,22 @@
 package benchmark;
 
-import statistics.Statistics;
+import statistics.MethodStat;
+import statistics.FullStat;
 
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BenchmarkHandler implements InvocationHandler {
 
     private final Object object;
-    private final HashMap<Object, Statistics> statistic;
+    private final FullStat fullStat;
 
-    public BenchmarkHandler(Object object, HashMap<Object, Statistics> statistic) {
+    public BenchmarkHandler(Object object, FullStat fullStat) {
         this.object = object;
-        this.statistic = statistic;
+        this.fullStat = fullStat;
     }
 
     @Override
@@ -22,7 +25,14 @@ public class BenchmarkHandler implements InvocationHandler {
         Object result = method.invoke(object, args);
         long endTime = System.nanoTime();
         if (method.isAnnotationPresent(Benchmarked.class)) {
-            statistic.computeIfAbsent(proxy, k -> new Statistics(endTime - startTime));
+            ArrayList<MethodStat> list = fullStat.getStatistics().get(proxy);
+            if (list == null) {
+                ArrayList<MethodStat> listNew = new ArrayList<>();
+                fullStat.getStatistics().put(proxy, listNew);
+                listNew.add(new MethodStat(endTime - startTime, method));
+            } else {
+                list.add(new MethodStat(endTime - startTime, method));
+            }
         }
         return result;
     }

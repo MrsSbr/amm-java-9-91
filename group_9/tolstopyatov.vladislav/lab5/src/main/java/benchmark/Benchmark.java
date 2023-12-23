@@ -1,12 +1,12 @@
 package benchmark;
 
-import statistics.Statistics;
+import statistics.FullStat;
+import statistics.Stat;
 
 import java.lang.reflect.Proxy;
-import java.util.HashMap;
 
 public class Benchmark {
-    private static final HashMap<Object, Statistics> statistic = new HashMap<>();
+    private static final FullStat FULL_STAT = new FullStat();
 
     @SuppressWarnings("unchecked")
     public static <T> T track(T service) {
@@ -14,10 +14,10 @@ public class Benchmark {
         return (T) Proxy.newProxyInstance(
                 clazz.getClassLoader(),
                 clazz.getInterfaces(),
-                new BenchmarkHandler(service, statistic));
+                new BenchmarkHandler(service, FULL_STAT));
     }
 
-    public static Statistics getStatistics(Object trackedService) {
-        return statistic.get(trackedService);
+    public static Stat getStatistics(Object trackedService) {
+        return new Stat(FULL_STAT.getStatistics().get(trackedService));
     }
 }
