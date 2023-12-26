@@ -1,14 +1,15 @@
 package org.example;
 
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class NumberThread extends Thread {
-    private final NumberProcessor numberProcessor;
+    AtomicInteger totalSum = new AtomicInteger(0);
     private final Scanner scanner;
     private int threadSum;
 
-    public NumberThread(NumberProcessor numberProcessor, Scanner scanner) {
-        this.numberProcessor = numberProcessor;
+    public NumberThread(AtomicInteger totalSum, Scanner scanner) {
+        this.totalSum = totalSum;
         this.scanner = scanner;
         threadSum = 0;
     }
@@ -29,7 +30,7 @@ public class NumberThread extends Thread {
                 break;
             }
             threadSum = threadSum + input;
-            numberProcessor.processNumber(input);
+            totalSum.addAndGet(input);;
         }
     }
 }

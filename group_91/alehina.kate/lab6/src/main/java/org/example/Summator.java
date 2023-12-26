@@ -1,12 +1,13 @@
 package org.example;
 
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Summator {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        NumberProcessor numberProcessor = new NumberProcessor();
+        AtomicInteger totalSum = new AtomicInteger(0);
 
         System.out.println("Введите количество потоков: ");
         int countThreds = scanner.nextInt();
@@ -15,7 +16,7 @@ public class Summator {
         System.out.println("Введите числа (для окончания одного из потоков введите 0):");
 
         for (int i  = 0; i < countThreds; i++) {
-            threads[i] = new NumberThread(numberProcessor, scanner);
+            threads[i] = new NumberThread(totalSum, scanner);
             threads[i].start();
         }
 
@@ -37,6 +38,6 @@ public class Summator {
         }
 
         System.out.println("Сумма сумм всех потоков: " + sumThreads);
-        System.out.println("Общая сумма: " + numberProcessor.getTotalSum());
+        System.out.println("Общая сумма: " + totalSum);
     }
 }
