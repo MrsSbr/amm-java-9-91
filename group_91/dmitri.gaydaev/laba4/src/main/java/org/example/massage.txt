@@ -1,0 +1,10 @@
+01.01.2023 08:00:00;Alice;Hello, Bob!
+01.01.2023 08:05:00;Bob;Hi Alice! How are you?
+01.01.2023 08:10:00;Alice;I'm good, thanks! What about you?
+02.01.2023 09:30:00;Charlie;Hey everyone! What's up?
+02.01.2023 09:35:00;Alice;Hi Charlie! We're just chatting.
+02.01.2023 09:40:00;Bob;Yeah, nothing much. How about you?
+02.01.2023 09:45:00;Charlie;I'm doing well, thanks!
+03.01.2023 12:00:00;Alice;By the way, have you seen this 😊 emoji?
+03.01.2023 12:05:00;Bob;Yes, I use it quite often! 😊
+03.01.2023 12:10:00;Charlie;It's a nice emoji indeed! 😊
