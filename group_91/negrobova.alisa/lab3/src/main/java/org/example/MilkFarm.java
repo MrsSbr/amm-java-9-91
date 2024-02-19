@@ -4,7 +4,6 @@ import org.example.model.MilkRecord;
 import org.example.service.MilkRecordService;
 import org.example.service.DataGenerator;
 import org.example.service.TaskExecutor;
-
 import java.util.*;
 //Фермер ведет статистику работы своего коровника, каждый день записывая дату, количество корма, съеденного коровами,
 //и количество молока
@@ -21,6 +20,7 @@ import java.util.*;
 //В задаче должны использоваться элементы функционального программирования
 //Задача должна быть представлена в виде maven-проекта
 //Задача должна быть покрыта тестами с помощью JUnit
+
 public class MilkFarm {
     public static void main(String[] args) {
         final int RECORDS_COUNT = 8517;
