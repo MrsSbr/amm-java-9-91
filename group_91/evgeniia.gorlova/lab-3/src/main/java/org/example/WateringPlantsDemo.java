@@ -17,3 +17,4 @@ public class WateringPlantsDemo {
         System.out.println("пример 3: " + wateringService.calculateSteps(plants3, capacity3));
     }
 }
+
