@@ -1,6 +1,5 @@
 package org.courses;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -32,9 +31,14 @@ public class ContainerAnalysis {
                 time = System.nanoTime();
                 appraiser.TypesOfCompaniesConductedOverThePastYear();
                 timeMethods.set(1, timeMethods.get(1) + System.nanoTime() - time);
-                time = System.nanoTime();
-                appraiser.BestCampaignInTermsOfBudgetCoverageRatio();
-                timeMethods.set(2, timeMethods.get(2) + System.nanoTime() - time);
+                try {
+                    time = System.nanoTime();
+                    appraiser.BestCampaignInTermsOfBudgetCoverageRatio();
+                    timeMethods.set(2, timeMethods.get(2) + System.nanoTime() - time);
+                } catch (RuntimeException e) {
+                    System.out.println("Во время теста №" + countTest + " на вход были поданы некорректные данные!");
+                }
+
             }
             System.out.println("Время работы контейнера " + namesCollections.get(indexCollection) + " в методе " +
                     namesMethods.get(0) + " составило в среднем " + timeMethods.get(0) / countTest + " наносекунд");

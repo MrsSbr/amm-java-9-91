@@ -1,7 +1,6 @@
 package org.courses;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class MarketingCampaignBuilder {
     private LocalDate dateStart;

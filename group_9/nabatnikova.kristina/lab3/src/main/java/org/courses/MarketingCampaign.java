@@ -1,7 +1,6 @@
 package org.courses;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class MarketingCampaign {

@@ -34,7 +34,7 @@ public class EvaluationMarketingCompanies {
         }
         marketingCampaigns.stream().forEach(campaign -> {
             Optional<MarketingCampaign> firstCampaignOptional = campaigns.stream().findFirst();
-            if (firstCampaignOptional.isPresent()) {
+            if (firstCampaignOptional.isPresent()) { //проверяет есть ли в campaigns значение
                 try {
                     MarketingCampaign firstCampaign = firstCampaignOptional.get();
                     double bestRatio = firstCampaign.getBudget().doubleValue() / firstCampaign.getCoverage().doubleValue();
