@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class RandomSumThreads {
     static final List<Integer> numbersPool = Collections.synchronizedList(new ArrayList<>());
-    public static volatile boolean inputFinished = false; // Флаг для индикации завершения ввода
+    public static AtomicBoolean inputFinished = new AtomicBoolean(false); // Флаг для индикации завершения ввода
 
     public static void main(String[] args) {
         AtomicInteger totalSum = new AtomicInteger(0);
@@ -26,7 +27,7 @@ public class RandomSumThreads {
             while (true) {
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("stop")) {
-                    inputFinished = true;
+                    inputFinished.set(true);
                     break;
                 }
                 try {

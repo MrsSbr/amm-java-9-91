@@ -17,7 +17,7 @@ class RandomSumThreadsTest {
         RandomSumThreads.numbersPool.add(5);
         RandomSumThreads.numbersPool.add(5);
         RandomSumThreads.numbersPool.add(5);
-        RandomSumThreads.inputFinished = true; // Имитация завершения ввода
+        RandomSumThreads.inputFinished.set(true); // Имитация завершения ввода
 
         AtomicInteger totalSum = new AtomicInteger(0);
         List<SumThread> threads = new ArrayList<>();

@@ -11,7 +11,7 @@ class SumThreadTest {
     @BeforeEach
     public void setup() {
         RandomSumThreads.numbersPool.clear(); // Очищаем пул перед каждым тестом
-        RandomSumThreads.inputFinished = false; // Убедимся, что флаг ввода сброшен
+        RandomSumThreads.inputFinished.set(false); // Убедимся, что флаг ввода сброшен
     }
 
     @Test
@@ -19,7 +19,7 @@ class SumThreadTest {
         RandomSumThreads.numbersPool.add(1);
         RandomSumThreads.numbersPool.add(2);
         RandomSumThreads.numbersPool.add(3);
-        RandomSumThreads.inputFinished = true; // Имитация завершения ввода
+        RandomSumThreads.inputFinished.set(true);// Имитация завершения ввода
 
         AtomicInteger totalSum = new AtomicInteger(0);
         SumThread sumThread = new SumThread(totalSum);
@@ -30,7 +30,7 @@ class SumThreadTest {
     }
     @Test
     public void testSumThreadCompletesWithEmptyList() throws InterruptedException {
-        RandomSumThreads.inputFinished = true; // Имитация завершения ввода
+        RandomSumThreads.inputFinished.set(true); // Имитация завершения ввода
 
         AtomicInteger totalSum = new AtomicInteger(0);
         SumThread sumThread = new SumThread(totalSum);

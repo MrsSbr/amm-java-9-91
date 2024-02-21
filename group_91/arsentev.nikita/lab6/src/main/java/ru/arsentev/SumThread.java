@@ -14,7 +14,7 @@ class SumThread extends Thread {
 
     @Override
     public void run() {
-        while (!RandomSumThreads.inputFinished || !numbersPool.isEmpty()) {
+        while (!RandomSumThreads.inputFinished.get() || !numbersPool.isEmpty()) {
             Integer number = null;
             synchronized (numbersPool) {
                 if (!numbersPool.isEmpty()) {
