@@ -1,13 +1,12 @@
 package ru.arsentev.solution;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.gson.JsonSyntaxException;
+import ru.arsentev.deserializer.JsonManualDeserializer;
 import ru.arsentev.entities.Cat;
-import ru.arsentev.deserializer.MethodsDeserializer;
 
 public class CheckDeserializeSolution {
     private static final String jsonString1;
     private static final String jsonString2;
+    private static final String jsonString3;
 
     static {
         jsonString1 = """
@@ -21,48 +20,35 @@ public class CheckDeserializeSolution {
                 }""";
         jsonString2 = """
                 {
-                  "name": "Vasya",
+                  "name": "Vas\"ya",
                   "age": "3",
                   "weight": "2.0",
                   "color": "BLUE",
                   "gender": "FEMALE",
                   "isPleased": false
                 }""";
+        jsonString3 = """
+                {
+                  "name": "Ivano",
+                  "age": "10",
+                  "weight": "12.5",
+                  "color": "BLACK",
+                  "gender": "MALE",
+                  "isPleased": true
+                }""";
     }
 
-    public static void checkCatDeserializeJsonStdCatMethod() {
-        System.out.println("CatDeserializeJsonStdCatMethod:");
+    public static void checkManualDeserializer() {
+        System.out.println("ManualDeserializer:");
         try {
             System.out.println(jsonString1);
-            System.out.println(MethodsDeserializer.catDeserializeJsonStdCatMethod(jsonString1));
+            System.out.println(JsonManualDeserializer.deserialize(jsonString1, Cat.class));
             System.out.println(jsonString2);
-            System.out.println(MethodsDeserializer.catDeserializeJsonStdCatMethod(jsonString2));
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static void checkCatDeserializeBuilderMethod() {
-        try {
-            System.out.println("CatDeserializeJsonStdCatMethod:");
-            System.out.println(jsonString1);
-            System.out.println(MethodsDeserializer.catDeserializeBuilderMethod(jsonString1));
-            System.out.println(jsonString2);
-            System.out.println(MethodsDeserializer.catDeserializeBuilderMethod(jsonString2));
-        } catch (JsonSyntaxException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static void checkTemplateDeserializeMethod() {
-        System.out.println("TemplateDeserializeMethod:");
-        try {
-            System.out.println(jsonString1);
-            System.out.println(MethodsDeserializer.templateMyDeserializeMethod(jsonString1, Cat.class));
-            System.out.println(jsonString2);
-            System.out.println(MethodsDeserializer.templateMyDeserializeMethod(jsonString2, Cat.class));
+            System.out.println(JsonManualDeserializer.deserialize(jsonString2, Cat.class));
+            System.out.println(jsonString3);
+            System.out.println(JsonManualDeserializer.deserialize(jsonString3, Cat.class));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println(e.getLocalizedMessage());
         }
     }
 }

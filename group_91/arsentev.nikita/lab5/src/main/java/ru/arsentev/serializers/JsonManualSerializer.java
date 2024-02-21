@@ -5,6 +5,8 @@ import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 public class JsonManualSerializer {
 
     public static String serialize(Object object) throws IllegalAccessException {
@@ -12,8 +14,10 @@ public class JsonManualSerializer {
         for (Field field : object.getClass().getDeclaredFields()) {
             field.setAccessible(true);
             Object value = field.get(object);
-            if (value instanceof Number || value instanceof Enum || value instanceof String) {
+            if (value instanceof Number || value instanceof Enum) {
                 value = "\"" + value + "\"";
+            } else if (value instanceof String) {
+                value = "\"" + StringEscapeUtils.escapeJava(value.toString()) + "\"";
             }
             jsonMap.put(field.getName(), value);
         }
