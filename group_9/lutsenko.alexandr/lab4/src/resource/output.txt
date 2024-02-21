@@ -1,0 +1,3 @@
+Courier with most restaurants: Courier1
+Restaurant with most dishes last year: Restaurant2
+Month with most delivery time: FEBRUARY
