@@ -28,6 +28,7 @@ class SumThreadTest {
 
         assertEquals(6, sumThread.getLocalSum()); // Проверяем, что сумма чисел корректна
     }
+
     @Test
     public void testSumThreadCompletesWithEmptyList() throws InterruptedException {
         RandomSumThreads.inputFinished.set(true); // Имитация завершения ввода
