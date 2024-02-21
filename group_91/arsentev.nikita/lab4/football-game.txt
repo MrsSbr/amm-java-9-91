@@ -1,0 +1,10 @@
+Arsenal;Chelsea;1:1
+Manchester City;Paris Saint-Germain;0:0
+Arsenal;Juventus;1:0
+Manchester United;Real Madrid;1:1
+Barcelona;Arsenal;1:0
+Arsenal;Paris Saint-Germain;1:0
+Liverpool;Real Madrid;1:1
+Chelsea;Bayern Munich;1:0
+Arsenal;Manchester United;1:1
+Juventus;Manchester City;1:0
