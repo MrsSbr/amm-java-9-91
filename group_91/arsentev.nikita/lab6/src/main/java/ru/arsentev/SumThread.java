@@ -1,35 +1,33 @@
 package ru.arsentev;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-import static ru.arsentev.RandomSumThreads.numbersPool;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.LongAdder;
 
 class SumThread extends Thread {
-    private final AtomicInteger totalSum;
-    private int localSum = 0;
+    private final LongAdder totalSum;
+    private long localSum;
 
-    public SumThread(AtomicInteger totalSum) {
+    public SumThread(LongAdder totalSum) {
         this.totalSum = totalSum;
+        localSum = 0;
     }
 
     @Override
     public void run() {
-        while (!RandomSumThreads.inputFinished.get() || !numbersPool.isEmpty()) {
-            Integer number = null;
-            synchronized (numbersPool) {
-                if (!numbersPool.isEmpty()) {
-                    number = numbersPool.remove(0); // Извлечение числа из пула
+        while (!RandomSumThreads.stop.get() || !RandomSumThreads.numbersQueue.isEmpty()) {
+            try {
+                Integer number = RandomSumThreads.numbersQueue.poll(100, TimeUnit.MILLISECONDS);
+                if(number != null) {
+                    localSum += number;
+                    totalSum.add(number);
                 }
-            }
-            if (number != null) {
-                localSum += number;
-                totalSum.addAndGet(number);
+            } catch (InterruptedException e) {
+                break;
             }
         }
-        System.out.println("Local sum for thread " + this.threadId() + ": " + localSum);
     }
 
-    public int getLocalSum() {
+    public long getLocalSum() {
         return localSum;
     }
 }

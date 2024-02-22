@@ -4,35 +4,36 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.LongAdder;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RandomSumThreadsTest {
     @Test
     public void testTotalSumCalculation() throws InterruptedException {
-        RandomSumThreads.numbersPool.add(4);
-        RandomSumThreads.numbersPool.add(5);
-        RandomSumThreads.numbersPool.add(5);
-        RandomSumThreads.numbersPool.add(5);
-        RandomSumThreads.numbersPool.add(5);
-        RandomSumThreads.numbersPool.add(5);
-        RandomSumThreads.inputFinished.set(true); // Имитация завершения ввода
+        RandomSumThreads.numbersQueue.add(4);
+        RandomSumThreads.numbersQueue.add(5);
+        RandomSumThreads.numbersQueue.add(5);
+        RandomSumThreads.numbersQueue.add(5);
+        RandomSumThreads.numbersQueue.add(5);
+        RandomSumThreads.numbersQueue.add(5);
 
-        AtomicInteger totalSum = new AtomicInteger(0);
+        LongAdder totalSum = new LongAdder();
         List<SumThread> threads = new ArrayList<>();
 
-        for (int i = 0; i < 2; i++) { // Создаем и запускаем 2 потока для теста
+        for (int i = 0; i < 2; i++) {
             SumThread thread = new SumThread(totalSum);
             threads.add(thread);
             thread.start();
         }
 
+        threads.forEach(Thread::interrupt);
+
         for (SumThread thread : threads) {
-            thread.join(); // Дождемся завершения всех потоков
+            thread.join();
         }
 
-        assertEquals(29, totalSum.get()); // Проверяем общую сумму
+        assertEquals(29, totalSum.longValue());
     }
 
 }
